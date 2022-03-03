@@ -1,0 +1,16 @@
+{
+  "name": "pdf-live",
+  "version": "1.0.0",
+  "description": "'PDF LIVE' is a PDF viewer that extends the open source 'mozilla/pdf.js'. \r You can start the PDF viewer with toolbar right away with 'PDF LIVE'.",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Takuya Motoshima <developer.takuyamotoshima@gmail.com> (https://twitter.com/TakuyaMotoshima)",
+  "license": "MIT",
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.0.0",
+    "pdfjs-dist": "^2.13.216"
+  }
+}
