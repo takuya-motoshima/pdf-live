@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="dark" data-tabbing="true">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,21 +20,13 @@
             <button class="Button ActionButton" data-element="zoomOutButton" aria-label="Zoom out" aria-keyshortcuts="Control+-">
               <i class="fa-solid fa-minus fa-lg"></i>
             </button>
-            <div class="ToggleZoomOverlay">
-              <div class="OverlayContainer">
-                <div class="OverlayText"><input type="text" class="textarea" tabindex="-1" aria-label="Set zoom" value="106" style="width: 32px;"><span>%</span></div>
-                <button class="Button OverlayButton" data-element="zoomOverlay" aria-label="Zoom Controls">
-                  <div class="Icon ">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12">
-                      <defs>
-                        <style>.cls-1{fill:#abb0c4;}</style>
-                      </defs>
-                      <title>icon - chevron - down</title>
-                      <path class="cls-1" d="M9,3.5l-3,3-3-3-1,1,4,4,4-4Z"></path>
-                    </svg>
-                  </div>
-                </button>
+            <div data-element="toggleZoomOverlay" class="toggle-zoom-overlay">
+              <div class="toggle-zoom-overlay-text">
+                <input type="text" class="textarea" tabindex="-1" aria-label="Set zoom" value="106"><span>%</span>
               </div>
+              <button class="Button OverlayButton" aria-label="Zoom Controls">
+                <i class="fa-solid fa-angle-down fa-sm"></i>
+              </button>
             </div>
             <button class="Button ActionButton" data-element="zoomInButton" aria-label="Zoom in" aria-keyshortcuts="Control+=">
               <i class="fa-solid fa-plus fa-lg"></i>
@@ -238,78 +230,16 @@
         <div data-element="documentContentContainer" class="document-content-container">
           <div class="measurement-container">
             <div class="DocumentContainer" data-element="documentContainer">
-              <div class="document" tabindex="-1" style="width: 674px; cursor: default;">
+              <div data-element="viewer" class="document" tabindex="-1" style="width: 674px; cursor: default;">
                 <div id="pageSection1" class="pageSection" style="float: left; position: relative; width: 665px; height: 855px; margin: 4.22494px;">
                   <div id="pageContainer1" class="pageContainer" style="margin-left: auto; margin-right: auto; background-color: white; width: 665px; height: 855px; top: 0px;">
-                    <canvas width="677" height="871" class="auxiliary" style="width: 665px; height: 855.561px; z-index: 30; position: absolute;"></canvas>
-                    <div id="pageWidgetContainer1" style="position: absolute; top: 0px; left: 0px; width: 665.428px; height: 855.55px; z-index: 40; transform: matrix(1, 0, 0, 1, 0, 0); transform-origin: left top; overflow: hidden;"></div>
                     <canvas width="665" height="856" class="hacc canvas1" style="width: 665px; height: 855px; background-color: white; z-index: 20; position: absolute;"></canvas>
                   </div>
                 </div>
                 <div style="clear: both;"></div>
                 <div id="pageSection2" class="pageSection" style="float: left; position: relative; width: 665px; height: 855px; margin: 4.22494px;">
                   <div id="pageContainer2" class="pageContainer" style="margin-left: auto; margin-right: auto; background-color: white; width: 665px; height: 855px; top: 0px;">
-                    <canvas width="677" height="871" class="auxiliary" style="width: 665px; height: 855.561px; z-index: 30; position: absolute;"></canvas>
-                    <div id="pageWidgetContainer2" style="position: absolute; top: 0px; left: 0px; width: 665.428px; height: 855.55px; z-index: 40; transform: matrix(1, 0, 0, 1, 0, 0); transform-origin: left top; overflow: hidden;">
-                      <div class="" style="left: 134.801px; top: 426.833px; width: 88.9762px; height: 11.0936px; position: absolute; padding: 0px; margin: 0px; background-color: rgba(0, 0, 0, 0); z-index: 35; transform: translate(0px, 0px) rotate(0deg); transform-origin: left top; appearance: none; border-style: solid; border-color: rgba(0, 0, 0, 0); border-width: 0px; border-radius: 0px;"><span class="link" tabindex="0" style="position: absolute; font-size: inherit; font-family: inherit; font-weight: inherit; font-style: inherit; color: inherit; width: 88.9762px; height: 11.0936px; border: 0px; padding: 0px; margin: 0px; background-color: transparent; vertical-align: top;"></span></div>
-                      <div class="" style="left: 134.974px; top: 718.984px; width: 72.8823px; height: 13.5959px; position: absolute; padding: 0px; margin: 0px; background-color: rgba(0, 0, 0, 0); z-index: 35; transform: translate(0px, 0px) rotate(0deg); transform-origin: left top; appearance: none; border-style: solid; border-color: rgba(0, 0, 0, 0); border-width: 0px; border-radius: 0px;"><span class="link" tabindex="0" style="position: absolute; font-size: inherit; font-family: inherit; font-weight: inherit; font-style: inherit; color: inherit; width: 72.8823px; height: 13.5959px; border: 0px; padding: 0px; margin: 0px; background-color: transparent; vertical-align: top;"></span></div>
-                    </div>
                     <canvas width="665" height="856" class="hacc canvas2" style="width: 665px; height: 855px; background-color: white; z-index: 20; position: absolute;"></canvas>
-                  </div>
-                </div>
-                <div style="clear: both;"></div>
-                <div id="pageSection3" class="pageSection" style="float: left; position: relative; width: 665px; height: 855px; margin: 4.22494px;">
-                  <div id="pageContainer3" class="pageContainer" style="margin-left: auto; margin-right: auto; background-color: white; width: 665px; height: 855px; top: 0px;">
-                    <canvas width="665" height="855" class="auxiliary" style="width: 665px; height: 855px; z-index: 30; position: absolute;"></canvas>
-                    <div id="pageWidgetContainer3" style="position: absolute; top: 0px; left: 0px; width: 665.428px; height: 855.55px; z-index: 40; transform: matrix(1, 0, 0, 1, 0, 0); transform-origin: left top; overflow: hidden;">
-                      <div class="" style="left: 184.292px; top: 691.955px; width: 146.56px; height: 17.6085px; position: absolute; padding: 0px; margin: 0px; background-color: rgba(0, 0, 0, 0); z-index: 35; transform: translate(0px, 0px) rotate(0deg); transform-origin: left top; appearance: none; border-style: solid; border-color: rgba(0, 0, 0, 0); border-width: 0px; border-radius: 0px;"><span class="link" tabindex="0" style="position: absolute; font-size: inherit; font-family: inherit; font-weight: inherit; font-style: inherit; color: inherit; width: 146.56px; height: 17.6085px; border: 0px; padding: 0px; margin: 0px; background-color: transparent; vertical-align: top;"></span></div>
-                      <div class="" style="left: 345.693px; top: 691.955px; width: 139.684px; height: 17.6085px; position: absolute; padding: 0px; margin: 0px; background-color: rgba(0, 0, 0, 0); z-index: 35; transform: translate(0px, 0px) rotate(0deg); transform-origin: left top; appearance: none; border-style: solid; border-color: rgba(0, 0, 0, 0); border-width: 0px; border-radius: 0px;"><span class="link" tabindex="0" style="position: absolute; font-size: inherit; font-family: inherit; font-weight: inherit; font-style: inherit; color: inherit; width: 139.684px; height: 17.6085px; border: 0px; padding: 0px; margin: 0px; background-color: transparent; vertical-align: top;"></span></div>
-                    </div>
-                    <canvas width="665" height="856" class="hacc canvas3" style="width: 665px; height: 855px; background-color: white; z-index: 20; position: absolute;"></canvas>
-                  </div>
-                </div>
-                <div style="clear: both;"></div>
-                <div id="pageSection4" class="pageSection" style="float: left; position: relative; width: 665px; height: 855px; margin: 4.22494px;">
-                  <div id="pageContainer4" class="pageContainer" style="margin-left: auto; margin-right: auto; background-color: white; width: 665px; height: 855px; top: 0px;">
-                    <canvas width="665" height="855" class="auxiliary" style="width: 665px; height: 855px; z-index: 30; position: absolute;"></canvas>
-                    <div id="pageWidgetContainer4" style="position: absolute; top: 0px; left: 0px; width: 665.428px; height: 855.55px; z-index: 40; transform: matrix(1, 0, 0, 1, 0, 0); transform-origin: left top; overflow: hidden;">
-                      <div class="" style="left: 137.724px; top: 535.578px; width: 141.624px; height: 17.6085px; position: absolute; padding: 0px; margin: 0px; background-color: rgba(0, 0, 0, 0); z-index: 35; transform: translate(0px, 0px) rotate(0deg); transform-origin: left top; appearance: none; border-style: solid; border-color: rgba(0, 0, 0, 0); border-width: 0px; border-radius: 0px;"><span class="link" tabindex="0" style="position: absolute; font-size: inherit; font-family: inherit; font-weight: inherit; font-style: inherit; color: inherit; width: 141.624px; height: 17.6085px; border: 0px; padding: 0px; margin: 0px; background-color: transparent; vertical-align: top;"></span></div>
-                      <div class="" style="left: 416.373px; top: 635.421px; width: 50.2324px; height: 14.407px; position: absolute; padding: 0px; margin: 0px; background-color: rgba(0, 0, 0, 0); z-index: 35; transform: translate(0px, 0px) rotate(0deg); transform-origin: left top; appearance: none; border-style: solid; border-color: rgba(0, 0, 0, 0); border-width: 0px; border-radius: 0px;"><span class="link" tabindex="0" style="position: absolute; font-size: inherit; font-family: inherit; font-weight: inherit; font-style: inherit; color: inherit; width: 50.2324px; height: 14.407px; border: 0px; padding: 0px; margin: 0px; background-color: transparent; vertical-align: top;"></span></div>
-                      <div class="" style="left: 417.248px; top: 658.806px; width: 57.0652px; height: 14.407px; position: absolute; padding: 0px; margin: 0px; background-color: rgba(0, 0, 0, 0); z-index: 35; transform: translate(0px, 0px) rotate(0deg); transform-origin: left top; appearance: none; border-style: solid; border-color: rgba(0, 0, 0, 0); border-width: 0px; border-radius: 0px;"><span class="link" tabindex="0" style="position: absolute; font-size: inherit; font-family: inherit; font-weight: inherit; font-style: inherit; color: inherit; width: 57.0652px; height: 14.407px; border: 0px; padding: 0px; margin: 0px; background-color: transparent; vertical-align: top;"></span></div>
-                      <div class="" style="left: 417.248px; top: 682.191px; width: 23.9881px; height: 14.407px; position: absolute; padding: 0px; margin: 0px; background-color: rgba(0, 0, 0, 0); z-index: 35; transform: translate(0px, 0px) rotate(0deg); transform-origin: left top; appearance: none; border-style: solid; border-color: rgba(0, 0, 0, 0); border-width: 0px; border-radius: 0px;"><span class="link" tabindex="0" style="position: absolute; font-size: inherit; font-family: inherit; font-weight: inherit; font-style: inherit; color: inherit; width: 23.9881px; height: 14.407px; border: 0px; padding: 0px; margin: 0px; background-color: transparent; vertical-align: top;"></span></div>
-                      <div class="" style="left: 417.248px; top: 705.576px; width: 23.9881px; height: 14.407px; position: absolute; padding: 0px; margin: 0px; background-color: rgba(0, 0, 0, 0); z-index: 35; transform: translate(0px, 0px) rotate(0deg); transform-origin: left top; appearance: none; border-style: solid; border-color: rgba(0, 0, 0, 0); border-width: 0px; border-radius: 0px;"><span class="link" tabindex="0" style="position: absolute; font-size: inherit; font-family: inherit; font-weight: inherit; font-style: inherit; color: inherit; width: 23.9881px; height: 14.407px; border: 0px; padding: 0px; margin: 0px; background-color: transparent; vertical-align: top;"></span></div>
-                      <div class="" style="left: 417.248px; top: 728.961px; width: 23.9881px; height: 14.407px; position: absolute; padding: 0px; margin: 0px; background-color: rgba(0, 0, 0, 0); z-index: 35; transform: translate(0px, 0px) rotate(0deg); transform-origin: left top; appearance: none; border-style: solid; border-color: rgba(0, 0, 0, 0); border-width: 0px; border-radius: 0px;"><span class="link" tabindex="0" style="position: absolute; font-size: inherit; font-family: inherit; font-weight: inherit; font-style: inherit; color: inherit; width: 23.9881px; height: 14.407px; border: 0px; padding: 0px; margin: 0px; background-color: transparent; vertical-align: top;"></span></div>
-                      <div class="" style="left: 417.248px; top: 751.282px; width: 23.9881px; height: 14.4076px; position: absolute; padding: 0px; margin: 0px; background-color: rgba(0, 0, 0, 0); z-index: 35; transform: translate(0px, 0px) rotate(0deg); transform-origin: left top; appearance: none; border-style: solid; border-color: rgba(0, 0, 0, 0); border-width: 0px; border-radius: 0px;"><span class="link" tabindex="0" style="position: absolute; font-size: inherit; font-family: inherit; font-weight: inherit; font-style: inherit; color: inherit; width: 23.9881px; height: 14.4076px; border: 0px; padding: 0px; margin: 0px; background-color: transparent; vertical-align: top;"></span></div>
-                    </div>
-                    <canvas width="665" height="856" class="hacc canvas4" style="width: 665px; height: 855px; background-color: white; z-index: 20; position: absolute;"></canvas>
-                  </div>
-                </div>
-                <div style="clear: both;"></div>
-                <div id="pageSection5" class="pageSection" style="float: left; position: relative; width: 665px; height: 855px; margin: 4.22494px;">
-                  <div id="pageContainer5" class="pageContainer" style="margin-left: auto; margin-right: auto; background-color: white; width: 665px; height: 855px; top: 0px;">
-                    <canvas width="665" height="855" class="auxiliary" style="width: 665px; height: 855px; z-index: 30; position: absolute;"></canvas>
-                    <div id="pageWidgetContainer5" style="position: absolute; top: 0px; left: 0px; width: 665.428px; height: 855.55px; z-index: 40; transform: matrix(1, 0, 0, 1, 0, 0); transform-origin: left top; overflow: hidden;"></div>
-                    <canvas width="665" height="856" class="hacc canvas5" style="width: 665px; height: 855px; background-color: white; z-index: 20; position: absolute;"></canvas>
-                  </div>
-                </div>
-                <div style="clear: both;"></div>
-                <div id="pageSection6" class="pageSection" style="float: left; position: relative; width: 665px; height: 855px; margin: 4.22494px;">
-                  <div id="pageContainer6" class="pageContainer" style="margin-left: auto; margin-right: auto; background-color: white; width: 665px; height: 855px; top: 0px;">
-                    <canvas width="665" height="855" class="auxiliary" style="width: 665px; height: 855px; z-index: 30; position: absolute;"></canvas>
-                    <div id="pageWidgetContainer6" style="position: absolute; top: 0px; left: 0px; width: 665.428px; height: 855.55px; z-index: 40; transform: matrix(1, 0, 0, 1, 0, 0); transform-origin: left top; overflow: hidden;">
-                      <div class="" style="left: 336.659px; top: 379.665px; width: 62.0982px; height: 17.6085px; position: absolute; padding: 0px; margin: 0px; background-color: rgba(0, 0, 0, 0); z-index: 35; transform: translate(0px, 0px) rotate(0deg); transform-origin: left top; appearance: none; border-style: solid; border-color: rgba(0, 0, 0, 0); border-width: 0px; border-radius: 0px;"><span class="link" tabindex="0" style="position: absolute; font-size: inherit; font-family: inherit; font-weight: inherit; font-style: inherit; color: inherit; width: 62.0982px; height: 17.6085px; border: 0px; padding: 0px; margin: 0px; background-color: transparent; vertical-align: top;"></span></div>
-                    </div>
-                    <canvas width="665" height="856" class="hacc canvas6" style="width: 665px; height: 855px; background-color: white; z-index: 20; position: absolute;"></canvas>
-                  </div>
-                </div>
-                <div style="clear: both;"></div>
-                <div id="pageSection7" class="pageSection" style="float: left; position: relative; width: 665px; height: 855px; margin: 4.22494px;">
-                  <div id="pageContainer7" class="pageContainer" style="margin-left: auto; margin-right: auto; background-color: white; width: 665px; height: 855px; top: 0px;">
-                    <canvas width="665" height="855" class="auxiliary" style="width: 665px; height: 855px; z-index: 30; position: absolute;"></canvas>
-                    <div id="pageWidgetContainer7" style="position: absolute; top: 0px; left: 0px; width: 665.428px; height: 855.55px; z-index: 40; transform: matrix(1, 0, 0, 1, 0, 0); transform-origin: left top; overflow: hidden;">
-                      <div class="" style="left: 172.239px; top: 145.343px; width: 238.782px; height: 17.6085px; position: absolute; padding: 0px; margin: 0px; background-color: rgba(0, 0, 0, 0); z-index: 35; transform: translate(0px, 0px) rotate(0deg); transform-origin: left top; appearance: none; border-style: solid; border-color: rgba(0, 0, 0, 0); border-width: 0px; border-radius: 0px;"><span class="link" tabindex="0" style="position: absolute; font-size: inherit; font-family: inherit; font-weight: inherit; font-style: inherit; color: inherit; width: 238.782px; height: 17.6085px; border: 0px; padding: 0px; margin: 0px; background-color: transparent; vertical-align: top;"></span></div>
-                    </div>
-                    <canvas width="665" height="856" class="hacc canvas7" style="width: 665px; height: 855px; background-color: white; z-index: 20; position: absolute;"></canvas>
                   </div>
                 </div>
                 <div style="clear: both;"></div>
@@ -347,48 +277,6 @@
           </div>
           <div class="custom-container"></div>
         </div>
-        <div class="right-panel closed">
-          <div data-element="searchPanel" class="Panel SearchPanel closed" style="width: 293px; min-width: 293px;">
-            <div class="SearchOverlay">
-              <div class="input-container">
-                <input type="text" autocomplete="off" placeholder="Search document" aria-label="Search document" id="SearchPanel__input" value="">
-                <button class="input-button" aria-label="Search document">
-                  <div class="Icon ">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                      <defs>
-                        <style>.cls-1{fill:#abb0c4;}</style>
-                      </defs>
-                      <title>icon - header - search</title>
-                      <path class="cls-1" d="M17.69,15.79a8.63,8.63,0,1,0-1.52,1.51l4.42,4.42a.42.42,0,0,0,.57,0l.94-.95a.39.39,0,0,0,0-.56Zm-5.28,1A6.42,6.42,0,1,1,17.19,12,6.43,6.43,0,0,1,12.41,16.8Z"></path>
-                    </svg>
-                  </div>
-                </button>
-              </div>
-              <div class="options">
-                <span class="ui__base ui__choice ui__choice--center">
-                  <span class="ui__choice__input">
-                    <div class="ui__choice__input__check"></div>
-                    <input id="case-sensitive-option" type="checkbox">
-                  </span>
-                  <label class="ui__choice__label" for="case-sensitive-option">Case sensitive</label>
-                </span>
-                <span class="ui__base ui__choice ui__choice--center">
-                  <span class="ui__choice__input">
-                    <div class="ui__choice__input__check"></div>
-                    <input id="whole-word-option" type="checkbox">
-                  </span>
-                  <label class="ui__choice__label" for="whole-word-option">Whole word</label>
-                </span>
-              </div>
-              <div class="divider"></div>
-              <div class="footer"></div>
-            </div>
-            <div class="results">
-              <div aria-label="grid" aria-readonly="true" class="ReactVirtualized__Grid ReactVirtualized__List" role="grid" tabindex="0" style="box-sizing: border-box; direction: ltr; height: 756.75px; position: relative; width: 200px; will-change: transform; overflow: hidden;"></div>
-            </div>
-          </div>
-        </div>
-        <div class="right-panel closed"></div>
       </div>
       <div>
         <div class="Overlay FlyoutMenu closed" data-element="zoomOverlay" role="listbox" aria-label="Zoom Overlay" style="left: 0px; right: auto; top: auto;">
