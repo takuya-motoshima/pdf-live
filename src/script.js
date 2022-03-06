@@ -37,8 +37,22 @@ import loadingModal from './loadingModal.js';
     console.log(`pdf.numPages=${pdf.numPages}`);
     for (let pageNum=1; pageNum<=pdf.numPages; pageNum++) {
       await renderPage(pdf, pageNum);
-      console.log(`Render the ${pageNum}th page`);
+      // console.log(`Render the ${pageNum}th page`);
     }
+  }
+
+  /**
+   * Open zoom overlay.
+   */
+  function openZoomOverlay() {
+    zoomOverlay.classList.remove('closed');
+  }
+
+  /**
+   * Close zoom overlay.
+   */
+  function closeZoomOverlay() {
+    zoomOverlay.classList.add('closed');
   }
 
   /**
@@ -54,7 +68,6 @@ import loadingModal from './loadingModal.js';
    * Check if there is a point inside the rectangle.
    */
   function pointInRectangle(point, rect) {
-    // console.log(`point=${JSON.stringify(point, null, 2)}`);
     return rect.x <= point.x && point.x <= rect.x + rect.width && rect.y <= point.y && point.y <= rect.y + rect.height;
   }
 
@@ -64,19 +77,26 @@ import loadingModal from './loadingModal.js';
   async function renderPage(pdf, pageNum) {
     // Fetch the specified page.
     const page = await pdf.getPage(pageNum);
+    if (pageNum === 1)
+      console.log('page.view=', page.view);
 
     // Support HiDPI-screens.
     const outputScale = window.devicePixelRatio || 1;
+    if (pageNum === 1)
+      console.log('outputScale=', outputScale);
+
     const viewport = page.getViewport({scale: 1.5});
+    if (pageNum === 1)
+      console.log('viewport=', viewport);
 
     // Create PDF page elements.
     const section = document.createElement('div');
     section.id = `section${pageNum}`;
-    section.classList.add('pageSection');
+    section.classList.add('page-section');
 
     const container = document.createElement('div');
     container.id = `pageContainer${pageNum}`;
-    container.classList.add('pageContainer');
+    container.classList.add('page-container');
 
     const canvas = document.createElement('canvas');
     canvas.width = Math.floor(viewport.width * outputScale);
@@ -131,10 +151,10 @@ import loadingModal from './loadingModal.js';
       layoutZoomOverlay();
 
       // Open zoom overlay.
-      zoomOverlay.classList.remove('closed');
+      openZoomOverlay();
     } else
       // Close zoom overlay.
-      zoomOverlay.classList.add('closed');
+      closeZoomOverlay();
   });
 
   // Recalculate the layout and size of each element when the window is resized.
@@ -147,11 +167,20 @@ import loadingModal from './loadingModal.js';
   document.body.addEventListener('click', evnt => {
     // Close if zoom overlay is open.
     if (!zoomOverlay.classList.contains('closed') && !pointInRectangle({x: evnt.pageX, y: evnt.pageY}, zoomOverlay.getBoundingClientRect()))
-      zoomOverlay.classList.add('closed');
+      closeZoomOverlay();
   });
 
+  // Change page scale.
+  for (let scaleSelect of document.querySelectorAll('[data-element="scaleSelect"]'))
+    scaleSelect.addEventListener('click', evnt => {
+      const scale = evnt.target.dataset.value;
+      console.log(`Select scale ${scale}`);
+      closeZoomOverlay();
+    });
+
   // Init PDF viewer.
-  const pdf = await initPDFViewer('sample.pdf');
+  const pdf = await initPDFViewer('sample2.pdf');
+  // const pdf = await initPDFViewer('sample.pdf');
 
   // Render all PDF pages.
   renderAllPages(pdf);

@@ -22,7 +22,7 @@
             </button>
             <div data-element="toggleZoomOverlay" class="toggle-zoom-overlay">
               <div class="toggle-zoom-overlay-text">
-                <input type="text" class="textarea" tabindex="-1" aria-label="Set zoom" value="106"><span>%</span>
+                <input type="text" class="textarea" tabindex="-1" aria-label="Set zoom" value="100"><span>%</span>
               </div>
               <button class="Button OverlayButton" aria-label="Zoom Controls">
                 <i class="fa-solid fa-angle-down fa-sm"></i>
@@ -41,177 +41,6 @@
         </div>
         <div class="view-header-border"></div>
       </div>
-      <div class="HeaderToolsContainer closed" data-element="toolsHeader">
-        <div class="Header Tools">
-          <div class="HeaderItems">
-            <div class="spacer "></div>
-            <div class="tool-group-buttons-container">
-              <div class="tool-group-buttons-scroll">
-                <div data-element="highlightToolGroupButton" class="tool-group-button">
-                  <button class="Button" data-element="highlightToolGroupButton" aria-label="Highlight" aria-keyshortcuts="H">
-                    <div class="Icon ">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <defs>
-                          <style>.cls-1{fill:#8c8c8c;}</style>
-                        </defs>
-                        <title>icon - line - tool - highlight</title>
-                        <path class="cls-1" d="M9.91,13.07h3.86L11.84,8.46Zm5.46,3.68L14.62,15H9.05L7.77,18H5.63L10.45,6.64a1,1,0,0,1,1-.64h1a1.23,1.23,0,0,1,1,.64l2,4.91V4H5.85A2.22,2.22,0,0,0,3.63,6.22V17.78A2.22,2.22,0,0,0,5.85,20h9.52Z"></path>
-                        <path fill="default" class="cls-1" d="M20.37,2V22h-2V2Z"></path>
-                      </svg>
-                    </div>
-                  </button>
-                </div>
-                <div data-element="underlineToolGroupButton" class="tool-group-button">
-                  <button class="Button" data-element="underlineToolGroupButton" aria-label="Underline" aria-keyshortcuts="U">
-                    <div class="Icon ">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <defs>
-                          <style>.cls-1{fill:#abb0c4;}</style>
-                        </defs>
-                        <title>icon - tool - text manipulation - underline</title>
-                        <rect class="cls-1" x="2.8" y="20.29" width="18.4" height="1.7"></rect>
-                        <path fill="default" class="cls-1" d="M8.53,13.2h6.94l1.6,3.74h2.66L13.87,2.8a1.54,1.54,0,0,0-1.2-.8h-1.2a1.27,1.27,0,0,0-1.2.8l-6,14.14H6.93ZM12,5.07l2.4,5.73H9.6Z"></path>
-                      </svg>
-                    </div>
-                  </button>
-                </div>
-                <div data-element="strikeoutToolGroupButton" class="tool-group-button">
-                  <button class="Button" data-element="strikeoutToolGroupButton" aria-label="Strikeout" aria-keyshortcuts="K">
-                    <div class="Icon ">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <defs>
-                          <style>.cls-1{fill:#abb0c4;}</style>
-                        </defs>
-                        <title>icon - tool - text manipulation - strikethrough</title>
-                        <rect class="cls-1" x="3.13" y="11.31" width="17.74" height="1.7"></rect>
-                        <path fill="default" class="cls-1" d="M12,5l2.4,5.77h2.68l-3.28-8A1.49,1.49,0,0,0,12.64,2H11.49a1.24,1.24,0,0,0-1.16.77L7,10.73H9.59Zm3.25,8.62,2,4.74h2.57l-2-4.74ZM4.17,18.32H6.74l2-4.74H6.18Z"></path>
-                      </svg>
-                    </div>
-                  </button>
-                </div>
-                <div data-element="squigglyToolGroupButton" class="tool-group-button">
-                  <button class="Button" data-element="squigglyToolGroupButton" aria-label="Squiggly" aria-keyshortcuts="G">
-                    <div class="Icon ">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <defs>
-                          <style>.cls-1{fill:#abb0c4;}</style>
-                        </defs>
-                        <title>icon - tool - text manipulation - squiggly</title>
-                        <path class="cls-1" d="M21,20V22a3,3,0,0,1-2.56-1.41c-.38-.51-.64-.64-1-.64s-.51.13-1,.64A3.34,3.34,0,0,1,13.79,22a3,3,0,0,1-2.56-1.41c-.38-.51-.64-.64-1-.64s-.52.13-1,.64A3.34,3.34,0,0,1,6.62,22a3,3,0,0,1-2.57-1.41c-.38-.51-.64-.64-1-.64V17.9a3,3,0,0,1,2.56,1.41c.38.51.64.64,1,.64s.51-.13,1-.64a3.32,3.32,0,0,1,2.57-1.41,3,3,0,0,1,2.56,1.41c.38.51.64.64,1,.64s.52-.13,1-.64a3.31,3.31,0,0,1,2.56-1.41A3,3,0,0,1,20,19.31C20.33,19.82,20.59,20,21,20Z"></path>
-                        <path fill="default" class="cls-1" d="M8.79,12.77h6.67L17,16.36h2.56L13.92,2.64A1.34,1.34,0,0,0,12.77,2H11.62a1.24,1.24,0,0,0-1.16.77L4.69,16.36H7.26Zm3.34-7.95,2.31,5.51H9.82Z"></path>
-                      </svg>
-                    </div>
-                  </button>
-                </div>
-                <div data-element="stickyToolGroupButton" class="tool-group-button">
-                  <button class="Button" data-element="stickyToolGroupButton" aria-label="Note" aria-keyshortcuts="N">
-                    <div class="Icon ">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <defs>
-                          <style>.cls-1{fill:#abb0c4;}</style>
-                        </defs>
-                        <title>icon - tool - comment - line</title>
-                        <path class="cls-1" d="M20,2.46H4a2,2,0,0,0-2,2v10a2,2,0,0,0,2,2H7v5.08l6.35-5.08H20a2,2,0,0,0,2-2v-10A2,2,0,0,0,20,2.46Zm0,12H12.65L9,17.38V14.46H4v-10H20Z"></path>
-                        <path fill="default" class="cls-1" d="M18,8.46H6v-2H18Zm-2.5,4H6v-2h9.5Z"></path>
-                      </svg>
-                    </div>
-                  </button>
-                </div>
-                <div data-element="freeTextToolGroupButton" class="tool-group-button">
-                  <button class="Button" data-element="freeTextToolGroupButton" aria-label="Free Text" aria-keyshortcuts="T">
-                    <div class="Icon ">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <defs>
-                          <style>.cls-1{fill:#abb0c4;}</style>
-                        </defs>
-                        <title>icon - tool - text - free text</title>
-                        <g>
-                          <path class="cls-1" d="M19.39,4.77V7.64A.43.43,0,0,1,19,8h-.82a.41.41,0,0,1-.4-.41V6.51H13.34V18h1.54a.41.41,0,0,1,.41.41v.81a.41.41,0,0,1-.41.41H9.14a.41.41,0,0,1-.41-.41v-.81A.41.41,0,0,1,9.14,18h1.54V6.51H6.27V7.64A.41.41,0,0,1,5.86,8H5A.43.43,0,0,1,4.6,7.6V4.77A.41.41,0,0,1,5,4.36H19A.39.39,0,0,1,19.39,4.77Z"></path>
-                        </g>
-                      </svg>
-                    </div>
-                  </button>
-                </div>
-                <div data-element="shapeToolGroupButton" class="tool-group-button">
-                  <button class="Button" data-element="shapeToolGroupButton" aria-label="Rectangle" aria-keyshortcuts="R">
-                    <div class="Icon ">
-                      <svg version="1.1" id="icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 24 24" style="enable-background:new 0 0 24 24;" xml:space="preserve">
-                        <style type="text/css"> .st0{fill:#868E96;} </style>
-                        <path class="st0" d="M19.3,3.8H4.7c-1,0-1.8,0.8-1.8,1.8v12.8c0,1,0.8,1.8,1.8,1.8h14.7c1,0,1.8-0.8,1.8-1.8V5.6 C21.2,4.6,20.3,3.7,19.3,3.8z M5.1,18V6h13.8v12H5.1z"></path>
-                        <rect fill="none" x="5.1" y="6" width="13.8" height="12"></rect>
-                      </svg>
-                    </div>
-                  </button>
-                </div>
-                <div data-element="freeHandToolGroupButton" class="tool-group-button">
-                  <button class="Button" data-element="freeHandToolGroupButton" aria-label="Free Hand" aria-keyshortcuts="F">
-                    <div class="Icon ">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <defs>
-                          <style>.cls-1{fill:#abb0c4;}</style>
-                        </defs>
-                        <title>icon - tool - pen - line</title>
-                        <path class="cls-1" d="M18.91,19.66a1.13,1.13,0,0,1-1.35,1.82,5.82,5.82,0,0,0-2.09-1c-3.22-.85-4.57-.29-6.82.63l-.55.23A7.42,7.42,0,0,1,5.42,22a3,3,0,0,1-2-.69,2.38,2.38,0,0,1-.87-1.66,1.81,1.81,0,0,1,.59-1.36,9.16,9.16,0,0,1,.93-.78,1.13,1.13,0,0,1,1.58.23,1.14,1.14,0,0,1-.23,1.59,2.93,2.93,0,0,0-.42.33c.27.13.84.17,2.25-.4L7.8,19a10.81,10.81,0,0,1,8.25-.72A7.89,7.89,0,0,1,18.91,19.66Z"></path>
-                        <path fill="default" class="cls-1" d="M21.45,5.77a2.09,2.09,0,0,1-.62,1.51l-9.16,9.16c-.09.08-.26.26-.44.26,0,0-4.18.9-4.42.89a1,1,0,0,1-.72-.13.67.67,0,0,1-.16-.73l.8-4.53c0-.18.08-.27.26-.45L13,5.8l3.2-3.2a2.2,2.2,0,0,1,3,0l1.66,1.66A2.34,2.34,0,0,1,21.45,5.77ZM16.21,9.06,14.37,7.22,8.59,13l1.84,1.84Zm3.2-3.2L17.57,4,15.88,5.71l1.84,1.84Z"></path>
-                      </svg>
-                    </div>
-                  </button>
-                </div>
-                <div data-element="freeHandHighlightToolGroupButton" class="tool-group-button">
-                  <button class="Button" data-element="freeHandHighlightToolGroupButton" aria-label="Free Hand Highlight">
-                    <div class="Icon ">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <defs>
-                          <style>.cls-1{fill:#abb0c4;}</style>
-                        </defs>
-                        <title>icon - tool - pen - highlight</title>
-                        <path fill="default" class="cls-1" d="M19.9658 6.91017H19.92L16.2992 3.25267C16.1376 3.0909 15.9183 3 15.6896 3C15.4609 3 15.2416 3.0909 15.08 3.25267L7.82917 10.4118C7.68847 10.5239 7.59386 10.6837 7.56334 10.861L6.56417 15.2518L4.8225 17.4427H7.6275L8.73667 16.3335L12.2567 15.5452C12.4386 15.5144 12.6023 15.4162 12.715 15.2702L19.92 8.12934C20.2428 7.7936 20.2625 7.2692 19.9658 6.91017V6.91017ZM11.9083 13.5377L9.54334 11.1727L15.7583 5.0585L18.1233 7.4235L11.9083 13.5377Z"></path>
-                        <path class="cls-1" d="M18.4167 17.2685C18.744 18.2557 18.9773 19.2716 19.1133 20.3027C18.2719 19.3853 17.15 18.7728 15.9233 18.561C14.8314 18.4146 13.7204 18.5244 12.6783 18.8818C11.4047 19.3332 10.1589 19.8597 8.9475 20.4585C7.81125 21.1097 6.50296 21.3975 5.19833 21.2835C4.80235 21.1839 4.45663 20.9426 4.22666 20.6052C4.14173 20.4738 4.07395 20.3321 4.025 20.1835C4.01028 20.0885 3.98252 19.9959 3.9425 19.9085C3.80542 19.4227 3.84105 18.9043 4.04333 18.4418C4.15136 18.1403 4.32695 17.8675 4.55667 17.6443L4.905 19.4135C4.79615 19.4335 4.71381 19.5233 4.70333 19.6335C4.70333 19.8993 5.79417 19.7527 6.67417 19.4227C7.31069 19.1708 7.92412 18.8641 8.5075 18.506C9.77851 17.691 11.1416 17.0294 12.5683 16.5352C13.7125 16.1519 14.9299 16.0389 16.125 16.2052C16.6842 16.3049 17.2193 16.5102 17.7017 16.8102C17.8758 16.8927 18.4167 17.2685 18.4167 17.2685Z"></path>
-                      </svg>
-                    </div>
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div class="divider "></div>
-            <button class="Button disabled ActionButton" data-element="undoButton" aria-label="Undo" aria-keyshortcuts="Control+Z"
-                      style="margin-left: 0px;">
-              <div class="Icon  disabled">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                  <defs>
-                    <style>.cls-1{fill:#abb0c4;}</style>
-                  </defs>
-                  <title>icon - operation - undo</title>
-                  <path class="cls-1" d="M8.25,10.12h7.39a3.82,3.82,0,0,1,3.78,3,3.76,3.76,0,0,1-3.67,4.53H12.6a.6.6,0,0,0-.6.61v1.3a.6.6,0,0,0,.6.6h2.93A6.41,6.41,0,0,0,22,14.7a6.26,6.26,0,0,0-6.2-7.08H8.25V4.71a.4.4,0,0,0-.65-.32L2.39,8.56a.41.41,0,0,0,0,.63L7.6,13.36A.4.4,0,0,0,8.25,13Z"></path>
-                </svg>
-              </div>
-            </button>
-            <button class="Button disabled ActionButton" data-element="redoButton" aria-label="Redo" aria-keyshortcuts="Control+Shift+Z">
-              <div class="Icon  disabled">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                  <defs>
-                    <style>.cls-1{fill:#abb0c4;}</style>
-                  </defs>
-                  <title>icon - operation - redo</title>
-                  <path class="cls-1" d="M8.47,20.13H11.4a.6.6,0,0,0,.6-.6v-1.3a.6.6,0,0,0-.6-.6h-3a3.82,3.82,0,0,1-3.78-3,3.76,3.76,0,0,1,3.67-4.54h7.5V13a.4.4,0,0,0,.65.32l5.21-4.17a.41.41,0,0,0,0-.63L16.4,4.39a.4.4,0,0,0-.65.32V7.62H8.25a6.26,6.26,0,0,0-6.2,7.08A6.41,6.41,0,0,0,8.47,20.13Z"></path>
-                </svg>
-              </div>
-            </button>
-            <button class="Button tool-button" data-element="eraserToolButton" aria-label="Eraser" aria-keyshortcuts="E">
-              <div class="Icon ">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                  <defs>
-                    <style>.cls-1{fill:#abb0c4;}</style>
-                  </defs>
-                  <title>icon - operation - eraser</title>
-                  <path class="cls-1" d="M12.93,3.1,7.78,8.25,2.62,13.5a2.18,2.18,0,0,0,0,3.05L7.3,21.22a1.07,1.07,0,0,0,.76.32H20.68a.4.4,0,0,0,.4-.4V19.77a.4.4,0,0,0-.4-.4H13.53l7.84-7.84a2.17,2.17,0,0,0,0-3.06L16,3.1A2.17,2.17,0,0,0,12.93,3.1ZM8.51,19.37,4.17,15,9.32,9.78l.8-.81,5.37,5.37-4.94,4.94-.08.09h-2Z"></path>
-                </svg>
-              </div>
-            </button>
-            <div class="spacer hide-in-tablet hide-in-mobile hide-in-small-mobile"></div>
-          </div>
-        </div>
-      </div>
       <div class="content">
         <div class="Panel LeftPanel closed thumbnail-panel-active" data-element="leftPanel">
           <div class="left-panel-container">
@@ -225,28 +54,57 @@
                 </div>
               </div>
             </div>
+            <div class="Panel ThumbnailsPanel" id="virtualized-thumbnails-container" data-element="thumbnailsPanel">
+              <div class="virtualized-thumbnails-container">
+                <div aria-label="grid" aria-readonly="true" class="ReactVirtualized__Grid ReactVirtualized__List thumbnailsList" role="grid" tabindex="0" style="box-sizing: border-box; direction: ltr; height: 1075.01px; position: relative; width: 219px; will-change: transform; overflow: auto; outline: none;">
+                  <div class="ReactVirtualized__Grid__innerScrollContainer" role="rowgroup" style="width: auto; height: 1400px; max-width: 219px; max-height: 1400px; overflow: hidden; position: relative;">
+                    <div role="row" aria-label="row" class="row" style="height: 200px; left: 0px; position: absolute; top: 0px; width: 100%;">
+                      <div role="cell" class="cellThumbContainer">
+                        <div class="Thumbnail" id="Thumbnail-container">
+                          <div class="container" draggable="false" style="width: 150px; height: 150px;">
+                            <div id="pageThumb0" class="thumbnail">
+                              <canvas width="234" height="300" class="page-image" style="width: 117px; height: 150px; background-color: white;"></canvas>
+                            </div>
+                          </div>
+                          <div class="page-label">1</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <div data-element="documentContentContainer" class="document-content-container">
           <div class="measurement-container">
-            <div class="DocumentContainer" data-element="documentContainer">
+            <div class="document-container" data-element="documentContainer">
               <div data-element="viewer" class="document" tabindex="-1" style="width: 674px; cursor: default;">
-                <div id="pageSection1" class="pageSection" style="float: left; position: relative; width: 665px; height: 855px; margin: 4.22494px;">
-                  <div id="pageContainer1" class="pageContainer" style="margin-left: auto; margin-right: auto; background-color: white; width: 665px; height: 855px; top: 0px;">
+                
+                <!-- begin:Page section -->
+                <!-- <div id="pageSection1" class="page-section" style="float: left; position: relative; width: 665px; height: 855px; margin: 4.22494px;">
+                  <div id="pageContainer1" class="page-container" style="margin-left: auto; margin-right: auto; background-color: white; width: 665px; height: 855px; top: 0px;">
                     <canvas width="665" height="856" class="hacc canvas1" style="width: 665px; height: 855px; background-color: white; z-index: 20; position: absolute;"></canvas>
                   </div>
-                </div>
-                <div style="clear: both;"></div>
-                <div id="pageSection2" class="pageSection" style="float: left; position: relative; width: 665px; height: 855px; margin: 4.22494px;">
-                  <div id="pageContainer2" class="pageContainer" style="margin-left: auto; margin-right: auto; background-color: white; width: 665px; height: 855px; top: 0px;">
+                </div> -->
+                <!-- end:Page section -->
+
+                <!-- <div style="clear: both;"></div> -->
+
+                <!-- begin:Page section -->
+                <!-- <div id="pageSection2" class="page-section" style="float: left; position: relative; width: 665px; height: 855px; margin: 4.22494px;">
+                  <div id="pageContainer2" class="page-container" style="margin-left: auto; margin-right: auto; background-color: white; width: 665px; height: 855px; top: 0px;">
                     <canvas width="665" height="856" class="hacc canvas2" style="width: 665px; height: 855px; background-color: white; z-index: 20; position: absolute;"></canvas>
                   </div>
-                </div>
+                </div> -->
+                <!-- end:Page section -->
+
                 <div style="clear: both;"></div>
               </div>
             </div>
             <div class="footer" style="width: calc(100% - 0px); margin-left: 0px;">
-              <div data-element="pageNavOverlay" class="Overlay PageNavOverlay FadeOut">
+              <div data-element="pageNavOverlay" class="Overlay PageNavOverlay">
+              <!-- <div data-element="pageNavOverlay" class="Overlay PageNavOverlay FadeOut"> -->
                 <button class="Button disabled side-arrow-container" aria-label="Previous page">
                   <div class="Icon side-arrow  disabled">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12">
@@ -280,8 +138,8 @@
       </div>
       <div>
         <div class="Overlay FlyoutMenu closed" data-element="zoomOverlay" role="listbox" aria-label="Zoom Overlay" style="left: 0px; right: auto; top: auto;">
-          <button class="Button ZoomItem" aria-label="Fit to width" role="option">
-            <div class="Icon ">
+          <button data-element="scaleSelect" data-value="pageWidth" class="Button ZoomItem" aria-label="Fit to width" role="option">
+            <div class="Icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                 <defs>
                   <style>.cls-1{fill:#abb0c4;}</style>
@@ -292,8 +150,8 @@
             </div>
             <span>Fit to width</span>
           </button>
-          <button class="Button ZoomItem" aria-label="Fit to page" role="option">
-            <div class="Icon ">
+          <button data-element="scaleSelect" data-value="pageFit" class="Button ZoomItem" aria-label="Fit to page" role="option">
+            <div class="Icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                 <defs>
                   <style>.cls-1{fill:#abb0c4;}</style>
@@ -305,54 +163,14 @@
             <span>Fit to page</span>
           </button>
           <div class="divider"></div>
-          <button class="OverlayItem" aria-label="10%" role="option">
-            <div class="ButtonText">10%</div>
-          </button>
-          <button class="OverlayItem" aria-label="25%" role="option">
-            <div class="ButtonText">25%</div>
-          </button>
-          <button class="OverlayItem" aria-label="50%" role="option">
-            <div class="ButtonText">50%</div>
-          </button>
-          <button class="OverlayItem" aria-label="100%" role="option">
-            <div class="ButtonText">100%</div>
-          </button>
-          <button class="OverlayItem" aria-label="125%" role="option">
-            <div class="ButtonText">125%</div>
-          </button>
-          <button class="OverlayItem" aria-label="150%" role="option">
-            <div class="ButtonText">150%</div>
-          </button>
-          <button class="OverlayItem" aria-label="200%" role="option">
-            <div class="ButtonText">200%</div>
-          </button>
-          <button class="OverlayItem" aria-label="400%" role="option">
-            <div class="ButtonText">400%</div>
-          </button>
-          <button class="OverlayItem" aria-label="800%" role="option">
-            <div class="ButtonText">800%</div>
-          </button>
-          <button class="OverlayItem" aria-label="1600%" role="option">
-            <div class="ButtonText">1600%</div>
-          </button>
-          <button class="OverlayItem" aria-label="6400%" role="option">
-            <div class="ButtonText">6400%</div>
-          </button>
-          <div class="dividerSmall"></div>
-          <div>
-            <button class="Button tool-button ZoomItem" data-element="marqueeToolButton" role="option">
-              <div class="Icon ">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                  <defs>
-                    <style>.cls-1{fill:#abb0c4;}</style>
-                  </defs>
-                  <title>icon - header - zoom - marquee</title>
-                  <path class="cls-1" d="M3.05,18.84H6.21v-2.1H4.11V14.63H2v3.16A1,1,0,0,0,3.05,18.84ZM18.84,3.05a1,1,0,0,0-1.05-1H14.63V4.11h2.11v2.1h2.1ZM4.11,4.11h2.1V2H3.05a1,1,0,0,0-1,1V6.21H4.11ZM2,8.32H4.11v4.21H2Zm14.74,0h2.1v3.15h-2.1ZM22,21l-1.81-1.82a3.53,3.53,0,0,0,.59-1.95,3.64,3.64,0,1,0-1.65,3L21,22Zm-6.9-3.77a2.08,2.08,0,1,1,2.08,2.08A2.08,2.08,0,0,1,15.1,17.18ZM8.32,2h4.21V4.11H8.32Zm0,14.74h3.15v2.1H8.32Z"></path>
-                </svg>
-              </div>
-              <span>Marquee Zoom</span>
-            </button>
-          </div>
+          <button data-element="scaleSelect" data-value="50" class="overlay-item" aria-label="50%" role="option">50%</button>
+          <button data-element="scaleSelect" data-value="75" class="overlay-item" aria-label="75%" role="option">75%</button>
+          <button data-element="scaleSelect" data-value="100" class="overlay-item" aria-label="100%" role="option"">100%</button>
+          <button data-element="scaleSelect" data-value="125" class="overlay-item" aria-label="125%" role="option"">125%</button>
+          <button data-element="scaleSelect" data-value="150" class="overlay-item" aria-label="150%" role="option"">150%</button>
+          <button data-element="scaleSelect" data-value="200" class="overlay-item" aria-label="200%" role="option"">200%</button>
+          <button data-element="scaleSelect" data-value="300" class="overlay-item" aria-label="300%" role="option"">300%</button>
+          <button data-element="scaleSelect" data-value="400" class="overlay-item" aria-label="400%" role="option"">400%</button>
         </div>
       </div>
       <div class="Modal ErrorModal closed" data-element="errorModal">
@@ -365,7 +183,7 @@
             <div class="header">
               <div class="header-text"></div>
               <button class="Button" data-element="closeModalButton" aria-label="Cancel">
-                <div class="Icon ">
+                <div class="Icon">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                     <defs>
                       <style>.cls-1{fill:#abb0c4;}</style>
