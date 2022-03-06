@@ -22,7 +22,7 @@
             </button>
             <div data-element="toggleZoomOverlay" class="toggle-zoom-overlay">
               <div class="toggle-zoom-overlay-text">
-                <input type="text" class="textarea" tabindex="-1" aria-label="Set zoom" value="100"><span>%</span>
+                <input data-element="scaleInput" type="text" class="textarea" tabindex="-1" aria-label="Set zoom" value="100"><span>%</span>
               </div>
               <button class="Button OverlayButton" aria-label="Zoom Controls">
                 <i class="fa-solid fa-angle-down fa-sm"></i>
@@ -79,56 +79,20 @@
         <div data-element="documentContentContainer" class="document-content-container">
           <div class="measurement-container">
             <div class="document-container" data-element="documentContainer">
-              <div data-element="viewer" class="document" tabindex="-1" style="width: 674px; cursor: default;">
-                
-                <!-- begin:Page section -->
-                <!-- <div id="pageSection1" class="page-section" style="float: left; position: relative; width: 665px; height: 855px; margin: 4.22494px;">
-                  <div id="pageContainer1" class="page-container" style="margin-left: auto; margin-right: auto; background-color: white; width: 665px; height: 855px; top: 0px;">
-                    <canvas width="665" height="856" class="hacc canvas1" style="width: 665px; height: 855px; background-color: white; z-index: 20; position: absolute;"></canvas>
-                  </div>
-                </div> -->
-                <!-- end:Page section -->
-
-                <!-- <div style="clear: both;"></div> -->
-
-                <!-- begin:Page section -->
-                <!-- <div id="pageSection2" class="page-section" style="float: left; position: relative; width: 665px; height: 855px; margin: 4.22494px;">
-                  <div id="pageContainer2" class="page-container" style="margin-left: auto; margin-right: auto; background-color: white; width: 665px; height: 855px; top: 0px;">
-                    <canvas width="665" height="856" class="hacc canvas2" style="width: 665px; height: 855px; background-color: white; z-index: 20; position: absolute;"></canvas>
-                  </div>
-                </div> -->
-                <!-- end:Page section -->
-
-                <div style="clear: both;"></div>
-              </div>
+              <div data-element="viewer" class="document" tabindex="-1"></div>
             </div>
             <div class="footer" style="width: calc(100% - 0px); margin-left: 0px;">
               <div data-element="pageNavOverlay" class="Overlay PageNavOverlay">
               <!-- <div data-element="pageNavOverlay" class="Overlay PageNavOverlay FadeOut"> -->
-                <button class="Button disabled side-arrow-container" aria-label="Previous page">
-                  <div class="Icon side-arrow  disabled">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12">
-                      <defs>
-                        <style>.cls-1{fill:#abb0c4;}</style>
-                      </defs>
-                      <title>icon - chevron - left</title>
-                      <path class="cls-1" d="M7.5,2l-4,4,4,4,1-1-3-3,3-3Z"></path>
-                    </svg>
-                  </div>
+                <button class="Button side-arrow-container" aria-label="Previous page">
+                <!-- <button class="Button disabled side-arrow-container" aria-label="Previous page"> -->
+                  <i class="fa-solid fa-angle-left"></i>
                 </button>
                 <div class="formContainer">
-                  <form><input type="text" tabindex="-1" aria-label="Set page" value="1" style="width: 8px;"> / 7</form>
+                  <form><input data-element="currentPageInput" type="text" tabindex="-1" aria-label="Set page" value="1" style="width: 8px;"> / <span data-element="totalPage">1</span></form>
                 </div>
                 <button class="Button side-arrow-container" aria-label="Next page">
-                  <div class="Icon side-arrow ">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12">
-                      <defs>
-                        <style>.cls-1{fill:#abb0c4;}</style>
-                      </defs>
-                      <title>icon - chevron - right</title>
-                      <path class="cls-1" d="M4.5,10l4-4-4-4-1,1,3,3-3,3Z"></path>
-                    </svg>
-                  </div>
+                  <i class="fa-solid fa-angle-right"></i>
                 </button>
               </div>
             </div>
@@ -177,7 +141,7 @@
         <div class="container"></div>
       </div>
       <div>
-        <div class="Modal WarningModal closed">
+        <div class="Modal warning-modal closed">
           <div class="container">
             <div class="swipe-indicator"></div>
             <div class="header">
@@ -201,7 +165,7 @@
           </div>
         </div>
       </div>
-      <div class="Modal PasswordModal closed" data-element="passwordModal">
+      <div class="Modal password-modal closed" data-element="passwordModal">
         <div class="container">
           <div class="wrapper">
             <div class="header">Password required</div>

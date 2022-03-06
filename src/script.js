@@ -35,6 +35,10 @@ import loadingModal from './loadingModal.js';
     */
   async function renderAllPages(pdf) {
     console.log(`pdf.numPages=${pdf.numPages}`);
+    // Show total number of pages.
+    totalPage.textContent = pdf.numPages;
+
+    // Draw PDF page by page.
     for (let pageNum=1; pageNum<=pdf.numPages; pageNum++) {
       await renderPage(pdf, pageNum);
       // console.log(`Render the ${pageNum}th page`);
@@ -85,18 +89,24 @@ import loadingModal from './loadingModal.js';
     if (pageNum === 1)
       console.log('outputScale=', outputScale);
 
-    const viewport = page.getViewport({scale: 1.5});
+    const viewport = page.getViewport({scale: 1});
+    // const viewport = page.getViewport({scale: 1.5});
     if (pageNum === 1)
       console.log('viewport=', viewport);
+
+    // Current page scale.
+    const currentScale = parseInt(scaleInput.value, 10) / 100;
+
+    // Calculate section margins.
+    const sectionMargin = currentScale * 4;
 
     // Create PDF page elements.
     const section = document.createElement('div');
     section.id = `section${pageNum}`;
+    section.style.width = `${Math.floor(viewport.width)}px`;
+    section.style.height = `${Math.floor(viewport.height)}px`;
+    section.style.margin = `${sectionMargin}px`;
     section.classList.add('page-section');
-
-    const container = document.createElement('div');
-    container.id = `pageContainer${pageNum}`;
-    container.classList.add('page-container');
 
     const canvas = document.createElement('canvas');
     canvas.width = Math.floor(viewport.width * outputScale);
@@ -104,8 +114,7 @@ import loadingModal from './loadingModal.js';
     canvas.style.width = `${Math.floor(viewport.width)}px`;
     canvas.style.height = `${Math.floor(viewport.height)}px`;
 
-    container.appendChild(canvas);
-    section.appendChild(container);
+    section.appendChild(canvas);
     viewer.appendChild(section);
 
     // Draw contents of a PDF file to a Canvas.
@@ -126,6 +135,11 @@ import loadingModal from './loadingModal.js';
   const toggleZoomOverlay = document.querySelector('[data-element="toggleZoomOverlay"]');
   const zoomOverlay = document.querySelector('[data-element="zoomOverlay"]');
   const viewer = document.querySelector('[data-element="viewer"]');
+  const scaleInput = document.querySelector('[data-element="scaleInput"]');
+  const totalPage = document.querySelector('[data-element="totalPage"]');
+  const currentPageInput = document.querySelector('[data-element="currentPageInput"]');
+  const zoomOutButton = document.querySelector('[data-element="zoomOutButton"]');
+  const zoomInButton = document.querySelector('[data-element="zoomInButton"]');
 
   // Toggle the opening and closing of the left panel.
   leftPanelButton.addEventListener('click', () => {
@@ -173,14 +187,26 @@ import loadingModal from './loadingModal.js';
   // Change page scale.
   for (let scaleSelect of document.querySelectorAll('[data-element="scaleSelect"]'))
     scaleSelect.addEventListener('click', evnt => {
-      const scale = evnt.target.dataset.value;
-      console.log(`Select scale ${scale}`);
+      const selectedScale = evnt.target.dataset.value;
+      console.log(`Select scale ${selectedScale}`);
       closeZoomOverlay();
+      if (!isNaN(parseInt(selectedScale, 10)))
+        scaleInput.value = selectedScale;
     });
 
+  // Zoom out PDF page.
+  zoomOutButton.addEventListener('click', () => {
+    const currentScale = parseInt(scaleInput.value, 10);
+    console.log(`currentScale=${currentScale}`);
+  });
+
+  // Zoom in on PDF page.
+  zoomInButton.addEventListener('click', () => {
+    const currentScale = parseInt(scaleInput.value, 10);
+  });
+
   // Init PDF viewer.
-  const pdf = await initPDFViewer('sample2.pdf');
-  // const pdf = await initPDFViewer('sample.pdf');
+  const pdf = await initPDFViewer('sample3.pdf');
 
   // Render all PDF pages.
   renderAllPages(pdf);

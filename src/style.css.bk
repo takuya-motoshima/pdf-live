@@ -17,10 +17,12 @@
   --gray-9: #343a40;
   --gray-10: #21242a;
   --gray-11: #101214;
+  --gray-12: #000;
   --component-background: var(--gray-0);
   --toggle-zoom-overlay-background: var(--gray-2);
   --document-background-color: var(--gray-2);
   --text-color: var(--gray-8);
+  --placeholder-text: var(--gray-6);
   --disabled-text: var(--gray-5);
   --disabled-icon: var(--gray-5);
   --scroll-chevron-color: var(--gray-6);
@@ -42,11 +44,28 @@
   --side-panel-border: var(--divider);
   --border: var(--gray-5);
   --focus-border: var(--blue-5);
+  --color-palette-border: var(--gray-8);
   --modal-negative-space: rgba(0, 0, 0, 0.3);
+  --spinner-negative-space: rgba(0, 0, 0, 0.3);
+  --white-color-palette-border: var(--border);
+  --list-separator-color: var(--gray-7);
   --scrollbar-color: var(--gray-6);
+  --note-box-shadow: var(--box-shadow);
+  --tools-header-background: var(--gray-3);
   --view-header-background: var(--gray-1);
+  --tools-overlay-background: var(--gray-0);
   --tools-button-hover: var(--blue-3);
   --tools-button-active: var(--blue-4);
+  --tools-overlay-button-hover: var(--blue-1);
+  --tools-overlay-button-active: var(--blue-2);
+  --outline-color: var(--blue-5);
+  --outline-hover: var(--gray-2);
+  --outline-selected: var(--blue-1);
+  --color-theme-primary: #00a5e4;
+  --color-theme-secondary: #242933;
+  --color-font-primary: var(--text-color);
+  /* --color-font-primary: #232229; */
+  --color-font-secondary: #5b5c68;
   --color-gray-1: var(--component-background);
   /* --color-gray-1: #fff; */
   --color-gray-2: #f4f4f4;
@@ -94,8 +113,12 @@
   --box-shadow-1: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   --box-shadow-2: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   --box-shadow-3: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  --z-index-local: 0;
+  --z-index-raised: 100;
+  --z-index-dragging: 200;
+  --z-index-overlay: 300;
   --font-family: Lato, Tahoma, sans-serif;
-  --focus-transition: box-shadow 0.1s cubic-bezier(0.4, 1, 0.75, 0.9);
+  --focus-transition: box-shadow 0.1s cubic-bezier(0.4, 1, 0.75, 0.9)
 }
 
 :root[data-theme="dark"] {
@@ -117,6 +140,7 @@
   --gray-9: #E7EBEE;
   --gray-10: #F1F3F5;
   --gray-11: #F8F9FA;
+  --gray-12: #FFFFFF;
   --panel-background: var(--gray-3);
   --toggle-zoom-overlay-background: var(--gray-4);
   --component-background: var(--gray-2);
@@ -126,6 +150,7 @@
   --scroll-chevron-color: var(--gray-5);
   --icon-color: var(--gray-6);
   --text-color: var(--gray-11);
+  --placeholder-text: var(--gray-5);
   --disabled-text: var(--gray-4);
   --disabled-icon: var(--gray-4);
   --primary-button: var(--blue-6);
@@ -142,14 +167,30 @@
   --popup-button-active: var(--blue-4);
   --primary-button-hover: var(--blue-5);
   --secondary-button-hover: var(--blue-5);
+  --color-palette-border: var(--gray-7);
   --modal-negative-space: rgba(0, 0, 0, 0.3);
+  --spinner-negative-space: rgba(0, 0, 0, 0.3);
+  --white-color-palette-border: transparent;
+  --list-separator-color: var(--gray-7);
   --scrollbar-color: var(--gray-5);
+  --note-box-shadow: transparent;
+  --tools-header-background: var(--gray-1);
   --view-header-background: hsl(206deg 7% 21%);
   /* --view-header-background: var(--gray-3); */
+  --tools-overlay-background: var(--gray-2);
   --tools-button-hover: hsl(206deg 5% 27%);
   /* --tools-button-hover: var(--blue-1); */
   --tools-button-active: var(--blue-2);
-  /* --color-gray-1: #4a4a4a;
+  --tools-overlay-button-hover: var(--blue-3);
+  --tools-overlay-button-active: var(--blue-4);
+  --outline-color: var(--blue-6);
+  --outline-hover: var(--blue-3);
+  --outline-selected: var(--blue-3);
+  /* --color-theme-primary: #00a5e4;
+  --color-theme-secondary: #8fa5c7;
+  --color-font-primary: #d7daeb;
+  --color-font-secondary: #989ba3;
+  --color-gray-1: #4a4a4a;
   --color-gray-2: #444;
   --color-gray-3: #424242;
   --color-gray-4: #3f3f3f;
@@ -170,35 +211,35 @@
   font-family: Lato;
   src: url(fonts/Lato-Regular.woff) format("woff");
   font-style: normal;
-  font-weight: 400;
+  font-weight: 400
 }
 
 @font-face {
   font-family: Lato;
   src: url(fonts/Lato-Italic.woff) format("woff");
   font-style: italic;
-  font-weight: 400;
+  font-weight: 400
 }
 
 @font-face {
   font-family: Lato;
   src: url(fonts/Lato-Bold.woff) format("woff");
   font-style: normal;
-  font-weight: 700;
+  font-weight: 700
 }
 
 @font-face {
   font-family: Lato;
   src: url(fonts/Lato-BoldItalic.woff) format("woff");
   font-weight: 700;
-  font-style: italic;
+  font-style: italic
 }
 
 @font-face {
   font-family: GreatVibes-Regular;
   src: url(fonts/GreatVibes-Regular.woff2) format("woff2"), url(fonts/GreatVibes-Regular.woff) format("woff");
   font-weight: 400;
-  font-style: normal;
+  font-style: normal
 }
 
 .tooltip--bottom,
@@ -225,11 +266,11 @@
   content: "";
   width: 0;
   height: 0;
-  position: absolute;
+  position: absolute
 }
 
 .tooltip--top {
-  margin-top: -10px;
+  margin-top: -10px
 }
 
 .tooltip--top .tooltip__content:before {
@@ -238,11 +279,11 @@
   margin-left: -8px;
   border-left: 8px solid transparent;
   border-right: 8px solid transparent;
-  border-top: 6px solid #222;
+  border-top: 6px solid #222
 }
 
 .tooltip--bottom {
-  margin-top: 10px;
+  margin-top: 10px
 }
 
 .tooltip--bottom .tooltip__content:before {
@@ -251,11 +292,11 @@
   margin-left: -8px;
   border-left: 8px solid transparent;
   border-right: 8px solid transparent;
-  border-bottom: 6px solid #222;
+  border-bottom: 6px solid #222
 }
 
 .tooltip--bottomLeft {
-  margin-top: 10px;
+  margin-top: 10px
 }
 
 .tooltip--bottomLeft .tooltip__content:before {
@@ -263,12 +304,12 @@
   margin-left: -7px;
   border-left: 8px solid transparent;
   border-right: 8px solid transparent;
-  border-bottom: 6px solid #222;
+  border-bottom: 6px solid #222
 }
 
 .tooltip--left {
   margin-left: -10px;
-  white-space: nowrap;
+  white-space: nowrap
 }
 
 .tooltip--left .tooltip__content:before {
@@ -277,12 +318,12 @@
   border-left: 6px solid #222;
   right: -6px;
   top: 50%;
-  margin-top: -6px;
+  margin-top: -6px
 }
 
 .tooltip--right {
   margin-left: 10px;
-  white-space: nowrap;
+  white-space: nowrap
 }
 
 .tooltip--right .tooltip__content:before {
@@ -291,41 +332,41 @@
   border-right: 6px solid #222;
   left: -6px;
   top: 50%;
-  margin-top: -6px;
+  margin-top: -6px
 }
 
 .tooltip__shortcut {
   margin-left: 3px;
-  opacity: .5;
+  opacity: .5
 }
 
 .tooltip__content {
   background: #222;
   color: #fff;
-  font-size: 12px;
+  font-size: 12px
 }
 
 .Icon {
   width: 22px;
   height: 22px;
   pointer-events: none;
-  color: var(--icon-color);
+  color: var(--icon-color)
 }
 
 .Icon circle:not([fill*="#"]),
 .Icon path:not([fill*="#"]),
 .Icon polygon:not([fill*="#"]),
 .Icon rect:not([fill*="#"]) {
-  fill: currentColor;
+  fill: currentColor
 }
 
 .Icon:not(.disabled) path[fill=default] {
-  fill: var(--icon-color);
+  fill: var(--icon-color)
 }
 
 .Icon.disabled,
 .Icon.disabled path {
-  fill: var(--disabled-icon);
+  fill: var(--disabled-icon)
 }
 
 .Icon circle[fill=fill],
@@ -337,7 +378,7 @@
 .Icon polygon[fill=none],
 .Icon rect[fill=fill],
 .Icon rect[fill=none] {
-  fill: none;
+  fill: none
 }
 
 .Button {
@@ -352,24 +393,29 @@
   border-radius: 4px;
   width: 32px;
   height: 32px;
-  color: var(--text-color);
+  color: var(--text-color)
 }
 
 html:not([data-tabbing=true]) .Button {
-  outline: none;
+  outline: none
+}
+
+.Button img {
+  height: 24px;
+  width: 24px
 }
 
 .Button.active path[fill=default] {
-  fill: var(--selected-icon-color);
+  fill: var(--selected-icon-color)
 }
 
 .Button.active .Icon {
-  color: var(--selected-icon-color);
+  color: var(--selected-icon-color)
 }
 
 .Button.disabled {
-  background: none !important;
-  cursor: default;
+  background: none!important;
+  cursor: default
 }
 
 .Button.disabled .Icon,
@@ -384,28 +430,31 @@ html:not([data-tabbing=true]) .Button {
   width: 100%;
   height: 100%;
   position: relative;
-  padding: 0 4px;
+  padding: 0 4px
 }
 
-.HeaderItems>.Button {
-  margin: 0 6px;
+.HeaderItems>.Button,
+.HeaderItems>.toggle-element-button {
+  margin: 0 6px
 }
 
 @media (max-width: 640px) {
-  .HeaderItems>.Button {
-    margin: 0 6px;
+  .HeaderItems>.Button,
+  .HeaderItems>.toggle-element-button {
+    margin: 0 6px
   }
 }
 
 @media (min-width: 641px) and (max-width:900px) {
-  .HeaderItems>.Button {
-    margin: 0 10px;
+  .HeaderItems>.Button,
+  .HeaderItems>.toggle-element-button {
+    margin: 0 10px
   }
 }
 
 .HeaderItems .spacer {
   flex: 1;
-  height: 100%;
+  height: 100%
 }
 
 .HeaderItems .divider {
@@ -413,59 +462,59 @@ html:not([data-tabbing=true]) .Button {
   height: 20px;
   margin: 0 6px;
   background: var(--divider);
-  flex-shrink: 0;
+  flex-shrink: 0
 }
 
 @media (max-width: 900px) {
   .HeaderItems .divider {
-    margin: 0 4px;
+    margin: 0 4px
   }
 }
 
 .HeaderItems .divider {
-  margin-left: 0;
+  margin-left: 0
 }
 
 @media (min-width: 901px) {
   .HeaderItems .divider {
     margin-left: 16px;
-    margin-right: 16px;
+    margin-right: 16px
   }
 }
 
 @media (min-width: 641px) and (max-width:900px) {
   .HeaderItems .divider {
     margin-left: 16px;
-    margin-right: 16px;
+    margin-right: 16px
   }
 }
 
 @media (max-width: 640px) {
   .HeaderItems .divider {
     margin-left: 16px;
-    margin-right: 16px;
+    margin-right: 16px
   }
 }
 
 .HeaderItems>.Button {
   width: 32px;
-  height: 32px;
+  height: 32px
 }
 
 .HeaderItems .Button:not(.disabled):hover {
   border-radius: 50%;
-  background: var(--tools-button-hover);
+  background: var(--tools-button-hover)
 }
 
 .HeaderItems .Button:not(.disabled).active {
   border-radius: 4px;
-  background: var(--tools-button-active);
+  background: var(--tools-button-active)
 }
 
 .view-header-border {
   width: 100%;
   height: 1px;
-  background: var(--border);
+  background: var(--border)
 }
 
 .Header {
@@ -476,17 +525,17 @@ html:not([data-tabbing=true]) .Button {
   width: 100%;
   height: 36px;
   background: var(--view-header-background);
-  z-index: 71;
+  z-index: 71
 }
 
 @media (max-width: 900px) {
   .Header {
-    height: 52px;
+    height: 52px
   }
 }
 
 .open.FlyoutMenu {
-  visibility: visible;
+  visibility: visible
 }
 
 .closed.FlyoutMenu {
@@ -502,14 +551,14 @@ html:not([data-tabbing=true]) .Button {
   border-radius: 4px;
   background: var(--component-background);
   box-shadow: 0 0 3px 0 var(--document-box-shadow);
-  padding: 6px 0;
+  padding: 6px 0
 }
 
 @media (max-height: 500px) {
   .FlyoutMenu {
     overflow: auto;
     max-height: 100%;
-    display: block;
+    display: block
   }
 }
 
@@ -521,37 +570,76 @@ html:not([data-tabbing=true]) .Button {
   align-items: center;
   padding-left: 12px;
   padding-right: 18px;
-  cursor: pointer;
+  cursor: pointer
 }
 
 .FlyoutMenu .row:hover {
-  background: var(--popup-button-hover);
+  background: var(--popup-button-hover)
 }
 
 .FlyoutMenu .row.active {
-  background: var(--popup-button-active);
+  background: var(--popup-button-active)
 }
 
 .FlyoutMenu .row .title {
-  margin-left: 4px;
+  margin-left: 4px
 }
 
 .FlyoutMenu .divider {
-  margin: 8px;
+  margin: 8px
+}
+
+.FlyoutMenu .divider,
+.FlyoutMenu .dividerSmall {
   height: 1px;
   background: var(--divider);
-  width: calc(100% - 16px);
+  width: calc(100% - 16px)
 }
 
-.open.password-modal {
-  visibility: visible;
+.FlyoutMenu .dividerSmall {
+  margin: 2px 8px
 }
 
-.closed.password-modal {
+.FlyoutMenu.mobile {
+  position: fixed;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  border-radius: 0;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  border: 0;
+  box-shadow: 0 0 3px 0 var(--document-box-shadow);
+  padding-top: 30px;
+  padding-bottom: 30px
+}
+
+.FlyoutMenu.mobile .swipe-indicator {
+  background: var(--divider);
+  border-radius: 2px;
+  height: 4px;
+  width: 38px;
+  position: absolute;
+  top: 12px;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0
+}
+
+.FlyoutMenu.mobile .row {
+  padding: 0 24px
+}
+
+.open.PasswordModal {
+  visibility: visible
+}
+
+.closed.PasswordModal {
   visibility: hidden;
 }
 
-.password-modal {
+.PasswordModal {
   position: fixed;
   left: 0;
   bottom: 0;
@@ -561,18 +649,18 @@ html:not([data-tabbing=true]) .Button {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: var(--modal-negative-space);
+  background: var(--modal-negative-space)
 }
 
-.password-modal .footer {
+.PasswordModal .footer {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
   width: 100%;
-  margin-top: 13px;
+  margin-top: 13px
 }
 
-.password-modal .footer .modal-button {
+.PasswordModal .footer .modal-button {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -584,90 +672,90 @@ html:not([data-tabbing=true]) .Button {
   width: fit-content;
   border-radius: 4px;
   height: 30px;
-  cursor: pointer;
+  cursor: pointer
 }
 
-.password-modal .footer .modal-button.cancel {
-  color: var(--secondary-button-text);
+.PasswordModal .footer .modal-button.cancel {
+  color: var(--secondary-button-text)
 }
 
-.password-modal .footer .modal-button.cancel:hover {
-  color: var(--secondary-button-hover);
+.PasswordModal .footer .modal-button.cancel:hover {
+  color: var(--secondary-button-hover)
 }
 
-.password-modal .footer .modal-button.confirm {
+.PasswordModal .footer .modal-button.confirm {
   margin-left: 4px;
   color: var(--primary-button-text);
   font-weight: 600;
-  background: var(--primary-button);
+  background: var(--primary-button)
 }
 
-.password-modal .footer .modal-button.confirm:hover {
-  background: var(--primary-button-hover);
+.PasswordModal .footer .modal-button.confirm:hover {
+  background: var(--primary-button-hover)
 }
 
 @media (max-width: 640px) {
-  .password-modal .footer .modal-button {
-    padding: 23px 8px;
+  .PasswordModal .footer .modal-button {
+    padding: 23px 8px
   }
 }
 
-.password-modal .container {
-  border-radius: 4px;
+.PasswordModal .container {
+  border-radius: 4px
 }
 
 @media (max-height: 500px) {
-  .password-modal .container {
+  .PasswordModal .container {
     overflow: auto;
-    max-height: 100%;
+    max-height: 100%
   }
 }
 
-.password-modal .container {
+.PasswordModal .container {
   display: flex;
   align-items: center;
   padding: 10px;
   background: var(--component-background);
-  box-shadow: 0 0 3px 0 var(--document-box-shadow);
+  box-shadow: 0 0 3px 0 var(--document-box-shadow)
 }
 
-.password-modal .container .wrapper {
+.PasswordModal .container .wrapper {
   align-self: stretch;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  position: relative;
+  position: relative
 }
 
-.password-modal .container .wrapper .header {
+.PasswordModal .container .wrapper .header {
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 700
 }
 
-.password-modal .container .wrapper .enter {
+.PasswordModal .container .wrapper .enter {
   margin-top: 22px;
-  font-size: 14px;
+  font-size: 14px
 }
 
-.password-modal .container .wrapper .enter input {
+.PasswordModal .container .wrapper .enter input {
   margin-top: 8px;
   width: 100%;
   border: none;
-  outline: none;
+  outline: none
 }
 
-.password-modal .container .wrapper .enter input.correct {
-  border-bottom: 2px solid #00a5e4;
+.PasswordModal .container .wrapper .enter input.correct {
+  border-bottom: 2px solid #00a5e4
 }
 
-.password-modal .container .wrapper .enter input.wrong {
-  border-bottom: 2px solid red;
+.PasswordModal .container .wrapper .enter input.wrong {
+  border-bottom: 2px solid red
 }
 
-.password-modal .container .wrapper .incorrect-password {
+.PasswordModal .container .wrapper .incorrect-password {
   margin-top: 2px;
   font-size: 14px;
-  color: #e00;
+  color: #e00
 }
 
 .PageNavOverlay {
@@ -688,12 +776,12 @@ html:not([data-tabbing=true]) .Button {
   background: #485056;
   border-radius: 4px;
   z-index: 0;
-  bottom: 20px;
+  bottom: 20px
 }
 
 @media (max-width: 640px) {
   .PageNavOverlay {
-    height: 36px;
+    height: 36px
   }
 }
 
@@ -707,40 +795,40 @@ html:not([data-tabbing=true]) .Button {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 4px;
+  margin: 0 4px
 }
 
 html:not([data-tabbing=true]) .PageNavOverlay .side-arrow-container {
-  outline: none;
+  outline: none
 }
 
 @media (max-width: 640px) {
   .PageNavOverlay .side-arrow-container {
     width: 40px;
-    height: 28px;
+    height: 28px
   }
 }
 
 .PageNavOverlay .side-arrow-container:hover {
-  background: #21242a;
+  background: #21242a
 }
 
 .PageNavOverlay .side-arrow-container .side-arrow {
   width: 16px;
   height: 16px;
-  color: #fff;
+  color: #fff
 }
 
 .PageNavOverlay .formContainer {
   height: 100%;
   display: flex;
-  align-items: center;
+  align-items: center
 }
 
 .PageNavOverlay .formContainer form {
   top: -1px;
   position: relative;
-  color: #fff;
+  color: #fff
 }
 
 .PageNavOverlay .formContainer form input {
@@ -755,17 +843,17 @@ html:not([data-tabbing=true]) .PageNavOverlay .side-arrow-container {
   cursor: pointer;
   outline: none;
   border-bottom: 1px solid var(--icon-color);
-  border-radius: 0;
+  border-radius: 0
 }
 
 .FadeOut {
   opacity: 0;
-  transition: opacity .3s ease;
+  transition: opacity .3s ease
 }
 
 .document-content-container {
   flex-direction: column;
-  transition: all .3s ease-in-out;
+  transition: all .3s ease-in-out
 }
 
 .document-content-container,
@@ -780,7 +868,7 @@ html:not([data-tabbing=true]) .PageNavOverlay .side-arrow-container {
 
 .document-content-container .measurement-container {
   flex-direction: column;
-  flex: 1;
+  flex: 1
 }
 
 .document-content-container .measurement-container .footer {
@@ -790,11 +878,11 @@ html:not([data-tabbing=true]) .PageNavOverlay .side-arrow-container {
   left: 0;
   z-index: 55;
   width: 100%;
-  transition: all .3s ease;
+  transition: all .3s ease
 }
 
 .document-content-container .measurement-container .footer>* {
-  pointer-events: auto;
+  pointer-events: auto
 }
 
 /* TODO: under development */
@@ -809,21 +897,21 @@ html:not([data-tabbing=true]) .PageNavOverlay .side-arrow-container {
   flex: 1;
   width: 100%;
   overflow: auto;
-  user-select: none;
+  user-select: none
 }
 
 @media (-ms-high-contrast:active),
 (-ms-high-contrast:none) {
   .document-container {
-    margin-left: 0 !important;
-    width: 100% !important;
+    margin-left: 0!important;
+    width: 100%!important
   }
 }
 
 .document-container .document {
   margin: auto;
   outline: none;
-  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: transparent
 }
 
 .document-container .document.hidden {
@@ -833,7 +921,7 @@ html:not([data-tabbing=true]) .PageNavOverlay .side-arrow-container {
 .document-container .document .page-section {
   background-color: #fff;
   position: relative;
-  box-shadow: 0 0 2px 0 rgba(0, 0, 0, .14), 0 2px 2px 0 rgba(0, 0, 0, .12), 0 1px 3px 0 rgba(0, 0, 0, .12);
+  box-shadow: 0 0 2px 0 rgba(0, 0, 0, .14), 0 2px 2px 0 rgba(0, 0, 0, .12), 0 1px 3px 0 rgba(0, 0, 0, .12)
 }
 
 .Thumbnail {
@@ -842,13 +930,13 @@ html:not([data-tabbing=true]) .PageNavOverlay .side-arrow-container {
   justify-content: center;
   align-items: center;
   text-align: center;
-  cursor: pointer;
+  cursor: pointer
 }
 
 .Thumbnail.active .container .page-image {
   border: 2px solid var(--focus-border);
   box-shadow: none;
-  box-sizing: content-box;
+  box-sizing: content-box
 }
 
 .Thumbnail .container {
@@ -856,24 +944,49 @@ html:not([data-tabbing=true]) .PageNavOverlay .side-arrow-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  cursor: pointer;
+  cursor: pointer
+}
+
+.Thumbnail .container .page-image {
+  box-shadow: 0 0 3px 0 var(--box-shadow)
 }
 
 .Thumbnail .container .page-image {
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%);
-  box-shadow: 0 0 3px 0 var(--box-shadow);
+  transform: translate(-50%, -50%)
+}
+
+.Thumbnail .container .checkbox {
+  position: absolute;
+  border-radius: 4px;
+  z-index: 4
 }
 
 .Thumbnail .container .default {
   top: 3%;
-  right: 15%;
+  right: 15%
+}
+
+.Thumbnail .container .rotated {
+  top: 15%;
+  right: 3%
+}
+
+.Thumbnail .container .dim {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  background: var(--modal-negative-space)
 }
 
 .Thumbnail .page-label {
-  margin-top: 11px;
+  margin-top: 11px
 }
 
 .Thumbnail.selected .container .thumbnail:before {
@@ -882,19 +995,19 @@ html:not([data-tabbing=true]) .PageNavOverlay .side-arrow-container {
   width: 16px;
   height: 16px;
   position: absolute;
-  z-index: 10;
+  z-index: 10
 }
 
 .Thumbnail.selected .page-label {
-  color: var(--focus-border) !important;
+  color: var(--focus-border)!important
 }
 
 .Thumbnail.selected canvas:first-of-type {
-  border: 3px solid var(--focus-border) !important;
+  border: 3px solid var(--focus-border)!important
 }
 
 .ThumbnailsPanel {
-  overflow: hidden !important;
+  overflow: hidden!important;
   display: flex;
   height: 100%;
 }
@@ -907,23 +1020,153 @@ html:not([data-tabbing=true]) .PageNavOverlay .side-arrow-container {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  flex-direction: column;
+  flex-direction: column
+}
+
+.ThumbnailsPanel .thumbnailPlaceholder {
+  width: 150px;
+  margin: 2px;
+  border: 1px solid var(--focus-border)
 }
 
 .ThumbnailsPanel .columnsOfThumbnails.row {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  flex-direction: row;
+  flex-direction: row
 }
 
 .ThumbnailsPanel .columnsOfThumbnails .cellThumbContainer {
   display: flex;
-  flex-direction: row;
+  flex-direction: row
 }
 
 .ThumbnailsPanel .columnsOfThumbnails .Thumbnail {
-  display: inline-flex;
+  display: inline-flex
+}
+
+.ThumbnailsPanel .columnsOfThumbnails .thumbnailPlaceholder {
+  width: 116px;
+  min-width: 116px;
+  height: 150px;
+  margin-bottom: 30px
+}
+
+.Dropdown {
+  border: none;
+  background-color: transparent;
+  display: flex;
+  user-select: none;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 80;
+  border-radius: 4px;
+  height: 28px;
+  border: 1px solid var(--border);
+  padding: 0 4px 0 8px;
+  background: var(--component-background);
+  cursor: pointer
+}
+
+.Dropdown,
+.Dropdown__wrapper {
+  position: relative
+}
+
+html:not([data-tabbing=true]) .Dropdown {
+  outline: none
+}
+
+.Dropdown .down-arrow {
+  flex: 0.2;
+  width: 12px;
+  height: 16px;
+  margin-top: 2px
+}
+
+.Dropdown .picked-option {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center
+}
+
+.Dropdown .picked-option .picked-option-text {
+  flex: 0.8;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis
+}
+
+.Dropdown:disabled {
+  background: none;
+  color: var(--disabled-icon)
+}
+
+.Dropdown__items {
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 30px;
+  right: 0;
+  border-radius: 4px;
+  box-shadow: 0 0 3px 0 var(--document-box-shadow);
+  background: var(--component-background);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden
+}
+
+.Dropdown__items.hide {
+  visibility: hidden
+}
+
+.Dropdown__item {
+  border: none;
+  background-color: transparent;
+  height: 28px;
+  align-items: center;
+  display: flex;
+  border-radius: 0;
+  padding: 0 32px 0 8px
+}
+
+html:not([data-tabbing=true]) .Dropdown__item {
+  outline: none
+}
+
+.Dropdown__item.active {
+  background-color: var(--popup-button-active)
+}
+
+.Dropdown__item:hover {
+  background-color: var(--popup-button-hover)
+}
+
+.Dropdown__item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px
+}
+
+.Dropdown__item:last-child {
+  border-bottom-right-radius: 4px
+}
+
+.horizontalLine {
+  height: 2px
+}
+
+.horizontalLine,
+.verticalLine {
+  background-color: rgba(30, 120, 235, .5);
+  position: fixed
+}
+
+.verticalLine {
+  width: 2px
 }
 
 .spinner {
@@ -943,7 +1186,7 @@ html:not([data-tabbing=true]) .PageNavOverlay .side-arrow-container {
   overflow: auto;
   -webkit-overflow-scrolling: touch;
   flex: 1;
-  flex-direction: column;
+  flex-direction: column
 }
 
 .LeftPanel {
@@ -958,40 +1201,65 @@ html:not([data-tabbing=true]) .PageNavOverlay .side-arrow-container {
   left: 0;
   transition: transform .3s ease-in-out;
   max-width: calc(100% - 16px);
-  height: calc(100% - 40px);
+  height: calc(100% - 40px)
 }
 
 @media (max-width: 640px) {
   .LeftPanel {
-    max-width: 100%;
+    max-width: 100%
   }
+}
+
+.LeftPanel.tools-header-open {
+  height: calc(100% - 80px)
 }
 
 @media (min-width: 901px) {
   .LeftPanel {
-    height: calc(100% - 40px);
+    height: calc(100% - 40px)
+  }
+  .LeftPanel.tools-header-open {
+    height: calc(100% - 74px)
   }
 }
 
 @media (min-width: 641px) {
   .LeftPanel {
-    height: calc(100% - 37px);
+    height: calc(100% - 37px)
   }
 }
 
 @media (min-width: 641px) and (min-width:641px) and (max-width:900px) {
   .LeftPanel {
-    height: calc(100% - 53px);
+    height: calc(100% - 53px)
+  }
+}
+
+@media (min-width: 641px) {
+  .LeftPanel.tools-header-open {
+    height: calc(100% - 76px)
+  }
+}
+
+@media (min-width: 641px) and (min-width:641px) and (max-width:900px) {
+  .LeftPanel.tools-header-open {
+    height: calc(100% - 104px)
+  }
+}
+
+@media (min-width: 641px) {
+  .LeftPanel.tools-header-and-header-hidden {
+    height: 100%
   }
 }
 
 .LeftPanel.closed {
-  transform: translateX(-100%);
+  transform: translateX(-100%)
 }
 
 @media (min-width: 641px) and (max-width:900px) {
   .LeftPanel {
-    border-right: 1px solid var(--side-panel-border);
+    border-right: 1px solid var(--side-panel-border)
   }
 }
 
@@ -1022,7 +1290,7 @@ html:not([data-tabbing=true]) .PageNavOverlay .side-arrow-container {
   .LeftPanel .left-panel-container {
     padding-top: 0;
     width: 100vw;
-    min-width: 100vw;
+    min-width: 100vw
   }
   .LeftPanel .left-panel-container .close-container {
     display: flex;
@@ -1031,32 +1299,38 @@ html:not([data-tabbing=true]) .PageNavOverlay .side-arrow-container {
     height: 64px;
     width: 100%;
     padding-right: 5px;
-    top: 0;
+    top: 0
   }
   .LeftPanel .left-panel-container .close-container .close-icon-container {
-    cursor: pointer;
+    cursor: pointer
   }
   .LeftPanel .left-panel-container .close-container .close-icon-container .close-icon {
     width: 24px;
-    height: 24px;
+    height: 24px
   }
 }
 
 .LeftPanel .left-panel-header {
   display: flex;
   align-items: center;
-  margin: 0 8px 16px 16px;
+  margin: 0 8px 16px 16px
 }
 
-.open.loading-modal {
-  visibility: visible;
+@media (max-width: 640px) {
+  .AnnotationStylePopup {
+    padding-top: 4px
+  }
 }
 
-.closed.loading-modal {
-  visibility: hidden;
+.open.LoadingModal {
+  visibility: visible
 }
 
-.loading-modal {
+.closed.LoadingModal {
+  visibility: hidden
+}
+
+.LoadingModal {
   position: fixed;
   left: 0;
   bottom: 0;
@@ -1066,18 +1340,18 @@ html:not([data-tabbing=true]) .PageNavOverlay .side-arrow-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: var(--modal-negative-space);
+  background: var(--modal-negative-space)
 }
 
-.loading-modal .footer {
+.LoadingModal .footer {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
   width: 100%;
-  margin-top: 13px;
+  margin-top: 13px
 }
 
-.loading-modal .footer .modal-button {
+.LoadingModal .footer .modal-button {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1089,42 +1363,42 @@ html:not([data-tabbing=true]) .PageNavOverlay .side-arrow-container {
   width: fit-content;
   border-radius: 4px;
   height: 30px;
-  cursor: pointer;
+  cursor: pointer
 }
 
-.loading-modal .footer .modal-button.cancel {
-  color: var(--secondary-button-text);
+.LoadingModal .footer .modal-button.cancel {
+  color: var(--secondary-button-text)
 }
 
-.loading-modal .footer .modal-button.cancel:hover {
-  color: var(--secondary-button-hover);
+.LoadingModal .footer .modal-button.cancel:hover {
+  color: var(--secondary-button-hover)
 }
 
-.loading-modal .footer .modal-button.confirm {
+.LoadingModal .footer .modal-button.confirm {
   margin-left: 4px;
   color: var(--primary-button-text);
   font-weight: 600;
-  background: var(--primary-button);
+  background: var(--primary-button)
 }
 
-.loading-modal .footer .modal-button.confirm:hover {
-  background: var(--primary-button-hover);
+.LoadingModal .footer .modal-button.confirm:hover {
+  background: var(--primary-button-hover)
 }
 
 @media (max-width: 640px) {
-  .loading-modal .footer .modal-button {
-    padding: 23px 8px;
+  .LoadingModal .footer .modal-button {
+    padding: 23px 8px
   }
 }
 
-.loading-modal .container {
+.LoadingModal .container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 10px;
+  padding: 10px
 }
 
-.loading-modal .inner-wrapper {
+.LoadingModal .inner-wrapper {
   margin: 10px;
   border-top: 5px solid var(--border);
   border: 5px solid var(--border);
@@ -1161,7 +1435,7 @@ html:not([data-tabbing=true]) .PageNavOverlay .side-arrow-container {
   flex-direction: row;
   justify-content: flex-end;
   width: 100%;
-  margin-top: 13px;
+  margin-top: 13px
 }
 
 .ErrorModal .footer .modal-button {
@@ -1176,44 +1450,44 @@ html:not([data-tabbing=true]) .PageNavOverlay .side-arrow-container {
   width: fit-content;
   border-radius: 4px;
   height: 30px;
-  cursor: pointer;
+  cursor: pointer
 }
 
 .ErrorModal .footer .modal-button.cancel {
-  color: var(--secondary-button-text);
+  color: var(--secondary-button-text)
 }
 
 .ErrorModal .footer .modal-button.cancel:hover {
-  color: var(--secondary-button-hover);
+  color: var(--secondary-button-hover)
 }
 
 .ErrorModal .footer .modal-button.confirm {
   margin-left: 4px;
   color: var(--primary-button-text);
   font-weight: 600;
-  background: var(--primary-button);
+  background: var(--primary-button)
 }
 
 .ErrorModal .footer .modal-button.confirm:hover {
-  background: var(--primary-button-hover);
+  background: var(--primary-button-hover)
 }
 
 @media (max-width: 640px) {
   .ErrorModal .footer .modal-button {
-    padding: 23px 8px;
+    padding: 23px 8px
   }
 }
 
 .ErrorModal .container {
   border-radius: 4px;
   box-shadow: 0 0 3px 0 var(--document-box-shadow);
-  background: var(--component-background);
+  background: var(--component-background)
 }
 
 @media (max-height: 500px) {
   .ErrorModal .container {
     overflow: auto;
-    max-height: 100%;
+    max-height: 100%
   }
 }
 
@@ -1223,18 +1497,18 @@ html:not([data-tabbing=true]) .PageNavOverlay .side-arrow-container {
   width: 300px;
   padding: 20px;
   word-break: break-word;
-  white-space: pre-wrap;
+  white-space: pre-wrap
 }
 
-.open.warning-modal {
-  visibility: visible;
+.open.WarningModal {
+  visibility: visible
 }
 
-.closed.warning-modal {
+.closed.WarningModal {
   visibility: hidden;
 }
 
-.warning-modal {
+.WarningModal {
   position: fixed;
   left: 0;
   bottom: 0;
@@ -1244,18 +1518,18 @@ html:not([data-tabbing=true]) .PageNavOverlay .side-arrow-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: var(--modal-negative-space);
+  background: var(--modal-negative-space)
 }
 
-.warning-modal .footer {
+.WarningModal .footer {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
   width: 100%;
-  margin-top: 13px;
+  margin-top: 13px
 }
 
-.warning-modal .footer .modal-button {
+.WarningModal .footer .modal-button {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1267,61 +1541,61 @@ html:not([data-tabbing=true]) .PageNavOverlay .side-arrow-container {
   width: fit-content;
   border-radius: 4px;
   height: 30px;
-  cursor: pointer;
+  cursor: pointer
 }
 
-.warning-modal .footer .modal-button.cancel {
-  color: var(--secondary-button-text);
+.WarningModal .footer .modal-button.cancel {
+  color: var(--secondary-button-text)
 }
 
-.warning-modal .footer .modal-button.cancel:hover {
-  color: var(--secondary-button-hover);
+.WarningModal .footer .modal-button.cancel:hover {
+  color: var(--secondary-button-hover)
 }
 
-.warning-modal .footer .modal-button.confirm {
+.WarningModal .footer .modal-button.confirm {
   margin-left: 4px;
   color: var(--primary-button-text);
   font-weight: 600;
-  background: var(--primary-button);
+  background: var(--primary-button)
 }
 
-.warning-modal .footer .modal-button.confirm:hover {
-  background: var(--primary-button-hover);
+.WarningModal .footer .modal-button.confirm:hover {
+  background: var(--primary-button-hover)
 }
 
 @media (max-width: 640px) {
-  .warning-modal .footer .modal-button {
-    padding: 23px 8px;
+  .WarningModal .footer .modal-button {
+    padding: 23px 8px
   }
 }
 
 @media (max-height: 500px) {
-  .warning-modal .container {
+  .WarningModal .container {
     overflow: auto;
-    max-height: 100%;
+    max-height: 100%
   }
 }
 
-.warning-modal .container {
+.WarningModal .container {
   display: flex;
   width: 480px;
   flex-direction: column;
   align-items: flex-start;
   border-radius: 4px;
   box-shadow: 0 0 3px 0 var(--document-box-shadow);
-  background: var(--component-background);
+  background: var(--component-background)
 }
 
 @media (max-width: 640px) {
-  .warning-modal .container {
+  .WarningModal .container {
     width: 100%;
     position: fixed;
     left: 0;
     bottom: 0;
     padding: 24px 24px 16px;
-    min-width: 100px;
+    min-width: 100px
   }
-  .warning-modal .container .swipe-indicator {
+  .WarningModal .container .swipe-indicator {
     background: var(--divider);
     border-radius: 2px;
     height: 4px;
@@ -1331,104 +1605,104 @@ html:not([data-tabbing=true]) .PageNavOverlay .side-arrow-container {
     margin-left: auto;
     margin-right: auto;
     left: 0;
-    right: 0;
+    right: 0
   }
 }
 
 @media (max-width: 640px) and (min-width:641px) {
-  .warning-modal .container .swipe-indicator {
-    display: none;
+  .WarningModal .container .swipe-indicator {
+    display: none
   }
 }
 
-.warning-modal .header {
+.WarningModal .header {
   position: relative;
   width: 100%;
-  padding: 6px;
+  padding: 6px
 }
 
-.warning-modal .header .header-text {
+.WarningModal .header .header-text {
   padding: 10px;
   font-size: 18px;
-  font-weight: 700;
+  font-weight: 700
 }
 
-.warning-modal .header .Button {
+.WarningModal .header .Button {
   position: absolute;
   top: 10px;
-  right: 10px;
+  right: 10px
 }
 
-.warning-modal .header .Button .Icon {
+.WarningModal .header .Button .Icon {
   height: 22px;
   width: 22px;
-  color: var(--icon-color);
+  color: var(--icon-color)
 }
 
 @media (max-width: 640px) {
-  .warning-modal .header .Button .Icon {
+  .WarningModal .header .Button .Icon {
     height: 28px;
-    width: 28px;
+    width: 28px
   }
 }
 
-.warning-modal .body {
+.WarningModal .body {
   font-size: 14px;
-  padding: 16px;
+  padding: 16px
 }
 
 @media (max-width: 640px) {
-  .warning-modal .body {
-    padding: 16px 8px;
+  .WarningModal .body {
+    padding: 16px 8px
   }
 }
 
-.warning-modal .body .footer {
-  justify-content: flex-start;
+.WarningModal .body .footer {
+  justify-content: flex-start
 }
 
-.warning-modal .footer {
-  padding: 0 8px 8px;
+.WarningModal .footer {
+  padding: 0 8px 8px
 }
 
-.warning-modal .divider {
+.WarningModal .divider {
   height: .5px;
   width: 100%;
-  background: var(--divider);
+  background: var(--divider)
 }
 
 @media (max-width: 640px) {
-  .warning-modal .divider {
-    display: none;
+  .WarningModal .divider {
+    display: none
   }
 }
 
 .PrintHandler {
-  height: 0;
+  height: 0
 }
 
 @page {
-  margin: 0;
+  margin: 0
 }
 
 @media print {
   body,
   html {
-    height: 100%;
+    height: 100%
   }
   body {
-    overflow: visible !important;
+    overflow: visible!important
   }
   .PrintHandler {
     display: block;
-    height: 100%;
+    height: 100%
   }
   .PrintHandler.ios-print {
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
-    position: absolute;
+    position: absolute
   }
   .PrintHandler img {
     display: block!important;
@@ -1438,7 +1712,7 @@ html:not([data-tabbing=true]) .PageNavOverlay .side-arrow-container {
     width: 100%;
     -o-object-fit: contain;
     object-fit: contain;
-    page-break-after: always;
+    page-break-after: always
   }
   .PrintHandler .page__container {
     box-sizing: border-box;
@@ -1447,28 +1721,62 @@ html:not([data-tabbing=true]) .PageNavOverlay .side-arrow-container {
     padding: 10px;
     min-height: 100%;
     min-width: 100%;
-    font-size: 10px;
+    font-size: 10px
   }
   .PrintHandler .page__container .page__header {
     align-self: flex-start;
     font-size: 2rem;
     margin-bottom: 2rem;
     padding-bottom: .6rem;
-    border-bottom: .1rem solid #000;
+    border-bottom: .1rem solid #000
+  }
+  .PrintHandler .page__container .note {
+    display: flex;
+    flex-direction: column;
+    padding: .6rem;
+    border: .1rem solid #d3d3d3;
+    border-radius: .4rem;
+    margin-bottom: .5rem
+  }
+  .PrintHandler .page__container .note .note__info {
+    font-size: 1.3rem;
+    margin-bottom: .1rem
+  }
+  .PrintHandler .page__container .note .note__info--with-icon {
+    display: flex
+  }
+  .PrintHandler .page__container .note .note__info--with-icon .note__icon {
+    width: 1.65rem;
+    height: 1.65rem;
+    margin-top: -.1rem;
+    margin-right: .2rem
+  }
+  .PrintHandler .page__container .note .note__info--with-icon .note__icon path:not([fill=none]) {
+    fill: currentColor
+  }
+  .PrintHandler .page__container .note .note__root .note__content {
+    margin-left: .3rem
+  }
+  .PrintHandler .page__container .note .note__reply {
+    margin: .5rem 0 0 2rem
+  }
+  .PrintHandler .page__container .note .note__content {
+    font-size: 1.2rem;
+    margin-top: .1rem
   }
   .PrintHandler #print-handler {
-    height: 100%;
+    height: 100%
   }
   #app {
-    overflow: visible !important;
+    overflow: visible!important
   }
   .App {
-    display: none !important;
+    display: none!important
   }
   #app,
   body,
   html {
-    max-width: none !important;
+    max-width: none!important
   }
 }
 
@@ -1481,16 +1789,16 @@ html:not([data-tabbing=true]) .PageNavOverlay .side-arrow-container {
   height: 24px;
   padding: 0 0 0 10px;
   cursor: pointer;
-  width: 100%;
+  width: 100%
 }
 
 html:not([data-tabbing=true]) .overlay-item {
-  outline: none;
+  outline: none
 }
 
 .overlay-item.selected,
 .overlay-item:hover {
-  background: var(--popup-button-hover);
+  background: var(--popup-button-hover)
 }
 
 .ZoomItem {
@@ -1501,57 +1809,57 @@ html:not([data-tabbing=true]) .overlay-item {
   align-items: center;
   padding: 2px 19px 2px 6px;
   cursor: pointer;
-  width: 100%;
+  width: 100%
 }
 
 html:not([data-tabbing=true]) .ZoomItem {
-  outline: none;
+  outline: none
 }
 
 .ZoomItem.selected,
 .ZoomItem:hover {
-  background: var(--popup-button-hover);
+  background: var(--popup-button-hover)
 }
 
 .ZoomItem .Icon {
-  margin: 4px 8px 4px 4px;
+  margin: 4px 8px 4px 4px
 }
 
 .ZoomItem Button {
-  height: auto;
+  height: auto
 }
 
 .ZoomItem.Button {
-  justify-content: flex-start;
+  justify-content: flex-start
 }
 
 * {
-  transition: background-color .25s ease;
+  transition: background-color .25s ease
 }
 
 ::-webkit-scrollbar {
-  width: 7px;
+  width: 7px
 }
 
 ::-webkit-scrollbar:horizontal {
-  height: 7px;
+  height: 7px
 }
 
 ::-webkit-scrollbar-track {
   width: 10px;
   border-radius: 10px;
-  background: none;
+  background: none
 }
 
 ::-webkit-scrollbar-thumb {
   border-radius: 10px;
   background-color: #adb5bd;
   background-color: var(--scrollbar-color);
-  border-top: 2px solid transparent;
+  border-top: 2px solid transparent
 }
 
 .document-container {
-  border-right: 3px solid transparent;
+  border-right: 3px solid transparent
 }
 
 #app,
@@ -1576,7 +1884,7 @@ select,
 textarea {
   font-family: Lato, sans-serif;
   color: #485056;
-  color: var(--text-color);
+  color: var(--text-color)
 }
 
 #app,
@@ -1586,7 +1894,7 @@ input,
 label,
 select,
 textarea {
-  font-size: 13px;
+  font-size: 13px
 }
 
 @media (max-width: 640px) {
@@ -1597,7 +1905,7 @@ textarea {
   label,
   select,
   textarea {
-    font-size: 16px;
+    font-size: 16px
   }
 }
 
@@ -1610,7 +1918,7 @@ textarea {
   background: #fff;
   background: var(--component-background);
   color: #485056;
-  color: var(--text-color);
+  color: var(--text-color)
 }
 
 input:focus,
@@ -1618,7 +1926,7 @@ select:focus,
 textarea:focus {
   outline: none;
   border: 1px solid #3183c8;
-  border: 1px solid var(--focus-border);
+  border: 1px solid var(--focus-border)
 }
 
 .App {
@@ -1639,22 +1947,22 @@ textarea:focus {
   display: flex;
   flex-direction: row;
   flex: 1;
-  overflow: auto;
+  overflow: auto
 }
 
 .App *,
 .App :after,
 .App :before {
-  box-sizing: border-box;
+  box-sizing: border-box
 }
 
 .App div {
-  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: transparent
 }
 
 .App canvas,
 .App div {
-  user-select: none;
+  user-select: none
 }
 
 .App input[type=text],
@@ -1662,11 +1970,11 @@ textarea:focus {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  user-select: text !important;
+  user-select: text!important
 }
 
 .App input[type=text] {
-  font-family: Lato;
+  font-family: Lato
 }
 
 .zoom-overlay {
@@ -1679,7 +1987,7 @@ textarea:focus {
 
   .zoom-overlay .Button {
     margin: 0 1px;
-    height: 100%;
+    height: 100%
   }
 
   .zoom-overlay .ActionButton {
@@ -1688,11 +1996,15 @@ textarea:focus {
   }
 
   .zoom-overlay .Button:last-child {
-    margin-right: 0;
+    margin-right: 0
   }
 
   .zoom-overlay .Button:first-child {
-    margin-left: 0;
+    margin-left: 0
+  }
+
+  .zoom-overlay .toggle-element-button {
+    height: 100%
   }
 
   .zoom-overlay .toggle-zoom-overlay {
@@ -1704,15 +2016,15 @@ textarea:focus {
     position: relative;
     height: 100%;
     color: var(--text-color);
-    margin-right: 1px;
+    margin-right: 1px
   }
 
   .zoom-overlay .toggle-zoom-overlay:hover {
-    background-color: var(--view-header-button-hover);
+    background-color: var(--view-header-button-hover)
   }
 
   .zoom-overlay .toggle-zoom-overlay.active {
-    background-color: var(--view-header-button-active);
+    background-color: var(--view-header-button-active)
   }
 
     .zoom-overlay .toggle-zoom-overlay .textarea {
@@ -1724,12 +2036,20 @@ textarea:focus {
       font-weight: 700;
       width: 40px;
       min-width: 28px;
-      text-align: right;
+      text-align: right
     }
 
     .zoom-overlay .toggle-zoom-overlay .Button.active,
     .zoom-overlay .toggle-zoom-overlay .Button:hover {
-      background: none !important;
+      background: none!important
+    }
+
+    .zoom-overlay .toggle-zoom-overlay .toggle-element-button {
+      width: 26px;
+      margin-left: 4px;
+      margin-top: -2px;
+      font-size: 16px;
+      height: 26px
     }
 
     .zoom-overlay .toggle-zoom-overlay .toggle-zoom-overlay-text {
@@ -1739,14 +2059,14 @@ textarea:focus {
       font-weight: 700;
       height: 100%;
       text-align: center;
-      display: flex;
+      display: flex
     }
 
 @keyframes spin {
   0% {
-    transform: rotate(0deg);
+    transform: rotate(0deg)
   }
   to {
-    transform: rotate(1turn);
+    transform: rotate(1turn)
   }
 }
