@@ -11,38 +11,38 @@
 <body>
   <div id="app">
     <div class="App">
-      <div class="Header" data-element="header">
-        <div class="HeaderItems">
-          <button class="Button" data-element="leftPanelButton" aria-label="Panel">
+      <div class="header" data-element="header">
+        <div class="header-items">
+          <button class="button" data-element="leftPanelButton" aria-label="Panel">
             <i class="fa-solid fa-bars fa-lg"></i>
           </button>
           <div class="zoom-overlay">
-            <button class="Button ActionButton" data-element="zoomOutButton" aria-label="Zoom out" aria-keyshortcuts="Control+-">
+            <button class="button action-button" data-element="zoomOutButton" aria-label="Zoom out" aria-keyshortcuts="Control+-">
               <i class="fa-solid fa-minus fa-lg"></i>
             </button>
             <div data-element="toggleZoomOverlay" class="toggle-zoom-overlay">
               <div class="toggle-zoom-overlay-text">
                 <input data-element="scaleInput" type="text" class="textarea" tabindex="-1" aria-label="Set zoom" value="100"><span>%</span>
               </div>
-              <button class="Button OverlayButton" aria-label="Zoom Controls">
+              <button class="button" aria-label="Zoom Controls">
                 <i class="fa-solid fa-angle-down fa-sm"></i>
               </button>
             </div>
-            <button class="Button ActionButton" data-element="zoomInButton" aria-label="Zoom in" aria-keyshortcuts="Control+=">
+            <button class="button action-button" data-element="zoomInButton" aria-label="Zoom in" aria-keyshortcuts="Control+=">
               <i class="fa-solid fa-plus fa-lg"></i>
             </button>
           </div>
-          <button class="Button" data-element="printButton" aria-label="Print">
+          <button class="button" data-element="printButton" aria-label="Print">
             <i class="fa-solid fa-print fa-lg"></i>
           </button>
-          <button class="Button" data-element="downloadButton" aria-label="Download">
+          <button class="button" data-element="downloadButton" aria-label="Download">
             <i class="fa-solid fa-download fa-lg"></i>
           </button>
         </div>
         <div class="view-header-border"></div>
       </div>
       <div class="content">
-        <div class="Panel LeftPanel closed thumbnail-panel-active" data-element="leftPanel">
+        <div class="Panel left-panel closed thumbnail-panel-active" data-element="leftPanel">
           <div class="left-panel-container">
             <div class="close-container">
               <div data-element="leftPanelCloseButton" class="close-icon-container">
@@ -82,16 +82,16 @@
               <div data-element="viewer" class="document" tabindex="-1"></div>
             </div>
             <div class="footer" style="width: calc(100% - 0px); margin-left: 0px;">
-              <div data-element="pageNavOverlay" class="Overlay PageNavOverlay">
-              <!-- <div data-element="pageNavOverlay" class="Overlay PageNavOverlay FadeOut"> -->
-                <button class="Button side-arrow-container" aria-label="Previous page">
-                <!-- <button class="Button disabled side-arrow-container" aria-label="Previous page"> -->
+              <div data-element="pageNavOverlay" class="page-nav-overlay">
+              <!-- <div data-element="pageNavOverlay" class="page-nav-overlay FadeOut"> -->
+                <button class="button side-arrow-container" aria-label="Previous page">
+                <!-- <button class="button disabled side-arrow-container" aria-label="Previous page"> -->
                   <i class="fa-solid fa-angle-left"></i>
                 </button>
-                <div class="formContainer">
+                <div class="form-container">
                   <form><input data-element="currentPageInput" type="text" tabindex="-1" aria-label="Set page" value="1" style="width: 8px;"> / <span data-element="totalPage">1</span></form>
                 </div>
-                <button class="Button side-arrow-container" aria-label="Next page">
+                <button class="button side-arrow-container" aria-label="Next page">
                   <i class="fa-solid fa-angle-right"></i>
                 </button>
               </div>
@@ -101,8 +101,8 @@
         </div>
       </div>
       <div>
-        <div class="Overlay FlyoutMenu closed" data-element="zoomOverlay" role="listbox" aria-label="Zoom Overlay" style="left: 0px; right: auto; top: auto;">
-          <button data-element="scaleSelect" data-value="pageWidth" class="Button ZoomItem" aria-label="Fit to width" role="option">
+        <div class="flyout-menu closed" data-element="zoomOverlay" role="listbox" aria-label="Zoom Overlay" style="left: 0px; right: auto; top: auto;">
+          <button data-element="scaleSelect" data-value="pageWidth" class="button ZoomItem" aria-label="Fit to width" role="option">
             <div class="Icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                 <defs>
@@ -114,7 +114,7 @@
             </div>
             <span>Fit to width</span>
           </button>
-          <button data-element="scaleSelect" data-value="pageFit" class="Button ZoomItem" aria-label="Fit to page" role="option">
+          <button data-element="scaleSelect" data-value="pageFit" class="button ZoomItem" aria-label="Fit to page" role="option">
             <div class="Icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                 <defs>
@@ -137,16 +137,16 @@
           <button data-element="scaleSelect" data-value="400" class="overlay-item" aria-label="400%" role="option"">400%</button>
         </div>
       </div>
-      <div class="Modal ErrorModal closed" data-element="errorModal">
+      <div class="modal error-modal closed" data-element="errorModal">
         <div class="container"></div>
       </div>
       <div>
-        <div class="Modal warning-modal closed">
+        <div class="modal warning-modal closed">
           <div class="container">
             <div class="swipe-indicator"></div>
-            <div class="header">
+            <div class="modal-header">
               <div class="header-text"></div>
-              <button class="Button" data-element="closeModalButton" aria-label="Cancel">
+              <button class="button" data-element="closeModalButton" aria-label="Cancel">
                 <div class="Icon">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                     <defs>
@@ -161,14 +161,14 @@
             <div class="divider"></div>
             <div class="body"></div>
             <div class="divider"></div>
-            <div class="footer"><button class="Button confirm modal-button" data-element="WarningModalSignButton"><span>OK</span></button></div>
+            <div class="footer"><button class="button confirm modal-button" data-element="WarningModalSignButton"><span>OK</span></button></div>
           </div>
         </div>
       </div>
-      <div class="Modal password-modal closed" data-element="passwordModal">
+      <div class="modal password-modal closed" data-element="passwordModal">
         <div class="container">
           <div class="wrapper">
-            <div class="header">Password required</div>
+            <div class="modal-header">Password required</div>
             <form>
               <div class="enter">
                 <div>This document is password protected. Please enter a password</div>
@@ -176,10 +176,10 @@
               </div>
               <div class="incorrect-password">Incorrect password, attempts left: 4</div>
               <div class="footer">
-                <button class="Button cancel modal-button" data-element="passwordCancelButton">
+                <button class="button cancel modal-button" data-element="passwordCancelButton">
                   <span>Cancel</span>
                 </button>
-                <button class="Button confirm modal-button" data-element="passwordSubmitButton">
+                <button class="button confirm modal-button" data-element="passwordSubmitButton">
                   <span>Submit</span>
                 </button>
               </div>

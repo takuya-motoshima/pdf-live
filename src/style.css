@@ -340,7 +340,7 @@
   fill: none;
 }
 
-.Button {
+.button {
   padding: 0;
   border: none;
   background-color: transparent;
@@ -355,30 +355,30 @@
   color: var(--text-color);
 }
 
-html:not([data-tabbing=true]) .Button {
+html:not([data-tabbing=true]) .button {
   outline: none;
 }
 
-.Button.active path[fill=default] {
+.button.active path[fill=default] {
   fill: var(--selected-icon-color);
 }
 
-.Button.active .Icon {
+.button.active .Icon {
   color: var(--selected-icon-color);
 }
 
-.Button.disabled {
+.button.disabled {
   background: none !important;
   cursor: default;
 }
 
-.Button.disabled .Icon,
-.Button.disabled i,
-.Button.disabled span {
+.button.disabled .Icon,
+.button.disabled i,
+.button.disabled span {
   color: var(--disabled-icon);
 }
 
-.HeaderItems {
+.header-items {
   display: flex;
   align-items: center;
   width: 100%;
@@ -387,28 +387,28 @@ html:not([data-tabbing=true]) .Button {
   padding: 0 4px;
 }
 
-.HeaderItems>.Button {
+.header-items>.button {
   margin: 0 6px;
 }
 
 @media (max-width: 640px) {
-  .HeaderItems>.Button {
+  .header-items>.button {
     margin: 0 6px;
   }
 }
 
 @media (min-width: 641px) and (max-width:900px) {
-  .HeaderItems>.Button {
+  .header-items>.button {
     margin: 0 10px;
   }
 }
 
-.HeaderItems .spacer {
+.header-items .spacer {
   flex: 1;
   height: 100%;
 }
 
-.HeaderItems .divider {
+.header-items .divider {
   width: 1px;
   height: 20px;
   margin: 0 6px;
@@ -417,47 +417,47 @@ html:not([data-tabbing=true]) .Button {
 }
 
 @media (max-width: 900px) {
-  .HeaderItems .divider {
+  .header-items .divider {
     margin: 0 4px;
   }
 }
 
-.HeaderItems .divider {
+.header-items .divider {
   margin-left: 0;
 }
 
 @media (min-width: 901px) {
-  .HeaderItems .divider {
+  .header-items .divider {
     margin-left: 16px;
     margin-right: 16px;
   }
 }
 
 @media (min-width: 641px) and (max-width:900px) {
-  .HeaderItems .divider {
+  .header-items .divider {
     margin-left: 16px;
     margin-right: 16px;
   }
 }
 
 @media (max-width: 640px) {
-  .HeaderItems .divider {
+  .header-items .divider {
     margin-left: 16px;
     margin-right: 16px;
   }
 }
 
-.HeaderItems>.Button {
+.header-items>.button {
   width: 32px;
   height: 32px;
 }
 
-.HeaderItems .Button:not(.disabled):hover {
+.header-items .button:not(.disabled):hover {
   border-radius: 50%;
   background: var(--tools-button-hover);
 }
 
-.HeaderItems .Button:not(.disabled).active {
+.header-items .button:not(.disabled).active {
   border-radius: 4px;
   background: var(--tools-button-active);
 }
@@ -468,7 +468,7 @@ html:not([data-tabbing=true]) .Button {
   background: var(--border);
 }
 
-.Header {
+.header {
   box-sizing: content-box!important;
   display: flex;
   flex-direction: column;
@@ -480,20 +480,20 @@ html:not([data-tabbing=true]) .Button {
 }
 
 @media (max-width: 900px) {
-  .Header {
+  .header {
     height: 52px;
   }
 }
 
-.open.FlyoutMenu {
+.open.flyout-menu {
   visibility: visible;
 }
 
-.closed.FlyoutMenu {
+.closed.flyout-menu {
   visibility: hidden;
 }
 
-.FlyoutMenu {
+.flyout-menu {
   position: absolute;
   z-index: 95;
   display: flex;
@@ -506,14 +506,14 @@ html:not([data-tabbing=true]) .Button {
 }
 
 @media (max-height: 500px) {
-  .FlyoutMenu {
+  .flyout-menu {
     overflow: auto;
     max-height: 100%;
     display: block;
   }
 }
 
-.FlyoutMenu .row {
+.flyout-menu .row {
   width: 100%;
   margin: 2px 0;
   height: 32px;
@@ -524,19 +524,19 @@ html:not([data-tabbing=true]) .Button {
   cursor: pointer;
 }
 
-.FlyoutMenu .row:hover {
+.flyout-menu .row:hover {
   background: var(--popup-button-hover);
 }
 
-.FlyoutMenu .row.active {
+.flyout-menu .row.active {
   background: var(--popup-button-active);
 }
 
-.FlyoutMenu .row .title {
+.flyout-menu .row .title {
   margin-left: 4px;
 }
 
-.FlyoutMenu .divider {
+.flyout-menu .divider {
   margin: 8px;
   height: 1px;
   background: var(--divider);
@@ -639,7 +639,7 @@ html:not([data-tabbing=true]) .Button {
   position: relative;
 }
 
-.password-modal .container .wrapper .header {
+.password-modal .container .wrapper .modal-header {
   font-size: 16px;
   font-weight: 700;
 }
@@ -670,7 +670,7 @@ html:not([data-tabbing=true]) .Button {
   color: #e00;
 }
 
-.PageNavOverlay {
+.page-nav-overlay {
   height: 32px;
   font-family: Lato;
   font-weight: 700;
@@ -692,12 +692,12 @@ html:not([data-tabbing=true]) .Button {
 }
 
 @media (max-width: 640px) {
-  .PageNavOverlay {
+  .page-nav-overlay {
     height: 36px;
   }
 }
 
-.PageNavOverlay .side-arrow-container {
+.page-nav-overlay .side-arrow-container {
   padding: 0;
   border: none;
   background-color: transparent;
@@ -710,40 +710,40 @@ html:not([data-tabbing=true]) .Button {
   margin: 0 4px;
 }
 
-html:not([data-tabbing=true]) .PageNavOverlay .side-arrow-container {
+html:not([data-tabbing=true]) .page-nav-overlay .side-arrow-container {
   outline: none;
 }
 
 @media (max-width: 640px) {
-  .PageNavOverlay .side-arrow-container {
+  .page-nav-overlay .side-arrow-container {
     width: 40px;
     height: 28px;
   }
 }
 
-.PageNavOverlay .side-arrow-container:hover {
+.page-nav-overlay .side-arrow-container:hover {
   background: #21242a;
 }
 
-.PageNavOverlay .side-arrow-container .side-arrow {
+.page-nav-overlay .side-arrow-container .side-arrow {
   width: 16px;
   height: 16px;
   color: #fff;
 }
 
-.PageNavOverlay .formContainer {
+.page-nav-overlay .form-container {
   height: 100%;
   display: flex;
   align-items: center;
 }
 
-.PageNavOverlay .formContainer form {
+.page-nav-overlay .form-container form {
   top: -1px;
   position: relative;
   color: #fff;
 }
 
-.PageNavOverlay .formContainer form input {
+.page-nav-overlay .form-container form input {
   min-width: 8px;
   padding: 0;
   border: none;
@@ -939,14 +939,14 @@ html:not([data-tabbing=true]) .PageNavOverlay .side-arrow-container {
   animation: spin 1.2s ease infinite;
 }
 
-.LeftPanel .Panel {
+.left-panel .Panel {
   overflow: auto;
   -webkit-overflow-scrolling: touch;
   flex: 1;
   flex-direction: column;
 }
 
-.LeftPanel {
+.left-panel {
   z-index: 65;
   flex-direction: column;
   background-color: var(--panel-background);
@@ -962,41 +962,41 @@ html:not([data-tabbing=true]) .PageNavOverlay .side-arrow-container {
 }
 
 @media (max-width: 640px) {
-  .LeftPanel {
+  .left-panel {
     max-width: 100%;
   }
 }
 
 @media (min-width: 901px) {
-  .LeftPanel {
+  .left-panel {
     height: calc(100% - 40px);
   }
 }
 
 @media (min-width: 641px) {
-  .LeftPanel {
+  .left-panel {
     height: calc(100% - 37px);
   }
 }
 
 @media (min-width: 641px) and (min-width:641px) and (max-width:900px) {
-  .LeftPanel {
+  .left-panel {
     height: calc(100% - 53px);
   }
 }
 
-.LeftPanel.closed {
+.left-panel.closed {
   transform: translateX(-100%);
 }
 
 @media (min-width: 641px) and (max-width:900px) {
-  .LeftPanel {
+  .left-panel {
     border-right: 1px solid var(--side-panel-border);
   }
 }
 
 @media (max-width: 640px) {
-  .LeftPanel {
+  .left-panel {
     position: fixed;
     top: 0;
     left: 0;
@@ -1006,7 +1006,7 @@ html:not([data-tabbing=true]) .PageNavOverlay .side-arrow-container {
   }
 }
 
-.LeftPanel .left-panel-container {
+.left-panel .left-panel-container {
   display: flex;
   flex-direction: column;
   padding: 16px 16px 0;
@@ -1014,17 +1014,17 @@ html:not([data-tabbing=true]) .PageNavOverlay .side-arrow-container {
   min-width: 251px;
 }
   
-  .LeftPanel .left-panel-container .close-container {
+  .left-panel .left-panel-container .close-container {
     display: none;
   }
 
 @media (max-width: 640px) {
-  .LeftPanel .left-panel-container {
+  .left-panel .left-panel-container {
     padding-top: 0;
     width: 100vw;
     min-width: 100vw;
   }
-  .LeftPanel .left-panel-container .close-container {
+  .left-panel .left-panel-container .close-container {
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -1033,16 +1033,16 @@ html:not([data-tabbing=true]) .PageNavOverlay .side-arrow-container {
     padding-right: 5px;
     top: 0;
   }
-  .LeftPanel .left-panel-container .close-container .close-icon-container {
+  .left-panel .left-panel-container .close-container .close-icon-container {
     cursor: pointer;
   }
-  .LeftPanel .left-panel-container .close-container .close-icon-container .close-icon {
+  .left-panel .left-panel-container .close-container .close-icon-container .close-icon {
     width: 24px;
     height: 24px;
   }
 }
 
-.LeftPanel .left-panel-header {
+.left-panel .left-panel-header {
   display: flex;
   align-items: center;
   margin: 0 8px 16px 16px;
@@ -1135,15 +1135,15 @@ html:not([data-tabbing=true]) .PageNavOverlay .side-arrow-container {
   animation: spin 1.2s ease infinite;
 }
 
-.open.ErrorModal {
+.open.error-modal {
   visibility: visible;
 }
 
-.closed.ErrorModal {
+.closed.error-modal {
   visibility: hidden;
 }
 
-.ErrorModal {
+.error-modal {
   position: fixed;
   left: 0;
   bottom: 0;
@@ -1156,7 +1156,7 @@ html:not([data-tabbing=true]) .PageNavOverlay .side-arrow-container {
   background: var(--modal-negative-space);
 }
 
-.ErrorModal .footer {
+.error-modal .footer {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
@@ -1164,7 +1164,7 @@ html:not([data-tabbing=true]) .PageNavOverlay .side-arrow-container {
   margin-top: 13px;
 }
 
-.ErrorModal .footer .modal-button {
+.error-modal .footer .modal-button {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1179,45 +1179,45 @@ html:not([data-tabbing=true]) .PageNavOverlay .side-arrow-container {
   cursor: pointer;
 }
 
-.ErrorModal .footer .modal-button.cancel {
+.error-modal .footer .modal-button.cancel {
   color: var(--secondary-button-text);
 }
 
-.ErrorModal .footer .modal-button.cancel:hover {
+.error-modal .footer .modal-button.cancel:hover {
   color: var(--secondary-button-hover);
 }
 
-.ErrorModal .footer .modal-button.confirm {
+.error-modal .footer .modal-button.confirm {
   margin-left: 4px;
   color: var(--primary-button-text);
   font-weight: 600;
   background: var(--primary-button);
 }
 
-.ErrorModal .footer .modal-button.confirm:hover {
+.error-modal .footer .modal-button.confirm:hover {
   background: var(--primary-button-hover);
 }
 
 @media (max-width: 640px) {
-  .ErrorModal .footer .modal-button {
+  .error-modal .footer .modal-button {
     padding: 23px 8px;
   }
 }
 
-.ErrorModal .container {
+.error-modal .container {
   border-radius: 4px;
   box-shadow: 0 0 3px 0 var(--document-box-shadow);
   background: var(--component-background);
 }
 
 @media (max-height: 500px) {
-  .ErrorModal .container {
+  .error-modal .container {
     overflow: auto;
     max-height: 100%;
   }
 }
 
-.ErrorModal .container {
+.error-modal .container {
   display: flex;
   align-items: center;
   width: 300px;
@@ -1341,32 +1341,32 @@ html:not([data-tabbing=true]) .PageNavOverlay .side-arrow-container {
   }
 }
 
-.warning-modal .header {
+.warning-modal .modal-header {
   position: relative;
   width: 100%;
   padding: 6px;
 }
 
-.warning-modal .header .header-text {
+.warning-modal .modal-header .header-text {
   padding: 10px;
   font-size: 18px;
   font-weight: 700;
 }
 
-.warning-modal .header .Button {
+.warning-modal .modal-header .button {
   position: absolute;
   top: 10px;
   right: 10px;
 }
 
-.warning-modal .header .Button .Icon {
+.warning-modal .modal-header .button .Icon {
   height: 22px;
   width: 22px;
   color: var(--icon-color);
 }
 
 @media (max-width: 640px) {
-  .warning-modal .header .Button .Icon {
+  .warning-modal .modal-header .button .Icon {
     height: 28px;
     width: 28px;
   }
@@ -1517,11 +1517,7 @@ html:not([data-tabbing=true]) .ZoomItem {
   margin: 4px 8px 4px 4px;
 }
 
-.ZoomItem Button {
-  height: auto;
-}
-
-.ZoomItem.Button {
+.ZoomItem.button {
   justify-content: flex-start;
 }
 
@@ -1677,21 +1673,21 @@ textarea:focus {
   margin: 0 auto;
 }
 
-  .zoom-overlay .Button {
+  .zoom-overlay .button {
     margin: 0 1px;
     height: 100%;
   }
 
-  .zoom-overlay .ActionButton {
+  .zoom-overlay .action-button {
     width: 32px;
     height: 32px;
   }
 
-  .zoom-overlay .Button:last-child {
+  .zoom-overlay .button:last-child {
     margin-right: 0;
   }
 
-  .zoom-overlay .Button:first-child {
+  .zoom-overlay .button:first-child {
     margin-left: 0;
   }
 
@@ -1727,8 +1723,8 @@ textarea:focus {
       text-align: right;
     }
 
-    .zoom-overlay .toggle-zoom-overlay .Button.active,
-    .zoom-overlay .toggle-zoom-overlay .Button:hover {
+    .zoom-overlay .toggle-zoom-overlay .button.active,
+    .zoom-overlay .toggle-zoom-overlay .button:hover {
       background: none !important;
     }
 
