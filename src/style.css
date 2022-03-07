@@ -305,39 +305,13 @@
   font-size: 12px;
 }
 
-.Icon {
-  width: 22px;
-  height: 22px;
+i {
   pointer-events: none;
   color: var(--icon-color);
 }
 
-.Icon circle:not([fill*="#"]),
-.Icon path:not([fill*="#"]),
-.Icon polygon:not([fill*="#"]),
-.Icon rect:not([fill*="#"]) {
-  fill: currentColor;
-}
-
-.Icon:not(.disabled) path[fill=default] {
-  fill: var(--icon-color);
-}
-
-.Icon.disabled,
-.Icon.disabled path {
+i.disabled {
   fill: var(--disabled-icon);
-}
-
-.Icon circle[fill=fill],
-.Icon circle[fill=none],
-.Icon path[fill=fill],
-.Icon path[fill=none],
-.Icon path[fill=stroke],
-.Icon polygon[fill=fill],
-.Icon polygon[fill=none],
-.Icon rect[fill=fill],
-.Icon rect[fill=none] {
-  fill: none;
 }
 
 .button {
@@ -363,7 +337,7 @@ html:not([data-tabbing=true]) .button {
   fill: var(--selected-icon-color);
 }
 
-.button.active .Icon {
+.button.active i {
   color: var(--selected-icon-color);
 }
 
@@ -372,7 +346,6 @@ html:not([data-tabbing=true]) .button {
   cursor: default;
 }
 
-.button.disabled .Icon,
 .button.disabled i,
 .button.disabled span {
   color: var(--disabled-icon);
@@ -1359,17 +1332,8 @@ html:not([data-tabbing=true]) .page-nav-overlay .side-arrow-container {
   right: 10px;
 }
 
-.warning-modal .modal-header .button .Icon {
-  height: 22px;
-  width: 22px;
+.warning-modal .modal-header .button i {
   color: var(--icon-color);
-}
-
-@media (max-width: 640px) {
-  .warning-modal .modal-header .button .Icon {
-    height: 28px;
-    width: 28px;
-  }
 }
 
 .warning-modal .body {
@@ -1513,7 +1477,6 @@ html:not([data-tabbing=true]) .ZoomItem {
   background: var(--popup-button-hover);
 }
 
-.ZoomItem .Icon,
 .ZoomItem i {
   margin: 4px 8px 4px 4px;
 }
