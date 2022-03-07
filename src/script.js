@@ -140,6 +140,12 @@ import loadingModal from './loadingModal.js';
   const currentPageInput = document.querySelector('[data-element="currentPageInput"]');
   const zoomOutButton = document.querySelector('[data-element="zoomOutButton"]');
   const zoomInButton = document.querySelector('[data-element="zoomInButton"]');
+  const scaleSelects = document.querySelectorAll('[data-element="scaleSelect"]');
+  const scales = [...scaleSelects].flatMap(scaleSelect => {
+    const scale = parseInt(scaleSelect.dataset.value, 10);
+    return !isNaN(scale) ? scale : [];
+  }).sort();
+  // console.log('scales=', scales);
 
   // Toggle the opening and closing of the left panel.
   leftPanelButton.addEventListener('click', () => {
@@ -185,7 +191,7 @@ import loadingModal from './loadingModal.js';
   });
 
   // Change page scale.
-  for (let scaleSelect of document.querySelectorAll('[data-element="scaleSelect"]'))
+  for (let scaleSelect of scaleSelects)
     scaleSelect.addEventListener('click', evnt => {
       const selectedScale = evnt.target.dataset.value;
       console.log(`Select scale ${selectedScale}`);
@@ -197,12 +203,15 @@ import loadingModal from './loadingModal.js';
   // Zoom out PDF page.
   zoomOutButton.addEventListener('click', () => {
     const currentScale = parseInt(scaleInput.value, 10);
-    console.log(`currentScale=${currentScale}`);
+    const minScale = Math.min(...scales);
+    scaleInput.value = scales.find(scale => scale < currentScale) ?? minScale;
   });
 
   // Zoom in on PDF page.
   zoomInButton.addEventListener('click', () => {
     const currentScale = parseInt(scaleInput.value, 10);
+    const maxScale = Math.max(...scales);
+    scaleInput.value = scales.find(scale => scale > currentScale) ?? maxScale;
   });
 
   // Init PDF viewer.
