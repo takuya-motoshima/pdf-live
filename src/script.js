@@ -144,7 +144,7 @@ import loadingModal from './loadingModal.js';
   const scales = [...scaleSelects].flatMap(scaleSelect => {
     const scale = parseInt(scaleSelect.dataset.value, 10);
     return !isNaN(scale) ? scale : [];
-  }).sort();
+  });
   // console.log('scales=', scales);
 
   // Toggle the opening and closing of the left panel.
@@ -204,14 +204,14 @@ import loadingModal from './loadingModal.js';
   zoomOutButton.addEventListener('click', () => {
     const currentScale = parseInt(scaleInput.value, 10);
     const minScale = Math.min(...scales);
-    scaleInput.value = scales.find(scale => scale < currentScale) ?? minScale;
+    scaleInput.value = scales.sort((a, b) => b - a).find(scale => scale < currentScale) ?? minScale;
   });
 
   // Zoom in on PDF page.
   zoomInButton.addEventListener('click', () => {
     const currentScale = parseInt(scaleInput.value, 10);
     const maxScale = Math.max(...scales);
-    scaleInput.value = scales.find(scale => scale > currentScale) ?? maxScale;
+    scaleInput.value = scales.sort((a, b) => a - b).find(scale => scale > currentScale) ?? maxScale;
   });
 
   // Init PDF viewer.
