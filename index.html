@@ -42,77 +42,59 @@
         <div class="view-header-border"></div>
       </div>
       <div class="content">
-        <div class="Panel left-panel closed thumbnail-panel-active" data-element="leftPanel">
+        <div class="left-panel closed" data-element="leftPanel">
           <div class="left-panel-container">
             <div class="close-container">
               <div data-element="leftPanelCloseButton" class="close-icon-container">
                 <i class="fa-solid fa-xmark fa-lg"></i>
               </div>
             </div>
-            <div class="Panel ThumbnailsPanel" id="virtualized-thumbnails-container" data-element="thumbnailsPanel">
-              <div class="virtualized-thumbnails-container">
-                <div aria-label="grid" aria-readonly="true" class="ReactVirtualized__Grid ReactVirtualized__List thumbnailsList" role="grid" tabindex="0" style="box-sizing: border-box; direction: ltr; height: 1075.01px; position: relative; width: 219px; will-change: transform; overflow: auto; outline: none;">
-                  <div class="ReactVirtualized__Grid__innerScrollContainer" role="rowgroup" style="width: auto; height: 1400px; max-width: 219px; max-height: 1400px; overflow: hidden; position: relative;">
-                    <div role="row" aria-label="row" class="row" style="height: 200px; left: 0px; position: absolute; top: 0px; width: 100%;">
-                      <div role="cell" class="cellThumbContainer">
-                        <div class="Thumbnail" id="Thumbnail-container">
-                          <div class="container" draggable="false" style="width: 150px; height: 150px;">
-                            <div id="pageThumb0" class="thumbnail">
-                              <canvas width="234" height="300" class="page-image" style="width: 117px; height: 150px; background-color: white;"></canvas>
-                            </div>
-                          </div>
-                          <div class="page-label">1</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+            <div class="thumbnails-panel" data-element="thumbnailsPanel">
+              <div class="thumbnail active">
+                <canvas width="234" height="300" class="thumbnail-image"></canvas>
+                <div class="thumbnail-label">1</div>
+              </div>
+              <div class="thumbnail">
+                <canvas width="234" height="300" class="thumbnail-image"></canvas>
+                <div class="thumbnail-label">2</div>
               </div>
             </div>
           </div>
         </div>
-        <div data-element="documentContentContainer" class="document-content-container">
-          <div class="measurement-container">
-            <div class="document-container" data-element="documentContainer">
-              <div data-element="viewer" class="document" tabindex="-1"></div>
-            </div>
-            <div class="footer" style="width: calc(100% - 0px); margin-left: 0px;">
-              <div data-element="pageNavOverlay" class="page-nav-overlay">
-              <!-- <div data-element="pageNavOverlay" class="page-nav-overlay FadeOut"> -->
-                <button class="button side-arrow-container" aria-label="Previous page">
-                <!-- <button class="button disabled side-arrow-container" aria-label="Previous page"> -->
-                  <i class="fa-solid fa-angle-left"></i>
-                </button>
-                <div class="form-container">
-                  <form><input data-element="currentPageInput" type="text" tabindex="-1" aria-label="Set page" value="1" style="width: 8px;"> / <span data-element="totalPage">1</span></form>
-                </div>
-                <button class="button side-arrow-container" aria-label="Next page">
-                  <i class="fa-solid fa-angle-right"></i>
-                </button>
+        <div data-element="pagegContainer" class="page-container">
+          <div class="footer" style="width: calc(100% - 0px); margin-left: 0px;">
+            <div data-element="pageNavOverlay" class="page-nav-overlay">
+            <!-- <div data-element="pageNavOverlay" class="page-nav-overlay fadeout"> -->
+              <button class="button side-arrow-container" aria-label="Previous page">
+              <!-- <button class="button disabled side-arrow-container" aria-label="Previous page"> -->
+                <i class="fa-solid fa-angle-left"></i>
+              </button>
+              <div class="form-container">
+                <form><input data-element="currentPageInput" type="text" tabindex="-1" aria-label="Set page" value="1" style="width: 8px;"> / <span data-element="totalPage">1</span></form>
               </div>
+              <button class="button side-arrow-container" aria-label="Next page">
+                <i class="fa-solid fa-angle-right"></i>
+              </button>
             </div>
           </div>
-          <div class="custom-container"></div>
         </div>
       </div>
-      <div>
-        <div class="flyout-menu closed" data-element="zoomOverlay" role="listbox" aria-label="Zoom Overlay" style="left: 0px; right: auto; top: auto;">
-          <button data-element="scaleSelect" data-value="pageWidth" class="button ZoomItem" aria-label="Fit to width" role="option">
-            <i class="fas fa-expand-arrows-alt fa-lg"></i>Fit to width
-          </button>
-          <button data-element="scaleSelect" data-value="pageFit" class="button ZoomItem" aria-label="Fit to page" role="option">
-            <i class="fas fa-expand-alt fa-lg"></i>Fit to page
-          </button>
-          <div class="divider"></div>
-          <button data-element="scaleSelect" data-value="50" class="overlay-item" aria-label="50%" role="option">50%</button>
-          <button data-element="scaleSelect" data-value="75" class="overlay-item" aria-label="75%" role="option">75%</button>
-          <button data-element="scaleSelect" data-value="100" class="overlay-item" aria-label="100%" role="option"">100%</button>
-          <button data-element="scaleSelect" data-value="125" class="overlay-item" aria-label="125%" role="option"">125%</button>
-          <button data-element="scaleSelect" data-value="150" class="overlay-item" aria-label="150%" role="option"">150%</button>
-          <button data-element="scaleSelect" data-value="200" class="overlay-item" aria-label="200%" role="option"">200%</button>
-          <button data-element="scaleSelect" data-value="300" class="overlay-item" aria-label="300%" role="option"">300%</button>
-          <button data-element="scaleSelect" data-value="400" class="overlay-item" aria-label="400%" role="option"">400%</button>
-        </div>
+      <div class="flyout-menu closed" data-element="zoomOverlay" role="listbox" aria-label="Zoom Overlay" style="left: 0px; right: auto; top: auto;">
+        <button data-element="scaleSelect" data-value="pageWidth" class="button zoom-item" aria-label="Fit to width" role="option">
+          <i class="fas fa-expand-arrows-alt fa-lg"></i>Fit to width
+        </button>
+        <button data-element="scaleSelect" data-value="pageFit" class="button zoom-item" aria-label="Fit to page" role="option">
+          <i class="fas fa-expand-alt fa-lg"></i>Fit to page
+        </button>
+        <div class="divider"></div>
+        <button data-element="scaleSelect" data-value="50" class="overlay-item" aria-label="50%" role="option">50%</button>
+        <button data-element="scaleSelect" data-value="75" class="overlay-item" aria-label="75%" role="option">75%</button>
+        <button data-element="scaleSelect" data-value="100" class="overlay-item" aria-label="100%" role="option"">100%</button>
+        <button data-element="scaleSelect" data-value="125" class="overlay-item" aria-label="125%" role="option"">125%</button>
+        <button data-element="scaleSelect" data-value="150" class="overlay-item" aria-label="150%" role="option"">150%</button>
+        <button data-element="scaleSelect" data-value="200" class="overlay-item" aria-label="200%" role="option"">200%</button>
+        <button data-element="scaleSelect" data-value="300" class="overlay-item" aria-label="300%" role="option"">300%</button>
+        <button data-element="scaleSelect" data-value="400" class="overlay-item" aria-label="400%" role="option"">400%</button>
       </div>
       <div class="modal error-modal closed" data-element="errorModal">
         <div class="container"></div>
@@ -156,9 +138,6 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="PrintHandler">
-      <div id="print-handler"></div>
     </div>
   </div>
   <script src="node_modules/pdfjs-dist/build/pdf.min.js"></script>

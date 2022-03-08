@@ -7,7 +7,7 @@ import loadingModal from './loadingModal.js';
   function openLeftPanel() {
     console.log('Open the left panel');
     leftPanel.classList.remove('closed')
-    documentContentContainer.classList.add('open')
+    pagegContainer.classList.add('open')
   }
 
   /**
@@ -16,7 +16,7 @@ import loadingModal from './loadingModal.js';
   function closeLeftPanel() {
     console.log('Close left panel');
     leftPanel.classList.add('closed')
-    documentContentContainer.classList.remove('open')
+    pagegContainer.classList.remove('open')
   }
 
   /**
@@ -106,16 +106,14 @@ import loadingModal from './loadingModal.js';
     section.style.width = `${Math.floor(viewport.width)}px`;
     section.style.height = `${Math.floor(viewport.height)}px`;
     section.style.margin = `${sectionMargin}px`;
-    section.classList.add('page-section');
+    section.classList.add('page');
 
     const canvas = document.createElement('canvas');
     canvas.width = Math.floor(viewport.width * outputScale);
     canvas.height = Math.floor(viewport.height * outputScale);
-    canvas.style.width = `${Math.floor(viewport.width)}px`;
-    canvas.style.height = `${Math.floor(viewport.height)}px`;
 
     section.appendChild(canvas);
-    viewer.appendChild(section);
+    pagegContainer.appendChild(section);
 
     // Draw contents of a PDF file to a Canvas.
     page.render({
@@ -130,11 +128,10 @@ import loadingModal from './loadingModal.js';
 
   const leftPanel = document.querySelector('[data-element="leftPanel"]');
   const leftPanelButton = document.querySelector('[data-element="leftPanelButton"]');
-  const documentContentContainer = document.querySelector('[data-element="documentContentContainer"]');
+  const pagegContainer = document.querySelector('[data-element="pagegContainer"]');
   const leftPanelCloseButton = document.querySelector('[data-element="leftPanelCloseButton"]');
   const toggleZoomOverlay = document.querySelector('[data-element="toggleZoomOverlay"]');
   const zoomOverlay = document.querySelector('[data-element="zoomOverlay"]');
-  const viewer = document.querySelector('[data-element="viewer"]');
   const scaleInput = document.querySelector('[data-element="scaleInput"]');
   const totalPage = document.querySelector('[data-element="totalPage"]');
   const currentPageInput = document.querySelector('[data-element="currentPageInput"]');
