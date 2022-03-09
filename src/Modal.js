@@ -6,8 +6,9 @@ export default class {
    * Add modal element defined in subclass to body element.
    */
   constructor() {
-    document.body.insertAdjacentHTML('beforeend', this.render());
-    this.modalNode = document.body.lastChild;
+    const appNode = document.querySelector('#app');
+    appNode.insertAdjacentHTML('beforeend', this.render());
+    this.modalNode = appNode.lastChild;
   }
 
   /**
