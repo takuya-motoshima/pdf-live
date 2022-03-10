@@ -1,6 +1,12 @@
 import Modal from './Modal.js';
 
+/**
+ * Password input modal.
+ */
 export default new (class extends Modal {
+  /**
+   * Render the content of this component.
+   */
   render() {
     return `<div class="pl-modal pl-password-modal closed" data-element="passwordModal">
               <div class="pl-modal-container">

@@ -15,16 +15,16 @@
     <!-- begin:Header -->
     <div class="pl-header" data-element="header">
       <div class="pl-header-items">
-        <button class="pl-button" data-element="leftPanelButton" aria-label="Panel">
+        <button class="pl-button" data-element="leftPanelToggle" aria-label="Panel">
           <i class="fa-solid fa-bars fa-lg"></i>
         </button>
         <div class="pl-zoom-overlay">
           <button class="pl-button action-button" data-element="zoomOutButton" aria-label="Zoom out" aria-keyshortcuts="Control+-">
             <i class="fa-solid fa-minus fa-lg"></i>
           </button>
-          <div data-element="toggleZoomOverlay" class="pl-zoom-overlay-toggle">
+          <div data-element="zoomOverlayToggle" class="pl-zoom-overlay-toggle">
             <div class="pl-zoom-overlay-toggle-text">
-              <input data-element="scaleInput" type="text" class="pl-textarea" tabindex="-1" aria-label="Set zoom" value="100"><span>%</span>
+              <input data-element="zoomInput" type="text" class="pl-textarea" tabindex="-1" aria-label="Set zoom" value="100"><span>%</span>
             </div>
             <button class="pl-button" aria-label="Zoom Controls">
               <i class="fa-solid fa-angle-down fa-sm"></i>
@@ -69,7 +69,7 @@
       <div data-element="pagegContainer" class="pl-page-container">
         
         <!-- begin:Page view -->
-        <div data-element="pagegView" class="pl-page-view"></div>
+        <div data-element="pageView" class="pl-page-view"></div>
         <!-- end:Page view -->
 
         <!-- begin:Page navigation -->
@@ -81,7 +81,7 @@
               <i class="fa-solid fa-angle-left"></i>
             </button>
             <div class="pl-page-nav-form-container">
-              <form><input data-element="currentPageInput" type="text" tabindex="-1" aria-label="Set page" value="1" style="width: 8px;"> / <span data-element="totalPage">1</span></form>
+              <form><input data-element="pageInput" type="text" tabindex="-1" aria-label="Set page" value="1" style="width: 8px;"> / <span data-element="totalPage">1</span></form>
             </div>
             <button class="pl-button pl-side-arrow-container" aria-label="Next page">
               <i class="fa-solid fa-angle-right"></i>
@@ -95,9 +95,9 @@
 
     </div>
     <!-- end:Content -->
-    
+
     <!-- begin:Zoom menu -->
-    <div class="pl-zoom-menu closed" data-element="zoomOverlay" role="listbox" aria-label="Zoom Overlay" style="left: 0px; right: auto; top: auto;">
+    <div class="pl-zoom-menu closed" data-element="zoomMenu" role="listbox" aria-label="Zoom Overlay" style="left: 0px; right: auto; top: auto;">
       <button data-element="zoomSelect" data-value="pageWidth" class="pl-button pl-zoom-menu-item" aria-label="Fit to width" role="option">
         <i class="fas fa-expand-arrows-alt fa-lg"></i>Fit to width
       </button>
@@ -107,7 +107,7 @@
       <div class="pl-divider"></div>
       <button data-element="zoomSelect" data-value="50" class="pl-zoom-menu-item" aria-label="50%" role="option">50%</button>
       <button data-element="zoomSelect" data-value="75" class="pl-zoom-menu-item" aria-label="75%" role="option">75%</button>
-      <button data-element="zoomSelect" data-value="100" class="pl-zoom-menu-item" aria-label="100%" role="option"">100%</button>
+      <button data-element="zoomSelect" data-value="100" class="pl-zoom-menu-item selected" aria-label="100%" role="option"">100%</button>
       <button data-element="zoomSelect" data-value="125" class="pl-zoom-menu-item" aria-label="125%" role="option"">125%</button>
       <button data-element="zoomSelect" data-value="150" class="pl-zoom-menu-item" aria-label="150%" role="option"">150%</button>
       <button data-element="zoomSelect" data-value="200" class="pl-zoom-menu-item" aria-label="200%" role="option"">200%</button>

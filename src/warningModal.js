@@ -1,6 +1,12 @@
 import Modal from './Modal.js';
 
+/**
+ * Warning modal.
+ */
 export default new (class extends Modal {
+  /**
+   * Render the content of this component.
+   */
   render() {
     return `<div class="pl-modal pl-warning-modal closed">
               <div class="pl-modal-container">
