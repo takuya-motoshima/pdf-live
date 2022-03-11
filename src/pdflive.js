@@ -22,8 +22,8 @@ import zoomController from './components/zoomController.js';
       * Render all PDF pages.
       */
     async function renderPages(pdfDoc, zoomFactor = 1.0) {
-      console.log(`Zoom factor: ${zoomFactor}`);
-      console.log(`Total number of pages: ${pdfDoc.numPages}`);
+      // console.log(`Zoom factor: ${zoomFactor}`);
+      // console.log(`Total number of pages: ${pdfDoc.numPages}`);
 
       // Show total number of pages.
       totalPage.textContent = pdfDoc.numPages;
@@ -33,35 +33,35 @@ import zoomController from './components/zoomController.js';
 
       // Draw PDF page by page.
       for (let num=1; num<=pdfDoc.numPages; num++) {
-          // Fetch page.
-          const page = await pdfDoc.getPage(num);
+        // Fetch page.
+        const page = await pdfDoc.getPage(num);
 
-          // Calculate the display area of the page.
-          const viewport = page.getViewport({scale: 1.5 * zoomFactor});
+        // Calculate the display area of the page.
+        const viewport = page.getViewport({scale: 1.5 * zoomFactor});
 
-          // Support HiDPI-screens.
-          const devicePixelRatio = window.devicePixelRatio || 1;
+        // Support HiDPI-screens.
+        const devicePixelRatio = window.devicePixelRatio || 1;
 
-          // Create PDF page elements.
-          const canvas = document.createElement('canvas');
-          canvas.id = `page${num}`;
-          canvas.width = Math.floor(viewport.width * devicePixelRatio);
-          canvas.height = Math.floor(viewport.height * devicePixelRatio);
-          canvas.style.width = `${Math.floor(viewport.width)}px`;
-          canvas.style.height = `${Math.floor(viewport.height)}px`;
-          canvas.style.margin = `${zoomFactor * 4}px`;
-          canvas.classList.add('pl-page');
-          pageView.appendChild(canvas);
+        // Create PDF page elements.
+        const canvas = document.createElement('canvas');
+        canvas.id = `page${num}`;
+        canvas.width = Math.floor(viewport.width * devicePixelRatio);
+        canvas.height = Math.floor(viewport.height * devicePixelRatio);
+        canvas.style.width = `${Math.floor(viewport.width)}px`;
+        canvas.style.height = `${Math.floor(viewport.height)}px`;
+        canvas.style.margin = `${zoomFactor * 4}px`;
+        canvas.classList.add('pl-page');
+        pageView.appendChild(canvas);
 
-          // Draw contents of a PDF file to a Canvas.
-          page.render({
-            canvasContext: canvas.getContext('2d'), 
-            transform: devicePixelRatio !== 1 ? [devicePixelRatio, 0, 0, devicePixelRatio, 0, 0] : null,
-            viewport
-          });
+        // Draw contents of a PDF file to a Canvas.
+        page.render({
+          canvasContext: canvas.getContext('2d'), 
+          transform: devicePixelRatio !== 1 ? [devicePixelRatio, 0, 0, devicePixelRatio, 0, 0] : null,
+          viewport
+        });
 
-          // Set the PDF page object to return.
-          pages.push(page);
+        // Set the PDF page object to return.
+        pages.push(page);
       }
       return pages;
     }
@@ -105,6 +105,9 @@ import zoomController from './components/zoomController.js';
     const pageView = document.querySelector('[data-element="pageView"]');
     const totalPage = document.querySelector('[data-element="totalPage"]');
     // const pageInput = document.querySelector('[data-element="pageInput"]');
+
+    // Rendering request task.
+    let renderTask = null;
 
     // Init PDF viewer.
     const pdfDoc = await getDocument('sample3.pdf');

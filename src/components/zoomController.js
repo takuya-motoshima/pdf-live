@@ -137,16 +137,39 @@ export default new (class {
       evnt.preventDefault();
 
       // Calculate the next zoom factor.
-      let newZoom = parseInt(this.zoomInput.value, 10);
-      let multiple;
+      const curZoom = parseInt(this.zoomInput.value, 10);
+      let newZoom = curZoom;
       if (evnt.deltaY < 0) {
-        // Zoom in.
-        multiple = 1.25;
-        newZoom = Math.min(Math.floor(newZoom * multiple), this.maxZoom);
+        // Rotate the mouse wheel upwards to zoom in.
+
+        // Activate the zoom out button.
+        this.zoomOutButton.disabled = false;
+
+        // Do nothing if the current zoom factor is maximum.
+        if (curZoom >= this.maxZoom)
+          return;
+
+        // Calculate new zoom factor.
+        const multiple = 1.25;
+        newZoom = Math.min(Math.floor(curZoom * multiple), this.maxZoom);
+        
+        // When the zoom factor reaches the maximum, disable the zoom-in button.
+        this.zoomInButton.disabled = newZoom >= this.maxZoom;
       } else if (evnt.deltaY > 0) {
-        // Zoom out.
-        multiple = .8;
-        newZoom = Math.max(Math.floor(newZoom * multiple), this.minZoom);
+        // Rotate the mouse wheel downwards to zoom out.
+        // Activate the zoom-in button.
+        this.zoomInButton.disabled = false;
+
+        // Do nothing if the current zoom factor is minimum.
+        if (curZoom <= this.minZoom)
+          return;
+
+        // Calculate new zoom factor.
+        const multiple = .8;
+        newZoom = Math.max(Math.floor(curZoom * multiple), this.minZoom);
+
+        // When the zoom factor reaches the minimum, disable the zoom out button.
+        this.zoomOutButton.disabled = newZoom <= this.minZoom;
       }
 
       // Set the new zoom factor to the zoom input value.
