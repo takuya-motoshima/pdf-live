@@ -222,7 +222,7 @@ textarea:focus {
   border: 1px solid var(--pl-border-focus);
 }
 
-.fadeout {
+.pl-fadeout {
   opacity: 0;
   transition: opacity .3s ease;
 }

@@ -1,9 +1,9 @@
-import loadingModal from './loadingModal.js';
-// import errorModal from './errorModal.js';
-// import warningModal from './warningModal.js';
-// import passwordModal from './passwordModal.js';
-import './leftPanel.js';
-import zoomController from './zoomController.js';
+import loadingModal from './components/loadingModal.js';
+// import errorModal from './components/errorModal.js';
+// import warningModal from './components/warningModal.js';
+// import passwordModal from './components/passwordModal.js';
+import './components/leftPanel.js';
+import zoomController from './components/zoomController.js';
 
 (async () => {
   try {
@@ -21,8 +21,8 @@ import zoomController from './zoomController.js';
     /**
       * Render all PDF pages.
       */
-    async function renderPages(pdfDoc, scale = 1.0) {
-      console.log(`Zoom factor: ${scale}`);
+    async function renderPages(pdfDoc, zoomFactor = 1.0) {
+      console.log(`Zoom factor: ${zoomFactor}`);
       console.log(`Total number of pages: ${pdfDoc.numPages}`);
 
       // Show total number of pages.
@@ -37,26 +37,26 @@ import zoomController from './zoomController.js';
           const page = await pdfDoc.getPage(num);
 
           // Calculate the display area of the page.
-          const viewport = page.getViewport({scale: 1.5 * scale});
+          const viewport = page.getViewport({scale: 1.5 * zoomFactor});
 
           // Support HiDPI-screens.
-          const outputScale = window.devicePixelRatio || 1;
+          const devicePixelRatio = window.devicePixelRatio || 1;
 
           // Create PDF page elements.
           const canvas = document.createElement('canvas');
           canvas.id = `page${num}`;
-          canvas.width = Math.floor(viewport.width * outputScale);
-          canvas.height = Math.floor(viewport.height * outputScale);
+          canvas.width = Math.floor(viewport.width * devicePixelRatio);
+          canvas.height = Math.floor(viewport.height * devicePixelRatio);
           canvas.style.width = `${Math.floor(viewport.width)}px`;
           canvas.style.height = `${Math.floor(viewport.height)}px`;
-          canvas.style.margin = `${scale * 4}px`;
+          canvas.style.margin = `${zoomFactor * 4}px`;
           canvas.classList.add('pl-page');
           pageView.appendChild(canvas);
 
           // Draw contents of a PDF file to a Canvas.
           page.render({
             canvasContext: canvas.getContext('2d'), 
-            transform: outputScale !== 1 ? [outputScale, 0, 0, outputScale, 0, 0] : null,
+            transform: devicePixelRatio !== 1 ? [devicePixelRatio, 0, 0, devicePixelRatio, 0, 0] : null,
             viewport
           });
 
@@ -69,30 +69,30 @@ import zoomController from './zoomController.js';
     /**
      * Resize page.
      */
-    function resizePage(scale = 1.0) {
-      console.log(`Resize to ${scale} times`);
+    function resizePage(zoomFactor = 1.0) {
+      console.log(`Resize to ${zoomFactor} times`);
       for (let num=1; num<=pages.length; num++) {
           // Fetch page.
           const page = pages[num - 1];
 
           // Calculate the display area of the page.
-          const viewport = page.getViewport({scale: 1.5 * scale});
+          const viewport = page.getViewport({scale: 1.5 * zoomFactor});
 
           // Support HiDPI-screens.
-          const outputScale = window.devicePixelRatio || 1;
+          const devicePixelRatio = window.devicePixelRatio || 1;
 
           // Create PDF page elements.
           const canvas = document.querySelector(`#page${num}`);
-          canvas.width = Math.floor(viewport.width * outputScale);
-          canvas.height = Math.floor(viewport.height * outputScale);
+          canvas.width = Math.floor(viewport.width * devicePixelRatio);
+          canvas.height = Math.floor(viewport.height * devicePixelRatio);
           canvas.style.width = `${Math.floor(viewport.width)}px`;
           canvas.style.height = `${Math.floor(viewport.height)}px`;
-          canvas.style.margin = `${scale * 4}px`;
+          canvas.style.margin = `${zoomFactor * 4}px`;
           
           // Draw contents of a PDF file to a Canvas.
           page.render({
             canvasContext: canvas.getContext('2d'), 
-            transform: outputScale !== 1 ? [outputScale, 0, 0, outputScale, 0, 0] : null,
+            transform: devicePixelRatio !== 1 ? [devicePixelRatio, 0, 0, devicePixelRatio, 0, 0] : null,
             viewport
           });
       }
@@ -113,9 +113,9 @@ import zoomController from './zoomController.js';
     const pages = await renderPages(pdfDoc, zoomController.getZoomFactor());
 
     // Change the zoom factor of the page when the zoom is changed.
-    zoomController.onChangeZoom(scale => {
+    zoomController.onChangeZoom(zoomFactor => {
       // Resize page.
-      resizePage(scale);
+      resizePage(zoomFactor);
     });
 
     // Hide loading.
