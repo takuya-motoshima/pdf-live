@@ -2,8 +2,8 @@ import loadingModal from './components/loadingModal.js';
 // import errorModal from './components/errorModal.js';
 // import warningModal from './components/warningModal.js';
 // import passwordModal from './components/passwordModal.js';
-import './components/leftPanel.js';
-import zoomController from './components/zoomController.js';
+import leftPanel from './components/leftPanel.js';
+import ZoomMenu from './components/ZoomMenu.js';
 
 (async () => {
   try {
@@ -19,7 +19,7 @@ import zoomController from './components/zoomController.js';
     }
 
     /**
-      * Render all PDF pages.
+      * Render pages.
       */
     async function renderPages(pdfDoc, zoomFactor = 1.0) {
       // console.log(`Zoom factor: ${zoomFactor}`);
@@ -112,11 +112,23 @@ import zoomController from './components/zoomController.js';
     // Init PDF viewer.
     const pdfDoc = await getDocument('sample3.pdf');
 
-    // Render all PDF pages.
-    const pages = await renderPages(pdfDoc, zoomController.getZoomFactor());
+    // Keep page width and height for zoom factor calculation to fit by page or width.
+    const pageSize = await (async () => {
+      const [width, height] = (await pdfDoc.getPage(1)).view.slice(2);
+      return {width, height}
+    })();
+
+    // Initialize zoom menu.
+    const zoomMenu = new ZoomMenu(pageSize);
+
+    // Render pages.
+    const pages = await renderPages(pdfDoc, zoomMenu.getZoomFactor());
+
+    // Render thumbnail images.
+    leftPanel.renderThumbnails(pdfDoc);
 
     // Change the zoom factor of the page when the zoom is changed.
-    zoomController.onChangeZoom(zoomFactor => {
+    zoomMenu.onChangeZoom(zoomFactor => {
       // Resize page.
       resizePage(zoomFactor);
     });

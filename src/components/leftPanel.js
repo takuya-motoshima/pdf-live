@@ -21,18 +21,25 @@ export default new (class {
   }
 
   /**
-  * Open the left panel.
-  */
+   * Open the left panel.
+   */
   open() {
     this.leftPanel.classList.remove('closed')
     this.pagegContainer.classList.add('open')
   }
 
   /**
-  * Close left panel.
-  */
+   * Close left panel.
+   */
   close() {
     this.leftPanel.classList.add('closed')
     this.pagegContainer.classList.remove('open')
+  }
+
+  /**
+   * Render thumbnail images.
+   */
+  renderThumbnails(pdfDoc) {
+    console.log('Start rendering thumbnails');
   }
 })()

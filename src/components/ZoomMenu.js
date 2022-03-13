@@ -1,13 +1,17 @@
 import pointInRectangle from '../shared/pointInRectangle.js';
+import isNumber from '../shared/isNumber.js';
 
 /**
  * Page zoom control.
  */
-export default new (class {
+export default class {
   /**
    * Control the zoom factor change event of a PDF page.
    */
-  constructor() {
+  constructor(pageSize) {
+    // Keep page width and height for zoom factor calculation to fit by page or width.
+    this.pageSize = pageSize;
+
     // Find dependent elements.
     this.zoomOverlayToggle = document.querySelector('[data-element="zoomOverlayToggle"]');
     this.zoomMenu = document.querySelector('[data-element="zoomMenu"]');
@@ -19,7 +23,7 @@ export default new (class {
     // All zooms that can be selected from the screen.
     this.zoomList = [...this.zoomSelects].flatMap(zoomSelect => {
       const zoom = parseInt(zoomSelect.dataset.value, 10);
-      return !isNaN(zoom) ? zoom : [];
+      return isNumber(zoom) ? zoom : [];
     });
 
     // Minimum zoom.
@@ -210,13 +214,18 @@ export default new (class {
    * Calculate zoom factor.
    *
    * @param {string}
-   * @return {number}
+   * @returns {number}
    */
   calcZoomFactor(zoom) {
+    console.log(`zoom=${zoom}`);
     let zoomFactor = 1.0;
-    if (!isNaN(parseInt(zoom, 10)))
+    if (isNumber(zoom))
+      // Convert specified percentage to ratio.
       zoomFactor = parseInt(zoom, 10) / 100;
-    else {
+    else if (zoom === 'pageFit') {
+      // Calculate the width and height of the page that fits the height of the container.
+    } else if (zoom === 'pageWidth') {
+      // Calculate the width and height of the page that fits the width of the container.
     }
     return zoomFactor;
   }
@@ -224,7 +233,7 @@ export default new (class {
   /**
    * Returns the current zoom factor.
    *
-   * @return {number}
+   * @returns {number}
    */
   getZoomFactor() {
     return this.calcZoomFactor(this.zoomInput.value);
@@ -239,4 +248,4 @@ export default new (class {
   onChangeZoom(handler) {
     this.changeZoomHandler = handler;
   }
-})()
+}
