@@ -11,7 +11,7 @@ export default class {
   constructor(standardViewport) {
     // Keep page width and height for zoom factor calculation to fit by page or width.
     this.standardViewport = standardViewport;
-    console.log(`Page width and height: ${this.standardViewport.width}/${this.standardViewport.height}`);
+    // console.log(`Page width and height: ${this.standardViewport.width}/${this.standardViewport.height}`);
 
     // Find dependent elements.
     this.zoomOverlayToggle = document.querySelector('[data-element="zoomOverlayToggle"]');

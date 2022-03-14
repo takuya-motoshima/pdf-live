@@ -608,7 +608,8 @@ html:not([data-tabbing=true]) .pl-button {
             justify-content: center;
             align-items: center;
             text-align: center;
-            height: 200px; 
+            /* height: 200px;  */
+            padding: 0 0 24px 0;
             width: 100%;
             cursor: pointer;
           }
