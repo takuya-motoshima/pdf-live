@@ -63,9 +63,7 @@ export default class {
         this.close();
 
         // Deselect a zoom item that was already selected.
-        const selectedZoom = [...this.zoomSelects].find(zoomSelect => zoomSelect.classList.contains('selected'));
-        if (selectedZoom)
-          selectedZoom.classList.remove('selected');
+        this.deselectZoomMenu();
 
         // Activate the selected zoom item.
         evnt.target.classList.add('selected');
@@ -124,6 +122,9 @@ export default class {
       // Activate the zoom-in button.
       this.zoomInButton.disabled = false;
 
+      // Activate the zoom menu that matches the current zoom factor.
+      this.activateZoomMenuFromValue(this.zoomInput.value);
+
       // Calculate zoom factor.
       const zoomFactor = this.calcZoomFactor(this.zoomInput.value);
 
@@ -144,6 +145,9 @@ export default class {
 
       // Activate the zoom out button.
       this.zoomOutButton.disabled = false;
+
+      // Activate the zoom menu that matches the current zoom factor.
+      this.activateZoomMenuFromValue(this.zoomInput.value);
 
       // Calculate zoom factor.
       const zoomFactor = this.calcZoomFactor(this.zoomInput.value);
@@ -200,6 +204,9 @@ export default class {
       // Set the new zoom factor to the zoom input value.
       this.zoomInput.value = newZoom;
 
+      // Activate the zoom menu that matches the current zoom factor.
+      this.activateZoomMenuFromValue(this.zoomInput.value);
+
       // Calculate zoom factor.
       const zoomFactor = this.calcZoomFactor(this.zoomInput.value);
 
@@ -242,13 +249,12 @@ export default class {
     if (isNumber(zoom))
       // Convert specified percentage to ratio.
       zoomFactor = parseInt(zoom, 10) / 100;
-    else if (zoom === 'pageFit') {
+    else if (zoom === 'pageFit')
       // Calculate the width and height of the page that fits the height of the container.
       zoomFactor = this.pageView.clientHeight / this.standardViewport.height;
-    } else if (zoom === 'pageWidth') {
+    else if (zoom === 'pageWidth')
       // Calculate the width and height of the page that fits the width of the container.
       zoomFactor = this.pageView.clientWidth / this.standardViewport.width;
-    }
     return zoomFactor;
   }
 
@@ -259,6 +265,28 @@ export default class {
    */
   getZoomFactor() {
     return this.calcZoomFactor(this.zoomInput.value);
+  }
+
+  /**
+   * Deselect a zoom item that was already selected.
+   */
+  deselectZoomMenu() {
+    const selectedZoom = document.querySelector('[data-element="zoomSelect"].selected');
+    if (selectedZoom)
+      selectedZoom.classList.remove('selected');
+  }
+
+  /**
+  * Activate the zoom menu from values.
+  */
+  activateZoomMenuFromValue(value) {
+    // Deselect a zoom item that was already selected.
+    this.deselectZoomMenu();
+
+    // Activate the zoom menu that matches the current zoom factor.
+    const zoomSelect = document.querySelector(`[data-element="zoomSelect"][data-value="${value}"]`);
+    if (zoomSelect)
+      zoomSelect.classList.add('selected');
   }
 
   /**
