@@ -113,13 +113,14 @@ import ZoomMenu from './components/ZoomMenu.js';
     const pdfDoc = await getDocument('sample3.pdf');
 
     // Keep page width and height for zoom factor calculation to fit by page or width.
-    const pageSize = await (async () => {
-      const [width, height] = (await pdfDoc.getPage(1)).view.slice(2);
+    const standardViewport = await (async () => {
+      const {width, height} = (await pdfDoc.getPage(1)).getViewport({scale: 1.5 * 1.0});
+      // const [width, height] = (await pdfDoc.getPage(1)).view.slice(2);
       return {width, height}
     })();
 
     // Initialize zoom menu.
-    const zoomMenu = new ZoomMenu(pageSize);
+    const zoomMenu = new ZoomMenu(standardViewport);
 
     // Render pages.
     const pages = await renderPages(pdfDoc, zoomMenu.getZoomFactor());

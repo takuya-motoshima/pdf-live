@@ -8,9 +8,10 @@ export default class {
   /**
    * Control the zoom factor change event of a PDF page.
    */
-  constructor(pageSize) {
+  constructor(standardViewport) {
     // Keep page width and height for zoom factor calculation to fit by page or width.
-    this.pageSize = pageSize;
+    this.standardViewport = standardViewport;
+    console.log(`Page width and height: ${this.standardViewport.width}/${this.standardViewport.height}`);
 
     // Find dependent elements.
     this.zoomOverlayToggle = document.querySelector('[data-element="zoomOverlayToggle"]');
@@ -19,7 +20,11 @@ export default class {
     this.zoomOutButton = document.querySelector('[data-element="zoomOutButton"]');
     this.zoomInButton = document.querySelector('[data-element="zoomInButton"]');
     this.zoomInput = document.querySelector('[data-element="zoomInput"]');
-  
+    this.pageView = document.querySelector('[data-element="pageView"]');
+
+    // Preventing multiple launches of resizing events.
+    this.resizeTimeout = null;
+
     // All zooms that can be selected from the screen.
     this.zoomList = [...this.zoomSelects].flatMap(zoomSelect => {
       const zoom = parseInt(zoomSelect.dataset.value, 10);
@@ -69,16 +74,32 @@ export default class {
         const zoomFactor = this.calcZoomFactor(evnt.target.dataset.value);
 
         // Set the zoom percentage to the text element.
-        this.zoomInput.value = zoomFactor * 100;
+        this.zoomInput.value = Math.floor(zoomFactor * 100);
 
         // Invoke zoom change event.
         this.changeZoomHandler(zoomFactor);
       }, {passive: true});
 
-    // Recalculates the position of the zoom overlay element when the window is resized.
+    // When the window is resized.
     window.addEventListener('resize', () => {
-      // Layout the zoom overlay.
-      this.layout();
+      // Preventing multiple launches of resizing events.
+      if (this.resizeTimeout)
+        clearTimeout(this.resizeTimeout);
+
+      this.resizeTimeout = setTimeout(() => {
+        // Recalculates the position of the zoom overlay element.
+        this.layout();
+
+        // If the zoom mode is "page fit" or "width fit", resize the page.
+        const curZoomSelect = document.querySelector('[data-element="zoomSelect"].selected').dataset.value;
+        if (curZoomSelect === 'pageFit' || curZoomSelect === 'pageWidth') {
+          // Calculate zoom factor.
+          const zoomFactor = this.calcZoomFactor(curZoomSelect);
+
+          // Invoke zoom change event.
+          this.changeZoomHandler(zoomFactor);
+        }
+      }, 100);
     }, {passive: true});
 
     // When the screen is clicked.
@@ -202,7 +223,7 @@ export default class {
   }
 
   /**
-   * Layout the zoom overlay.
+   * Recalculates the position of the zoom overlay element.
    */
   layout() {
     const rect =  this.zoomOverlayToggle.getBoundingClientRect();
@@ -217,15 +238,16 @@ export default class {
    * @returns {number}
    */
   calcZoomFactor(zoom) {
-    console.log(`zoom=${zoom}`);
     let zoomFactor = 1.0;
     if (isNumber(zoom))
       // Convert specified percentage to ratio.
       zoomFactor = parseInt(zoom, 10) / 100;
     else if (zoom === 'pageFit') {
       // Calculate the width and height of the page that fits the height of the container.
+      zoomFactor = this.pageView.clientHeight / this.standardViewport.height;
     } else if (zoom === 'pageWidth') {
       // Calculate the width and height of the page that fits the width of the container.
+      zoomFactor = this.pageView.clientWidth / this.standardViewport.width;
     }
     return zoomFactor;
   }
