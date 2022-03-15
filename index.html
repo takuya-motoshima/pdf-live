@@ -50,7 +50,8 @@
     <div class="pl-content">
 
       <!-- begin:Left panel -->
-      <div class="pl-left-panel closed" data-element="leftPanel">
+      <div class="pl-left-panel" data-element="leftPanel">
+      <!-- <div class="pl-left-panel closed" data-element="leftPanel"> -->
         <div class="pl-left-panel-container">
           <div class="pl-thumbnails-panel" data-element="thumbnailsPanel"></div>
         </div>
@@ -58,7 +59,8 @@
       <!-- end:Left panel -->
 
       <!-- begin:Page container -->
-      <div data-element="pagegContainer" class="pl-page-container">
+      <div data-element="pagegContainer" class="pl-page-container open">
+      <!-- <div data-element="pagegContainer" class="pl-page-container"> -->
         
         <!-- begin:Page view -->
         <div data-element="pageView" class="pl-page-view"></div>
@@ -68,14 +70,14 @@
         <div class="pl-page-footer" style="width: calc(100% - 0px); margin-left: 0px;">
           <div data-element="pageNavOverlay" class="pl-page-nav-overlay">
           <!-- <div data-element="pageNavOverlay" class="pl-page-nav-overlay pl-fadeout"> -->
-            <button class="pl-button pl-side-arrow-container" aria-label="Previous page">
+            <button data-element="previousPageButton" class="pl-button pl-side-arrow-container" aria-label="Previous page">
             <!-- <button class="pl-button disabled pl-side-arrow-container" aria-label="Previous page"> -->
               <i class="fa-solid fa-angle-left"></i>
             </button>
             <div class="pl-page-nav-form-container">
               <form><input data-element="pageInput" type="text" tabindex="-1" aria-label="Set page" value="1" style="width: 8px;"> / <span data-element="totalPage">1</span></form>
             </div>
-            <button class="pl-button pl-side-arrow-container" aria-label="Next page">
+            <button data-element="nextPageButton" class="pl-button pl-side-arrow-container" aria-label="Next page">
               <i class="fa-solid fa-angle-right"></i>
             </button>
           </div>

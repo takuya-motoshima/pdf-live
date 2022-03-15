@@ -4,6 +4,7 @@ import loadingModal from './components/loadingModal.js';
 // import passwordModal from './components/passwordModal.js';
 import LeftPanel from './components/LeftPanel.js';
 import ZoomMenu from './components/ZoomMenu.js';
+import PageNav from './components/PageNav.js';
 
 (async () => {
   try {
@@ -104,7 +105,6 @@ import ZoomMenu from './components/ZoomMenu.js';
     // Find dependent elements.
     const pageView = document.querySelector('[data-element="pageView"]');
     const totalPage = document.querySelector('[data-element="totalPage"]');
-    // const pageInput = document.querySelector('[data-element="pageInput"]');
 
     // Rendering request task.
     let renderTask = null;
@@ -128,6 +128,9 @@ import ZoomMenu from './components/ZoomMenu.js';
 
     // Initialize the left panel.
     const leftPanel = new LeftPanel(pages);
+
+    // Initialize page navigation.
+    const pageNav = new PageNav();  
 
     // Change the zoom factor of the page when the zoom is changed.
     zoomMenu.onChangeZoom(zoomFactor => {

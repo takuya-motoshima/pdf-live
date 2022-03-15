@@ -620,14 +620,20 @@ html:not([data-tabbing=true]) .pl-button {
           }
 
               .pl-thumbnail .pl-thumbnail-image {
-                margin: 6px 6px 0;
                 box-shadow: 0 0 3px 0 var(--pl-box-shadow);
                 width: 117px;
+                /* height: 150px; */
                 background-color: white;
               }
 
               .pl-thumbnail.active .pl-thumbnail-image {
-                box-shadow: 0 0 0 6px var(--pl-thumbnail-border-active);
+                border: 6px solid var(--pl-thumbnail-border-active);
+                /* border: 2px solid var(--pl-border-focus); */
+                box-shadow: none;
+                box-sizing: content-box;
+
+                /* test */
+                /* box-shadow: 0 0 0 6px var(--pl-thumbnail-border-active); */
               }
 
             .pl-thumbnail .pl-thumbnail-label {

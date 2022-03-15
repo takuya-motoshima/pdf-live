@@ -11,6 +11,7 @@ export default class {
     this.leftPanel = document.querySelector('[data-element="leftPanel"]');
     this.pagegContainer = document.querySelector('[data-element="pagegContainer"]');
     this.thumbnailsPanel = document.querySelector('[data-element="thumbnailsPanel"]');
+    this.thumbnails = [];
 
     // Toggle the opening and closing of the left panel.
     this.leftPanelToggle.addEventListener('click', () => {
@@ -21,7 +22,20 @@ export default class {
     }, {passive: true});
 
     // Render thumbnail images.
-    this.renderThumbnails(pages);
+    this.renderThumbnails(pages).then(thumbnailNodes => {
+      // Keep currently active thumbnail node.
+      let activeThumbnailNode = thumbnailNodes.find(thumbnailNode => thumbnailNode.classList.contains('active'));
+      console.log('activeThumbnailNode=', activeThumbnailNode);
+
+      // Add click event for thumbnail node.
+      for (let thumbnailNode of thumbnailNodes) {
+        thumbnailNode.addEventListener('click', evnt => {
+          activeThumbnailNode.classList.remove('active');
+          evnt.currentTarget.classList.add('active');
+          activeThumbnailNode = evnt.currentTarget;
+        }, {passive: true});
+      }
+    });
   }
 
   /**
@@ -45,6 +59,7 @@ export default class {
    */
   async renderThumbnails(pages) {
     // console.log('Start rendering thumbnails, pages=', pages);
+    const thumbnailNodes = [];
     for (let num=1; num<=pages.length; num++) {
       // Fetch page.
       const page = pages[num - 1];
@@ -55,6 +70,10 @@ export default class {
       // Create a thumbnail container node.
       const thumbnailNode = document.createElement('div');
       thumbnailNode.classList.add('pl-thumbnail');
+
+      // Activate the thumbnail on the first page.
+      if (num === 1)
+        thumbnailNode.classList.add('active');    
 
       // Create a thumbnail image node.
       const canvas = document.createElement('canvas');
@@ -74,6 +93,10 @@ export default class {
 
       // Draw contents of a PDF file to a Canvas.
       page.render({canvasContext: canvas.getContext('2d'), viewport});
+
+      // Set the created thumbnail node as the return value.
+      thumbnailNodes.push(thumbnailNode);
     }
+    return thumbnailNodes;
   }
 }
