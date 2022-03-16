@@ -25,6 +25,9 @@ export default class {
     // Preventing multiple launches of resizing events.
     this.resizeTimeout = null;
 
+    // Save the previous input zoom.
+    this.prevZoom = this.zoomInput.value;
+
     // All zooms that can be selected from the screen.
     this.zoomList = [...this.zoomSelects].flatMap(zoomSelect => {
       const zoom = parseInt(zoomSelect.dataset.value, 10);
@@ -74,6 +77,9 @@ export default class {
         // Set the zoom percentage to the text node.
         this.zoomInput.value = Math.floor(zoomFactor * 100);
 
+        // Keep last input zoom.
+        this.prevZoom = this.zoomInput.value;
+
         // Invoke zoom change event.
         this.changeZoomHandler(zoomFactor);
       }, {passive: true});
@@ -111,10 +117,13 @@ export default class {
     // Zoom out the page.
     this.zoomOutButton.addEventListener('click', () => {
       // Current zoom factor.
-      const curZoom = parseInt(this.zoomInput.value, 10);
+      const curZoom = parseInt(this.prevZoom, 10);
 
       // Set a zoom factor one step smaller than the current one.
       this.zoomInput.value = this.zoomList.sort((a, b) => b - a).find(zoom => zoom < curZoom) ?? this.minZoom;
+
+      // Keep last input zoom.
+      this.prevZoom = this.zoomInput.value;
 
       // When the zoom factor reaches the minimum, disable the zoom out button.
       this.zoomOutButton.disabled = this.zoomInput.value == this.minZoom;
@@ -135,10 +144,14 @@ export default class {
     // Zoom in on the page.
     this.zoomInButton.addEventListener('click', () => {
       // Current zoom factor.
-      const curZoom = parseInt(this.zoomInput.value, 10);
+      const curZoom = parseInt(this.prevZoom, 10);
+      // const curZoom = parseInt(this.zoomInput.value, 10);
 
       // Set a zoom factor one step larger than the current one.
       this.zoomInput.value = this.zoomList.sort((a, b) => a - b).find(zoom => zoom > curZoom) ?? this.maxZoom;
+
+      // Keep last input zoom.
+      this.prevZoom = this.zoomInput.value;
 
       // When the zoom factor reaches the maximum, disable the zoom-in button.
       this.zoomInButton.disabled = this.zoomInput.value == this.maxZoom;
@@ -166,7 +179,8 @@ export default class {
       evnt.preventDefault();
 
       // Calculate the next zoom factor.
-      const curZoom = parseInt(this.zoomInput.value, 10);
+      const curZoom = parseInt(this.prevZoom, 10);
+      // const curZoom = parseInt(this.zoomInput.value, 10);
       let newZoom = curZoom;
       if (evnt.deltaY < 0) {
         // Rotate the mouse wheel upwards to zoom in.
@@ -204,6 +218,9 @@ export default class {
       // Set the new zoom factor to the zoom input value.
       this.zoomInput.value = newZoom;
 
+      // Keep last input zoom.
+      this.prevZoom = this.zoomInput.value;
+
       // Activate the zoom menu that matches the current zoom factor.
       this.activateZoomMenuFromValue(this.zoomInput.value);
 
@@ -213,6 +230,22 @@ export default class {
       // Invoke zoom change event.
       this.changeZoomHandler(zoomFactor);
     }, {passive: false});
+
+    // When the zoom input text is out of focus.
+    this.zoomInput.addEventListener('blur', () => {
+      // Calculate input zoom.
+      this.calcInputZoom();
+    }, {passive: true})
+
+    // When the enter key is pressed in the input zoom.
+    this.zoomInput.addEventListener('keydown', evnt => {
+      // Ignore other than enter key.
+      if (evnt.key !== 'Enter' && evnt.keyCode !== 13)
+        return;
+
+      // Calculate input zoom.
+      this.calcInputZoom();
+    });
   }
 
   /**
@@ -287,6 +320,36 @@ export default class {
     const zoomSelect = document.querySelector(`[data-element="zoomSelect"][data-value="${value}"]`);
     if (zoomSelect)
       zoomSelect.classList.add('selected');
+  }
+
+  /**
+   * Calculate input zoom.
+   */
+  calcInputZoom() {
+    // Convert the entered zoom to a number.
+    let curZoom = parseInt(this.zoomInput.value, 10);
+    if (!isNaN(curZoom)) {
+      if (curZoom < this.minZoom)
+        // If the input is less than the minimum value, set the minimum value to the input.
+        curZoom = this.minZoom;
+      else if (curZoom > this.maxZoom)
+        // If the input exceeds the maximum value, set the maximum value to the input.
+        curZoom = this.maxZoom;
+
+      // Set the adjusted zoom factor to the input zoom.
+      this.zoomInput.value = curZoom;
+
+      // Keep last input zoom.
+      this.prevZoom = this.zoomInput.value;
+
+      // Calculate zoom factor.
+      const zoomFactor = this.calcZoomFactor(this.zoomInput.value);
+
+      // Invoke zoom change event.
+      this.changeZoomHandler(zoomFactor);
+    } else
+      // If the input zoom is an invalid number, set the previous value to the input zoom.
+      this.zoomInput.value = this.prevZoom;
   }
 
   /**
