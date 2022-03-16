@@ -22,6 +22,7 @@ export default class {
     this.zoomSelects = document.querySelectorAll('[data-element="zoomSelect"]');
     this.zoomOutButton = document.querySelector('[data-element="zoomOutButton"]');
     this.zoomInButton = document.querySelector('[data-element="zoomInButton"]');
+    this.zoomInputForm = document.querySelector('[data-element="zoomInputForm"]');
     this.zoomInput = document.querySelector('[data-element="zoomInput"]');
     this.pageView = document.querySelector('[data-element="pageView"]');
 
@@ -196,15 +197,21 @@ export default class {
       this.enterZoom();
     }, {passive: true});
 
-    // Press Enter key with input zoom.
-    this.zoomInput.addEventListener('keydown', evnt => {
-      // Ignore other than enter key.
-      if (evnt.key !== 'Enter' && evnt.keyCode !== 13)
-        return;
+    // Submit page input form.
+    this.zoomInputForm.addEventListener('submit', evnt => {
+      evnt.preventDefault();
 
       // Zoom page according to the zoom you enter.
       this.enterZoom();
-    }, {passive: true});
+    }, {passive: false});
+    // // Press Enter key with input zoom.
+    // this.zoomInput.addEventListener('keydown', evnt => {
+    //   // Ignore other than enter key.
+    //   if (evnt.key !== 'Enter' && evnt.keyCode !== 13)
+    //     return;
+    //   // Zoom page according to the zoom you enter.
+    //   this.enterZoom();
+    // }, {passive: true});
   }
 
   /**
