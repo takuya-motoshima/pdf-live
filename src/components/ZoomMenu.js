@@ -1,6 +1,9 @@
 import pointInRectangle from '../shared/pointInRectangle.js';
 import isNumber from '../shared/isNumber.js';
 
+const ZOOM_OUT = 0;
+const ZOOM_IN = 1;
+
 /**
  * Page zoom control.
  */
@@ -116,57 +119,14 @@ export default class {
 
     // Zoom out the page.
     this.zoomOutButton.addEventListener('click', () => {
-      // Current zoom factor.
-      const curZoom = parseInt(this.prevZoom, 10);
-
-      // Set a zoom factor one step smaller than the current one.
-      this.zoomInput.value = this.zoomList.sort((a, b) => b - a).find(zoom => zoom < curZoom) ?? this.minZoom;
-
-      // Keep last input zoom.
-      this.prevZoom = this.zoomInput.value;
-
-      // When the zoom factor reaches the minimum, disable the zoom out button.
-      this.zoomOutButton.disabled = this.zoomInput.value == this.minZoom;
-
-      // Activate the zoom-in button.
-      this.zoomInButton.disabled = false;
-
-      // Activate the zoom menu that matches the current zoom factor.
-      this.activateZoomMenuFromValue(this.zoomInput.value);
-
-      // Calculate zoom factor.
-      const zoomFactor = this.calcZoomFactor(this.zoomInput.value);
-
-      // Invoke zoom change event.
-      this.changeZoomHandler(zoomFactor);
+      // Calculate zoom step.
+      this.calcZoomStep(ZOOM_OUT);
     }, {passive: true});
 
     // Zoom in on the page.
     this.zoomInButton.addEventListener('click', () => {
-      // Current zoom factor.
-      const curZoom = parseInt(this.prevZoom, 10);
-      // const curZoom = parseInt(this.zoomInput.value, 10);
-
-      // Set a zoom factor one step larger than the current one.
-      this.zoomInput.value = this.zoomList.sort((a, b) => a - b).find(zoom => zoom > curZoom) ?? this.maxZoom;
-
-      // Keep last input zoom.
-      this.prevZoom = this.zoomInput.value;
-
-      // When the zoom factor reaches the maximum, disable the zoom-in button.
-      this.zoomInButton.disabled = this.zoomInput.value == this.maxZoom;
-
-      // Activate the zoom out button.
-      this.zoomOutButton.disabled = false;
-
-      // Activate the zoom menu that matches the current zoom factor.
-      this.activateZoomMenuFromValue(this.zoomInput.value);
-
-      // Calculate zoom factor.
-      const zoomFactor = this.calcZoomFactor(this.zoomInput.value);
-
-      // Invoke zoom change event.
-      this.changeZoomHandler(zoomFactor);
+      // Calculate zoom step.
+      this.calcZoomStep(ZOOM_IN);
     }, {passive: true});
 
     // Hold down the Ctrl key and rotate the mouse wheel to zoom. 
@@ -342,6 +302,12 @@ export default class {
       // Keep last input zoom.
       this.prevZoom = this.zoomInput.value;
 
+      // When the zoom factor reaches the minimum, disable the zoom out button.
+      this.zoomOutButton.disabled = this.zoomInput.value == this.minZoom;
+
+      // When the zoom factor reaches the maximum, disable the zoom-in button.
+      this.zoomInButton.disabled = this.zoomInput.value == this.maxZoom;
+
       // Calculate zoom factor.
       const zoomFactor = this.calcZoomFactor(this.zoomInput.value);
 
@@ -350,6 +316,51 @@ export default class {
     } else
       // If the input zoom is an invalid number, set the previous value to the input zoom.
       this.zoomInput.value = this.prevZoom;
+  }
+
+  /**
+   * Calculate zoom step.
+   *
+   * @param {number} zoomDirection Zoom direction. 0: Zoom out, 1: Zoom in
+   */
+  calcZoomStep(zoomDirection) {
+    // Current zoom factor.
+    const curZoom = parseInt(this.prevZoom, 10);
+
+    // Calculate the next zoom.
+    if (zoomDirection === ZOOM_OUT)
+      // Set a zoom factor one step smaller than the current one.
+      this.zoomInput.value = this.zoomList.sort((a, b) => b - a).find(zoom => zoom < curZoom) ?? this.minZoom;
+    else    
+      // Set a zoom factor one step larger than the current one.
+      this.zoomInput.value = this.zoomList.sort((a, b) => a - b).find(zoom => zoom > curZoom) ?? this.maxZoom;
+
+    // Keep last input zoom.
+    this.prevZoom = this.zoomInput.value;
+
+    // Controlling the activation of zoom-in and zoom-out buttons.
+    if (zoomDirection === ZOOM_OUT) {
+      // When the zoom factor reaches the minimum, disable the zoom out button.
+      this.zoomOutButton.disabled = this.zoomInput.value == this.minZoom;
+
+      // Activate the zoom-in button.
+      this.zoomInButton.disabled = false;
+    } else {
+      // When the zoom factor reaches the maximum, disable the zoom-in button.
+      this.zoomInButton.disabled = this.zoomInput.value == this.maxZoom;
+
+      // Activate the zoom out button.
+      this.zoomOutButton.disabled = false;
+    }
+
+    // Activate the zoom menu that matches the current zoom factor.
+    this.activateZoomMenuFromValue(this.zoomInput.value);
+
+    // Calculate zoom factor.
+    const zoomFactor = this.calcZoomFactor(this.zoomInput.value);
+
+    // Invoke zoom change event.
+    this.changeZoomHandler(zoomFactor);
   }
 
   /**
