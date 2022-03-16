@@ -23,7 +23,7 @@
           <button class="pl-button action-button" data-element="zoomOutButton" aria-label="Zoom out" aria-keyshortcuts="Control+-">
             <i class="fa-solid fa-minus fa-lg"></i>
           </button>
-          <div data-element="zoomOverlayToggle" class="pl-zoom-overlay-toggle">
+          <div data-element="zoomToggle" class="pl-zoom-overlay-toggle">
             <div class="pl-zoom-overlay-toggle-text">
               <input data-element="zoomInput" type="text" class="pl-textarea" tabindex="-1" aria-label="Set zoom" value="100"><span>%</span>
             </div>
@@ -70,13 +70,13 @@
         <div class="pl-page-footer" style="width: calc(100% - 0px); margin-left: 0px;">
           <div data-element="pageNavOverlay" class="pl-page-nav-overlay">
           <!-- <div data-element="pageNavOverlay" class="pl-page-nav-overlay pl-fadeout"> -->
-            <button data-element="prevPageButton" class="pl-button pl-side-arrow-container" aria-label="Previous page">
+            <button data-element="prevPageButton" class="pl-button pl-side-arrow-container" aria-label="Previous page" disabled>
             <!-- <button class="pl-button disabled pl-side-arrow-container" aria-label="Previous page"> -->
               <i class="fa-solid fa-angle-left"></i>
             </button>
             <div class="pl-page-nav-form-container">
-              <form>
-                <input data-element="currentPageInput" type="text" tabindex="-1" aria-label="Set page" value="1"> / <span data-element="totalPage">1</span>
+              <form data-element="pageInputForm">
+                <input data-element="pageInput" type="text" tabindex="-1" aria-label="Set page" value="1"> / <span data-element="totalPage">1</span>
               </form>
             </div>
             <button data-element="nextPageButton" class="pl-button pl-side-arrow-container" aria-label="Next page">

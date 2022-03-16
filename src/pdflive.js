@@ -51,20 +51,18 @@ import PageNav from './components/PageNav.js';
     const leftPanel = new LeftPanel(pages);
 
     // Thumbnail selection event.
-    leftPanel.onSelectThumbnail(pageNumber => {
-      // console.log(`Thumbnail page ${pageNumber} selected`);
+    leftPanel.onSelectThumbnail(pageNum => {
       // View the page corresponding to the selected thumbnail in the viewer.
-      pageNav.activatePage(pageNumber);
+      pageNav.activatePage(pageNum);
     });
 
     // Initialize page navigation.
     const pageNav = new PageNav();  
 
     // If the page you are browsing changes.
-    pageNav.onChangeBrowsingPage(pageNumber => {
+    pageNav.onChangeBrowsingPage(pageNum => {
       // Activate the thumbnail page of the browsing page.
-      // console.log(`Received browsing page number ${pageNumber}`);
-      leftPanel.activateThumbnailPage(pageNumber);
+      leftPanel.activateThumbnailPage(pageNum);
     });
 
     // Hide loading.

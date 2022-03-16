@@ -15,7 +15,7 @@ export default class {
     this.activeThumbnailNode = null;
 
     // Thumbnail selection event handler.
-    this.selectThumbnailHandler = pageNumber => {};
+    this.selectThumbnailHandler = pageNum => {};
 
     // Toggle the opening and closing of the left panel.
     this.leftPanelToggle.addEventListener('click', () => {
@@ -42,8 +42,8 @@ export default class {
           this.activeThumbnailNode = evnt.currentTarget;
 
           // Invoke thumbnail selection event.
-          const pageNumber = parseInt(this.activeThumbnailNode.dataset.pageNumber, 10);
-          this.selectThumbnailHandler(pageNumber);
+          const pageNum = parseInt(this.activeThumbnailNode.dataset.pageNumber, 10);
+          this.selectThumbnailHandler(pageNum);
         }, {passive: true});
       }
 
@@ -71,15 +71,15 @@ export default class {
   /**
    * Activate thumbnails.
    *
-   * @param {number} pageNumber
+   * @param {number} pageNum
    */
-  activateThumbnailPage(pageNumber) {
+  activateThumbnailPage(pageNum) {
     // Deactivate currently active thumbnails.
     if (this.activeThumbnailNode)
       this.activeThumbnailNode.classList.remove('active');
  
     // Activates the thumbnail corresponding to the specified page number.
-    const targetThumbnailNode = this.thumbnailNodes.find(thumbnailNode => thumbnailNode.dataset.pageNumber == pageNumber);
+    const targetThumbnailNode = this.thumbnailNodes.find(thumbnailNode => thumbnailNode.dataset.pageNumber == pageNum);
     if (targetThumbnailNode) {
       // Activate the target thumbnail.
       targetThumbnailNode.classList.add('active');
@@ -145,7 +145,7 @@ export default class {
    * Thumbnail selection event.
    * Returns the page number of the selected thumbnail to the handler.
    *
-   * @param {(pageNumber: number): void => {}}
+   * @param {(pageNum: number): void => {}}
    */
   onSelectThumbnail(handler) {
     this.selectThumbnailHandler = handler;
