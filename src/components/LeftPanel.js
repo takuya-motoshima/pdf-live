@@ -14,6 +14,9 @@ export default class {
     this.thumbnailNodes = [];
     this.activeThumbnailNode = null;
 
+    // Thumbnail selection event handler.
+    this.selectThumbnailHandler = pageNumber => {};
+
     // Toggle the opening and closing of the left panel.
     this.leftPanelToggle.addEventListener('click', () => {
       if (this.leftPanel.classList.contains('closed'))
@@ -37,6 +40,10 @@ export default class {
           // Activate the selected thumbnail.
           evnt.currentTarget.classList.add('active');
           this.activeThumbnailNode = evnt.currentTarget;
+
+          // Invoke thumbnail selection event.
+          const pageNumber = parseInt(this.activeThumbnailNode.dataset.pageNumber, 10);
+          this.selectThumbnailHandler(pageNumber);
         }, {passive: true});
       }
 
@@ -132,5 +139,15 @@ export default class {
       thumbnailNodes.push(thumbnailNode);
     }
     return thumbnailNodes;
+  }
+
+  /**
+   * Thumbnail selection event.
+   * Returns the page number of the selected thumbnail to the handler.
+   *
+   * @param {(pageNumber: number): void => {}}
+   */
+  onSelectThumbnail(handler) {
+    this.selectThumbnailHandler = handler;
   }
 }

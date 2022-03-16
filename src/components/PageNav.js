@@ -12,7 +12,7 @@ export default class {
     this.prevPageButton = document.querySelector('[data-element="prevPageButton"]');
     this.nextPageButton = document.querySelector('[data-element="nextPageButton"]');
     this.pageView = document.querySelector('[data-element="pageView"]');
-    this.pages = this.pageView.querySelectorAll('[id^="page"]');
+    this.pagesNodes = this.pageView.querySelectorAll('[id^="page"]');
 
     // Handler for change event for the page you are viewing.
     this.changeBrowsingPageHandler = pageNumber => {};
@@ -32,7 +32,7 @@ export default class {
         const pageNumber = parseInt(pageNode.dataset.pageNumber, 10);
         // console.log(`View page ${pageNumber}`);
 
-        // Displays the number of the displayed page.
+        // Show current page number.
         this.currentPageInput.value = pageNumber;
 
         // Invoke browsing page change event.
@@ -45,8 +45,24 @@ export default class {
     });
 
     // Observe the page node as an intersection judgment target. 
-    for (let page of this.pages)
-      observer.observe(page);
+    for (let pagesNode of this.pagesNodes)
+      observer.observe(pagesNode);
+  }
+
+  /**
+   * Activate the specified page.
+
+   * @param {number} pageNumber
+   */
+  activatePage(pageNumber) {
+    // Find the target page node.
+    const targetPageNode = [...this.pagesNodes].find(pagesNode => pagesNode.dataset.pageNumber == pageNumber);
+
+    // Display the target page node in the viewer.
+    this.pageView.scrollTop = targetPageNode.offsetTop;
+
+    // Show page number.
+    this.currentPageInput.value = pageNumber;
   }
 
   /**

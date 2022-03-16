@@ -44,12 +44,18 @@ import PageNav from './components/PageNav.js';
       resizePage(pages, zoomFactor);
     });
 
-
     // Render pages.
     const pages = await renderPages(pdfDoc, zoomMenu.getZoomFactor());
 
     // Initialize the left panel.
     const leftPanel = new LeftPanel(pages);
+
+    // Thumbnail selection event.
+    leftPanel.onSelectThumbnail(pageNumber => {
+      // console.log(`Thumbnail page ${pageNumber} selected`);
+      // View the page corresponding to the selected thumbnail in the viewer.
+      pageNav.activatePage(pageNumber);
+    });
 
     // Initialize page navigation.
     const pageNav = new PageNav();  
