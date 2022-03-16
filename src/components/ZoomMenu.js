@@ -6,14 +6,14 @@ import isNumber from '../shared/isNumber.js';
  */
 export default class {
   /**
-   * Control the zoom factor change event of a PDF page.
+   * Control the zoom factor change event of a page.
    */
   constructor(standardViewport) {
     // Keep page width and height for zoom factor calculation to fit by page or width.
     this.standardViewport = standardViewport;
     // console.log(`Page width and height: ${this.standardViewport.width}/${this.standardViewport.height}`);
 
-    // Find dependent elements.
+    // Find dependent nodes.
     this.zoomOverlayToggle = document.querySelector('[data-element="zoomOverlayToggle"]');
     this.zoomMenu = document.querySelector('[data-element="zoomMenu"]');
     this.zoomSelects = document.querySelectorAll('[data-element="zoomSelect"]');
@@ -71,7 +71,7 @@ export default class {
         // Calculate zoom factor.
         const zoomFactor = this.calcZoomFactor(evnt.target.dataset.value);
 
-        // Set the zoom percentage to the text element.
+        // Set the zoom percentage to the text node.
         this.zoomInput.value = Math.floor(zoomFactor * 100);
 
         // Invoke zoom change event.
@@ -85,7 +85,7 @@ export default class {
         clearTimeout(this.resizeTimeout);
 
       this.resizeTimeout = setTimeout(() => {
-        // Recalculates the position of the zoom overlay element.
+        // Recalculates the position of the zoom overlay node.
         this.layout();
 
         // If the zoom mode is "page fit" or "width fit", resize the page.
@@ -230,7 +230,7 @@ export default class {
   }
 
   /**
-   * Recalculates the position of the zoom overlay element.
+   * Recalculates the position of the zoom overlay node.
    */
   layout() {
     const rect =  this.zoomOverlayToggle.getBoundingClientRect();

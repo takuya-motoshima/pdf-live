@@ -3,10 +3,10 @@
  */
 export default class {
   /**
-   * Controls opening and closing of the left panel and rendering of PDF page thumbnails.
+   * Controls opening and closing of the left panel and rendering of page thumbnails.
    */
   constructor(pages) {
-    // Find dependent elements.
+    // Find dependent nodes.
     this.leftPanelToggle = document.querySelector('[data-element="leftPanelToggle"]');
     this.leftPanel = document.querySelector('[data-element="leftPanel"]');
     this.pagegContainer = document.querySelector('[data-element="pagegContainer"]');
@@ -75,7 +75,7 @@ export default class {
       if (num === 1)
         thumbnailNode.classList.add('active');    
 
-      // Create a thumbnail image node.
+      // Create a canvas node.
       const canvas = document.createElement('canvas');
       canvas.classList.add('pl-thumbnail-image');
       canvas.width = Math.floor(viewport.width);
@@ -91,7 +91,7 @@ export default class {
       // Append Thumbnail Container Node.
       this.thumbnailsPanel.appendChild(thumbnailNode)
 
-      // Draw contents of a PDF file to a Canvas.
+      // Render page content on canvas.
       page.render({canvasContext: canvas.getContext('2d'), viewport});
 
       // Set the created thumbnail node as the return value.

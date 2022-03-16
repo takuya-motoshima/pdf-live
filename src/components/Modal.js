@@ -3,7 +3,7 @@
  */
 export default class {
   /**
-   * Add modal element defined in subclass to body element.
+   * Add modal node defined in subclass to body node.
    */
   constructor() {
     const appNode = document.querySelector('#app');
@@ -12,7 +12,7 @@ export default class {
   }
 
   /**
-   * Returns modal element HTML.
+   * Returns modal node HTML.
    */
   render() {}
 
