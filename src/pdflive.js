@@ -38,6 +38,13 @@ import PageNav from './components/PageNav.js';
     // Initialize zoom menu.
     const zoomMenu = new ZoomMenu(standardViewport);
 
+    // Change the zoom factor of the page when the zoom is changed.
+    zoomMenu.onChangeZoom(zoomFactor => {
+      // Resize page.
+      resizePage(pages, zoomFactor);
+    });
+
+
     // Render pages.
     const pages = await renderPages(pdfDoc, zoomMenu.getZoomFactor());
 
@@ -47,10 +54,11 @@ import PageNav from './components/PageNav.js';
     // Initialize page navigation.
     const pageNav = new PageNav();  
 
-    // Change the zoom factor of the page when the zoom is changed.
-    zoomMenu.onChangeZoom(zoomFactor => {
-      // Resize page.
-      resizePage(pages, zoomFactor);
+    // If the page you are browsing changes.
+    pageNav.onChangeBrowsingPage(pageNumber => {
+      // Activate the thumbnail page of the browsing page.
+      // console.log(`Received browsing page number ${pageNumber}`);
+      leftPanel.activateThumbnailPage(pageNumber);
     });
 
     // Hide loading.

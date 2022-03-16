@@ -38,7 +38,7 @@ export default class {
     this.maxZoom = Math.max(...this.zoomList);
 
     // Zoom change event handler.
-    this.changeZoomHandler = () => {};
+    this.changeZoomHandler = zoomFactor => {};
 
     // Toggle the opening and closing of the zoom overlay.
     this.zoomOverlayToggle.addEventListener('click', (evnt) => {

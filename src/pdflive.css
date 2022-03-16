@@ -763,6 +763,7 @@ html:not([data-tabbing=true]) .pl-button {
                 outline: none;
                 border-bottom: 1px solid var(--pl-icon-color);
                 border-radius: 0;
+                width: 1rem;
               }
 
       .pl-page-container .pl-page {

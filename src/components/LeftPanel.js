@@ -11,7 +11,8 @@ export default class {
     this.leftPanel = document.querySelector('[data-element="leftPanel"]');
     this.pagegContainer = document.querySelector('[data-element="pagegContainer"]');
     this.thumbnailsPanel = document.querySelector('[data-element="thumbnailsPanel"]');
-    this.thumbnails = [];
+    this.thumbnailNodes = [];
+    this.activeThumbnailNode = null;
 
     // Toggle the opening and closing of the left panel.
     this.leftPanelToggle.addEventListener('click', () => {
@@ -24,17 +25,23 @@ export default class {
     // Render thumbnail images.
     this.renderThumbnails(pages).then(thumbnailNodes => {
       // Keep currently active thumbnail node.
-      let activeThumbnailNode = thumbnailNodes.find(thumbnailNode => thumbnailNode.classList.contains('active'));
-      console.log('activeThumbnailNode=', activeThumbnailNode);
+      this.activeThumbnailNode = thumbnailNodes.find(thumbnailNode => thumbnailNode.classList.contains('active'));
+      // console.log('this.activeThumbnailNode=', this.activeThumbnailNode);
 
       // Add click event for thumbnail node.
       for (let thumbnailNode of thumbnailNodes) {
         thumbnailNode.addEventListener('click', evnt => {
-          activeThumbnailNode.classList.remove('active');
+          // Deactivate currently active thumbnails.
+          this.activeThumbnailNode.classList.remove('active');
+
+          // Activate the selected thumbnail.
           evnt.currentTarget.classList.add('active');
-          activeThumbnailNode = evnt.currentTarget;
+          this.activeThumbnailNode = evnt.currentTarget;
         }, {passive: true});
       }
+
+      // Keep thumbnail nodes.
+      this.thumbnailNodes = thumbnailNodes;
     });
   }
 
@@ -55,6 +62,24 @@ export default class {
   }
 
   /**
+   * Activate thumbnails.
+   *
+   * @param {number} pageNumber
+   */
+  activateThumbnailPage(pageNumber) {
+    // Deactivate currently active thumbnails.
+    if (this.activeThumbnailNode)
+      this.activeThumbnailNode.classList.remove('active');
+ 
+    // Activates the thumbnail corresponding to the specified page number.
+    const targetThumbnailNode = this.thumbnailNodes.find(thumbnailNode => thumbnailNode.dataset.pageNumber == pageNumber);
+    if (targetThumbnailNode) {
+      targetThumbnailNode.classList.add('active');
+      this.activeThumbnailNode = targetThumbnailNode;
+    }
+  }
+
+  /**
    * Render thumbnail images.
    */
   async renderThumbnails(pages) {
@@ -70,6 +95,7 @@ export default class {
       // Create a thumbnail container node.
       const thumbnailNode = document.createElement('div');
       thumbnailNode.classList.add('pl-thumbnail');
+      thumbnailNode.dataset.pageNumber = num;
 
       // Activate the thumbnail on the first page.
       if (num === 1)
