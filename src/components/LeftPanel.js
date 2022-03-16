@@ -74,8 +74,16 @@ export default class {
     // Activates the thumbnail corresponding to the specified page number.
     const targetThumbnailNode = this.thumbnailNodes.find(thumbnailNode => thumbnailNode.dataset.pageNumber == pageNumber);
     if (targetThumbnailNode) {
+      // Activate the target thumbnail.
       targetThumbnailNode.classList.add('active');
       this.activeThumbnailNode = targetThumbnailNode;
+
+      // Change the scroll position of the thumbnail viewer to a position where the active thumbnail node can be displayed.
+      const panelRect = this.thumbnailsPanel.getBoundingClientRect();
+      const thumbnailRect = this.activeThumbnailNode.getBoundingClientRect();
+      const isViewable = thumbnailRect.top >= panelRect.top && thumbnailRect.top <= panelRect.top + this.thumbnailsPanel.clientHeight;
+      if (!isViewable)
+        this.thumbnailsPanel.scrollTop = thumbnailRect.top + this.thumbnailsPanel.scrollTop - panelRect.top;
     }
   }
 
