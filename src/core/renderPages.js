@@ -1,5 +1,8 @@
 /**
   * Render pages.
+  *
+  * @param {PDFDocumentProxy} pdfDoc
+  * @param {number} zoomFactor
   */
 export default async (pdfDoc, zoomFactor = 1.0) => {
   // console.log(`Zoom factor: ${zoomFactor}`);
