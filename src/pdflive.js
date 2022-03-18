@@ -10,6 +10,8 @@ import LeftPanel from './components/LeftPanel.js';
 import ZoomMenu from './components/ZoomMenu.js';
 import PageNav from './components/PageNav.js';
 
+const url = 'sample/portrait3.pdf';
+
 (async () => {
   try {
     // Show loading.
@@ -21,8 +23,11 @@ import PageNav from './components/PageNav.js';
     // // Rendering request task.
     // let renderTask = null;
 
+    // Show PDF file name in title.
+    document.title = `${url.substring(url.lastIndexOf('/')+1)} - PDF LIVE`;
+
     // Init viewer.
-    const pdfDoc = await getDocument('sample/portrait3.pdf');
+    const pdfDoc = await getDocument(url);
 
     // Keep page width and height for zoom factor calculation to fit by page or width.
     const standardViewport = await (async () => {
