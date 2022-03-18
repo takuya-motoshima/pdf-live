@@ -69,6 +69,16 @@ export default class {
       // Display the page corresponding to the entered page number.
       this.enterPage();
     }, {passive: false});
+
+    // To the previous page.
+    this.prevPageButton.addEventListener('click', () => {
+      this.activatePage(parseInt(this.pageInput.value, 10) - 1);
+    });
+
+    // To the next page.
+    this.nextPageButton.addEventListener('click', () => {
+      this.activatePage(parseInt(this.pageInput.value, 10) + 1);
+    });
   }
 
   /**
