@@ -14,19 +14,12 @@ import PageNav from './components/PageNav.js';
     // Show loading.
     loadingModal.open();
 
-    // Find dependent nodes.
-    // const pageView = document.querySelector('[data-element="pageView"]');
-    const totalPage = document.querySelector('[data-element="totalPage"]');
-
-    // Rendering request task.
-    let renderTask = null;
+    // // Rendering request task.
+    // let renderTask = null;
 
     // Init viewer.
     const pdfDoc = await getDocument('sample/portrait3.pdf');
     // const pdfDoc = await getDocument('sample/landscape.pdf');
-
-    // Show total number of pages.
-    totalPage.textContent = pdfDoc.numPages;
 
     // Keep page width and height for zoom factor calculation to fit by page or width.
     const standardViewport = await (async () => {
@@ -36,10 +29,8 @@ import PageNav from './components/PageNav.js';
     })();
 
     // Initialize zoom menu.
-    const zoomMenu = new ZoomMenu(standardViewport);
-
-    // Change the zoom factor of the page when the zoom is changed.
-    zoomMenu.onChangeZoom(zoomFactor => {
+    const zoomMenu = (new ZoomMenu(standardViewport)).onChangeZoom(zoomFactor => {
+      // Change the zoom factor of the page when the zoom is changed.
       // Resize page.
       resizePage(pages, zoomFactor);
     });
@@ -48,19 +39,15 @@ import PageNav from './components/PageNav.js';
     const pages = await renderPages(pdfDoc, zoomMenu.getZoomFactor());
 
     // Initialize the left panel.
-    const leftPanel = new LeftPanel(pages);
-
-    // Thumbnail selection event.
-    leftPanel.onSelectThumbnail(pageNum => {
+    const leftPanel = (new LeftPanel(pages)).onSelectThumbnail(pageNum => {
+      // Thumbnail selection event.
       // View the page corresponding to the selected thumbnail in the viewer.
       pageNav.activatePage(pageNum);
     });
 
     // Initialize page navigation.
-    const pageNav = new PageNav();  
-
-    // If the page you are browsing changes.
-    pageNav.onChangeBrowsingPage(pageNum => {
+    const pageNav = (new PageNav(pdfDoc.numPages)).onChangeBrowsingPage(pageNum => {
+      // If the page you are browsing changes.
       // Activate the thumbnail page of the browsing page.
       leftPanel.activateThumbnailPage(pageNum);
     });

@@ -1,7 +1,7 @@
 /**
  * Left panel controller.
  */
-export default class {
+export default class LeftPanel {
   /**
    * Controls opening and closing of the left panel and rendering of page thumbnails.
    */
@@ -146,8 +146,10 @@ export default class {
    * Returns the page number of the selected thumbnail to the handler.
    *
    * @param {(pageNum: number): void => {}}
+   * @returns {LeftPanel} The instance on which this method was called.
    */
   onSelectThumbnail(handler) {
     this.selectThumbnailHandler = handler;
+    return this;
   }
 }

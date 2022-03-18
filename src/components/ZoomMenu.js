@@ -7,7 +7,7 @@ const ZOOM_IN = 1;
 /**
  * Page zoom control.
  */
-export default class {
+export default class ZoomMenu {
   /**
    * Control the zoom factor change event of a page.
    */
@@ -376,8 +376,10 @@ export default class {
    * Returns the zoom factor to the event handler.
    *
    * @param {(zoomFactor: number): void => {}}
+   * @returns {ZoomMenu} The instance on which this method was called.
    */
   onChangeZoom(handler) {
     this.changeZoomHandler = handler;
+    return this;
   }
 }

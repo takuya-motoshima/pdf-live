@@ -1,11 +1,13 @@
 /**
  * Control page navigation.
  */
-export default class {
+export default class PageNav {
   /**
    * Construct page navigation.
+   *
+   * @param {number} numPages
    */
-  constructor() {
+  constructor(numPages) {
     // Find dependent nodes.
     this.pageInput = document.querySelector('[data-element="pageInput"]');
     this.totalPage = document.querySelector('[data-element="totalPage"]');
@@ -15,11 +17,14 @@ export default class {
     this.pageNodes = this.pageView.querySelectorAll('[id^="page"]');
     this.pageInputForm = document.querySelector('[data-element="pageInputForm"]');
 
+    // Show total number of pages.
+    this.totalPage.textContent = numPages;
+
     // Maximum page number.
     this.minPageNum = 1;
 
     // Minimum page number.
-    this.maxPageNum = parseInt(this.totalPage.textContent, 10);
+    this.maxPageNum = numPages;
 
     // Last input page.
     this.lastPageNum = 1;
@@ -73,12 +78,12 @@ export default class {
     // To the previous page.
     this.prevPageButton.addEventListener('click', () => {
       this.activatePage(parseInt(this.pageInput.value, 10) - 1);
-    });
+    }, {passive: true});
 
     // To the next page.
     this.nextPageButton.addEventListener('click', () => {
       this.activatePage(parseInt(this.pageInput.value, 10) + 1);
-    });
+    }, {passive: true});
   }
 
   /**
@@ -115,16 +120,6 @@ export default class {
   }
 
   /**
-   * Browsing page change event.
-   * Returns the number of the page being viewed to the event handler.
-   *
-   * @param {(pageNum: number): void => {}}
-   */
-  onChangeBrowsingPage(handler) {
-    this.changeBrowsingPageHandler = handler;
-  }
-
-  /**
    * Display the page corresponding to the entered page number.
    */
   enterPage() {
@@ -145,5 +140,17 @@ export default class {
     } else
       // If the input zoom is an invalid number, set the previous value to the input zoom.
       this.pageInput.value = this.lastPageNum;
+  }
+
+  /**
+   * Browsing page change event.
+   * Returns the number of the page being viewed to the event handler.
+   *
+   * @param {(pageNum: number): void => {}}
+   * @returns {PageNav} The instance on which this method was called.
+   */
+  onChangeBrowsingPage(handler) {
+    this.changeBrowsingPageHandler = handler;
+    return this;
   }
 }
