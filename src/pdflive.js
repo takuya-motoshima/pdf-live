@@ -9,16 +9,22 @@ import LeftPanel from './components/LeftPanel.js';
 import ZoomMenu from './components/ZoomMenu.js';
 import PageNav from './components/PageNav.js';
 
+const url = 'sample/portrait3.pdf';
+
 (async () => {
   try {
     // Show loading.
     loadingModal.open();
 
+    // Find dependent nodes.
+    const printButton = document.querySelector('[data-element="printButton"]');
+    const printFrame = document.querySelector('[data-element="printFrame"]');
+
     // // Rendering request task.
     // let renderTask = null;
 
     // Init viewer.
-    const pdfDoc = await getDocument('sample/portrait3.pdf');
+    const pdfDoc = await getDocument(url);
     // const pdfDoc = await getDocument('sample/landscape.pdf');
 
     // Keep page width and height for zoom factor calculation to fit by page or width.
@@ -51,6 +57,14 @@ import PageNav from './components/PageNav.js';
       // Activate the thumbnail page of the browsing page.
       leftPanel.activateThumbnailPage(pageNum);
     });
+
+    // Print PDF.
+    printButton.addEventListener('click', () => {
+      printFrame.addEventListener('load', () => {
+        printFrame.contentWindow.print();
+      }, {passive: true, once: true});
+      printFrame.src = url;
+    }, {passive: true});
 
     // Hide loading.
     loadingModal.close();
