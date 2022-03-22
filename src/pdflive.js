@@ -2,6 +2,7 @@ import getDocument from './core/getDocument.js';
 import renderPages from './core/renderPages.js';
 import resizePage from './core/resizePage.js';
 import printPdf from './core/printPdf.js';
+import downloadPdf from './core/downloadPdf.js';
 import loadingModal from './components/loadingModal.js';
 // import errorModal from './components/errorModal.js';
 // import warningModal from './components/warningModal.js';
@@ -9,6 +10,7 @@ import loadingModal from './components/loadingModal.js';
 import LeftPanel from './components/LeftPanel.js';
 import ZoomMenu from './components/ZoomMenu.js';
 import PageNav from './components/PageNav.js';
+import getFilename from './helpers/getFilename.js';
 
 const url = 'sample/portrait3.pdf';
 
@@ -19,12 +21,13 @@ const url = 'sample/portrait3.pdf';
 
     // Find dependent nodes.
     const printButton = document.querySelector('[data-element="printButton"]');
+    const downloadButton = document.querySelector('[data-element="downloadButton"]');
 
     // // Rendering request task.
     // let renderTask = null;
 
     // Show PDF file name in title.
-    document.title = `${url.substring(url.lastIndexOf('/')+1)} - PDF LIVE`;
+    document.title = getFilename(url);
 
     // Init viewer.
     const pdfDoc = await getDocument(url);
@@ -62,7 +65,14 @@ const url = 'sample/portrait3.pdf';
 
     // Print PDF.
     printButton.addEventListener('click', async () => {
-      await printPdf(pdfDoc);
+      await printPdf(url);
+      // await printPdf(pdfDoc);
+    }, {passive: true});
+
+
+    // Download PDF.
+    downloadButton.addEventListener('click', async () => {
+      await downloadPdf(pdfDoc, getFilename(url));
     }, {passive: true});
 
     // Hide loading.
@@ -73,5 +83,6 @@ const url = 'sample/portrait3.pdf';
     // passwordModal.open();
   } catch (err) {
     alert(err);
+    throw err;
   }
 })();

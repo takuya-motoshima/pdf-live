@@ -14,13 +14,13 @@
   <div class="pl-app" id="app">
 
     <!-- begin:Header -->
-    <div class="pl-header" data-element="header">
+    <div data-element="header" class="pl-header">
       <div class="pl-header-items">
-        <button class="pl-button" data-element="leftPanelToggle" aria-label="Panel">
+        <button data-element="leftPanelToggle" class="pl-button" aria-label="Panel">
           <i class="fa-solid fa-bars fa-lg"></i>
         </button>
         <div class="pl-zoom-overlay">
-          <button class="pl-button action-button" data-element="zoomOutButton" aria-label="Zoom out" aria-keyshortcuts="Control+-">
+          <button data-element="zoomOutButton" class="pl-button action-button" aria-label="Zoom out" aria-keyshortcuts="Control+-">
             <i class="fa-solid fa-minus fa-lg"></i>
           </button>
           <div data-element="zoomToggle" class="pl-zoom-overlay-toggle">
@@ -34,14 +34,14 @@
               <i class="fa-solid fa-angle-down fa-sm"></i>
             </button>
           </div>
-          <button class="pl-button action-button" data-element="zoomInButton" aria-label="Zoom in" aria-keyshortcuts="Control+=">
+          <button data-element="zoomInButton" class="pl-button action-button" aria-label="Zoom in" aria-keyshortcuts="Control+=">
             <i class="fa-solid fa-plus fa-lg"></i>
           </button>
         </div>
-        <button class="pl-button" data-element="printButton" aria-label="Print">
+        <button data-element="printButton" class="pl-button" aria-label="Print">
           <i class="fa-solid fa-print fa-lg"></i>
         </button>
-        <button class="pl-button" data-element="downloadButton" aria-label="Download">
+        <button data-element="downloadButton" class="pl-button" aria-label="Download">
           <i class="fa-solid fa-download fa-lg"></i>
         </button>
       </div>
@@ -53,10 +53,10 @@
     <div class="pl-content">
 
       <!-- begin:Left panel -->
-      <div class="pl-left-panel" data-element="leftPanel">
-      <!-- <div class="pl-left-panel closed" data-element="leftPanel"> -->
+      <div data-element="leftPanel" class="pl-left-panel">
+      <!-- <div data-element="leftPanel" class="pl-left-panel closed"> -->
         <div class="pl-left-panel-container">
-          <div class="pl-thumbnails-panel" data-element="thumbnailsPanel"></div>
+          <div data-element="thumbnailsPanel" class="pl-thumbnails-panel"></div>
         </div>
       </div>
       <!-- end:Left panel -->
@@ -96,7 +96,7 @@
     <!-- end:Content -->
 
     <!-- begin:Zoom menu -->
-    <div class="pl-zoom-menu closed" data-element="zoomMenu" role="listbox" aria-label="Zoom Overlay" style="left: 0px; right: auto; top: auto;">
+    <div data-element="zoomMenu" class="pl-zoom-menu closed" role="listbox" aria-label="Zoom Overlay" style="left: 0px; right: auto; top: auto;">
       <button data-element="zoomSelect" data-value="pageWidth" class="pl-button pl-zoom-menu-item" aria-label="Fit to width" role="option">
         <i class="fas fa-expand-arrows-alt fa-lg"></i>Fit to width
       </button>
