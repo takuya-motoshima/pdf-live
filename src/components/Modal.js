@@ -17,16 +17,16 @@ export default class {
   render() {}
 
   /**
-   * Open modal.
+   * Show modal.
    */
-  open() {
-    this.modalNode.classList.replace('closed', 'open');
+  show() {
+    this.modalNode.classList.replace('pl-modal-hide', 'pl-modal-show');
   }
 
   /**
-   * Close modal.
+   * Hide modal.
    */
-  close() {
-    this.modalNode.classList.replace('open', 'closed');
+  hide() {
+    this.modalNode.classList.replace('pl-modal-show', 'pl-modal-hide');
   }
 }

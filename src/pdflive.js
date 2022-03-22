@@ -4,7 +4,7 @@ import resizePage from './core/resizePage.js';
 import printPdf from './core/printPdf.js';
 import downloadPdf from './core/downloadPdf.js';
 import loadingModal from './components/loadingModal.js';
-// import errorModal from './components/errorModal.js';
+import errorModal from './components/errorModal.js';
 // import warningModal from './components/warningModal.js';
 // import passwordModal from './components/passwordModal.js';
 import LeftPanel from './components/LeftPanel.js';
@@ -17,7 +17,7 @@ const url = 'sample/portrait3.pdf';
 (async () => {
   try {
     // Show loading.
-    loadingModal.open();
+    loadingModal.show();
 
     // Find dependent nodes.
     const printButton = document.querySelector('[data-element="printButton"]');
@@ -76,13 +76,11 @@ const url = 'sample/portrait3.pdf';
     }, {passive: true});
 
     // Hide loading.
-    loadingModal.close();
-
-    // warningModal.open();
-    // errorModal.open();
-    // passwordModal.open();
+    loadingModal.hide();
+    // warningModal.show();
+    // passwordModal.show();
   } catch (err) {
-    alert(err);
+    // errorModal.show(err.message);
     throw err;
   }
 })();

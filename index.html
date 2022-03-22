@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark" data-tabbing="true">
+<html lang="en" data-theme="dark" data-tabbing="false">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -54,7 +54,7 @@
 
       <!-- begin:Left panel -->
       <div data-element="leftPanel" class="pl-left-panel">
-      <!-- <div data-element="leftPanel" class="pl-left-panel closed"> -->
+      <!-- <div data-element="leftPanel" class="pl-left-panel pl-left-panel-closed"> -->
         <div class="pl-left-panel-container">
           <div data-element="thumbnailsPanel" class="pl-thumbnails-panel"></div>
         </div>
@@ -62,7 +62,7 @@
       <!-- end:Left panel -->
 
       <!-- begin:Page container -->
-      <div data-element="pagegContainer" class="pl-page-container open">
+      <div data-element="pagegContainer" class="pl-page-container pl-page-container-open">
       <!-- <div data-element="pagegContainer" class="pl-page-container"> -->
         
         <!-- begin:Page view -->
@@ -96,7 +96,7 @@
     <!-- end:Content -->
 
     <!-- begin:Zoom menu -->
-    <div data-element="zoomMenu" class="pl-zoom-menu closed" role="listbox" aria-label="Zoom Overlay" style="left: 0px; right: auto; top: auto;">
+    <div data-element="zoomMenu" class="pl-zoom-menu pl-zoom-menu-closed" role="listbox" aria-label="Zoom Overlay" style="left: 0px; right: auto; top: auto;">
       <button data-element="zoomSelect" data-value="pageWidth" class="pl-button pl-zoom-menu-item" aria-label="Fit to width" role="option">
         <i class="fas fa-expand-arrows-alt fa-lg"></i>Fit to width
       </button>
@@ -106,7 +106,7 @@
       <div class="pl-divider"></div>
       <button data-element="zoomSelect" data-value="50" class="pl-zoom-menu-item" aria-label="50%" role="option">50%</button>
       <button data-element="zoomSelect" data-value="75" class="pl-zoom-menu-item" aria-label="75%" role="option">75%</button>
-      <button data-element="zoomSelect" data-value="100" class="pl-zoom-menu-item selected" aria-label="100%" role="option"">100%</button>
+      <button data-element="zoomSelect" data-value="100" class="pl-zoom-menu-item pl-zoom-menu-item-selected" aria-label="100%" role="option"">100%</button>
       <button data-element="zoomSelect" data-value="125" class="pl-zoom-menu-item" aria-label="125%" role="option"">125%</button>
       <button data-element="zoomSelect" data-value="150" class="pl-zoom-menu-item" aria-label="150%" role="option"">150%</button>
       <button data-element="zoomSelect" data-value="200" class="pl-zoom-menu-item" aria-label="200%" role="option"">200%</button>

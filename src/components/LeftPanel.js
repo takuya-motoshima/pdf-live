@@ -19,7 +19,7 @@ export default class LeftPanel {
 
     // Toggle the opening and closing of the left panel.
     this.leftPanelToggle.addEventListener('click', () => {
-      if (this.leftPanel.classList.contains('closed'))
+      if (this.leftPanel.classList.contains('pl-left-panel-closed'))
         this.open();
       else
         this.close();
@@ -28,17 +28,17 @@ export default class LeftPanel {
     // Render thumbnail images.
     this.renderThumbnails(pages).then(thumbnailNodes => {
       // Keep currently active thumbnail node.
-      this.activeThumbnailNode = thumbnailNodes.find(thumbnailNode => thumbnailNode.classList.contains('active'));
-      // console.log('this.activeThumbnailNode=', this.activeThumbnailNode);
+      this.activeThumbnailNode = thumbnailNodes.find(
+        thumbnailNode => thumbnailNode.classList.contains('pl-thumbnail-active'));
 
       // Add click event for thumbnail node.
       for (let thumbnailNode of thumbnailNodes) {
         thumbnailNode.addEventListener('click', evnt => {
           // Deactivate currently active thumbnails.
-          this.activeThumbnailNode.classList.remove('active');
+          this.activeThumbnailNode.classList.remove('pl-thumbnail-active');
 
           // Activate the selected thumbnail.
-          evnt.currentTarget.classList.add('active');
+          evnt.currentTarget.classList.add('pl-thumbnail-active');
           this.activeThumbnailNode = evnt.currentTarget;
 
           // Invoke thumbnail selection event.
@@ -56,16 +56,16 @@ export default class LeftPanel {
    * Open the left panel.
    */
   open() {
-    this.leftPanel.classList.remove('closed')
-    this.pagegContainer.classList.add('open')
+    this.leftPanel.classList.remove('pl-left-panel-closed')
+    this.pagegContainer.classList.add('pl-page-container-open')
   }
 
   /**
    * Close left panel.
    */
   close() {
-    this.leftPanel.classList.add('closed')
-    this.pagegContainer.classList.remove('open')
+    this.leftPanel.classList.add('pl-left-panel-closed')
+    this.pagegContainer.classList.remove('pl-page-container-open')
   }
 
   /**
@@ -76,13 +76,13 @@ export default class LeftPanel {
   activateThumbnailPage(pageNum) {
     // Deactivate currently active thumbnails.
     if (this.activeThumbnailNode)
-      this.activeThumbnailNode.classList.remove('active');
+      this.activeThumbnailNode.classList.remove('pl-thumbnail-active');
  
     // Activates the thumbnail corresponding to the specified page number.
     const targetThumbnailNode = this.thumbnailNodes.find(thumbnailNode => thumbnailNode.dataset.pageNumber == pageNum);
     if (targetThumbnailNode) {
       // Activate the target thumbnail.
-      targetThumbnailNode.classList.add('active');
+      targetThumbnailNode.classList.add('pl-thumbnail-active');
       this.activeThumbnailNode = targetThumbnailNode;
 
       // Change the scroll position of the thumbnail viewer to a position where the active thumbnail node can be displayed.
@@ -114,7 +114,7 @@ export default class LeftPanel {
 
       // Activate the thumbnail on the first page.
       if (num === 1)
-        thumbnailNode.classList.add('active');    
+        thumbnailNode.classList.add('pl-thumbnail-active');    
 
       // Create a canvas node.
       const canvas = document.createElement('canvas');

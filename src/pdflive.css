@@ -358,11 +358,11 @@ html:not([data-tabbing=true]) .pl-button {
   outline: none;
 }
 
-.pl-button.active path[fill=default] {
+.pl-button.pl-button-active path[fill=default] {
   fill: var(--pl-icon-selected-color);
 }
 
-.pl-button.active i {
+.pl-button.pl-button-active i {
   color: var(--pl-icon-selected-color);
 }
 
@@ -476,8 +476,8 @@ html:not([data-tabbing=true]) .pl-button {
         background: var(--pl-tools-button-hover);
       }
 
-      .pl-header-items .pl-button:not(.disabled).active,
-      .pl-header-items .pl-button:not([disabled]).active {
+      .pl-header-items .pl-button:not(.disabled).pl-button-active,
+      .pl-header-items .pl-button:not([disabled]).pl-button-active {
         border-radius: 4px;
         background: var(--pl-tools-button-active);
       }
@@ -524,7 +524,7 @@ html:not([data-tabbing=true]) .pl-button {
         background-color: var(--pl-header-button-hover);
       }
 
-      .pl-zoom-overlay .pl-zoom-overlay-toggle.active {
+      .pl-zoom-overlay .pl-zoom-overlay-toggle.pl-zoom-overlay-toggle-active {
         background-color: var(--pl-header-button-active);
       }
 
@@ -540,7 +540,7 @@ html:not([data-tabbing=true]) .pl-button {
           text-align: right;
         }
 
-        .pl-zoom-overlay .pl-zoom-overlay-toggle .pl-button.active,
+        .pl-zoom-overlay .pl-zoom-overlay-toggle .pl-button.pl-button-active,
         .pl-zoom-overlay .pl-zoom-overlay-toggle .pl-button:hover {
           background: none !important;
         }
@@ -577,7 +577,7 @@ html:not([data-tabbing=true]) .pl-button {
       height: calc(100% - var(--pl-header-height-desktop));
     }
 
-    .pl-left-panel.closed {
+    .pl-left-panel-closed.pl-left-panel {
       transform: translateX(-100%);
     }
 
@@ -615,7 +615,7 @@ html:not([data-tabbing=true]) .pl-button {
             cursor: pointer;
           }
 
-          .pl-thumbnail.active {
+          .pl-thumbnail-active.pl-thumbnail {
             pointer-events: none;
           }
 
@@ -626,7 +626,7 @@ html:not([data-tabbing=true]) .pl-button {
                 background-color: white;
               }
 
-              .pl-thumbnail.active .pl-thumbnail-image {
+              .pl-thumbnail-active.pl-thumbnail .pl-thumbnail-image {
                 box-shadow: 0 0 0 6px var(--pl-thumbnail-border-active);
               }
 
@@ -645,11 +645,11 @@ html:not([data-tabbing=true]) .pl-button {
       transition: all .3s ease-in-out;
     }
 
-    .pl-page-container.hidden {
+    .pl-page-container-hide.pl-page-container {
       display: none;
     }
 
-    .open.pl-page-container {
+    .pl-page-container-open.pl-page-container {
       width: calc(100% - 265px);
       margin-left: 265px;
     }
@@ -775,11 +775,11 @@ html:not([data-tabbing=true]) .pl-button {
           width: 100%;
         }
 
-.open.pl-zoom-menu {
+.pl-zoom-menu-open.pl-zoom-menu {
   visibility: visible;
 }
 
-.closed.pl-zoom-menu {
+.pl-zoom-menu-closed.pl-zoom-menu {
   visibility: hidden;
 }
 
@@ -823,12 +823,12 @@ html:not([data-tabbing=true]) .pl-button {
     cursor: pointer;
   }
 
-  .pl-zoom-menu-item.selected,
+  .pl-zoom-menu-item.pl-zoom-menu-item-selected,
   .pl-zoom-menu-item:hover {
     background: var(--pl-popup-button-hover) !important;
   }
 
-  .pl-zoom-menu-item.selected {
+  .pl-zoom-menu-item.pl-zoom-menu-item-selected {
     pointer-events: none;
   }
 
@@ -863,11 +863,11 @@ html:not([data-tabbing=true]) .pl-button {
   background: var(--pl-modal-negative-space);
 }
 
-.open.pl-modal {
+.pl-modal-show.pl-modal {
   visibility: visible;
 }
 
-.closed.pl-modal {
+.pl-modal-hide.pl-modal {
   visibility: hidden;
 }
 
@@ -886,7 +886,16 @@ html:not([data-tabbing=true]) .pl-button {
       border-radius: 50%;
       width: 54px;
       height: 54px;
-      animation: spin 1.2s ease infinite;
+      animation: pl-spin 1.2s ease infinite;
+    }
+
+    @keyframes pl-spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(1turn);
+      }
     }
 
   .pl-warning-modal .pl-modal-container {
@@ -1131,12 +1140,3 @@ html:not([data-tabbing=true]) .pl-button {
         .pl-password-modal .pl-modal-footer .pl-button-modal.pl-button-confirm:hover {
           background: var(--pl-primary-button-hover);
         }
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(1turn);
-  }
-}

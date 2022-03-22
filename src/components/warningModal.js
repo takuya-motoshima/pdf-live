@@ -8,7 +8,7 @@ export default new (class extends Modal {
    * Render the content of this component.
    */
   render() {
-    return `<div class="pl-modal pl-warning-modal closed">
+    return `<div class="pl-modal pl-warning-modal pl-modal-hide">
               <div class="pl-modal-container">
                 <div class="pl-modal-header">Warning modal header</div>
                 <div class="body">Warning modal body</div>

@@ -8,7 +8,7 @@ export default new (class extends Modal {
    * Render the content of this component.
    */
   render() {
-    return `<div class="pl-modal pl-password-modal closed" data-element="passwordModal">
+    return `<div class="pl-modal pl-password-modal pl-modal-hide" data-element="passwordModal">
               <div class="pl-modal-container">
                 <div class="pl-modal-wrapper">
                   <div class="pl-modal-header">Password required</div>
