@@ -2,15 +2,60 @@
   "name": "pdf-live",
   "version": "1.0.0",
   "description": "'PDF LIVE' is a PDF viewer that extends the open source 'mozilla/pdf.js'. \r You can start the PDF viewer with toolbar right away with 'PDF LIVE'.",
-  "main": "script.js",
+  "main": "dist/pdf-live.common.js",
+  "module": "dist/pdf-live.esm.js",
+  "browser": "dist/pdf-live.js",
+  "types": "types/index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "watch": "rollup -c --watch",
+    "prewatch": "rm -rf dist types",
+    "build": "rollup -c",
+    "prebuild": "rm -rf dist types",
+    "test": "jest",
+    "start": "ts-node -r tsconfig-paths/register -P tsconfig.json -O '{\"module\":\"commonjs\"}' -e \"import * as index from '~/index';console.log(index);\""
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/takuya-motoshima/pdf-live.git"
+  },
+  "files": [
+    "LICENSE",
+    "README.md",
+    "CHANGELOG.md",
+    "dist/",
+    "types/",
+    "docs/",
+    "package.json"
+  ],
   "keywords": [],
   "author": "Takuya Motoshima <developer.takuyamotoshima@gmail.com> (https://twitter.com/TakuyaMotoshima)",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/takuya-motoshima/pdf-live/issues",
+    "email": "developer.takuyamotoshima@gmail.com"
+  },
+  "homepage": "https://github.com/takuya-motoshima/pdf-live#readme",
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^6.0.0",
+    "@fortawesome/fontawesome-free": "^6.1.0",
     "pdfjs-dist": "^2.13.216"
+  },
+  "devDependencies": {
+    "@rollup/plugin-alias": "^3.1.9",
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-replace": "^4.0.0",
+    "@types/jest": "^27.4.1",
+    "fetch-mock": "^9.11.0",
+    "jest": "^27.5.1",
+    "rollup": "^2.70.1",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-copy": "^3.4.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-postcss": "^4.0.2",
+    "rollup-plugin-terser": "^7.0.2",
+    "rollup-plugin-typescript2": "^0.31.2",
+    "ts-jest": "^27.1.3",
+    "ts-node": "^10.7.0",
+    "tsconfig-paths": "^3.14.0",
+    "typescript": "^4.6.2"
   }
 }
