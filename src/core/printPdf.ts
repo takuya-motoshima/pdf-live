@@ -5,7 +5,7 @@
  *
  * @param {string} url
  */
-export default async (url: string) => {
+export default async (url: string): Promise<void> => {
   // Iframe for embedding print data.
   const printFrame = document.querySelector('[data-element="printFrame"]') as HTMLIFrameElement;
 

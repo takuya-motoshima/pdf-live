@@ -10,10 +10,9 @@ import pt_br from '~/i18n/pt_br.json';
 import ru from '~/i18n/ru.json';
 import zh_cn from '~/i18n/zh_cn.json';
 import zh_tw from '~/i18n/zh_tw.json';
+import Language from '~/interfaces/Language';
 
-export default (lang: string = 'en'): {[key: string]: any} => {
-  const language = {de, en, es, fr, it, ja, ko, nl, pt_br, ru, zh_cn, zh_tw};
-  if (!(lang in language))
-    lang = 'en';
-  return language[lang];
+export default (lang: string = 'en'): Language => {
+  const languages: {[key: string]: Language} = {de, en, es, fr, it, ja, ko, nl, pt_br, ru, zh_cn, zh_tw};
+  return languages[lang in languages ? lang : 'en'];
 }

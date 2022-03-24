@@ -13,8 +13,7 @@ import PageNav from './components/PageNav.js';
 import getFilename from './helpers/getFilename.js';
 import i18n from './i18n/index.js';
 
-const url = 'sample/portrait.pdf';
-// const url = 'nofound.pdf';
+const url = 'sample.pdf';
 const context = document.querySelector('[data-element="app"]');
 const errorModal = new ErrorModal(context);
 const loadingModal = new LoadingModal(context);

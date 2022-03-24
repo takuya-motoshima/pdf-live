@@ -36,7 +36,7 @@
   },
   "homepage": "https://github.com/takuya-motoshima/pdf-live#readme",
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^6.1.0",
+    "handlebars-extd": "^1.0.2",
     "pdfjs-dist": "^2.13.216"
   },
   "devDependencies": {

@@ -11,17 +11,7 @@ import ru from './ru.js';
 import zh_cn from './zh_cn.js';
 import zh_tw from './zh_tw.js';
 
-export default {
-  de,
-  en,
-  es,
-  fr,
-  it,
-  ja,
-  ko,
-  nl,
-  pt_br,
-  ru,
-  zh_cn,
-  zh_tw
+export default (lang = 'en') => {
+  const languages = {de, en, es, fr, it, ja, ko, nl, pt_br, ru, zh_cn, zh_tw};
+  return languages[lang in languages ? lang : 'en'];
 }

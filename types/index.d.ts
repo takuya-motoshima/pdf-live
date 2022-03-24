@@ -7,6 +7,8 @@ declare class PdfLive extends HTMLElement {
     private loadingModal;
     /** @type {ErrorModal} */
     private errorModal;
+    /** @type {Language} */
+    private language;
     /**
      * constructor
      */
