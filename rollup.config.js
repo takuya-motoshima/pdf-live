@@ -10,6 +10,11 @@ import json from '@rollup/plugin-json';
 // import alias from '@rollup/plugin-alias';
 // import replace from '@rollup/plugin-replace';
 
+// Determine whether it is a production environment
+const isPro = () => {
+  return process.env.NODE_ENV === 'production';
+}
+
 export default {
   // external: Object.keys(pkg['dependencies'] || []),
   input: './src/index.ts',
@@ -25,7 +30,7 @@ export default {
       tsconfigOverride: {compilerOptions: {}},
       useTsconfigDeclarationDir: true
     }),
-    terser(),
+    isPro() && terser(),
     json(),
     commonjs(),
     resolve({
