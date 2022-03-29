@@ -11,7 +11,7 @@ import LeftPanel from './components/LeftPanel.js';
 import ZoomNav from './components/ZoomNav.js';
 import PageNav from './components/PageNav.js';
 import getFilename from './helpers/getFilename.js';
-import i18n from './i18n/index.js';
+// import i18n from './i18n/index.js';
 
 const url = 'sample.pdf';
 const context = document.querySelector('[data-element="app"]');

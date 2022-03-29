@@ -118,10 +118,10 @@ class PdfLive extends HTMLElement {
       this.querySelector('[data-element="pagegContainer"]')!.classList.remove('pl-page-container-hide');
     } catch (err) {
       let message = 'Unknown Error';
-      if (err instanceof Error)
-        message = err.message;
-      else if (err instanceof BadDocumentError)
+      if (err instanceof BadDocumentError)
         message = this.language.message.badDocument;
+      else if (err instanceof Error)
+        message = err.message;
       else
         message = String(err);
       this.errorModal.show(message);

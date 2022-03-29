@@ -1,11 +1,16 @@
 /**
   * Resize page.
+  *
+  * @param {any[]}  pages
+  * @param {number} zoomFactor
   */
-export default (pages, zoomFactor = 1.0) => {
-  console.log(`Resize to ${zoomFactor} times`);
-  for (let num=1; num<=pages.length; num++) {
+export default async (pages, zoomFactor = 1.0) => {
+  // console.log(`Resize to ${zoomFactor} times`);
+  // if (!renderTasks)
+  //   renderTasks = new Array(pages.length);
+  for (let i=0; i<pages.length; i++) {
     // Fetch page.
-    const page = pages[num - 1];
+    const page = pages[i];
 
     // Calculate the display area of the page.
     const viewport = page.getViewport({scale: 1.5 * zoomFactor});
@@ -14,15 +19,19 @@ export default (pages, zoomFactor = 1.0) => {
     const devicePixelRatio = window.devicePixelRatio || 1;
 
     // Find the page node.
-    const pageNode = document.querySelector(`#page${num}`);
+    const pageNode = document.querySelector(`#page${i+1}`);
     pageNode.style.width = `${Math.floor(viewport.width)}px`;
     pageNode.style.height = `${Math.floor(viewport.height)}px`;
     pageNode.style.margin = `${zoomFactor * 4}px`;
 
-    // Find the canvas node.
-    const canvas = pageNode.querySelector('canvas');
+    // Create a canvas node. When performing a continuous resizing operation, multiple renderings are performed on the same canvas, which is not possible, so create a new canvas node without reusing it.
+    pageNode.querySelector('canvas')?.remove();
+    const canvas = document.createElement('canvas');
+
+    // Append a canvas node to a page node.
     canvas.width = Math.floor(viewport.width * devicePixelRatio);
     canvas.height = Math.floor(viewport.height * devicePixelRatio);
+    pageNode.appendChild(canvas);
     
     // Render page content on canvas.
     page.render({
