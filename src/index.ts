@@ -4,6 +4,7 @@ import renderPages from '~/core/renderPages';
 import resizePage from '~/core/resizePage';
 import printPdf from '~/core/printPdf';
 import downloadPdf from '~/core/downloadPdf';
+import loadPdfJs from '~/core/loadPdfJs';
 import LoadingModal from '~/components/LoadingModal';
 import ErrorModal from '~/components/ErrorModal';
 // import warningModal from '~/components/warningModal';
@@ -57,6 +58,9 @@ class PdfLive extends HTMLElement {
    */
   protected async connectedCallback(): Promise<void> {
     try {
+      // Load pdf-dist JS.
+      await loadPdfJs();
+
       // Set the pdf live application CSS class to the root node.
       this.classList.add('pl-app');
 
