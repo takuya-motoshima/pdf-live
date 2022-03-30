@@ -12,7 +12,7 @@
     "noImplicitAny": true,
     "baseUrl": "./",
     "paths": {
-      "~/*": ["src/*"],
+      "~/*": ["src/*"]
     },
     "esModuleInterop": true
   },

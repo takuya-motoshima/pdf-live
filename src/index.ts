@@ -31,6 +31,12 @@ class PdfLive extends HTMLElement {
   /** @type {Language} */
   private language: Language;
 
+  /** @type {boolean} */
+  private loaded: boolean = false;
+
+  /** @type {boolean} */
+  private calledLoadHandler : boolean = false;
+
   /**
    * constructor
    */
@@ -101,6 +107,9 @@ class PdfLive extends HTMLElement {
         // If the page you are browsing changes.
         // Activate the thumbnail page of the browsing page.
         leftPanel.activatePage(pageNum);
+
+        // Invoke pagechange event.
+        this.invoke('pageChange', {pageNum});
       });
 
       // Print PDF.
@@ -116,6 +125,14 @@ class PdfLive extends HTMLElement {
 
       // Show page container after successful loading of PDF.
       this.querySelector('[data-element="pagegContainer"]')!.classList.remove('pl-page-container-hide');
+
+      // Check if the event has already been executed so that the documentLoaded event is not executed twice.
+      if (!this.calledLoadHandler)
+        // Invoke PDF document loaded event.
+        this.invoke('documentLoaded');
+
+      // Turn on the document loaded flag.
+      this.loaded = true;
     } catch (err) {
       let message = 'Unknown Error';
       if (err instanceof BadDocumentError)
@@ -157,13 +174,20 @@ class PdfLive extends HTMLElement {
   /**
    * Add event listener
    * 
-   * @param  {string}         type
-   * @param  {() => void}     listener
-   * @param  {{once: boolen}} options.once
+   * @param  {'pageChange'|'documentLoaded'}  type
+   * @param  {() => void}                     listener
+   * @param  {{once: boolen}}                 options.once
    * @return {PdfLive}
    */
-   public on(type: string, listener: (evnt?: Event) => void, options: {once: boolean } = {once: false}): PdfLive {
+   public on(type: 'pageChange'|'documentLoaded', listener: (evnt?: Event) => void, options: {once: boolean } = {once: false}): PdfLive {
+    // Set event handler.
     this.addEventListener(type, listener, options);
+
+    // If the document is already loaded and the loaded event is set, immediately invoke the loaded event..
+    if (type === 'documentLoaded' || this.loaded) {
+      this.invoke('documentLoaded');
+      this.calledLoadHandler = true;
+    }
     return this;
   }
 

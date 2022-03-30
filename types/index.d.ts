@@ -9,6 +9,10 @@ declare class PdfLive extends HTMLElement {
     private errorModal;
     /** @type {Language} */
     private language;
+    /** @type {boolean} */
+    private loaded;
+    /** @type {boolean} */
+    private calledLoadHandler;
     /**
      * constructor
      */
@@ -34,12 +38,12 @@ declare class PdfLive extends HTMLElement {
     /**
      * Add event listener
      *
-     * @param  {string}         type
-     * @param  {() => void}     listener
-     * @param  {{once: boolen}} options.once
+     * @param  {'pageChange'|'documentLoaded'}  type
+     * @param  {() => void}                     listener
+     * @param  {{once: boolen}}                 options.once
      * @return {PdfLive}
      */
-    on(type: string, listener: (evnt?: Event) => void, options?: {
+    on(type: 'pageChange' | 'documentLoaded', listener: (evnt?: Event) => void, options?: {
         once: boolean;
     }): PdfLive;
     /**

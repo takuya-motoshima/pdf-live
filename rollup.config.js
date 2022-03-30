@@ -7,8 +7,7 @@ import pkg from './package.json';
 import copy from 'rollup-plugin-copy'
 import path from 'path';
 import json from '@rollup/plugin-json';
-// import alias from '@rollup/plugin-alias';
-// import replace from '@rollup/plugin-replace';
+import alias from '@rollup/plugin-alias';
 
 // Determine whether it is a production environment
 const isPro = () => {
@@ -19,11 +18,6 @@ export default {
   // external: Object.keys(pkg['dependencies'] || []),
   input: './src/index.ts',
   plugins: [
-    // alias({
-    //   entries: {
-    //     pdfjsLib: 'pdfjs-dist/build/pdf.min.js'
-    //   }
-    // }),
     typescript({
       tsconfigDefaults: {compilerOptions: {}},
       tsconfig: 'tsconfig.json',

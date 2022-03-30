@@ -14,7 +14,7 @@ export default async (url: string, workerSrc: string): Promise<any> => {
 
     // Loading a document.
     const pdfDoc = await window.pdfjsLib.getDocument(url).promise;
-    console.log(`Loaded ${url}. Total number of pages is ${pdfDoc.numPages}`);
+    // console.log(`Loaded ${url}. Total number of pages is ${pdfDoc.numPages}`);
     return pdfDoc;
   } catch (err) {
     throw new BadDocumentError(err instanceof Error ? err.message : String(err));

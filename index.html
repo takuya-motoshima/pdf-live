@@ -12,6 +12,21 @@
   <script src="dist/pdf.min.js"></script>
   <script type="module">
     import './dist/pdf-live.esm.js';
+
+    // Find the PDFLive node.
+    const pdflive = document.querySelector('#pdflive');
+
+    // Set event handler for PDF Live.
+    pdflive
+      .on('documentLoaded', () => {
+        // PDF document load event.
+        console.log('Loaded PDF document');
+      })
+      .on('pageChange', evnt => {
+        // Page change event.
+        const pageNum = evnt.detail.pageNum;
+        console.log(`Opened page ${pageNum}`);
+      });
   </script>
 </body>
 </html>
