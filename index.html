@@ -8,12 +8,12 @@
   <link rel="stylesheet" href="dist/pdf-live.css">
 </head>
 <body>
-  <pdf-live id="pdflive" src="sample/portrait3.pdf" worker="dist/pdf.worker.js" lang="ja"></pdf-live>
+  <pdf-live src="sample/portrait3.pdf" lang="ja" worker="dist/pdf.worker.js"></pdf-live>
   <script type="module">
     import './dist/pdf-live.esm.js';
 
     // Find the PDFLive node.
-    const pdflive = document.querySelector('#pdflive');
+    const pdflive = document.querySelector('pdf-live');
 
     // Set event handler for PDF Live.
     pdflive

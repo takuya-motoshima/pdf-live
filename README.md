@@ -15,19 +15,22 @@ npm install pdf-live
 ## Quick Start
 
 ### ES6 syntax
-```js
-import pdfLive from 'pdf-live'; 
+HTML:
+```html
+<pdf-live src="sample.pdf" lang="ja" worker="node_modules/pdf-live/dist/pdf.worker.js"></pdf-live>
+```
 
-// Loading a document.
-await pdfLive.loadDocument('helloworld.pdf');
+JS:
+```js
+import './node_modules/pdf-live/dist/pdf-live.esm.js';
 ```
 
 ### ES5 syntax
 ```html
-<script src="node_modules/pdf-live/dist/build.js"></script>
+<pdf-live src="sample.pdf" lang="ja" worker="node_modules/pdf-live/dist/pdf.worker.js"></pdf-live>
+
+<script src="node_modules/pdf-live/dist/pdf-live.js"></script>
 <script>
-  // Loading a document.
-  await pdfLive.loadDocument('helloworld.pdf');
 </script>
 ```
 
@@ -40,15 +43,3 @@ await pdfLive.loadDocument('helloworld.pdf');
 
 ## License
 [MIT](LICENSE)
-
-## Note
-express
-  50%   382/495   306/396
-  100%  573/742   612/792
-  200%  1530/1980 1224/1584
-  400%  1382/423  1106/339
-pdf.js
-  50%   510/660   408/528
-  100%  1020/1320 816/1056
-  200%  2040/2640 1632/2112
-  400%  3608/4664 3269/4228
