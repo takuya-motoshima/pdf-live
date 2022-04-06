@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Reference | pdf-live</title>
   <link rel="shortcut icon" type="image/svg+xml" href="favicon.svg">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/github.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
@@ -48,10 +48,18 @@
     <nav class="sidenav align-items-start navbar navbar-light py-0" id="sidenav">
       <nav class="nav nav-pills flex-column flex-nowrap mb-0 py-3 pt-md-1">
         <a class="nav-link" href="#install">Install</a>
-        <a class="nav-link" href="#es6-usage">ES6 Usage</a>
+        <a class="nav-link" href="#quick-start">Quick Start</a>
         <nav class="nav nav-pills flex-column flex-nowrap fw-normal small">
-          <a class="nav-link" href="#es6-usage-css">CSS</a>
-          <a class="nav-link" href="#es6-usage-html">HTML</a>
+          <!-- <a class="nav-link" href="#quick-start-dependencies">Dependencies</a> -->
+          <a class="nav-link" href="#quick-start-css">CSS</a>
+          <a class="nav-link" href="#quick-start-html">HTML</a>
+          <a class="nav-link" href="#quick-start-js">JS</a>
+        </nav>
+        <a class="nav-link" href="#usage">Usage</a>
+        <a class="nav-link" href="#api">PDFLiveElement API</a>
+        <nav class="nav nav-pills flex-column flex-nowrap fw-normal small">
+          <a class="nav-link" href="#api-properties">Properties</a>
+          <a class="nav-link" href="#api-methods">Methods</a>
         </nav>
       </nav>
     </nav>
@@ -77,13 +85,17 @@
             </div>
             <hr class="mx-auto mx-lg-0 my-5">
             <p class="text-muted">
-              Currently <a href="https://github.com/takuya-motoshima/pdf-live/releases/tag/v1.0.0">v1.0.0</a>
+              Currently <a href="https://github.com/takuya-motoshima/pdf-live/releases/tag/v1.0.0" target="_blank">v1.0.0</a>
               <span class="px-1">•</span>
               <a href="#install">Install</a>
               <span class="px-1">•</span>
-              <a href="#quickStart">ES6 Usage</a>
+              <a href="#quick-start">Quick Start</a>
               <span class="px-1">•</span>
-              <a href="https://github.com/takuya-motoshima/pdf-live">GitHub repo</a>
+              <a href="#usage">Usage</a>
+              <span class="px-1">•</span>
+              <a href="#api">PDFLiveElement API</a>
+              <span class="px-1">•</span>
+              <a href="https://github.com/takuya-motoshima/pdf-live" target="_blank">GitHub repo</a>
             </p>
           </div>
         </div>
@@ -97,22 +109,182 @@
       <button type="button" class="btn-clipboard" title="Copy to clipboard"><i class="far fa-clone"></i></button>
       <pre><code class="bash">npm i pdf-live</code></pre>
     </div>
-    <!--end:: Install -->
+    <!-- end:: Install -->
 
-    <!-- begin::ES6 Usage -->
-    <h1 id="es6-usage">ES6 Usage</h1>
+    <!-- begin::Quick Start -->
+    <h1 id="quick-start">Quick Start</h1>
 
-    <h2 id="es6-usage-css">CSS</h2>
-    <p>Copy-paste the stylesheet <link> into your <head> to load our CSS.</p>
+    <!-- <h2 id="quick-start-dependencies">Dependencies</h2> -->
+
+    <h2 id="quick-start-css">CSS</h2>
+    <p>Copy-paste the stylesheet &lt;link&gt; into your &lt;head&gt; to load our CSS.</p>
     <div class="highlight">
       <button type="button" class="btn-clipboard" title="Copy to clipboard"><i class="far fa-clone"></i></button>
-      <pre><code class="css">&lt;link rel=&quot;stylesheet&quot; href=&quot;node_modules/pdf-live/dist/pdf-live.css&quot;&gt;</code></pre>
+      <pre><code class="html">&lt;link rel=&quot;stylesheet&quot; href=&quot;node_modules/pdf-live/dist/pdf-live.css&quot;&gt;</code></pre>
     </div>
 
-    <h2 id="es6-usage-css">HTML</h2>
-    <p></p>
+    <h2 id="quick-start-html">HTML</h2>
+    <p>Copy-paste the icon &lt;link&gt; into your &lt;head&gt; to load our Favicon.<br>This step is not required. If you do not wish to set a favicon, skip this step.</p>
+    <div class="highlight">
+      <button type="button" class="btn-clipboard" title="Copy to clipboard"><i class="far fa-clone"></i></button>
+      <pre><code class="html">&lt;link rel=&quot;icon&quot; type=&quot;image/svg+xml&quot; href=&quot;node_modules/pdf-live/dist/favicon.svg&quot;&gt;</code></pre>
+    </div>
 
-    <!--end:: ES6 Usage -->
+    <p>Copy-paste the &lt;pdf-live&gt; into your &lt;body&gt; to load our PDF live.</p>
+    <div class="highlight">
+      <button type="button" class="btn-clipboard" title="Copy to clipboard"><i class="far fa-clone"></i></button>
+      <pre><code class="html">&lt;pdf-live src=&quot;sample.pdf&quot; lang=&quot;en&quot; worker=&quot;node_modules/pdf-live/dist/pdf.worker.min.js&quot;&gt;&lt;/pdf-live&gt;</code></pre>
+    </div>
+
+    <h2 id="quick-start-js">JS</h2>
+    <h5>For ES6</h5>
+    <p>To use PDF Live in ES6, simply import the PDF Live ESM module.</p>
+    <div class="highlight">
+      <button type="button" class="btn-clipboard" title="Copy to clipboard"><i class="far fa-clone"></i></button>
+      <pre><code class="html">&lt;script type=&quot;module&quot;&gt;
+  import &#039;./node_modules/pdf-live/dist/pdf-live.esm.js&#039;;
+&lt;/script&gt;</code></pre>
+    </div>
+    
+    <h5>For ES5</h5>
+    <p>To use PDF Live in ES5, please load the UMD module of PDF Live with &lt;script&gt; tag</p>
+    <div class="highlight">
+      <button type="button" class="btn-clipboard" title="Copy to clipboard"><i class="far fa-clone"></i></button>
+      <pre><code class="html">&lt;script src=&quot;node_modules/pdf-live/dist/pdf-live.js&quot;&gt;&lt;/script&gt;</code></pre>
+    </div>
+    <!-- end:: Quick Start -->
+
+    <!-- begin:: Usage -->
+    <h1 id="usage">Usage</h1>
+    <p>The following example references a PDF live element from within the JS code and sets the event.</p>
+    <div class="highlight">
+      <button type="button" class="btn-clipboard" title="Copy to clipboard"><i class="far fa-clone"></i></button>
+      <pre><code class="js">// Find the PDFLive node.
+const pdflive = document.querySelector(&#039;pdf-live&#039;);
+
+// Set event handler for PDF Live.
+pdflive
+  .on(&#039;documentLoaded&#039;, () =&gt; {
+    // PDF document load event.
+    console.log(&#039;Loaded PDF document&#039;);
+  })
+  .on(&#039;pageChange&#039;, evnt =&gt; {
+    // Page change event.
+    const pageNum = evnt.detail.pageNum;
+    console.log(`Opened page ${pageNum}`);
+  });</code></pre>
+    </div>
+    <!-- end:: Usage -->
+
+    <!-- begin:: API -->
+    <h1 id="api">PDFLiveElement API</h1>
+    <p>The PDFLiveElement interface provides special properties and methods for manipulating PDF objects. It also inherits properties and methods of HTMLElement.</p>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="650" height="27" viewBox="0 0 650 27" class="mb-3">
+      <rect x="0" y="0" width="88" height="25" fill="#fff" stroke="#D4DDE4" stroke-width="2px"></rect>
+      <text x="44" y="16" font-size="10px" fill="#4D4E53" text-anchor="middle">EventTarget</text>
+      <line x1="88" y1="14" x2="118" y2="14" stroke="#D4DDE4"></line>
+      <polyline points="88,14 98,9 98,19 88,14" stroke="#D4DDE4" fill="#fff"></polyline>
+      <rect x="118" y="0" width="75" height="25" fill="#fff" stroke="#D4DDE4" stroke-width="2px"></rect>
+      <text x="155.5" y="16" font-size="10px" fill="#4D4E53" text-anchor="middle">Node</text>
+      <line x1="193" y1="14" x2="223" y2="14" stroke="#D4DDE4"></line>
+      <polyline points="193,14 203,9 203,19 193,14" stroke="#D4DDE4" fill="#fff"></polyline>
+      <rect x="223" y="0" width="75" height="25" fill="#fff" stroke="#D4DDE4" stroke-width="2px"></rect>
+      <text x="260.5" y="16" font-size="10px" fill="#4D4E53" text-anchor="middle">Element</text>
+      <line x1="298" y1="14" x2="328" y2="14" stroke="#D4DDE4"></line>
+      <polyline points="298,14 308,9 308,19 298,14" stroke="#D4DDE4" fill="#fff"></polyline>
+      <rect x="328" y="0" width="88" height="25" fill="#fff" stroke="#D4DDE4" stroke-width="2px"></rect>
+      <text x="372" y="16" font-size="10px" fill="#4D4E53" text-anchor="middle">HTMLElement</text>
+      <line x1="416" y1="14" x2="446" y2="14" stroke="#D4DDE4"></line>
+      <polyline points="416,14 426,9 426,19 416,14" stroke="#D4DDE4" fill="#fff"></polyline>
+      <rect x="446" y="0" width="128" height="25" fill="#fff" stroke="#D4DDE4" stroke-width="2px"></rect>
+      <text x="510" y="16" font-size="10px" fill="#4D4E53" text-anchor="middle">PDFLiveElement</text>
+    </svg>
+
+    <h2 id="api-properties">Properties</h2>
+    <p>This interface also inherits properties from its ancestors HTMLElement, Element, Node, and EventTarget.</p>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        <div class="fw-bold"><code>src</code><span class="badge border bg-light text-dark rounded-pill ms-2">required</span></div>
+        <div class="ms-3">
+          URL of the PDF document.
+        </div>
+      </li>
+      <li class="list-group-item">
+        <div class="fw-bold"><code>lang</code></div>
+        <div class="ms-3">
+          Languages used within PDF Live.<br>
+          You can use any of de, en, es, fr, it, ja, ko, nl, pt_br, ru, zh_cn, zh_tw.<br>
+          If omitted, en is used (default).
+        </div>
+      </li>
+      <li class="list-group-item">
+        <div class="fw-bold"><code>worker</code><span class="badge border bg-light text-dark rounded-pill ms-2">required</span></div>
+        <div class="ms-3">
+          The path of the web walker to handle time-consuming tasks such as parsing and rendering PDF documents.<br>
+          Set the path to "node_modules/pdf-live/dist/pdf.worker.min.js" installed by npm.
+        </div>
+      </li>
+    </ul>
+
+    <h2 id="api-methods">Methods</h2>
+    <p>This interface also inherits methods from its ancestors HTMLElement, Element, Node, and EventTarget.</p>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        <div class="fw-bold"><code>on()</code></div>
+        <div class="ms-3">
+          Alias of EventTarget.addEventListener.<br>
+          <h6>Syntax</h6>
+          <div class="highlight">
+            <pre><code class="js">on(type, listener);
+on(type, listener, options);</code></pre>
+          </div>
+          <h6 class="mb-0">Parameters</h6>
+          <ul class="list-group">
+            <li class="list-group-item pt-0 border-0">
+              <div class="fw-bold"><code>type</code></div>
+              <div class="ms-3">A case-sensitive string representing the event type to listen for.</div>
+            </li>
+            <li class="list-group-item border-0">
+              <div class="fw-bold"><code>listener</code></div>
+              <div class="ms-3">The function that receives a notification when an event of the specified type occurs. </div>
+            </li>
+          </ul>
+          <h6 class="mb-0">Return value</h6>
+          PDFLiveElement.
+        </div>
+      </li>
+      <li class="list-group-item">
+        <div class="fw-bold"><code>off()</code></div>
+        <div class="ms-3">
+          Alias of EventTarget.removeEventListener.<br>
+          <h6>Syntax</h6>
+          <div class="highlight">
+            <pre><code class="js">off(type, listener);</code></pre>
+          </div>
+          <h6 class="mb-0">Parameters</h6>
+          <ul class="list-group">
+            <li class="list-group-item pt-0 border-0">
+              <div class="fw-bold"><code>type</code></div>
+              <div class="ms-3">A string which specifies the type of event for which to remove an event listener.</div>
+            </li>
+            <li class="list-group-item border-0">
+              <div class="fw-bold"><code>listener</code></div>
+              <div class="ms-3">The EventListener function of the event handler to remove from the event target.</div>
+            </li>
+          </ul>
+          <h6 class="mb-0">Return value</h6>
+          PDFLiveElement.
+        </div>
+      </li>
+      <li class="list-group-item">
+        <div class="fw-bold"><code>getCurrentPageNumber()</code></div>
+        <div class="ms-3">
+        </div>
+      </li>
+    </ul>
+
+    <!-- end:: API -->
   </main>
 </div>
 

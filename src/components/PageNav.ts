@@ -179,4 +179,13 @@ export default class PageNav {
     this.changeHandler = handler;
     return this;
   }
+
+  /**
+   * Returns the current page number.
+   *
+   * @return {number}
+   */
+  public getCurrentPageNumber(): number {
+    return parseInt(this.pageInput.value, 10);
+  }
 }

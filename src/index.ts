@@ -22,9 +22,9 @@ import hbs from 'handlebars-extd';
 import BadDocumentError from '~/exceptions/BadDocumentError';
 
 /**
- * PDF LIVE component class.
+ * PDFLiveElement.
  */
-class PdfLive extends HTMLElement {
+class PDFLiveElement extends HTMLElement {
   /** @type {LoadingModal} */
   private loadingModal: LoadingModal = new LoadingModal(this);
 
@@ -39,6 +39,9 @@ class PdfLive extends HTMLElement {
 
   /** @type {boolean} */
   private calledLoadHandler : boolean = false;
+
+  /** @type {boolean} */
+  private pageNav: PageNav|undefined;
 
   /**
    * constructor
@@ -105,11 +108,11 @@ class PdfLive extends HTMLElement {
       const leftPanel = (new LeftPanel(this, pages)).onSelect((pageNum: number) => {
         // Thumbnail selection event.
         // View the page corresponding to the selected thumbnail in the viewer.
-        pageNav.activatePage(pageNum);
+        this.pageNav?.activatePage(pageNum);
       });
 
       // Initialize page navigation.
-      const pageNav = (new PageNav(this, pdfDoc.numPages)).onChange((pageNum: number) => {
+      this.pageNav = (new PageNav(this, pdfDoc.numPages)).onChange((pageNum: number) => {
         // If the page you are browsing changes.
         // Activate the thumbnail page of the browsing page.
         leftPanel.activatePage(pageNum);
@@ -186,9 +189,9 @@ class PdfLive extends HTMLElement {
   /**
    * Define elements
    *
-   * @return {PdfLive}
+   * @return {PDFLiveElement}
    */
-  public static define(): typeof PdfLive {
+  public static define(): typeof PDFLiveElement {
     if (window.customElements.get('pdf-live'))
       return this;
     window.customElements.define('pdf-live', this);
@@ -198,11 +201,11 @@ class PdfLive extends HTMLElement {
   /**
    * Generate elements
    *
-   * @return {PdfLive}
+   * @return {PDFLiveElement}
    */
-  public static createElement(): PdfLive {
-    const PdfLive = this.define();
-    return new PdfLive();
+  public static createElement(): PDFLiveElement {
+    const PDFLiveElement = this.define();
+    return new PDFLiveElement();
   }
 
   /**
@@ -211,9 +214,9 @@ class PdfLive extends HTMLElement {
    * @param  {'pageChange'|'documentLoaded'}  type
    * @param  {() => void}                     listener
    * @param  {{once: boolen}}                 options.once
-   * @return {PdfLive}
+   * @return {PDFLiveElement}
    */
-   public on(type: 'pageChange'|'documentLoaded', listener: (evnt?: Event) => void, options: {once: boolean } = {once: false}): PdfLive {
+   public on(type: 'pageChange'|'documentLoaded', listener: (evnt?: Event) => void, options: {once: boolean } = {once: false}): PDFLiveElement {
     // Set event handler.
     this.addEventListener(type, listener, options);
 
@@ -230,11 +233,20 @@ class PdfLive extends HTMLElement {
    * 
    * @param  {string}     type
    * @param  {() => void} listener
-   * @return {PdfLive}
+   * @return {PDFLiveElement}
    */
-   public off(type: string, listener: (evnt?: Event) => void): PdfLive {
+   public off(type: string, listener: (evnt?: Event) => void): PDFLiveElement {
     this.removeEventListener(type, listener);
     return this;
+  }
+
+  /**
+   * Returns the current page number.
+   *
+   * @return {number}
+   */
+  public getCurrentPageNumber(): number {
+    return this.pageNav!.getCurrentPageNumber();
   }
 
   /**
@@ -400,5 +412,5 @@ class PdfLive extends HTMLElement {
   }
 }
 
-PdfLive.define();
-export default PdfLive;
+PDFLiveElement.define();
+export default PDFLiveElement;

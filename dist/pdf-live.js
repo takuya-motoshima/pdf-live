@@ -1004,6 +1004,14 @@
           this.changeHandler = handler;
           return this;
       }
+      /**
+       * Returns the current page number.
+       *
+       * @return {number}
+       */
+      getCurrentPageNumber() {
+          return parseInt(this.pageInput.value, 10);
+      }
   }
 
   /**
@@ -1564,9 +1572,9 @@
   d=m,function(){var t={not_string:/[^s]/,not_bool:/[^t]/,not_type:/[^T]/,not_primitive:/[^v]/,number:/[diefg]/,numeric_arg:/[bcdiefguxX]/,json:/[j]/,not_json:/[^j]/,text:/^[^\x25]+/,modulo:/^\x25{2}/,placeholder:/^\x25(?:([1-9]\d*)\$|\(([^)]+)\))?(\+)?(0|'[^$])?(-)?(\d+)?(?:\.(\d+))?([b-gijostTuvxX])/,key:/^([a-z_][a-z_\d]*)/i,key_access:/^\.([a-z_][a-z_\d]*)/i,index_access:/^\[(\d+)\]/,sign:/^[+-]/};function e(n){return function(n,r){var i,s,a,o,u,l,c,h,p,d=1,f=n.length,m="";for(s=0;s<f;s++)if("string"==typeof n[s])m+=n[s];else if("object"==typeof n[s]){if((o=n[s]).keys)for(i=r[d],a=0;a<o.keys.length;a++){if(null==i)throw new Error(e('[sprintf] Cannot access property "%s" of undefined value "%s"',o.keys[a],o.keys[a-1]));i=i[o.keys[a]];}else i=o.param_no?r[o.param_no]:r[d++];if(t.not_type.test(o.type)&&t.not_primitive.test(o.type)&&i instanceof Function&&(i=i()),t.numeric_arg.test(o.type)&&"number"!=typeof i&&isNaN(i))throw new TypeError(e("[sprintf] expecting number but found %T",i));switch(t.number.test(o.type)&&(h=0<=i),o.type){case"b":i=parseInt(i,10).toString(2);break;case"c":i=String.fromCharCode(parseInt(i,10));break;case"d":case"i":i=parseInt(i,10);break;case"j":i=JSON.stringify(i,null,o.width?parseInt(o.width):0);break;case"e":i=o.precision?parseFloat(i).toExponential(o.precision):parseFloat(i).toExponential();break;case"f":i=o.precision?parseFloat(i).toFixed(o.precision):parseFloat(i);break;case"g":i=o.precision?String(Number(i.toPrecision(o.precision))):parseFloat(i);break;case"o":i=(parseInt(i,10)>>>0).toString(8);break;case"s":i=String(i),i=o.precision?i.substring(0,o.precision):i;break;case"t":i=String(!!i),i=o.precision?i.substring(0,o.precision):i;break;case"T":i=Object.prototype.toString.call(i).slice(8,-1).toLowerCase(),i=o.precision?i.substring(0,o.precision):i;break;case"u":i=parseInt(i,10)>>>0;break;case"v":i=i.valueOf(),i=o.precision?i.substring(0,o.precision):i;break;case"x":i=(parseInt(i,10)>>>0).toString(16);break;case"X":i=(parseInt(i,10)>>>0).toString(16).toUpperCase();}t.json.test(o.type)?m+=i:(!t.number.test(o.type)||h&&!o.sign?p="":(p=h?"+":"-",i=i.toString().replace(t.sign,"")),l=o.pad_char?"0"===o.pad_char?"0":o.pad_char.charAt(1):" ",c=o.width-(p+i).length,u=o.width&&0<c?l.repeat(c):"",m+=o.align?p+i+u:"0"===l?p+u+i:u+p+i);}return m}(function(e){if(r[e])return r[e];for(var n,i=e,s=[],a=0;i;){if(null!==(n=t.text.exec(i)))s.push(n[0]);else if(null!==(n=t.modulo.exec(i)))s.push("%");else {if(null===(n=t.placeholder.exec(i)))throw new SyntaxError("[sprintf] unexpected placeholder");if(n[2]){a|=1;var o=[],u=n[2],l=[];if(null===(l=t.key.exec(u)))throw new SyntaxError("[sprintf] failed to parse named argument key");for(o.push(l[1]);""!==(u=u.substring(l[0].length));)if(null!==(l=t.key_access.exec(u)))o.push(l[1]);else {if(null===(l=t.index_access.exec(u)))throw new SyntaxError("[sprintf] failed to parse named argument key");o.push(l[1]);}n[2]=o;}else a|=2;if(3===a)throw new Error("[sprintf] mixing positional and named placeholders is not (yet) supported");s.push({placeholder:n[0],param_no:n[1],keys:n[2],sign:n[3],pad_char:n[4],align:n[5],width:n[6],precision:n[7],type:n[8]});}i=i.substring(n[0].length);}return r[e]=s}(n),arguments)}function n(t,n){return e.apply(null,[t].concat(n||[]))}var r=Object.create(null);d.sprintf=e,d.vsprintf=n,"undefined"!=typeof window&&(window.sprintf=e,window.vsprintf=n);}();var y=Object.freeze({__proto__:null,slice:function(t,e,n){return "string"!=typeof t||"number"!=typeof e||t.length<e?t:"number"!=typeof n?t.slice(e):t.slice(e,n)},nltobr:function(t){return t.replace(/\r?\n|\r/g,"<br>")},sprintf:function(t,...e){const n=[];for(let t of e)s(t)&&s(t.hash)&&(t=t.hash),n.push(t);return n.length>0?m.vsprintf(t,n):t},lowercase:function(t){return i(t)?t.toLowerCase():t},uppercase:function(t){return i(t)?t.toUpperCase():t},concat:function(...t){return s(t[t.length-1])&&t.pop(),t.join("")},join:function(t,e){return e&&!s(e)||(e=""),!!a(t)&&t.join(e)}});for(let t of [u,h,p,f,y])for(let[e,n]of Object.entries(t))r.registerHelper(e,n);
 
   /**
-   * PDF LIVE component class.
+   * PDFLiveElement.
    */
-  class PdfLive extends HTMLElement {
+  class PDFLiveElement extends HTMLElement {
       /** @type {LoadingModal} */
       loadingModal = new LoadingModal(this);
       /** @type {ErrorModal} */
@@ -1577,6 +1585,8 @@
       loaded = false;
       /** @type {boolean} */
       calledLoadHandler = false;
+      /** @type {boolean} */
+      pageNav;
       /**
        * constructor
        */
@@ -1629,10 +1639,10 @@
               const leftPanel = (new LeftPanel(this, pages)).onSelect((pageNum) => {
                   // Thumbnail selection event.
                   // View the page corresponding to the selected thumbnail in the viewer.
-                  pageNav.activatePage(pageNum);
+                  this.pageNav?.activatePage(pageNum);
               });
               // Initialize page navigation.
-              const pageNav = (new PageNav(this, pdfDoc.numPages)).onChange((pageNum) => {
+              this.pageNav = (new PageNav(this, pdfDoc.numPages)).onChange((pageNum) => {
                   // If the page you are browsing changes.
                   // Activate the thumbnail page of the browsing page.
                   leftPanel.activatePage(pageNum);
@@ -1700,7 +1710,7 @@
       /**
        * Define elements
        *
-       * @return {PdfLive}
+       * @return {PDFLiveElement}
        */
       static define() {
           if (window.customElements.get('pdf-live'))
@@ -1711,11 +1721,11 @@
       /**
        * Generate elements
        *
-       * @return {PdfLive}
+       * @return {PDFLiveElement}
        */
       static createElement() {
-          const PdfLive = this.define();
-          return new PdfLive();
+          const PDFLiveElement = this.define();
+          return new PDFLiveElement();
       }
       /**
        * Add event listener
@@ -1723,7 +1733,7 @@
        * @param  {'pageChange'|'documentLoaded'}  type
        * @param  {() => void}                     listener
        * @param  {{once: boolen}}                 options.once
-       * @return {PdfLive}
+       * @return {PDFLiveElement}
        */
       on(type, listener, options = { once: false }) {
           // Set event handler.
@@ -1740,11 +1750,19 @@
        *
        * @param  {string}     type
        * @param  {() => void} listener
-       * @return {PdfLive}
+       * @return {PDFLiveElement}
        */
       off(type, listener) {
           this.removeEventListener(type, listener);
           return this;
+      }
+      /**
+       * Returns the current page number.
+       *
+       * @return {number}
+       */
+      getCurrentPageNumber() {
+          return this.pageNav.getCurrentPageNumber();
       }
       /**
        * Call event listener
@@ -1906,8 +1924,8 @@
         <iframe data-element="printFrame" style="display: none;"></iframe>`)({ language: this.language }));
       }
   }
-  PdfLive.define();
+  PDFLiveElement.define();
 
-  return PdfLive;
+  return PDFLiveElement;
 
 }));

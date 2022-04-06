@@ -9,9 +9,8 @@
 </head>
 <body>
   <pdf-live src="sample/portrait3.pdf" lang="ja" worker="dist/pdf.worker.min.js"></pdf-live>
-  <script type="module">
-    import './dist/pdf-live.esm.js';
-
+  <script src="dist/pdf-live.js"></script>
+  <script>
     // Find the PDFLive node.
     const pdflive = document.querySelector('pdf-live');
 

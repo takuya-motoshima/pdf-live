@@ -6,7 +6,7 @@ import BadDocumentError from '../exceptions/BadDocumentError.js';
 export default async url => {
   try {
     // Setting worker path to worker bundle.
-    pdfjsLib.GlobalWorkerOptions.workerSrc = 'libs/pdf.worker.js';
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'libs/pdf.worker.min.js';
 
     // Loading a document.
     const pdfDoc = await pdfjsLib.getDocument(url).promise;

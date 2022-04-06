@@ -17,7 +17,7 @@ npm install pdf-live
 ### ES6 syntax
 HTML:
 ```html
-<pdf-live src="sample.pdf" lang="ja" worker="node_modules/pdf-live/dist/pdf.worker.js"></pdf-live>
+<pdf-live src="sample.pdf" lang="ja" worker="node_modules/pdf-live/dist/pdf.worker.min.js"></pdf-live>
 ```
 
 JS:
@@ -27,7 +27,7 @@ import './node_modules/pdf-live/dist/pdf-live.esm.js';
 
 ### ES5 syntax
 ```html
-<pdf-live src="sample.pdf" lang="ja" worker="node_modules/pdf-live/dist/pdf.worker.js"></pdf-live>
+<pdf-live src="sample.pdf" lang="ja" worker="node_modules/pdf-live/dist/pdf.worker.min.js"></pdf-live>
 
 <script src="node_modules/pdf-live/dist/pdf-live.js"></script>
 <script>

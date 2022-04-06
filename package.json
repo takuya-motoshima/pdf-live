@@ -23,13 +23,13 @@
     "url": "git+https://github.com/takuya-motoshima/pdf-live.git"
   },
   "files": [
-    "LICENSE",
-    "README.md",
-    "CHANGELOG.md",
     "dist/",
-    "types/",
     "docs/",
-    "package.json"
+    "types/",
+    "LICENSE",
+    "package-lock.json",
+    "package.json",
+    "README.md"
   ],
   "keywords": [],
   "author": "Takuya Motoshima <developer.takuyamotoshima@gmail.com> (https://twitter.com/TakuyaMotoshima)",

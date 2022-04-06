@@ -739,7 +739,6 @@ html:not([data-tabbing=true]) .pl-button {
       }
 
       .pl-page-container .pl-page-footer {
-        pointer-events: none;
         position: absolute;
         bottom: 0;
         left: 0;

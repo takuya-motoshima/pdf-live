@@ -1,8 +1,8 @@
 import './index.css';
 /**
- * PDF LIVE component class.
+ * PDFLiveElement.
  */
-declare class PdfLive extends HTMLElement {
+declare class PDFLiveElement extends HTMLElement {
     /** @type {LoadingModal} */
     private loadingModal;
     /** @type {ErrorModal} */
@@ -13,6 +13,8 @@ declare class PdfLive extends HTMLElement {
     private loaded;
     /** @type {boolean} */
     private calledLoadHandler;
+    /** @type {boolean} */
+    private pageNav;
     /**
      * constructor
      */
@@ -26,34 +28,40 @@ declare class PdfLive extends HTMLElement {
     /**
      * Define elements
      *
-     * @return {PdfLive}
+     * @return {PDFLiveElement}
      */
-    static define(): typeof PdfLive;
+    static define(): typeof PDFLiveElement;
     /**
      * Generate elements
      *
-     * @return {PdfLive}
+     * @return {PDFLiveElement}
      */
-    static createElement(): PdfLive;
+    static createElement(): PDFLiveElement;
     /**
      * Add event listener
      *
      * @param  {'pageChange'|'documentLoaded'}  type
      * @param  {() => void}                     listener
      * @param  {{once: boolen}}                 options.once
-     * @return {PdfLive}
+     * @return {PDFLiveElement}
      */
     on(type: 'pageChange' | 'documentLoaded', listener: (evnt?: Event) => void, options?: {
         once: boolean;
-    }): PdfLive;
+    }): PDFLiveElement;
     /**
      * Remove event listener
      *
      * @param  {string}     type
      * @param  {() => void} listener
-     * @return {PdfLive}
+     * @return {PDFLiveElement}
      */
-    off(type: string, listener: (evnt?: Event) => void): PdfLive;
+    off(type: string, listener: (evnt?: Event) => void): PDFLiveElement;
+    /**
+     * Returns the current page number.
+     *
+     * @return {number}
+     */
+    getCurrentPageNumber(): number;
     /**
      * Call event listener
      *
@@ -67,4 +75,4 @@ declare class PdfLive extends HTMLElement {
      */
     private render;
 }
-export default PdfLive;
+export default PDFLiveElement;

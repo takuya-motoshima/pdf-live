@@ -54,4 +54,10 @@ export default class PageNav {
      * @returns {PageNav} The instance on which this method was called.
      */
     onChange(handler: (pageNum: number) => void): PageNav;
+    /**
+     * Returns the current page number.
+     *
+     * @return {number}
+     */
+    getCurrentPageNumber(): number;
 }
