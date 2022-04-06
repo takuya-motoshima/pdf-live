@@ -7,7 +7,6 @@ import pkg from './package.json';
 import copy from 'rollup-plugin-copy'
 import path from 'path';
 import json from '@rollup/plugin-json';
-import alias from '@rollup/plugin-alias';
 
 // Determine whether it is a production environment
 const isPro = () => {
@@ -38,9 +37,7 @@ export default {
     copy({
       targets: [
         {src: 'src/fonts/**/*', dest: 'dist/fonts'},
-        {src: 'node_modules/pdfjs-dist/build/pdf.js', dest: 'dist'},
-        {src: 'node_modules/pdfjs-dist/build/pdf.js.map', dest: 'dist'},
-        {src: 'node_modules/pdfjs-dist/build/pdf.min.js', dest: 'dist'},
+        {src: 'src/favicon.svg', dest: 'dist'},
         {src: 'node_modules/pdfjs-dist/build/pdf.worker.js', dest: 'dist'},
         {src: 'node_modules/pdfjs-dist/build/pdf.worker.js.map', dest: 'dist'},
         {src: 'node_modules/pdfjs-dist/build/pdf.worker.min.js', dest: 'dist'}

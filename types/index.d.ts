@@ -65,6 +65,6 @@ declare class PdfLive extends HTMLElement {
     /**
      * Render viewer.
      */
-    private renderViewer;
+    private render;
 }
 export default PdfLive;

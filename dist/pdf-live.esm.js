@@ -209,6 +209,32 @@ var downloadPdf = async (pdfDoc, downloadName) => {
 };
 
 /**
+ * Set the theme.
+ *
+ * @param {string} theme
+ */
+var setTheme = (theme) => {
+    // Returns an error if the theme is anything other than light or dark.
+    if (theme !== 'dark' && theme !== 'light')
+        throw new Error('The theme can be either light or dark');
+    // Update theme.
+    document.documentElement.setAttribute('data-theme', theme);
+    // Save updated themes to local storage.
+    localStorage.setItem('theme', theme);
+};
+
+/**
+ * Restore theme.
+ */
+var restoreTheme = () => {
+    // Last saved theme.
+    const theme = localStorage.getItem('theme');
+    // Restore if you have a saved theme.
+    if (theme)
+        setTheme(theme);
+};
+
+/**
  * Load pdf-dist JS.
  */
 var loadPdfJs = () => {
@@ -484,7 +510,7 @@ const ZOOM_IN = 1;
  */
 class ZoomNav {
     /** @type {Viewport} */
-    standardViewport;
+    defaultViewport;
     /** @type {HTMLDivElement} */
     zoomToggle;
     /** @type {HTMLDivElement} */
@@ -517,11 +543,11 @@ class ZoomNav {
      * Control the zoom factor change event of a page.
      *
      * @param {HTMLDivElement}  context
-     * @param {Viewport}        standardViewport
+     * @param {Viewport}        defaultViewport
      */
-    constructor(context, standardViewport) {
+    constructor(context, defaultViewport) {
         // Keep page width and height for zoom factor calculation to fit by page or width.
-        this.standardViewport = standardViewport;
+        this.defaultViewport = defaultViewport;
         // Find dependent nodes.
         this.zoomToggle = context.querySelector('[data-element="zoomToggle"]');
         this.zoomMenu = context.querySelector('[data-element="zoomMenu"]');
@@ -711,10 +737,10 @@ class ZoomNav {
             zoomFactor = parseInt(zoom, 10) / 100;
         else if (zoom === 'pageFit')
             // Calculate the width and height of the page that fits the height of the container.
-            zoomFactor = this.pageView.clientHeight / this.standardViewport.height;
+            zoomFactor = this.pageView.clientHeight / this.defaultViewport.height;
         else if (zoom === 'pageWidth')
             // Calculate the width and height of the page that fits the width of the container.
-            zoomFactor = this.pageView.clientWidth / this.standardViewport.width;
+            zoomFactor = this.pageView.clientWidth / this.defaultViewport.width;
         return zoomFactor;
     }
     /**
@@ -1005,6 +1031,7 @@ var action$b = {
 	submit: "OK",
 	zoomIn: "Heranzoomen",
 	zoomOut: "Rauszoomen",
+	zoomControls: "Zoomeinstellungen",
 	darkMode: "Dark Mode",
 	lightMode: "Heller Modus"
 };
@@ -1046,6 +1073,7 @@ var action$a = {
 	submit: "Submit",
 	zoomIn: "Zoom in",
 	zoomOut: "Zoom out",
+	zoomControls: "Zoom Controls",
 	darkMode: "Dark mode",
 	lightMode: "Light mode"
 };
@@ -1087,6 +1115,7 @@ var action$9 = {
 	submit: "Enviar",
 	zoomIn: "Acercar zoom",
 	zoomOut: "Alejar zoom",
+	zoomControls: "Controles de zoom",
 	darkMode: "Modo oscuro",
 	lightMode: "Modo de luz"
 };
@@ -1128,6 +1157,7 @@ var action$8 = {
 	submit: "Soumettre",
 	zoomIn: "Zoom avant",
 	zoomOut: "Zoom arrière",
+	zoomControls: "Commandes de zoom",
 	darkMode: "Mode sombre",
 	lightMode: "Mode clair"
 };
@@ -1169,6 +1199,7 @@ var action$7 = {
 	submit: "Invia",
 	zoomIn: "Ingrandire",
 	zoomOut: "Rimpicciolisci",
+	zoomControls: "Controlli dello zoom",
 	darkMode: "Modalità scura",
 	lightMode: "Modalità luce"
 };
@@ -1210,6 +1241,7 @@ var action$6 = {
 	submit: "送信",
 	zoomIn: "ズームイン",
 	zoomOut: "ズームアウト",
+	zoomControls: "ズームコントロール",
 	darkMode: "ダークモード",
 	lightMode: "ライトモード"
 };
@@ -1251,6 +1283,7 @@ var action$5 = {
 	submit: "제출",
 	zoomIn: "확대",
 	zoomOut: "축소",
+	zoomControls: "줌 컨트롤",
 	darkMode: "다크모드",
 	lightMode: "라이트모드"
 };
@@ -1292,6 +1325,7 @@ var action$4 = {
 	submit: "Verzenden",
 	zoomIn: "Zoom in",
 	zoomOut: "Zoom uit",
+	zoomControls: "Zoomregelaars",
 	darkMode: "Donkere modus",
 	lightMode: "Lichte modus"
 };
@@ -1333,6 +1367,7 @@ var action$3 = {
 	submit: "Enviar",
 	zoomIn: "Aproximar",
 	zoomOut: "Afastar",
+	zoomControls: "Controles de zoom",
 	darkMode: "Modo escuro",
 	lightMode: "Modo claro"
 };
@@ -1374,6 +1409,7 @@ var action$2 = {
 	submit: "Отправить",
 	zoomIn: "Увеличить",
 	zoomOut: "Уменьшить",
+	zoomControls: "Управление масштабированием",
 	darkMode: "Темный режим",
 	lightMode: "Легкий режим"
 };
@@ -1415,6 +1451,7 @@ var action$1 = {
 	submit: "提交",
 	zoomIn: "放大",
 	zoomOut: "缩小",
+	zoomControls: "缩放控制",
 	darkMode: "暗模式",
 	lightMode: "灯光模式"
 };
@@ -1456,6 +1493,7 @@ var action = {
 	submit: "提交",
 	zoomIn: "放大",
 	zoomOut: "縮小",
+	zoomControls: "縮放控制",
 	darkMode: "暗模式",
 	lightMode: "燈光模式"
 };
@@ -1555,7 +1593,7 @@ class PdfLive extends HTMLElement {
             // Set the pdf live application CSS class to the root node.
             this.classList.add('pl-app');
             // Render viewer.
-            this.renderViewer();
+            this.render();
             // Get the URL from the src attribute.
             const url = this.getAttribute('src');
             if (!url)
@@ -1565,16 +1603,16 @@ class PdfLive extends HTMLElement {
             if (!workerSrc)
                 throw new Error('Element "pdf-live" is missing required attribute "worker"');
             // Set the PDF file name in the title.
-            document.title = getFilename(url);
+            this.querySelector('[data-element="title"]').textContent = document.title = getFilename(url);
             // Load a PDF document.
             const pdfDoc = await getDocument(url, workerSrc);
             // Keep page width and height for zoom factor calculation to fit by page or width.
-            const standardViewport = await (async () => {
+            const defaultViewport = await (async () => {
                 const { width, height } = (await pdfDoc.getPage(1)).getViewport({ scale: 1.5 * 1.0 });
                 return { width, height };
             })();
             // Initialize zoom menu.
-            const zoomNav = (new ZoomNav(this, standardViewport)).onChange((zoomFactor) => {
+            const zoomNav = (new ZoomNav(this, defaultViewport)).onChange((zoomFactor) => {
                 // Change the zoom factor of the page when the zoom is changed.
                 // Resize page.
                 resizePage(pages, zoomFactor);
@@ -1604,8 +1642,32 @@ class PdfLive extends HTMLElement {
             this.querySelector('[data-element="downloadButton"]').addEventListener('click', async () => {
                 await downloadPdf(pdfDoc, getFilename(url));
             }, { passive: true });
+            // Change theme. 
+            this.querySelector('[data-element="themeChangeButton"]').addEventListener('click', evnt => {
+                // Current theme.
+                let currentTheme = document.documentElement.getAttribute('data-theme');
+                // New theme.
+                const target = evnt.currentTarget;
+                let newTheme;
+                if (!currentTheme || currentTheme === 'light') {
+                    newTheme = 'dark';
+                    target.setAttribute('data-mode', 'dark');
+                    target.setAttribute('aria-label', 'Dark mode');
+                    target.setAttribute('title', 'Dark mode');
+                }
+                else {
+                    newTheme = 'light';
+                    target.setAttribute('data-mode', 'light');
+                    target.setAttribute('aria-label', 'Light mode');
+                    target.setAttribute('title', 'Light mode');
+                }
+                // Update theme.
+                setTheme(newTheme);
+            }, { passive: true });
+            // Restore theme.
+            restoreTheme();
             // Show page container after successful loading of PDF.
-            this.querySelector('[data-element="pagegContainer"]').classList.remove('pl-page-container-hide');
+            this.classList.add('pl-app-loaded');
             // Check if the event has already been executed so that the documentLoaded event is not executed twice.
             if (!this.calledLoadHandler)
                 // Invoke PDF document loaded event.
@@ -1692,24 +1754,20 @@ class PdfLive extends HTMLElement {
     /**
      * Render viewer.
      */
-    renderViewer() {
+    render() {
         this.insertAdjacentHTML('beforeend', r.compile(`<!-- begin:Header -->
         <div data-element="header" class="pl-header">
-          <div class="pl-header-items">
-            <button data-element="leftPanelToggle"
-                    class="pl-button"
-                    aria-label="{{language.component.leftPanel}}"
-                    title="{{language.component.leftPanel}}">
+          <div class="pl-header-container">
+            <button data-element="leftPanelToggle" class="pl-left-panel-toggle pl-button" aria-label="{{language.component.leftPanel}}" title="{{language.component.leftPanel}}">
               <svg class="pl-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                 <path d="M0 96C0 78.33 14.33 64 32 64H416C433.7 64 448 78.33 448 96C448 113.7 433.7 128 416 128H32C14.33 128 0 113.7 0 96zM0 256C0 238.3 14.33 224 32 224H416C433.7 224 448 238.3 448 256C448 273.7 433.7 288 416 288H32C14.33 288 0 273.7 0 256zM416 448H32C14.33 448 0 433.7 0 416C0 398.3 14.33 384 32 384H416C433.7 384 448 398.3 448 416C448 433.7 433.7 448 416 448z"/>
               </svg>
             </button>
+            <div class="pl-document-title">
+              <div data-element="title" class="pl-document-title-ellipsis"></div>
+            </div>
             <div class="pl-zoom-overlay">
-              <button data-element="zoomOutButton"
-                      class="pl-button action-button"
-                      aria-label="{{language.action.zoomOut}}"
-                      aria-keyshortcuts="Control+-"
-                      title="{{language.action.zoomOut}}{{language.shortcut.zoomOut}}">
+              <button data-element="zoomOutButton" class="pl-button action-button" aria-label="{{language.action.zoomOut}}" aria-keyshortcuts="Control+-" title="{{language.action.zoomOut}}{{language.shortcut.zoomOut}}">
                 <svg class="pl-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                   <path d="M400 288h-352c-17.69 0-32-14.32-32-32.01s14.31-31.99 32-31.99h352c17.69 0 32 14.3 32 31.99S417.7 288 400 288z"/>
                 </svg>
@@ -1727,32 +1785,32 @@ class PdfLive extends HTMLElement {
                   </svg>
                 </button>
               </div>
-              <button data-element="zoomInButton"
-                      class="pl-button action-button"
-                      aria-label="{{language.action.zoomIn}}"
-                      aria-keyshortcuts="Control+="
-                      title="{{language.action.zoomIn}}{{language.shortcut.zoomIn}}">
+              <button data-element="zoomInButton" class="pl-button action-button" aria-label="{{language.action.zoomIn}}" aria-keyshortcuts="Control+=" title="{{language.action.zoomIn}}{{language.shortcut.zoomIn}}">
                 <svg class="pl-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                   <path d="M432 256c0 17.69-14.33 32.01-32 32.01H256v144c0 17.69-14.33 31.99-32 31.99s-32-14.3-32-31.99v-144H48c-17.67 0-32-14.32-32-32.01s14.33-31.99 32-31.99H192v-144c0-17.69 14.33-32.01 32-32.01s32 14.32 32 32.01v144h144C417.7 224 432 238.3 432 256z"/>
                 </svg>
               </button>
             </div>
-            <button data-element="printButton"
-                    class="pl-button"
-                    aria-label="{{language.action.print}}"
-                    title="{{language.action.print}}">
-              <svg class="pl-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                <path d="M448 192H64C28.65 192 0 220.7 0 256v96c0 17.67 14.33 32 32 32h32v96c0 17.67 14.33 32 32 32h320c17.67 0 32-14.33 32-32v-96h32c17.67 0 32-14.33 32-32V256C512 220.7 483.3 192 448 192zM384 448H128v-96h256V448zM432 296c-13.25 0-24-10.75-24-24c0-13.27 10.75-24 24-24s24 10.73 24 24C456 285.3 445.3 296 432 296zM128 64h229.5L384 90.51V160h64V77.25c0-8.484-3.375-16.62-9.375-22.62l-45.25-45.25C387.4 3.375 379.2 0 370.8 0H96C78.34 0 64 14.33 64 32v128h64V64z"/>
-              </svg>
-            </button>
-            <button data-element="downloadButton"
-                    class="pl-button"
-                    aria-label="{{language.action.download}}"
-                    title="{{language.action.download}}">
-              <svg class="pl-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                <path d="M480 352h-133.5l-45.25 45.25C289.2 409.3 273.1 416 256 416s-33.16-6.656-45.25-18.75L165.5 352H32c-17.67 0-32 14.33-32 32v96c0 17.67 14.33 32 32 32h448c17.67 0 32-14.33 32-32v-96C512 366.3 497.7 352 480 352zM432 456c-13.2 0-24-10.8-24-24c0-13.2 10.8-24 24-24s24 10.8 24 24C456 445.2 445.2 456 432 456zM233.4 374.6C239.6 380.9 247.8 384 256 384s16.38-3.125 22.62-9.375l128-128c12.49-12.5 12.49-32.75 0-45.25c-12.5-12.5-32.76-12.5-45.25 0L288 274.8V32c0-17.67-14.33-32-32-32C238.3 0 224 14.33 224 32v242.8L150.6 201.4c-12.49-12.5-32.75-12.5-45.25 0c-12.49 12.5-12.49 32.75 0 45.25L233.4 374.6z"/>
-              </svg>
-            </button>
+            <div class="pl-header-nav">
+              <button data-element="printButton" class="pl-button" aria-label="{{language.action.print}}" title="{{language.action.print}}">
+                <svg class="pl-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                  <path d="M448 192H64C28.65 192 0 220.7 0 256v96c0 17.67 14.33 32 32 32h32v96c0 17.67 14.33 32 32 32h320c17.67 0 32-14.33 32-32v-96h32c17.67 0 32-14.33 32-32V256C512 220.7 483.3 192 448 192zM384 448H128v-96h256V448zM432 296c-13.25 0-24-10.75-24-24c0-13.27 10.75-24 24-24s24 10.73 24 24C456 285.3 445.3 296 432 296zM128 64h229.5L384 90.51V160h64V77.25c0-8.484-3.375-16.62-9.375-22.62l-45.25-45.25C387.4 3.375 379.2 0 370.8 0H96C78.34 0 64 14.33 64 32v128h64V64z"/>
+                </svg>
+              </button>
+              <button data-element="downloadButton" class="pl-button" aria-label="{{language.action.download}}" title="{{language.action.download}}">
+                <svg class="pl-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                  <path d="M480 352h-133.5l-45.25 45.25C289.2 409.3 273.1 416 256 416s-33.16-6.656-45.25-18.75L165.5 352H32c-17.67 0-32 14.33-32 32v96c0 17.67 14.33 32 32 32h448c17.67 0 32-14.33 32-32v-96C512 366.3 497.7 352 480 352zM432 456c-13.2 0-24-10.8-24-24c0-13.2 10.8-24 24-24s24 10.8 24 24C456 445.2 445.2 456 432 456zM233.4 374.6C239.6 380.9 247.8 384 256 384s16.38-3.125 22.62-9.375l128-128c12.49-12.5 12.49-32.75 0-45.25c-12.5-12.5-32.76-12.5-45.25 0L288 274.8V32c0-17.67-14.33-32-32-32C238.3 0 224 14.33 224 32v242.8L150.6 201.4c-12.49-12.5-32.75-12.5-45.25 0c-12.49 12.5-12.49 32.75 0 45.25L233.4 374.6z"/>
+                </svg>
+              </button>
+              <button data-element="themeChangeButton" class="pl-button" data-mode="light" aria-label="Dark mode" title="Dark mode">
+                <svg class="pl-icon pl-icon-dark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                  <path d="M279.135 512c78.756 0 150.982-35.804 198.844-94.775 28.27-34.831-2.558-85.722-46.249-77.401-82.348 15.683-158.272-47.268-158.272-130.792 0-48.424 26.06-92.292 67.434-115.836 38.745-22.05 28.999-80.788-15.022-88.919A257.936 257.936 0 0 0 279.135 0c-141.36 0-256 114.575-256 256 0 141.36 114.576 256 256 256zm0-464c12.985 0 25.689 1.201 38.016 3.478-54.76 31.163-91.693 90.042-91.693 157.554 0 113.848 103.641 199.2 215.252 177.944C402.574 433.964 344.366 464 279.135 464c-114.875 0-208-93.125-208-208s93.125-208 208-208z"/>
+                </svg>
+                <svg class="pl-icon pl-icon-light" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                  <path d="M256 160c-52.9 0-96 43.1-96 96s43.1 96 96 96 96-43.1 96-96-43.1-96-96-96zm246.4 80.5l-94.7-47.3 33.5-100.4c4.5-13.6-8.4-26.5-21.9-21.9l-100.4 33.5-47.4-94.8c-6.4-12.8-24.6-12.8-31 0l-47.3 94.7L92.7 70.8c-13.6-4.5-26.5 8.4-21.9 21.9l33.5 100.4-94.7 47.4c-12.8 6.4-12.8 24.6 0 31l94.7 47.3-33.5 100.5c-4.5 13.6 8.4 26.5 21.9 21.9l100.4-33.5 47.3 94.7c6.4 12.8 24.6 12.8 31 0l47.3-94.7 100.4 33.5c13.6 4.5 26.5-8.4 21.9-21.9l-33.5-100.4 94.7-47.3c13-6.5 13-24.7.2-31.1zm-155.9 106c-49.9 49.9-131.1 49.9-181 0-49.9-49.9-49.9-131.1 0-181 49.9-49.9 131.1-49.9 181 0 49.9 49.9 49.9 131.1 0 181z"/>
+                </svg>
+              </button>
+            </div>
           </div>
           <div class="pl-header-border"></div>
         </div>
@@ -1772,7 +1830,7 @@ class PdfLive extends HTMLElement {
 
           <!-- begin:Page container -->
           <!-- <div data-element="pagegContainer" class="pl-page-container pl-page-container-open"> -->
-          <div data-element="pagegContainer" class="pl-page-container pl-page-container-hide">
+          <div data-element="pagegContainer" class="pl-page-container">
             
             <!-- begin:Page view -->
             <div data-element="pageView" class="pl-page-view"></div>
@@ -1781,11 +1839,7 @@ class PdfLive extends HTMLElement {
             <!-- begin:Page navigation -->
             <div class="pl-page-footer" style="width: calc(100% - 0px); margin-left: 0px;">
               <div data-element="pageNavOverlay" class="pl-page-nav-overlay">
-                <button data-element="prevPageButton"
-                        class="pl-button pl-side-arrow-container"
-                        aria-label="{{language.action.pagePrev}}"
-                        title="{{language.action.pagePrev}}"
-                        disabled>
+                <button data-element="prevPageButton" class="pl-button pl-side-arrow-container" aria-label="{{language.action.pagePrev}}" title="{{language.action.pagePrev}}" disabled>
                   <svg class="pl-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512">
                     <path d="M192 448c-8.188 0-16.38-3.125-22.62-9.375l-160-160c-12.5-12.5-12.5-32.75 0-45.25l160-160c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L77.25 256l137.4 137.4c12.5 12.5 12.5 32.75 0 45.25C208.4 444.9 200.2 448 192 448z"/>
                   </svg>
@@ -1795,10 +1849,7 @@ class PdfLive extends HTMLElement {
                     <input data-element="pageInput" type="text" tabindex="-1" aria-label="Set page" value="1"> / <span data-element="totalPage">1</span>
                   </form>
                 </div>
-                <button data-element="nextPageButton"
-                        class="pl-button pl-side-arrow-container"
-                        aria-label="{{language.action.pageNext}}"
-                        title="{{language.action.pageNext}}">
+                <button data-element="nextPageButton" class="pl-button pl-side-arrow-container" aria-label="{{language.action.pageNext}}" title="{{language.action.pageNext}}">
                   <svg class="pl-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512">
                     <path d="M64 448c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L178.8 256L41.38 118.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l160 160c12.5 12.5 12.5 32.75 0 45.25l-160 160C80.38 444.9 72.19 448 64 448z"/>
                   </svg>

@@ -4,7 +4,7 @@ import Viewport from '~/interfaces/Viewport';
  */
 export default class ZoomNav {
     /** @type {Viewport} */
-    private readonly standardViewport;
+    private readonly defaultViewport;
     /** @type {HTMLDivElement} */
     private readonly zoomToggle;
     /** @type {HTMLDivElement} */
@@ -37,9 +37,9 @@ export default class ZoomNav {
      * Control the zoom factor change event of a page.
      *
      * @param {HTMLDivElement}  context
-     * @param {Viewport}        standardViewport
+     * @param {Viewport}        defaultViewport
      */
-    constructor(context: HTMLElement, standardViewport: Viewport);
+    constructor(context: HTMLElement, defaultViewport: Viewport);
     /**
      * Open zoom overlay.
      */

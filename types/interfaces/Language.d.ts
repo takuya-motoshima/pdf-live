@@ -14,6 +14,7 @@ export default interface  {
         submit: string;
         zoomIn: string;
         zoomOut: string;
+        zoomControls: string;
         darkMode: string;
         lightMode: string;
     };

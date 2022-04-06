@@ -393,6 +393,7 @@ html:not([data-tabbing=true]) .pl-button {
   outline: none;
 }
 
+.pl-button.disabled,
 .pl-button[disabled] {
   background: none !important;
   cursor: default;
@@ -404,8 +405,11 @@ html:not([data-tabbing=true]) .pl-button {
   color: #fff;
 }
 
+.pl-button.disabled i,
 .pl-button[disabled] i,
+.pl-button.disabled .pl-icon,
 .pl-button[disabled] .pl-icon,
+.pl-button.disabled span,
 .pl-button[disabled] span {
   color: var(--pl-disabled-icon);
 }
@@ -487,45 +491,36 @@ html:not([data-tabbing=true]) .pl-button {
       padding: 0 4px;
     }
 
-      .pl-left-panel-toggle {
-        flex: 0 1 auto;
+      .pl-header-container > .pl-button {
         margin: 0 6px;
         width: 32px;
         height: 32px;
       }
 
-      .pl-left-panel-toggle:not([disabled]):hover {
-        border-radius: 50%;
-        background: var(--pl-tools-button-hover);
-      }
-
-
       @media (max-width: 640px) {
-        .pl-left-panel-toggle {
+        .pl-header-container > .pl-button {
           margin: 0 6px;
         }
       }
 
       @media (min-width: 641px) and (max-width:900px) {
-        .pl-left-panel-toggle {
+        .pl-header-container > .pl-button {
           margin: 0 10px;
         }
       }
 
-      .pl-document-title {
-        flex: 0 1 calc(100% / 3 - 32px);
-        min-width: 0;
+      .pl-header-container .pl-button:not(.disabled):hover,
+      .pl-header-container .pl-button:not([disabled]):hover {
+        border-radius: 50%;
+        background: var(--pl-tools-button-hover);
       }
 
-        .pl-document-title-ellipsis {
-          overflow: hidden;
-          white-space: nowrap;
-          text-overflow: ellipsis;
-          font-weight: bolder;
-        }
+      .pl-header-container [data-mode="light"] .pl-icon-light,
+      .pl-header-container [data-mode="dark"] .pl-icon-dark {
+        display: none;
+      }
 
       .pl-zoom-overlay {
-        flex: 1 1 calc(100% / 3);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -599,40 +594,6 @@ html:not([data-tabbing=true]) .pl-button {
               /* width: 12px; */
               /* height: 12px; */
             }
-
-      .pl-header-nav {
-        flex: 1 1 calc(100% / 3);
-        display: flex;
-        justify-content: flex-end;
-      }
-      
-        .pl-header-nav .pl-button {
-          margin: 0 6px;
-          width: 32px;
-          height: 32px;
-        }
-
-        @media (max-width: 640px) {
-          .pl-header-nav .pl-button {
-            margin: 0 6px;
-          }
-        }
-
-        @media (min-width: 641px) and (max-width:900px) {
-          .pl-header-nav .pl-button {
-            margin: 0 10px;
-          }
-        }
-
-        .pl-header-nav .pl-button:not([disabled]):hover {
-          border-radius: 50%;
-          background: var(--pl-tools-button-hover);
-        }
-
-        .pl-header-nav [data-mode="light"] .pl-icon-light,
-        .pl-header-nav [data-mode="dark"] .pl-icon-dark {
-          display: none;
-        }
 
   .pl-app > .pl-content {
     display: flex;

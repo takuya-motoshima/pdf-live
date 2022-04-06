@@ -3,6 +3,8 @@ import renderPages from './core/renderPages.js';
 import resizePage from './core/resizePage.js';
 import printPdf from './core/printPdf.js';
 import downloadPdf from './core/downloadPdf.js';
+import setTheme from './core/setTheme.js';
+import restoreTheme from './core/restoreTheme.js';
 import LoadingModal from './components/LoadingModal.js';
 import ErrorModal from './components/ErrorModal.js';
 // import warningModal from './components/warningModal.js';
@@ -11,9 +13,9 @@ import LeftPanel from './components/LeftPanel.js';
 import ZoomNav from './components/ZoomNav.js';
 import PageNav from './components/PageNav.js';
 import getFilename from './helpers/getFilename.js';
-// import i18n from './i18n/index.js';
 
 const url = 'sample.pdf';
+// const url = 'notfound.pdf';
 const context = document.querySelector('[data-element="app"]');
 const errorModal = new ErrorModal(context);
 const loadingModal = new LoadingModal(context);
@@ -23,23 +25,20 @@ const loadingModal = new LoadingModal(context);
     // Show loading.
     loadingModal.show();
 
-    // // Rendering request task.
-    // let renderTask = null;
-
     // Set the PDF file name in the title.
-    document.title = getFilename(url);
+    document.querySelector('[data-element="title"]').textContent = document.title = getFilename(url);
 
     // Load a PDF document.
     const pdfDoc = await getDocument(url);
 
     // Keep page width and height for zoom factor calculation to fit by page or width.
-    const standardViewport = await (async () => {
+    const defaultViewport = await (async () => {
       const {width, height} = (await pdfDoc.getPage(1)).getViewport({scale: 1.5 * 1.0});
       return {width, height}
     })();
 
     // Initialize zoom menu.
-    const zoomNav = (new ZoomNav(standardViewport)).onChange(zoomFactor => {
+    const zoomNav = (new ZoomNav(defaultViewport)).onChange(zoomFactor => {
       // Change the zoom factor of the page when the zoom is changed.
       // Resize page.
       resizePage(pages, zoomFactor);
@@ -73,8 +72,35 @@ const loadingModal = new LoadingModal(context);
       await downloadPdf(pdfDoc, getFilename(url));
     }, {passive: true});
 
+    // Change theme. 
+    document.querySelector('[data-element="themeChangeButton"]').addEventListener('click', evnt => {
+      // Current theme.
+      let currentTheme = document.documentElement.getAttribute('data-theme');
+
+      // New theme.
+      const target = evnt.currentTarget;
+      let newTheme;
+      if (!currentTheme || currentTheme === 'light') {
+        newTheme = 'dark';
+        target.setAttribute('data-mode', 'dark');
+        target.setAttribute('aria-label', 'Dark mode');
+        target.setAttribute('title', 'Dark mode');
+      } else {
+        newTheme = 'light';
+        target.setAttribute('data-mode', 'light');
+        target.setAttribute('aria-label', 'Light mode');
+        target.setAttribute('title', 'Light mode');
+      }
+
+      // Update theme.
+      setTheme(newTheme);
+    }, {passive: true});
+
+    // Restore theme.
+    restoreTheme();
+
     // Show page container after successful loading of PDF.
-    document.querySelector('[data-element="pagegContainer"]').classList.remove('pl-page-container-hide');
+    document.querySelector('[data-element="app"]').classList.add('pl-app-loaded');
 
     // warningModal.show();
     // passwordModal.show();

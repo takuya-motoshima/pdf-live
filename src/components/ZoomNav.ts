@@ -10,7 +10,7 @@ const ZOOM_IN = 1;
  */
 export default class ZoomNav {
   /** @type {Viewport} */
-  private readonly standardViewport: Viewport;
+  private readonly defaultViewport: Viewport;
 
   /** @type {HTMLDivElement} */
   private readonly zoomToggle: HTMLDivElement;
@@ -58,11 +58,11 @@ export default class ZoomNav {
    * Control the zoom factor change event of a page.
    *
    * @param {HTMLDivElement}  context
-   * @param {Viewport}        standardViewport
+   * @param {Viewport}        defaultViewport
    */
-  constructor(context: HTMLElement, standardViewport: Viewport) {
+  constructor(context: HTMLElement, defaultViewport: Viewport) {
     // Keep page width and height for zoom factor calculation to fit by page or width.
-    this.standardViewport = standardViewport;
+    this.defaultViewport = defaultViewport;
 
     // Find dependent nodes.
     this.zoomToggle = context.querySelector('[data-element="zoomToggle"]') as HTMLDivElement;
@@ -295,10 +295,10 @@ export default class ZoomNav {
       zoomFactor = parseInt(zoom, 10) / 100;
     else if (zoom === 'pageFit')
       // Calculate the width and height of the page that fits the height of the container.
-      zoomFactor = this.pageView.clientHeight / this.standardViewport.height;
+      zoomFactor = this.pageView.clientHeight / this.defaultViewport.height;
     else if (zoom === 'pageWidth')
       // Calculate the width and height of the page that fits the width of the container.
-      zoomFactor = this.pageView.clientWidth / this.standardViewport.width;
+      zoomFactor = this.pageView.clientWidth / this.defaultViewport.width;
     return zoomFactor;
   }
 
