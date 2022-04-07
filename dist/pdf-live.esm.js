@@ -37,8 +37,10 @@ var getDocument = async (url, workerSrc) => {
     try {
         // Setting worker path to worker bundle.
         window.pdfjsLib.GlobalWorkerOptions.workerSrc = workerSrc;
+        // Delimiter for timestamp parameter to invalidate cache.
+        const delimiter = url.indexOf('?') === -1 ? '?' : '&';
         // Loading a document.
-        const pdfDoc = await window.pdfjsLib.getDocument(url).promise;
+        const pdfDoc = await window.pdfjsLib.getDocument(`${url}${delimiter}t=${+new Date()}`).promise;
         // console.log(`Loaded ${url}. Total number of pages is ${pdfDoc.numPages}`);
         return pdfDoc;
     }
@@ -1603,7 +1605,7 @@ class PDFLiveElement extends HTMLElement {
             // Set the pdf live application CSS class to the root node.
             this.classList.add('pl-app');
             // Render viewer.
-            this.render();
+            this.render(true);
             // Get the URL from the src attribute.
             const url = this.getAttribute('src');
             if (!url)
@@ -1771,8 +1773,10 @@ class PDFLiveElement extends HTMLElement {
     }
     /**
      * Render viewer.
+     *
+     * @param {boolean} openLeftPanel
      */
-    render() {
+    render(openLeftPanel) {
         this.insertAdjacentHTML('beforeend', r.compile(`<!-- begin:Header -->
         <div data-element="header" class="pl-header">
           <div class="pl-header-container">
@@ -1838,8 +1842,7 @@ class PDFLiveElement extends HTMLElement {
         <div class="pl-content">
 
           <!-- begin:Left panel -->
-          <!-- <div data-element="leftPanel" class="pl-left-panel"> -->
-          <div data-element="leftPanel" class="pl-left-panel pl-left-panel-closed">
+          <div data-element="leftPanel" class="pl-left-panel{{#unless openLeftPanel}} pl-left-panel-closed{{/unless}}">
             <div class="pl-left-panel-container">
               <div data-element="thumbnailsPanel" class="pl-thumbnails-panel"></div>
             </div>
@@ -1847,8 +1850,7 @@ class PDFLiveElement extends HTMLElement {
           <!-- end:Left panel -->
 
           <!-- begin:Page container -->
-          <!-- <div data-element="pagegContainer" class="pl-page-container pl-page-container-open"> -->
-          <div data-element="pagegContainer" class="pl-page-container">
+          <div data-element="pagegContainer" class="pl-page-container {{#if openLeftPanel}} pl-page-container-open{{/if}}">
             
             <!-- begin:Page view -->
             <div data-element="pageView" class="pl-page-view"></div>
@@ -1915,7 +1917,7 @@ class PDFLiveElement extends HTMLElement {
           <!-- <button data-element="zoomSelect" data-value="400" class="pl-zoom-menu-item" aria-label="400%" role="option"">400%</button> -->
         </div>
         <!-- end:Zoom menu -->
-        <iframe data-element="printFrame" style="display: none;"></iframe>`)({ language: this.language }));
+        <iframe data-element="printFrame" style="display: none;"></iframe>`)({ language: this.language, openLeftPanel }));
     }
 }
 PDFLiveElement.define();

@@ -3,7 +3,7 @@
 
 'PDF LIVE' is a PDF viewer that extends the open source 'mozilla/pdf.js'. You can start the PDF viewer with toolbar right away with 'PDF LIVE'.
 
-<!-- <div style="page-break-before: always;"></div> -->
+<div style="page-break-before: always;"></div>
 
 ## Install
 Install with [npm](https://www.npmjs.com/):

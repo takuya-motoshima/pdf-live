@@ -72,6 +72,8 @@ declare class PDFLiveElement extends HTMLElement {
     private invoke;
     /**
      * Render viewer.
+     *
+     * @param {boolean} openLeftPanel
      */
     private render;
 }
