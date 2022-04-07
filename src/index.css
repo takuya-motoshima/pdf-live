@@ -68,7 +68,8 @@
   --pl-gray-9: #E7EBEE;
   --pl-gray-10: #F1F3F5;
   --pl-gray-11: #F8F9FA;
-  --pl-panel-background: var(--pl-gray-3);
+  --pl-panel-background: hsl(206deg 7% 21%);
+  /* --pl-panel-background: var(--pl-gray-3); */
   --pl-component-background: var(--pl-gray-2);
   --pl-box-shadow: var(--pl-gray-5);
   --pl-document-box-shadow: var(--pl-gray-5);
@@ -85,7 +86,8 @@
   --pl-divider: var(--pl-gray-4);
   --pl-border: var(--pl-gray-4);
   --pl-icon-selected-color: var(--pl-gray-8);
-  --pl-document-background-color: var(--pl-gray-2);
+  --pl-document-background-color: hsl(206deg 4% 34%);
+  /* --pl-document-background-color: var(--pl-gray-2); */
   --pl-modal-negative-space: rgba(0, 0, 0, 0.3);
   --pl-header-button-hover: var(--pl-blue-3);
   --pl-header-background: hsl(206deg 7% 21%);

@@ -7,18 +7,21 @@ import setTheme from './core/setTheme.js';
 import restoreTheme from './core/restoreTheme.js';
 import LoadingModal from './components/LoadingModal.js';
 import ErrorModal from './components/ErrorModal.js';
-// import warningModal from './components/warningModal.js';
-// import passwordModal from './components/passwordModal.js';
+import PasswordModal from './components/PasswordModal.js';
 import LeftPanel from './components/LeftPanel.js';
 import ZoomNav from './components/ZoomNav.js';
 import PageNav from './components/PageNav.js';
 import getFilename from './helpers/getFilename.js';
 
 const url = 'sample.pdf';
-// const url = 'notfound.pdf';
 const context = document.querySelector('[data-element="app"]');
 const errorModal = new ErrorModal(context);
 const loadingModal = new LoadingModal(context);
+
+// Password protection.
+const protection = false;
+// const protection = true;
+const passwordModal = new PasswordModal(context);
 
 (async () => {
   try {
@@ -99,16 +102,27 @@ const loadingModal = new LoadingModal(context);
     // Restore theme.
     restoreTheme();
 
-    // Show page container after successful loading of PDF.
-    document.querySelector('[data-element="app"]').classList.add('pl-app-loaded');
 
-    // warningModal.show();
-    // passwordModal.show();
-  } catch (err) {
-    errorModal.show(err.message);
-    throw err;
-  } finally {
+
+    if (protection) {
+      passwordModal.show();
+    } else {
+      // Show page container after successful loading of PDF.
+      document.querySelector('[data-element="app"]').classList.add('pl-app-loaded');
+    }
+
     // Hide loading.
     loadingModal.hide();
+  } catch (err) {
+    // Hide loading.
+    loadingModal.hide();
+
+    // Show error.
+    errorModal.show(err.message);
+    throw err;
   }
+  // } finally {
+  //   // Hide loading.
+  //   loadingModal.hide();
+  // }
 })();

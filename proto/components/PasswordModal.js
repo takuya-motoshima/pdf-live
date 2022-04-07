@@ -3,7 +3,7 @@ import Modal from './Modal.js';
 /**
  * Password input modal.
  */
-export default new (class extends Modal {
+export default class PasswordModal extends Modal {
   /**
    * Render the content of this component.
    *
@@ -29,4 +29,4 @@ export default new (class extends Modal {
               </div>
             </div>`;
   }
-})()
+}
