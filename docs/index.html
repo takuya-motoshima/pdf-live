@@ -13,7 +13,7 @@
 </head>
 <body data-bs-spy="scroll" data-bs-target="#sidenav" data-bs-offset="74">
 
-  <header class="navbar navbar-expand-md navbar-light topnav fixed-top">
+  <header class="navbar navbar-expand-md navbar-light bg-white topnav fixed-top">
     <nav class="container-xxl justify-content-start" aria-label="Main navigation">
       <a class="navbar-brand p-0 me-2" href="./" aria-label="Bootstrap">
         <img src="logo.svg" height="50">
@@ -47,6 +47,7 @@
   <aside data-element="sidebar" class="sidebar" id="sidebar">
     <nav class="sidenav align-items-start navbar navbar-light py-0" id="sidenav">
       <nav class="nav nav-pills flex-column flex-nowrap mb-0 py-3 pt-md-1">
+        <a class="nav-link" href="#introduction">Introduction</a>
         <a class="nav-link" href="#install">Install</a>
         <a class="nav-link" href="#quick-start">Quick Start</a>
         <nav class="nav nav-pills flex-column flex-nowrap fw-normal small">
@@ -60,13 +61,14 @@
         <nav class="nav nav-pills flex-column flex-nowrap fw-normal small">
           <a class="nav-link" href="#api-properties">Properties</a>
           <a class="nav-link" href="#api-methods">Methods</a>
+          <a class="nav-link" href="#api-events">Events</a>
         </nav>
       </nav>
     </nav>
   </aside>
   <div class="sidebar-overlay"></div>
   <main class="main order-1 ps-lg-4">
-    <div class="hero py-5 text-center text-lg-start">
+    <div id="introduction" class="hero py-5 text-center text-lg-start">
       <div class="container">
         <div class="row flex-lg-row-reverse">
           <div class="col-6 mx-auto col-lg-5 mx-lg-0">
@@ -233,7 +235,7 @@ pdflive
       <li class="list-group-item">
         <div class="fw-bold"><code>on()</code></div>
         <div class="ms-3">
-          Alias of EventTarget.addEventListener.<br>
+          <p>Alias of EventTarget.addEventListener.</p>
           <h6>Syntax</h6>
           <div class="highlight">
             <pre><code class="js">on(type, listener);
@@ -251,13 +253,13 @@ on(type, listener, options);</code></pre>
             </li>
           </ul>
           <h6 class="mb-0">Return value</h6>
-          PDFLiveElement.
+          <p>PDFLiveElement.</p>
         </div>
       </li>
       <li class="list-group-item">
         <div class="fw-bold"><code>off()</code></div>
         <div class="ms-3">
-          Alias of EventTarget.removeEventListener.<br>
+          <p>Alias of EventTarget.removeEventListener.</p>
           <h6>Syntax</h6>
           <div class="highlight">
             <pre><code class="js">off(type, listener);</code></pre>
@@ -274,16 +276,60 @@ on(type, listener, options);</code></pre>
             </li>
           </ul>
           <h6 class="mb-0">Return value</h6>
-          PDFLiveElement.
+          <p>PDFLiveElement.</p>
         </div>
       </li>
       <li class="list-group-item">
         <div class="fw-bold"><code>getCurrentPageNumber()</code></div>
         <div class="ms-3">
+          <p>Returns the current page number.</p>
+          <h6>Syntax</h6>
+          <div class="highlight">
+            <pre><code class="js">getCurrentPageNumber();</code></pre>
+          </div>
+          <h6>Parameters</h6>
+          <p>None.</p>
+          <h6 class="mb-0">Return value</h6>
+          <p>Current page number.</p>
         </div>
       </li>
     </ul>
 
+    <h2 id="api-events">Events</h2>
+    <p>Inherits methods from its parent, HTMLElement , defined in the GlobalEventHandlers mixin.<br>Listen to these events using on() or addEventListener().</p>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        <div class="fw-bold"><code>documentLoaded</code></div>
+        <div class="ms-3">
+          <p>Fired when the PDF document has been loaded.</p>
+          <h6>Examples</h6>
+          <div class="highlight">
+            <button type="button" class="btn-clipboard" title="Copy to clipboard"><i class="far fa-clone"></i></button>
+            <pre class="mb-0"><code class="js">const pdflive = document.querySelector(&#039;pdf-live&#039;);
+
+pdflive.on(&#039;documentLoaded&#039;, () =&gt; {
+  console.log(&#039;Loaded PDF document&#039;);
+});</code></pre>
+          </div>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <div class="fw-bold"><code>pageChange</code></div>
+        <div class="ms-3">
+          <p>Fired when the page number being viewed is changed.</p>
+          <h6>Examples</h6>
+          <div class="highlight">
+            <button type="button" class="btn-clipboard" title="Copy to clipboard"><i class="far fa-clone"></i></button>
+            <pre class="mb-0"><code class="js">const pdflive = document.querySelector(&#039;pdf-live&#039;);
+
+pdflive.on(&#039;pageChange&#039;, evnt =&gt; {
+  const pageNum = evnt.detail.pageNum;
+  console.log(`Opened page ${pageNum}`);
+});</code></pre>
+          </div>
+        </div>
+      </li>
+    </ul>
     <!-- end:: API -->
   </main>
 </div>
