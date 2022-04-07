@@ -1,5 +1,8 @@
 :root {
   --top-spacing: 74px;
+  --nav-link-active-color: #ff725e;
+  --highlight-clipboard-active: #ff725e;
+  --code-color: #ff725e;
   scroll-padding-top: var(--top-spacing);
 }
 
@@ -105,7 +108,7 @@
     .sidenav a:hover,
     .sidenav .nav-link.active {
       font-weight: 600;
-      color: #0d6efd;
+      color: var(--nav-link-active-color);
       background-color: transparent;
     }
 
@@ -197,6 +200,10 @@
   overflow-x: hidden;
 }
 
+:not(.highlight) :not(pre) > code {
+  color: var(--code-color);
+}
+
 .highlight {
   position: relative;
   background: #f8f9fa;
@@ -228,7 +235,7 @@
   }
 
   .highlight .btn-clipboard:hover {
-    color: #0d6efd;
+    color: var(--highlight-clipboard-active);
   }
 
   .highlight .btn-clipboard:focus:not(:focus-visible) {
