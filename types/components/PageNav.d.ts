@@ -23,7 +23,7 @@ export default class PageNav {
     /** @type {number} */
     private lastPage;
     /** @type {(pageNum: number) => void} */
-    private changeHandler;
+    private changeListener;
     /**
      * Construct page navigation.
      *
@@ -48,12 +48,12 @@ export default class PageNav {
      */
     private enterPage;
     /**
-     * Browsing page change event. Returns the number of the page being viewed to the event handler.
+     * Browsing page change event. Returns the number of the page being viewed to the event listener.
      *
      * @param   {(pageNum: number) => void}
      * @returns {PageNav} The instance on which this method was called.
      */
-    onChange(handler: (pageNum: number) => void): PageNav;
+    onChange(listener: (pageNum: number) => void): PageNav;
     /**
      * Returns the current page number.
      *

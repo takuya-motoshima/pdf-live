@@ -33,7 +33,7 @@ export default class PageNav {
   private lastPage: number = 1;
 
   /** @type {(pageNum: number) => void} */
-  private changeHandler: (pageNum: number) => void = (pageNum: number): void => {};
+  private changeListener: (pageNum: number) => void = (pageNum: number): void => {};
 
   /**
    * Construct page navigation.
@@ -74,7 +74,7 @@ export default class PageNav {
         this.updatePage(pageNum);
 
         // Invoke browsing page change event.
-        this.changeHandler(pageNum);
+        this.changeListener(pageNum);
       });
     }, {
       root: this.pageView,
@@ -170,13 +170,13 @@ export default class PageNav {
   }
 
   /**
-   * Browsing page change event. Returns the number of the page being viewed to the event handler.
+   * Browsing page change event. Returns the number of the page being viewed to the event listener.
    *
    * @param   {(pageNum: number) => void}
    * @returns {PageNav} The instance on which this method was called.
    */
-  public onChange(handler: (pageNum: number) => void): PageNav {
-    this.changeHandler = handler;
+  public onChange(listener: (pageNum: number) => void): PageNav {
+    this.changeListener = listener;
     return this;
   }
 

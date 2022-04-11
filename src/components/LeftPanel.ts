@@ -21,7 +21,7 @@ export default class LeftPanel {
   private activeThumbnailNode: HTMLDivElement|undefined = undefined;
 
   /** @type {(pageNum: number) => void} */
-  private selectHandler: (pageNum: number) => void = (pageNum: number): void => {};
+  private selectListener: (pageNum: number) => void = (pageNum: number): void => {};
 
   /**
    * Controls opening and closing of the left panel and rendering of page thumbnails.
@@ -38,7 +38,7 @@ export default class LeftPanel {
 
     // Toggle the opening and closing of the left panel.
     this.leftPanelToggle.addEventListener('click', () => {
-      if (this.leftPanel.classList.contains('pl-left-panel-closed'))
+      if (this.leftPanel.classList.contains('left-panel-closed'))
         this.open();
       else
         this.close();
@@ -49,21 +49,21 @@ export default class LeftPanel {
 
     // Keep currently active thumbnail node.
     this.activeThumbnailNode = this.thumbnailNodes.find(
-      thumbnailNode => thumbnailNode.classList.contains('pl-thumbnail-active'));
+      thumbnailNode => thumbnailNode.classList.contains('thumbnail-active'));
 
     // Add click event for thumbnail node.
     for (let thumbnailNode of this.thumbnailNodes) {
       thumbnailNode.addEventListener('click', evnt => {
         // Deactivate currently active thumbnails.
-        this.activeThumbnailNode!.classList.remove('pl-thumbnail-active');
+        this.activeThumbnailNode!.classList.remove('thumbnail-active');
 
         // Activate the selected thumbnail.
-        (evnt.currentTarget! as HTMLDivElement).classList.add('pl-thumbnail-active');
+        (evnt.currentTarget! as HTMLDivElement).classList.add('thumbnail-active');
         this.activeThumbnailNode = evnt.currentTarget as HTMLDivElement;
 
         // Invoke thumbnail selection event.
         const pageNum = parseInt(this.activeThumbnailNode.dataset.pageNumber as string, 10);
-        this.selectHandler(pageNum);
+        this.selectListener(pageNum);
       }, {passive: true});
     }
   }
@@ -72,16 +72,16 @@ export default class LeftPanel {
    * Open the left panel.
    */
   public open(): void {
-    this.leftPanel.classList.remove('pl-left-panel-closed')
-    this.pagegContainer.classList.add('pl-page-container-open')
+    this.leftPanel.classList.remove('left-panel-closed')
+    this.pagegContainer.classList.add('page-container-open')
   }
 
   /**
    * Close left panel.
    */
   public close(): void {
-    this.leftPanel.classList.add('pl-left-panel-closed')
-    this.pagegContainer.classList.remove('pl-page-container-open')
+    this.leftPanel.classList.add('left-panel-closed')
+    this.pagegContainer.classList.remove('page-container-open')
   }
 
   /**
@@ -92,13 +92,13 @@ export default class LeftPanel {
   public activatePage(pageNum: number): void {
     // Deactivate currently active thumbnails.
     if (this.activeThumbnailNode)
-      this.activeThumbnailNode.classList.remove('pl-thumbnail-active');
+      this.activeThumbnailNode.classList.remove('thumbnail-active');
  
     // Activates the thumbnail corresponding to the specified page number.
     const targetThumbnailNode = this.thumbnailNodes.find(thumbnailNode => thumbnailNode.dataset.pageNumber == pageNum.toString());
     if (targetThumbnailNode) {
       // Activate the target thumbnail.
-      targetThumbnailNode.classList.add('pl-thumbnail-active');
+      targetThumbnailNode.classList.add('thumbnail-active');
       this.activeThumbnailNode = targetThumbnailNode;
 
       // Change the scroll position of the thumbnail viewer to a position where the active thumbnail node can be displayed.
@@ -128,23 +128,23 @@ export default class LeftPanel {
 
       // Create a thumbnail container node.
       const thumbnailNode = document.createElement('div');
-      thumbnailNode.classList.add('pl-thumbnail');
+      thumbnailNode.classList.add('thumbnail');
       thumbnailNode.dataset.pageNumber = num.toString();
 
       // Activate the thumbnail on the first page.
       if (num === 1)
-        thumbnailNode.classList.add('pl-thumbnail-active');    
+        thumbnailNode.classList.add('thumbnail-active');    
 
       // Create a canvas node.
       const canvas = document.createElement('canvas');
-      canvas.classList.add('pl-thumbnail-image');
+      canvas.classList.add('thumbnail-image');
       canvas.width = Math.floor(viewport.width);
       canvas.height = Math.floor(viewport.height);
       thumbnailNode.appendChild(canvas);
 
       // Create a thumbnail number label node.
       const label = document.createElement('div');
-      label.classList.add('pl-thumbnail-label');
+      label.classList.add('thumbnail-label');
       label.textContent = num.toString();
       thumbnailNode.appendChild(label);
 
@@ -161,13 +161,13 @@ export default class LeftPanel {
   }
 
   /**
-   * Thumbnail selection event. Returns the page number of the selected thumbnail to the handler.
+   * Thumbnail selection event. Returns the page number of the selected thumbnail to the listener.
    *
    * @param   {(pageNum: number) => void}
    * @returns {LeftPanel} The instance on which this method was called.
    */
-  onSelect(handler: (pageNum: number) => void) {
-    this.selectHandler = handler;
+  public onSelect(listener: (pageNum: number) => void): LeftPanel {
+    this.selectListener = listener;
     return this;
   }
 }

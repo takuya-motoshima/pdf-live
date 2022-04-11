@@ -25,7 +25,7 @@
   "message": {
     "badDocument": "Error al cargar el documento. El documento está dañado o no es válido.",
     "enterPassword": "Este documento está protegido por contraseña. Introduce una contraseña",
-    "incorrectPassword": "Contraseña incorrecta, intentos restantes: {{ remainingAttempts }}",
+    "incorrectPassword": "Contraseña incorrecta",
     "notSupported": "Ese tipo de archivo no es compatible.",
     "passwordRequired": "Se requiere contraseña",
     "warning": "Advertencia"

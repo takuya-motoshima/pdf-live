@@ -25,7 +25,7 @@
   "message": {
     "badDocument": "Falha ao carregar documento. O documento está corrompido ou é inválido.",
     "enterPassword": "Esse documento é protegido por senha. Digite uma senha",
-    "incorrectPassword": "Senha incorreta. Tentativas restantes: {{ remainingAttempts }}",
+    "incorrectPassword": "Senha incorreta",
     "notSupported": "Esse tipo de arquivo não é compatível.",
     "passwordRequired": "Senha obrigatória",
     "warning": "Aviso"

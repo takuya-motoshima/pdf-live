@@ -32,7 +32,7 @@ export default async (pdfDoc, zoomFactor = 1.0) => {
     pageNode.style.width = `${Math.floor(viewport.width)}px`;
     pageNode.style.height = `${Math.floor(viewport.height)}px`;
     pageNode.style.margin = `${zoomFactor * 4}px`;
-    pageNode.classList.add('pl-page');
+    pageNode.classList.add('page');
     pageNode.dataset.pageNumber = num.toString();
 
     // Create a canvas node.

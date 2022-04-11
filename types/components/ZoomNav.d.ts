@@ -32,7 +32,7 @@ export default class ZoomNav {
     /** @type {number} */
     private readonly maxZoom;
     /** @type {(zoomFactor: number) => void} */
-    private changeHandler;
+    private changeListener;
     /**
      * Control the zoom factor change event of a page.
      *
@@ -86,10 +86,10 @@ export default class ZoomNav {
      */
     private calcStep;
     /**
-     * Zoom change event. Returns the zoom factor to the event handler.
+     * Zoom change event. Returns the zoom factor to the event listener.
      *
      * @param {(zoomFactor: number) => void}
      * @returns {ZoomNav} The instance on which this method was called.
      */
-    onChange(handler: (zoomFactor: number) => void): this;
+    onChange(listener: (zoomFactor: number) => void): ZoomNav;
 }

@@ -1,4 +1,5 @@
-declare const _default: (url: string, workerSrc: string) => Promise<any>;
+import Language from '~/interfaces/Language';
+declare const _default: (url: string, workerSrc: string, language: Language) => Promise<any>;
 /**
   * Load a PDF document.
   *

@@ -25,7 +25,7 @@
   "message": {
     "badDocument": "Caricamento del documento non riuscito. Il documento è corrotto o non valido.",
     "enterPassword": "Questo documento è protetto da password. Per favore inserire una password",
-    "incorrectPassword": "Password errata, tentativi rimasti: {{rimanendo tentativi}}",
+    "incorrectPassword": "Password errata",
     "notSupported": "Quel tipo di file non è supportato.",
     "passwordRequired": "Password richiesta",
     "warning": "Avvertimento"

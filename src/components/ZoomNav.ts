@@ -1,5 +1,5 @@
-import pointInRectangle from '../shared/pointInRectangle.js';
-import isNumber from '../shared/isNumber.js';
+import pointInRectangle from '~/shared/pointInRectangle.js';
+import isNumber from '~/shared/isNumber.js';
 import Viewport from '~/interfaces/Viewport';
 
 const ZOOM_OUT = 0;
@@ -52,7 +52,7 @@ export default class ZoomNav {
   private readonly maxZoom: number;
 
   /** @type {(zoomFactor: number) => void} */
-  private changeHandler: (zoomFactor: number) => void = (zoomFactor: number): void => {}
+  private changeListener: (zoomFactor: number) => void = (zoomFactor: number): void => {}
 
   /**
    * Control the zoom factor change event of a page.
@@ -91,7 +91,7 @@ export default class ZoomNav {
 
     // Toggle the opening and closing of the zoom overlay.
     this.zoomToggle.addEventListener('click', (evnt) => {
-      if (this.zoomMenu.classList.contains('pl-zoom-menu-closed')) {
+      if (this.zoomMenu.classList.contains('zoom-menu-closed')) {
         // Stops event propagation to the body so that the process of closing the zoom overlay for body click events does not run.
         evnt.stopPropagation();
 
@@ -116,7 +116,7 @@ export default class ZoomNav {
 
         // Activate the selected zoom item.
         const targetNode = evnt.target as HTMLButtonElement;
-        targetNode.classList.add('pl-zoom-menu-item-selected');
+        targetNode.classList.add('zoom-menu-item-selected');
 
         // Calculate zoom factor.
         const zoomFactor = this.calcFactor(targetNode.dataset.value as string);
@@ -128,7 +128,7 @@ export default class ZoomNav {
         this.lastZoom = parseInt(this.zoomInput.value, 10);
 
         // Invoke zoom change event.
-        this.changeHandler(zoomFactor);
+        this.changeListener(zoomFactor);
       }, {passive: true});
 
     // When the window is resized.
@@ -143,14 +143,14 @@ export default class ZoomNav {
 
         // If the zoom mode is "page fit" or "width fit", resize the page.
         const selectedZoom = this.zoomSelects.find(zoomSelect =>
-          zoomSelect.classList.contains('pl-zoom-menu-item-selected')) as HTMLButtonElement;
+          zoomSelect.classList.contains('zoom-menu-item-selected')) as HTMLButtonElement;
         const currentZoom = selectedZoom.dataset.value;
         if (currentZoom === 'pageFit' || currentZoom === 'pageWidth') {
           // Calculate zoom factor.
           const zoomFactor = this.calcFactor(currentZoom);
 
           // Invoke zoom change event.
-          this.changeHandler(zoomFactor);
+          this.changeListener(zoomFactor);
         }
       }, 100);
     }, {passive: true});
@@ -158,7 +158,7 @@ export default class ZoomNav {
     // When the screen is clicked.
     document.body.addEventListener('click', evnt => {
       // Close if zoom overlay is open.
-      if (!this.zoomMenu.classList.contains('pl-zoom-menu-closed')
+      if (!this.zoomMenu.classList.contains('zoom-menu-closed')
         && !pointInRectangle({x: evnt.pageX, y: evnt.pageY}, this.zoomMenu.getBoundingClientRect()))
         this.close();
     }, {passive: true});
@@ -233,7 +233,7 @@ export default class ZoomNav {
       const zoomFactor = this.calcFactor(this.zoomInput.value);
 
       // Invoke zoom change event.
-      this.changeHandler(zoomFactor);
+      this.changeListener(zoomFactor);
     }, {passive: false});
 
     // Focus out zoom input.
@@ -263,14 +263,14 @@ export default class ZoomNav {
    * Open zoom overlay.
    */
   public open(): void {
-    this.zoomMenu.classList.remove('pl-zoom-menu-closed');
+    this.zoomMenu.classList.remove('zoom-menu-closed');
   }
 
   /**
    * Close zoom overlay.
    */
   public close(): void {
-    this.zoomMenu.classList.add('pl-zoom-menu-closed');
+    this.zoomMenu.classList.add('zoom-menu-closed');
   }
 
   /**
@@ -316,9 +316,9 @@ export default class ZoomNav {
    */
   private deselectMenu(): void {
     const selectedZoom = this.zoomSelects.find(zoomSelect =>
-      zoomSelect.classList.contains('pl-zoom-menu-item-selected'));
+      zoomSelect.classList.contains('zoom-menu-item-selected'));
     if (selectedZoom)
-      selectedZoom.classList.remove('pl-zoom-menu-item-selected');
+      selectedZoom.classList.remove('zoom-menu-item-selected');
   }
 
   /**
@@ -333,7 +333,7 @@ export default class ZoomNav {
     // Activate the zoom menu that matches the current zoom factor.
     const zoomSelect = this.zoomSelects.find(zoomSelect => zoomSelect.dataset.value == value);
     if (zoomSelect)
-      zoomSelect.classList.add('pl-zoom-menu-item-selected');
+      zoomSelect.classList.add('zoom-menu-item-selected');
   }
 
   /**
@@ -368,7 +368,7 @@ export default class ZoomNav {
       const zoomFactor = this.calcFactor(this.zoomInput.value);
 
       // Invoke zoom change event.
-      this.changeHandler(zoomFactor);
+      this.changeListener(zoomFactor);
     } else
       // If the input zoom is an invalid number, set the previous value to the input zoom.
       this.zoomInput.value = this.lastZoom.toString();
@@ -413,17 +413,17 @@ export default class ZoomNav {
     const zoomFactor = this.calcFactor(this.zoomInput.value);
 
     // Invoke zoom change event.
-    this.changeHandler(zoomFactor);
+    this.changeListener(zoomFactor);
   }
 
   /**
-   * Zoom change event. Returns the zoom factor to the event handler.
+   * Zoom change event. Returns the zoom factor to the event listener.
    *
    * @param {(zoomFactor: number) => void}
    * @returns {ZoomNav} The instance on which this method was called.
    */
-  public onChange(handler: (zoomFactor: number) => void) {
-    this.changeHandler = handler;
+  public onChange(listener: (zoomFactor: number) => void): ZoomNav {
+    this.changeListener = listener;
     return this;
   }
 }

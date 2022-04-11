@@ -1,5 +1,3 @@
-import BadDocumentError from '../exceptions/BadDocumentError.js';
-
 /**
   * Load a PDF document.
   */
@@ -16,6 +14,6 @@ export default async url => {
     // console.log(`Loaded ${url}. Total number of pages is ${pdfDoc.numPages}`);
     return pdfDoc;
   } catch (err) {
-    throw new BadDocumentError(err instanceof Error ? err.message : String(err));
+    throw new Error('Failed to load document. The document is either corrupt or not valid.');
   }
 }

@@ -3,18 +3,30 @@ import './index.css';
  * PDFLiveElement.
  */
 declare class PDFLiveElement extends HTMLElement {
-    /** @type {LoadingModal} */
-    private loadingModal;
+    /** @type {Loading} */
+    private readonly loading;
     /** @type {ErrorModal} */
-    private errorModal;
+    private readonly errorModal;
+    /** @type {PasswordModal} */
+    private readonly passwordModal;
     /** @type {Language} */
-    private language;
+    private readonly language;
     /** @type {boolean} */
     private loaded;
     /** @type {boolean} */
-    private calledLoadHandler;
+    private calledLoadListener;
     /** @type {boolean} */
     private pageNav;
+    /** @type {HTMLDivElement} */
+    private readonly documentTitle;
+    /** @type {HTMLButtonElement} */
+    private readonly printButton;
+    /** @type {HTMLButtonElement} */
+    private readonly downloadButton;
+    /** @type {HTMLButtonElement} */
+    private readonly themeChangeButton;
+    /** @type {{[key: string]: Function}} */
+    private readonly listeners;
     /**
      * constructor
      */
@@ -40,36 +52,17 @@ declare class PDFLiveElement extends HTMLElement {
     /**
      * Add event listener
      *
-     * @param  {'pageChange'|'documentLoaded'}  type
-     * @param  {() => void}                     listener
-     * @param  {{once: boolen}}                 options.once
+     * @param  {'pageChange'|'documentLoaded'|'passwordEnter'}  type
+     * @param  {Function}                                       listener
      * @return {PDFLiveElement}
      */
-    on(type: 'pageChange' | 'documentLoaded', listener: (evnt?: Event) => void, options?: {
-        once: boolean;
-    }): PDFLiveElement;
-    /**
-     * Remove event listener
-     *
-     * @param  {string}     type
-     * @param  {() => void} listener
-     * @return {PDFLiveElement}
-     */
-    off(type: string, listener: (evnt?: Event) => void): PDFLiveElement;
+    on(type: 'pageChange' | 'documentLoaded' | 'passwordEnter', listener: Function): PDFLiveElement;
     /**
      * Returns the current page number.
      *
      * @return {number}
      */
     getCurrentPageNumber(): number;
-    /**
-     * Call event listener
-     *
-     * @param  {string} type
-     * @param  {Object} detail
-     * @return {void}
-     */
-    private invoke;
     /**
      * Render viewer.
      *

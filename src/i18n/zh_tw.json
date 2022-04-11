@@ -25,7 +25,7 @@
   "message": {
     "badDocument": "無法載入文件。此文件已損壞或無效。",
     "enterPassword": "文件有密碼保護。請輸入密碼",
-    "incorrectPassword": "密碼不正確，剩下 {{ remainingAttempts }} 次嘗試機會",
+    "incorrectPassword": "密碼不正確",
     "notSupported": "不支援該檔案類型。",
     "passwordRequired": "需要密碼",
     "warning": "警告"

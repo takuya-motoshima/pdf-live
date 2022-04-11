@@ -25,7 +25,7 @@
   "message": {
     "badDocument": "Er is een fout opgetreden bij het laden van het document. Het document is corrupt of heeft een ongeldige indeling.",
     "enterPassword": "Dit document heeft een wachtwoord beveiliging. Geef een wachtwoord",
-    "incorrectPassword": "Fout wachtwoord, overgebleven pogingen: {{ remainingAttempts }}",
+    "incorrectPassword": "Fout wachtwoord",
     "notSupported": "Dit bestandstype wordt niet ondersteund.",
     "passwordRequired": "Wachtwoord vereist",
     "warning": "Waarschuwing"

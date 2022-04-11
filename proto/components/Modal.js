@@ -1,7 +1,7 @@
 /**
  * Modal base class.
  */
-export default class {
+export default class Modal {
   /**
    * Construct modal. Add modal node defined in subclass to context.
    *
@@ -26,15 +26,28 @@ export default class {
 
   /**
    * Show modal.
+   *
+   * @returns {Modal} The instance on which this method was called.
    */
   show() {
-    this.modalNode.classList.replace('pl-modal-hide', 'pl-modal-show');
+    this.modalNode.classList.add('modal-show');
+    return this;
   }
 
   /**
    * Hide modal.
+   *
+   * @returns {Modal} The instance on which this method was called.
    */
   hide() {
-    this.modalNode.classList.replace('pl-modal-show', 'pl-modal-hide');
+    this.modalNode.classList.remove('modal-show');
+    return this;
+  }
+
+  /**
+   * Destroy modal.
+   */
+  destroy() {
+    this.modalNode.remove();
   }
 }

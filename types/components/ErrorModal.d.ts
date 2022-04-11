@@ -2,7 +2,7 @@ import Modal from '~/components/Modal';
 /**
  * Error modal.
  */
-export default class extends Modal {
+export default class ErrorModal extends Modal {
     /** @type {HTMLDivElement} */
     private readonly message;
     /**
@@ -22,5 +22,5 @@ export default class extends Modal {
      *
      * @param {string} message
      */
-    show(message?: string): void;
+    show(message?: string): ErrorModal;
 }

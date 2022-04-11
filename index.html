@@ -8,23 +8,27 @@
   <link rel="stylesheet" href="dist/pdf-live.css">
 </head>
 <body>
-  <pdf-live src="sample.pdf" lang="ja" worker="dist/pdf.worker.min.js"></pdf-live>
+  <pdf-live src="sample.pdf" lang="ja" worker="dist/pdf.worker.min.js" protected></pdf-live>
   <script type="module">
     import './dist/pdf-live.esm.js';
 
     // Find the PDFLive node.
     const pdflive = document.querySelector('pdf-live');
 
-    // Set event handler for PDF Live.
+    // Set event listener for PDF Live.
     pdflive
       .on('documentLoaded', () => {
         // PDF document load event.
         console.log('Loaded PDF document');
       })
-      .on('pageChange', evnt => {
+      .on('pageChange', pageNum => {
         // Page change event.
-        const pageNum = evnt.detail.pageNum;
         console.log(`Opened page ${pageNum}`);
+      })
+      .on('passwordEnter', password => {
+        // Password entered.
+        console.log('Password entered');
+        return password === 'password';
       });
   </script>
 </body>

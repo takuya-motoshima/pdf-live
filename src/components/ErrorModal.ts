@@ -3,7 +3,7 @@ import Modal from '~/components/Modal';
 /**
  * Error modal.
  */
-export default class extends Modal {
+export default class ErrorModal extends Modal {
   /** @type {HTMLDivElement} */
   private readonly message: HTMLDivElement;
 
@@ -23,8 +23,14 @@ export default class extends Modal {
    * @returns {string} Modal HTML.
    */
   protected render(): string {
-    return `<div class="pl-modal pl-error-modal pl-modal-hide" data-element="errorModal">
-              <div data-element="message" class="pl-modal-container">This is an error</div>
+    return `<div class="modal">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-body">
+                    <div data-element="message">This is an error</div>
+                  </div>
+                </div>
+              </div>
             </div>`;
   }
 
@@ -33,8 +39,9 @@ export default class extends Modal {
    *
    * @param {string} message
    */
-  public show(message?: string): void {
+  public show(message?: string): ErrorModal {
     this.message.textContent = message as string;
     super.show();
+    return this;
   }
 }

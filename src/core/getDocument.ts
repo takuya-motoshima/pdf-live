@@ -1,4 +1,4 @@
-import BadDocumentError from '~/exceptions/BadDocumentError';
+import Language from '~/interfaces/Language';
 
 /**
   * Load a PDF document.
@@ -7,7 +7,7 @@ import BadDocumentError from '~/exceptions/BadDocumentError';
   * @param  {string} workerSrc
   * @return {PDFDocumentProxy}
   */
-export default async (url: string, workerSrc: string): Promise<any> => {
+export default async (url: string, workerSrc: string, language: Language): Promise<any> => {
   try {
     // Setting worker path to worker bundle.
     window.pdfjsLib.GlobalWorkerOptions.workerSrc = workerSrc;
@@ -20,6 +20,6 @@ export default async (url: string, workerSrc: string): Promise<any> => {
     // console.log(`Loaded ${url}. Total number of pages is ${pdfDoc.numPages}`);
     return pdfDoc;
   } catch (err) {
-    throw new BadDocumentError(err instanceof Error ? err.message : String(err));
+    throw new Error(language.message.badDocument);
   }
 }

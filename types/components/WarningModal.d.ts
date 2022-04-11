@@ -1,8 +1,8 @@
-import Modal from '~/components/Modal';
+import Modal from '~/components/Modal.js';
 /**
- * Show loading.
+ * Warning modal.
  */
-export default class LoadingModal extends Modal {
+export default class WarningModal extends Modal {
     /**
      * Render the content of this component.
      *

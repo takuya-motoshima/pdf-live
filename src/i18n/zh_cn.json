@@ -25,7 +25,7 @@
   "message": {
     "badDocument": "无法加载文档，此文档已损坏或无效。",
     "enterPassword": "此文档已被加密。请输入密码。",
-    "incorrectPassword": "密码错误，剩余输入机会：{{remainingAttempts}}",
+    "incorrectPassword": "密码错误",
     "notSupported": "不支持该文件类型。",
     "passwordRequired": "需要输入密码",
     "warning": "警告"

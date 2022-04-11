@@ -1,6 +1,5 @@
 node_modules/
+proto/
 src/
-docs/
-screencaps/
 rollup.config.js
 tsconfig.json

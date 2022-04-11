@@ -3,7 +3,7 @@ import Modal from './Modal.js';
 /**
  * Error modal.
  */
-export default class extends Modal {
+export default class ErrorModal extends Modal {
   /**
    * Construct modal.
    */
@@ -18,8 +18,14 @@ export default class extends Modal {
    * @returns {string} Modal HTML.
    */
   render() {
-    return `<div class="pl-modal pl-error-modal pl-modal-hide" data-element="errorModal">
-              <div data-element="message" class="pl-modal-container">This is an error</div>
+    return `<div class="modal">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-body">
+                    <div data-element="message">This is an error</div>
+                  </div>
+                </div>
+              </div>
             </div>`;
   }
 

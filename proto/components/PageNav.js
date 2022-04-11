@@ -29,8 +29,8 @@ export default class PageNav {
     // Last input page.
     this.lastPage = 1;
 
-    // Handler for change event for the page you are viewing.
-    this.changeHandler = pageNum => {};
+    // Listener for change event for the page you are viewing.
+    this.changeListener = pageNum => {};
 
     // Shows the number of the page at the current scroll position.
     const observer = new IntersectionObserver(entries => {
@@ -49,7 +49,7 @@ export default class PageNav {
         this.updatePage(pageNum);
 
         // Invoke browsing page change event.
-        this.changeHandler(pageNum);
+        this.changeListener(pageNum);
       });
     }, {
       root: this.pageView,
@@ -145,13 +145,13 @@ export default class PageNav {
   }
 
   /**
-   * Browsing page change event. Returns the number of the page being viewed to the event handler.
+   * Browsing page change event. Returns the number of the page being viewed to the event listener.
    *
    * @param   {(pageNum: number) => void}
    * @returns {PageNav} The instance on which this method was called.
    */
-  onChange(handler) {
-    this.changeHandler = handler;
+  onChange(listener) {
+    this.changeListener = listener;
     return this;
   }
 }

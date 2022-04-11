@@ -25,7 +25,7 @@
   "message": {
     "badDocument": "Échec du chargement du document. Le document est corrompu ou non valide.",
     "enterPassword": "Ce document est protégé par un mot de passe. Veuillez saisir ce mot de passe.",
-    "incorrectPassword": "Mot de passe incorrect. Tentatives restantes: {{remainingAttempts}}",
+    "incorrectPassword": "Mot de passe incorrect",
     "notSupported": "Ce type de fichier n'est pas pris en charge.",
     "passwordRequired": "Mot de passe requis",
     "warning": "Avertissement"

@@ -1,0 +1,37 @@
+{
+  "action": {
+    "cancel": "取消",
+    "close": "关闭",
+    "download": "下载",
+    "enterFullscreen": "全屏",
+    "exitFullscreen": "退出全屏",
+    "fitToPage": "页面尺寸",
+    "fitToWidth": "自身尺寸",
+    "pagePrev": "上一页",
+    "pageNext": "下一页",
+    "print": "打印",
+    "ok": "好的",
+    "submit": "提交",
+    "zoomIn": "放大",
+    "zoomOut": "缩小",
+    "zoomControls": "缩放控制",
+    "darkMode": "暗模式",
+    "lightMode": "灯光模式"
+  },
+  "component": {
+    "leftPanel": "面板",
+    "zoomOverlay": "缩放叠加"
+  },
+  "message": {
+    "badDocument": "无法加载文档，此文档已损坏或无效。",
+    "enterPassword": "此文档已被加密。请输入密码。",
+    "incorrectPassword": "密码错误，剩余输入机会：{{remainingAttempts}}",
+    "notSupported": "不支持该文件类型。",
+    "passwordRequired": "需要输入密码",
+    "warning": "警告"
+  },
+  "shortcut": {
+    "zoomIn": "(Ctrl +)",
+    "zoomOut": "(Ctrl -)"
+  }
+}

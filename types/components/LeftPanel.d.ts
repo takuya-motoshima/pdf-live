@@ -15,7 +15,7 @@ export default class LeftPanel {
     /** @type {HTMLDivElement|null} */
     private activeThumbnailNode;
     /** @type {(pageNum: number) => void} */
-    private selectHandler;
+    private selectListener;
     /**
      * Controls opening and closing of the left panel and rendering of page thumbnails.
      *
@@ -45,10 +45,10 @@ export default class LeftPanel {
      */
     private render;
     /**
-     * Thumbnail selection event. Returns the page number of the selected thumbnail to the handler.
+     * Thumbnail selection event. Returns the page number of the selected thumbnail to the listener.
      *
      * @param   {(pageNum: number) => void}
      * @returns {LeftPanel} The instance on which this method was called.
      */
-    onSelect(handler: (pageNum: number) => void): this;
+    onSelect(listener: (pageNum: number) => void): LeftPanel;
 }

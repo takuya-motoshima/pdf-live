@@ -25,7 +25,7 @@
   "message": {
     "badDocument": "ドキュメントの読み込みに失敗しました。ドキュメントが破損しているか、有効ではありません。",
     "enterPassword": "このドキュメントは、パスワードで保護されています。 パスワードを入力してください。",
-    "incorrectPassword": "パスワードが正しくありません。残りの試行回数：{{ remainingAttempts }}",
+    "incorrectPassword": "パスワードが正しくありません。",
     "notSupported": "このファイル形式はサポートされていません。",
     "passwordRequired": "パスワードが必要です",
     "warning": "警告"
