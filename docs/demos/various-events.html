@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="dist/favicon.svg">
+  <link rel="stylesheet" href="dist/pdf-live.css">
+</head>
+<body>
+  <pdf-live src="sample.pdf" lang="en" worker="dist/pdf.worker.js"></pdf-live>
+  <script type="module">
+    import './dist/pdf-live.esm.js';
+
+    // Find the PDFLive node.
+    const pdflive = document.querySelector('pdf-live');
+
+    // Set event listener for PDF Live.
+    pdflive
+      .on('documentLoaded', () => {
+        // PDF document loaded.
+        alert('Loaded PDF document');
+      })
+      .on('pageChange', pageNum => {
+        // The browsing page has changed. The page number can be received as a parameter.
+        alert(`Opened page ${pageNum}`);
+      })
+  </script>
+</body>
+</html>
