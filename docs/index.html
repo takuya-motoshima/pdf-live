@@ -280,6 +280,9 @@ pdflive
           <div class="ms-3">
             The protected attribute password-protects PDF documents.<br>
             If this attribute is added, a password prompt will be raised before loading the document.
+            <div class="callout callout-warning">
+              When using the protected attribute, the PDF live node must have a <code class="fw-bold">passwordEnter</code> event.
+            </div>
           </div>
         </li>
       </ul>
@@ -355,6 +358,39 @@ pdflive.on(&#039;documentLoaded&#039;, () =&gt; {
 
 pdflive.on(&#039;pageChange&#039;, pageNum =&gt; {
   console.log(`Opened page ${pageNum}`);
+});</code></pre>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="fw-bold"><code>passwordEnter</code></div>
+          <div class="ms-3">
+            <p>Fired when user enters password.</p>
+            <div class="callout callout-warning">
+              To password protect a PDF, the PDF live node must have the <code class="fw-bold">protected</code> attribute.
+            </div>
+            <h6>Examples</h6>
+            <div class="highlight">
+              <button type="button" class="btn-clipboard" title="Copy to clipboard"><i class="far fa-clone"></i></button>
+              <pre class="mb-0"><code class="js">const pdflive = document.querySelector(&#039;pdf-live&#039;);
+
+pdflive.on(&#039;passwordEnter&#039;, password =&gt; {
+  // Returns true if the password entered is correct.
+  return password === &#039;password&#039;;
+});</code></pre>
+            </div>
+
+            <p class="mb-0 mt-3">If you want to check for correct passwords server-side, return Promise in the listener.</p>
+            <div class="highlight">
+              <button type="button" class="btn-clipboard" title="Copy to clipboard"><i class="far fa-clone"></i></button>
+              <pre class="mb-0"><code class="js">const pdflive = document.querySelector(&#039;pdf-live&#039;);
+
+pdflive.on(&#039;passwordEnter&#039;, async password =&gt; {
+  // Request correct password.
+  const correctPassword = await (await fetch(&#039;Correct Password.txt&#039;)).text();
+
+  // Returns true if the password entered is correct.
+  return correctPassword === password;
 });</code></pre>
             </div>
           </div>

@@ -15,7 +15,7 @@
     // Find the PDFLive node.
     const pdflive = document.querySelector('pdf-live');
 
-    // Password entered..
+    // Password entered.
     pdflive.on('passwordEnter', async password => {
       // Request correct password.
       const correctPassword = await (await fetch('Correct Password.txt')).text();

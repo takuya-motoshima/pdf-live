@@ -114,7 +114,7 @@ class PDFLiveElement extends HTMLElement {
       // Set the PDF file name in the title.
       this.documentTitle.textContent = document.title = getFilename(url);
 
-      // Get the Worker URL from the worker attribute..
+      // Get the Worker URL from the worker attribute.
       const workerSrc = this.getAttribute('worker');
       if (!workerSrc)
         throw new Error('Element pdf-live is missing required attribute worker');
@@ -276,7 +276,7 @@ class PDFLiveElement extends HTMLElement {
     // Set event listener.
     this.listeners[type] = listener;
 
-    // If the document is already loaded and the loaded event is set, immediately invoke the loaded event..
+    // If the document is already loaded and the loaded event is set, immediately invoke the loaded event.
     if (type === 'documentLoaded' || this.loaded) {
       if (this.listeners.documentLoaded)
         this.listeners.documentLoaded();

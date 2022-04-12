@@ -162,7 +162,7 @@ export default class PageNav {
         // If the input exceeds the maximum value, set the maximum value to the input.
         pageNum = this.maxPage;
 
-      // Activate the specified page..
+      // Activate the specified page.
       this.activatePage(pageNum);
     } else
       // If the input zoom is an invalid number, set the previous value to the input zoom.
