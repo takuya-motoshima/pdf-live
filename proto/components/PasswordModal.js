@@ -140,7 +140,7 @@ export default class PasswordModal extends Modal {
     super.show();
 
     // Focus on password entry field.
-    this.passwordInput.focus();
+    setTimeout(() => this.passwordInput.focus());
 
     // The caller waits until the password is answered correctly.
     return new Promise((rslv, rej) => {
