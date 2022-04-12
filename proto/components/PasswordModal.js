@@ -116,7 +116,7 @@ export default class PasswordModal extends Modal {
                 <div class="modal-content">
                   <div class="modal-header">Password required</div>
                   <div class="modal-body">
-                    <form data-element="form">
+                    <form data-element="form" id="passwordForm">
                       <div class="enter">
                         <div>This document is password protected. Please enter a password</div>
                         <input data-element="passwordInput" type="password" autocomplete="current-password" aria-label="Password required">
@@ -126,7 +126,7 @@ export default class PasswordModal extends Modal {
                   </div>
                   <div class="modal-footer">
                     <!-- <button class="button button-cancel button-modal" data-element="passwordCancelButton"><span>Cancel</span></button> -->
-                    <button type="submit" class="button button-confirm button-modal" data-element="passwordSubmitButton" disabled><span>Submit</span></button>
+                    <button form="passwordForm" type="submit" class="button button-confirm button-modal" data-element="passwordSubmitButton" disabled><span>Submit</span></button>
                   </div>
                 </div>
               </div>
