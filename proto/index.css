@@ -405,6 +405,12 @@ pdf-live {
         min-width: 0;
       }
 
+      @media (max-width: 640px) {
+        .document-title {
+          display: none;
+        }
+      }
+
         .document-title-ellipsis {
           overflow: hidden;
           white-space: nowrap;
@@ -419,6 +425,12 @@ pdf-live {
         justify-content: center;
         height: 28px;
         margin: 0 auto;
+      }
+
+      @media (max-width: 640px) {
+        .zoom-overlay {
+          flex: 1 1 0;
+        }
       }
 
         .zoom-overlay .button {
@@ -493,7 +505,13 @@ pdf-live {
         display: flex;
         justify-content: flex-end;
       }
-      
+
+      @media (max-width: 640px) {
+        .header-nav {
+          flex: 0 1 auto;
+        }
+      }
+
         .header-nav .button {
           margin: 0 6px;
           width: 32px;

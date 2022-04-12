@@ -78,7 +78,7 @@ class PDFLiveElement extends HTMLElement {
     this.language = i18n(this.getAttribute('lang') || 'en');
 
     // Render viewer.
-    this.render(true);
+    this.render(window.innerWidth > 640);
 
     // Document title.
     this.documentTitle = this.querySelector('[data-element="title"]') as HTMLDivElement;
