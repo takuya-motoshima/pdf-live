@@ -4,12 +4,12 @@
 'PDF LIVE' is a PDF viewer that extends the open source 'mozilla/pdf.js'. You can start the PDF viewer with toolbar right away with 'PDF LIVE'.
 
 ## Documentation
-* [Introduction](https://lab.octopass.tech/pdf-live/docs/#introduction)
-* [Demo](https://lab.octopass.tech/pdf-live/docs/#demo)
-* [Install](https://lab.octopass.tech/pdf-live/docs/#install)
-* [Quick Start](https://lab.octopass.tech/pdf-live/docs/#quick-start)
-* [Usage](https://lab.octopass.tech/pdf-live/docs/#usage)
-* [API](https://lab.octopass.tech/pdf-live/docs/#api)
+* [Introduction](https://takuya-motoshima.github.io/pdf-live/#introduction)
+* [Demo](https://takuya-motoshima.github.io/pdf-live/#demo)
+* [Install](https://takuya-motoshima.github.io/pdf-live/#install)
+* [Quick Start](https://takuya-motoshima.github.io/pdf-live/#quick-start)
+* [Usage](https://takuya-motoshima.github.io/pdf-live/#usage)
+* [API](https://takuya-motoshima.github.io/pdf-live/#api)
 
 ## Author
 **Takuya Motoshima**
