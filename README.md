@@ -28,7 +28,7 @@ This step is not required. If you do not wish to set a favicon, skip this step.
 
 Copy-paste the &lt;pdf-live&gt; into your &lt;body&gt; to load our PDF live.
 ```html
-<pdf-live src="sample.pdf" lang="en" worker="node_modules/pdf-live/dist/pdf.worker.min.js"></pdf-live>
+<pdf-live src="sample.pdf" lang="en" worker="node_modules/pdf-live/dist/pdf.worker.js"></pdf-live>
 ```
 
 ### JS
@@ -55,13 +55,24 @@ const pdflive = document.querySelector('pdf-live');
 // Set event listener for PDF Live.
 pdflive
   .on('documentLoaded', () => {
-    // PDF document load event.
+    // PDF document loaded.
     console.log('Loaded PDF document');
   })
   .on('pageChange', pageNum => {
-    // Page change event.
+    // The browsing page has changed. The page number can be received as a parameter.
     console.log(`Opened page ${pageNum}`);
+  })
+  .on('passwordEnter', password => {
+    // Returns true if the password entered is correct.
+    // NOTE: This event listener is required if the protected attribute is in a PDF live node.
+    return password === 'password';
   });
+
+// The passwordEnter event listener is Async can also be used.
+pdflive.on('passwordEnter', async password => {
+  const correctPassword = await (await fetch('Correct Password.txt')).text();
+  return correctPassword === password;
+});
 ```
 
 ## Author

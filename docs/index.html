@@ -110,18 +110,25 @@
       <p>Quickly start a project from a demo, ranging from partial use of a PDF live to an event or theme.</p>
       <div class="row">
         <div class="col-sm-6 col-md-4 col-xl-3 mb-3">
-          <a class="d-block" href="#!">
+          <a class="d-block" href="demos/light-theme.html">
             <img class="img-thumbnail mb-3" src="img/demo/light.png" width="480" height="300" loading="lazy">
             <h6 class="mb-1">Light theme</h6>
           </a>
           <p class="text-muted">A light theme is a hight-light UI that displays mostly light surfaces.</p>
         </div>
         <div class="col-sm-6 col-md-4 col-xl-3 mb-3">
-          <a class="d-block" href="#!">
+          <a class="d-block" href="demos/dark-theme.html">
             <img class="img-thumbnail mb-3" src="img/demo/dark.png" width="480" height="300" loading="lazy">
             <h6 class="mb-1">Dark theme</h6>
           </a>
           <p class="text-muted">A dark theme is a low-light UI that displays mostly dark surfaces.</p>
+        </div>
+        <div class="col-sm-6 col-md-4 col-xl-3 mb-3">
+          <a class="d-block" href="demos/dark-theme.html">
+            <img class="img-thumbnail mb-3" src="img/demo/dark.png" width="480" height="300" loading="lazy">
+            <h6 class="mb-1">Password protected</h6>
+          </a>
+          <p class="text-muted">If you work with sensitive information, you need to protect it: apply password permissions to PDF files to prevent PDFs from being viewed, printed, or downloaded.</p>
         </div>
       </div>
       <!-- end::Demo -->
@@ -157,7 +164,7 @@
       <p>Copy-paste the &lt;pdf-live&gt; into your &lt;body&gt; to load our PDF live.</p>
       <div class="highlight">
         <button type="button" class="btn-clipboard" title="Copy to clipboard"><i class="far fa-clone"></i></button>
-        <pre><code class="html">&lt;pdf-live src=&quot;sample.pdf&quot; lang=&quot;en&quot; worker=&quot;node_modules/pdf-live/dist/pdf.worker.min.js&quot;&gt;&lt;/pdf-live&gt;</code></pre>
+        <pre><code class="html">&lt;pdf-live src=&quot;sample.pdf&quot; lang=&quot;en&quot; worker=&quot;node_modules/pdf-live/dist/pdf.worker.js&quot;&gt;&lt;/pdf-live&gt;</code></pre>
       </div>
 
       <h2 id="quick-start-js">JS</h2>
@@ -189,12 +196,11 @@ const pdflive = document.querySelector(&#039;pdf-live&#039;);
 // Set event listener for PDF Live.
 pdflive
   .on(&#039;documentLoaded&#039;, () =&gt; {
-    // PDF document load event.
+    // PDF document loaded.
     console.log(&#039;Loaded PDF document&#039;);
   })
-  .on(&#039;pageChange&#039;, evnt =&gt; {
+  .on(&#039;pageChange&#039;, pageNum =&gt; {
     // Page change event.
-    const pageNum = evnt.detail.pageNum;
     console.log(`Opened page ${pageNum}`);
   });</code></pre>
       </div>
@@ -235,6 +241,13 @@ pdflive
           </div>
         </li>
         <li class="list-group-item">
+          <div class="fw-bold"><code>worker</code><span class="badge border bg-light text-dark rounded-pill ms-2">required</span></div>
+          <div class="ms-3">
+            The path of the web walker to handle time-consuming tasks such as parsing and rendering PDF documents.<br>
+            Set the path to "node_modules/pdf-live/dist/pdf.worker.js" installed by npm.
+          </div>
+        </li>
+        <li class="list-group-item">
           <div class="fw-bold"><code>lang</code></div>
           <div class="ms-3">
             Languages used within PDF Live.<br>
@@ -243,10 +256,10 @@ pdflive
           </div>
         </li>
         <li class="list-group-item">
-          <div class="fw-bold"><code>worker</code><span class="badge border bg-light text-dark rounded-pill ms-2">required</span></div>
+          <div class="fw-bold"><code>protected</code></div>
           <div class="ms-3">
-            The path of the web walker to handle time-consuming tasks such as parsing and rendering PDF documents.<br>
-            Set the path to "node_modules/pdf-live/dist/pdf.worker.min.js" installed by npm.
+            The protected attribute password-protects PDF documents.<br>
+            If this attribute is added, a password prompt will be raised before loading the document.
           </div>
         </li>
       </ul>
@@ -257,44 +270,20 @@ pdflive
         <li class="list-group-item">
           <div class="fw-bold"><code>on()</code></div>
           <div class="ms-3">
-            <p>Alias of EventTarget.addEventListener.</p>
+            <p>The on() method sets up a function that will be called whenever the specified event is delivered to the target.</p>
             <h6>Syntax</h6>
             <div class="highlight">
-              <pre><code class="js">on(type, listener);
-on(type, listener, options);</code></pre>
+              <pre><code class="js">on(type, listener);</code></pre>
             </div>
             <h6 class="mb-0">Parameters</h6>
             <ul class="list-group">
               <li class="list-group-item pt-0 border-0">
                 <div class="fw-bold"><code>type</code></div>
-                <div class="ms-3">A case-sensitive string representing the event type to listen for.</div>
+                <div class="ms-3">The type of event to listen for.<br>Can be one of pageChange, documentLoaded, or passwordEnter.</div>
               </li>
               <li class="list-group-item border-0">
                 <div class="fw-bold"><code>listener</code></div>
                 <div class="ms-3">The function that receives a notification when an event of the specified type occurs. </div>
-              </li>
-            </ul>
-            <h6 class="mb-0">Return value</h6>
-            <p>PDFLiveElement.</p>
-          </div>
-        </li>
-        <li class="list-group-item">
-          <div class="fw-bold"><code>off()</code></div>
-          <div class="ms-3">
-            <p>Alias of EventTarget.removeEventListener.</p>
-            <h6>Syntax</h6>
-            <div class="highlight">
-              <pre><code class="js">off(type, listener);</code></pre>
-            </div>
-            <h6 class="mb-0">Parameters</h6>
-            <ul class="list-group">
-              <li class="list-group-item pt-0 border-0">
-                <div class="fw-bold"><code>type</code></div>
-                <div class="ms-3">A string which specifies the type of event for which to remove an event listener.</div>
-              </li>
-              <li class="list-group-item border-0">
-                <div class="fw-bold"><code>listener</code></div>
-                <div class="ms-3">The EventListener function of the event listener to remove from the event target.</div>
               </li>
             </ul>
             <h6 class="mb-0">Return value</h6>
@@ -344,8 +333,7 @@ pdflive.on(&#039;documentLoaded&#039;, () =&gt; {
               <button type="button" class="btn-clipboard" title="Copy to clipboard"><i class="far fa-clone"></i></button>
               <pre class="mb-0"><code class="js">const pdflive = document.querySelector(&#039;pdf-live&#039;);
 
-pdflive.on(&#039;pageChange&#039;, evnt =&gt; {
-  const pageNum = evnt.detail.pageNum;
+pdflive.on(&#039;pageChange&#039;, pageNum =&gt; {
   console.log(`Opened page ${pageNum}`);
 });</code></pre>
             </div>

@@ -7,16 +7,19 @@
   "browser": "dist/pdf-live.js",
   "types": "types/index.d.ts",
   "scripts": {
-    "prebuild": "rm -rf dist types",
+    "prebuild": "rm -rf dist types docs/demos/dist",
     "build": "cross-env NODE_ENV=production rollup -c",
+    "postbuild": "cp -a dist docs/demos/dist",
     "prewatch": "rm -rf dist types",
     "watch": "cross-env NODE_ENV=production rollup -c --watch",
-    "prebuild:dev": "rm -rf dist types",
+    "postwatch": "cp -a dist docs/demos/dist",
+    "prebuild:dev": "rm -rf dist types docs/demos/dist",
     "build:dev": "cross-env NODE_ENV=development rollup -c",
-    "prewatch:dev": "rm -rf dist types",
+    "postbuild:dev": "cp -a dist docs/demos/dist",
+    "prewatch:dev": "rm -rf dist types docs/demos/dist",
     "watch:dev": "cross-env NODE_ENV=development rollup -c --watch",
-    "test": "jest",
-    "start": "ts-node -r tsconfig-paths/register -P tsconfig.json -O '{\"module\":\"commonjs\"}' -e \"import * as index from '~/index';console.log(index);\""
+    "postwatch:dev": "cp -a dist docs/demos/dist",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -59,7 +62,6 @@
     "rollup-plugin-typescript2": "^0.31.2",
     "ts-jest": "^27.1.3",
     "ts-node": "^10.7.0",
-    "tsconfig-paths": "^3.14.0",
     "typescript": "^4.6.2"
   }
 }

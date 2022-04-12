@@ -117,7 +117,6 @@ export default class LeftPanel {
    * @returns {HTMLDivElement[]}
    */
   private render(pages: any[]): HTMLDivElement[] {
-    // console.log('Start rendering thumbnails, pages=', pages);
     const thumbnailNodes = [];
     for (let num=1; num<=pages.length; num++) {
       // Fetch page.

@@ -39,6 +39,7 @@
 
 .topnav {
   padding: .75rem 0;
+  border: 1px solid #cfd4da;
 }
 
   .topnav .navbar-toggler {

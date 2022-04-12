@@ -80,7 +80,6 @@ export default class PasswordModal extends Modal {
           isCorrect = await this.enterListener(this.passwordInput.value);
         else
           isCorrect = this.enterListener(this.passwordInput.value) as boolean;
-        console.log(`isCorrect=${isCorrect}`);
 
         //  Display error message if password is incorrect. 
         if (!isCorrect) {

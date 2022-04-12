@@ -71,7 +71,8 @@ class PDFLiveElement extends HTMLElement {
     super();
 
     // Restore theme.
-    restoreTheme();
+    if (this.getAttribute('restoretheme') !== 'false')
+      restoreTheme();
 
     // Render viewer.
     this.render(true);
@@ -132,7 +133,6 @@ class PDFLiveElement extends HTMLElement {
 
         // Set password enter event for password modal.
         this.passwordModal.onEnter(async (password: string): Promise<boolean> => {
-          console.log(`password=${password}`);
           return new Promise<boolean>(async (rslv, rej) => {
             if (!this.listeners.passwordEnter)
               return void rej(new Error('Password protection requires password enter event'));
@@ -180,7 +180,8 @@ class PDFLiveElement extends HTMLElement {
         leftPanel.activatePage(pageNum);
 
         // Invoke pagechange event.
-        this.listeners.pageChange!(pageNum);
+        if (this.listeners.pageChange)
+          this.listeners.pageChange(pageNum);
       });
 
       // Print PDF.
@@ -222,9 +223,9 @@ class PDFLiveElement extends HTMLElement {
       this.classList.add('document-loaded');
 
       // Check if the event has already been executed so that the documentLoaded event is not executed twice.
-      if (!this.calledLoadListener)
+      if (!this.calledLoadListener && this.listeners.documentLoaded)
         // Invoke PDF document loaded event.
-        this.listeners.documentLoaded!()
+        this.listeners.documentLoaded()
 
       // Turn on the document loaded flag.
       this.loaded = true;
@@ -277,7 +278,8 @@ class PDFLiveElement extends HTMLElement {
 
     // If the document is already loaded and the loaded event is set, immediately invoke the loaded event..
     if (type === 'documentLoaded' || this.loaded) {
-      this.listeners.documentLoaded!();
+      if (this.listeners.documentLoaded)
+        this.listeners.documentLoaded();
       this.calledLoadListener = true;
     }
     return this;

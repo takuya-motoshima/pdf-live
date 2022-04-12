@@ -17,7 +17,6 @@ export default async (url: string, workerSrc: string, language: Language): Promi
 
     // Loading a document.
     const pdfDoc = await window.pdfjsLib.getDocument(`${url}${delimiter}t=${+new Date()}`).promise;
-    // console.log(`Loaded ${url}. Total number of pages is ${pdfDoc.numPages}`);
     return pdfDoc;
   } catch (err) {
     throw new Error(language.message.badDocument);

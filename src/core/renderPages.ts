@@ -6,9 +6,6 @@
   * @returns  {Promise<any[]>}
   */
 export default async (pdfDoc: any, zoomFactor: number = 1.0): Promise<any[]> => {
-  // console.log(`Zoom factor: ${zoomFactor}`);
-  // console.log(`Total number of pages: ${pdfDoc.numPages}`);
-
   // Find dependent nodes.
   const pageView = document.querySelector('[data-element="pageView"]') as HTMLDivElement;
 

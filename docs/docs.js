@@ -25,7 +25,6 @@ document.querySelector('.sidebar-overlay').addEventListener('click', () => {
 for (let target of document.querySelectorAll('.btn-clipboard'))
   new ClipboardJS(target, {
     target: trigger => {
-      console.log('trigger.nextElementSibling=', trigger.nextElementSibling);
       return trigger.nextElementSibling;
     }
   }).on('success', e => {

@@ -96,7 +96,6 @@ export default class LeftPanel {
    * @param {any[]} pages
    */
   render(pages) {
-    // console.log('Start rendering thumbnails, pages=', pages);
     const thumbnailNodes = [];
     for (let num=1; num<=pages.length; num++) {
       // Fetch page.

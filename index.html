@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="dist/pdf-live.css">
 </head>
 <body>
-  <pdf-live src="sample.pdf" lang="ja" worker="dist/pdf.worker.min.js" protected></pdf-live>
+  <pdf-live src="sample.pdf" lang="ja" worker="dist/pdf.worker.js" protected></pdf-live>
   <script type="module">
     import './dist/pdf-live.esm.js';
 
@@ -18,17 +18,22 @@
     // Set event listener for PDF Live.
     pdflive
       .on('documentLoaded', () => {
-        // PDF document load event.
+        // PDF document loaded.
         console.log('Loaded PDF document');
       })
       .on('pageChange', pageNum => {
-        // Page change event.
+        // The browsing page has changed. The page number can be received as a parameter.
         console.log(`Opened page ${pageNum}`);
       })
-      .on('passwordEnter', password => {
-        // Password entered.
-        console.log('Password entered');
-        return password === 'password';
+      // .on('passwordEnter', password => {
+      //   // Receives the password entered and returns true if the password is correct.
+      //   // If the protected attribute is used for PDF live nodes, setting this event listener is mandatory.
+      //   return password === 'password';
+      // });
+      .on('passwordEnter', async password => {
+        // The passwordEnter event listener is Async can also be used.
+        const correctPassword = await (await fetch('Correct Password.txt')).text();
+        return correctPassword === password;
       });
   </script>
 </body>

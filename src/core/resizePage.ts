@@ -5,7 +5,6 @@
   * @param {number} zoomFactor
   */
 export default (pages: any[], zoomFactor: number = 1.0): void => {
-  // console.log(`Resize to ${zoomFactor} times`);
   for (let num=1; num<=pages.length; num++) {
     // Fetch page.
     const page = pages[num - 1];
