@@ -10,6 +10,7 @@
 * [Quick Start](https://takuya-motoshima.github.io/pdf-live/#quick-start)
 * [Usage](https://takuya-motoshima.github.io/pdf-live/#usage)
 * [API](https://takuya-motoshima.github.io/pdf-live/#api)
+* [Changelog](https://takuya-motoshima.github.io/pdf-live/#changelog)
 
 ## Author
 **Takuya Motoshima**

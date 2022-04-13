@@ -78,7 +78,7 @@ class PDFLiveElement extends HTMLElement {
     this.language = i18n(this.getAttribute('lang') || 'en');
 
     // Render viewer.
-    this.render(window.innerWidth > 640);
+    this.render();
 
     // Document title.
     this.documentTitle = this.querySelector('[data-element="title"]') as HTMLDivElement;
@@ -296,10 +296,10 @@ class PDFLiveElement extends HTMLElement {
 
   /**
    * Render viewer.
-   *
-   * @param {boolean} openLeftPanel
    */
-  private render(openLeftPanel: boolean): void {
+  private render(): void {
+    const isMobile = window.innerWidth <= 640;
+    const openLeftPanel = !isMobile;
     this.insertAdjacentHTML('beforeend', hbs.compile(
       `<!-- begin:Header -->
         <div data-element="header" class="header">
@@ -321,7 +321,7 @@ class PDFLiveElement extends HTMLElement {
               <div data-element="zoomToggle" class="zoom-overlay-toggle">
                 <div class="zoom-overlay-toggle-text">
                   <form data-element="zoomForm">
-                    <input data-element="zoomInput" type="text" class="textarea" tabindex="-1" aria-label="Set zoom" value="100">
+                    <input data-element="zoomInput" type="text" class="textarea" tabindex="-1" aria-label="Set zoom">
                   </form>
                   <span>%</span>
                 </div>
@@ -409,7 +409,7 @@ class PDFLiveElement extends HTMLElement {
 
         <!-- begin:Zoom menu -->
         <div data-element="zoomMenu" class="zoom-menu zoom-menu-closed" role="listbox" aria-label="{{language.component.zoomOverlay}}">
-          <button data-element="zoomSelect" data-value="pageWidth" class="button zoom-menu-item" aria-label="{{language.action.fitToWidth}}" role="option">
+          <button data-element="zoomSelect" data-value="pageWidth" class="button zoom-menu-item{{#if isMobile}} zoom-menu-item-selected{{/if}}" aria-label="{{language.action.fitToWidth}}" role="option">
             <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
               <path d="M5.93,4.36,9.17,7.6a.39.39,0,0,1,0,.56l-1,1a.39.39,0,0,1-.56,0L4.36,5.93,2.68,7.6A.4.4,0,0,1,2,7.32V2.4A.4.4,0,0,1,2.4,2H7.32a.4.4,0,0,1,.28.68ZM7.6,14.83,4.36,18.07,2.68,16.4a.4.4,0,0,0-.68.28V21.6a.4.4,0,0,0,.4.4H7.32a.4.4,0,0,0,.28-.68L5.93,19.64,9.17,16.4a.39.39,0,0,0,0-.56l-1-1A.39.39,0,0,0,7.6,14.83ZM16.4,2.68l1.67,1.68L14.83,7.6a.39.39,0,0,0,0,.56l1,1a.39.39,0,0,0,.56,0l3.24-3.24L21.32,7.6A.4.4,0,0,0,22,7.32V2.4a.4.4,0,0,0-.4-.4H16.68A.4.4,0,0,0,16.4,2.68Zm-.56,12.15-1,1a.39.39,0,0,0,0,.56l3.24,3.24L16.4,21.32a.4.4,0,0,0,.28.68H21.6a.4.4,0,0,0,.4-.4V16.68a.4.4,0,0,0-.68-.28l-1.68,1.67L16.4,14.83A.39.39,0,0,0,15.84,14.83Z"></path>
             </svg>
@@ -424,13 +424,13 @@ class PDFLiveElement extends HTMLElement {
           <div class="divider"></div>
           <button data-element="zoomSelect" data-value="50" class="zoom-menu-item" aria-label="50%" role="option">50%</button>
           <button data-element="zoomSelect" data-value="75" class="zoom-menu-item" aria-label="75%" role="option">75%</button>
-          <button data-element="zoomSelect" data-value="100" class="zoom-menu-item zoom-menu-item-selected" aria-label="100%" role="option"">100%</button>
+          <button data-element="zoomSelect" data-value="100" class="zoom-menu-item{{#unless isMobile}} zoom-menu-item-selected{{/unless}}" aria-label="100%" role="option"">100%</button>
           <button data-element="zoomSelect" data-value="125" class="zoom-menu-item" aria-label="125%" role="option"">125%</button>
           <button data-element="zoomSelect" data-value="150" class="zoom-menu-item" aria-label="150%" role="option"">150%</button>
           <button data-element="zoomSelect" data-value="200" class="zoom-menu-item" aria-label="200%" role="option"">200%</button>
         </div>
         <!-- end:Zoom menu -->
-        <iframe data-element="printFrame" style="display: none;"></iframe>`)({language: this.language, openLeftPanel}));
+        <iframe data-element="printFrame" style="display: none;"></iframe>`)({language: this.language, openLeftPanel, isMobile}));
   }
 }
 

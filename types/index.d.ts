@@ -65,8 +65,6 @@ declare class PDFLiveElement extends HTMLElement {
     getCurrentPageNumber(): number;
     /**
      * Render viewer.
-     *
-     * @param {boolean} openLeftPanel
      */
     private render;
 }

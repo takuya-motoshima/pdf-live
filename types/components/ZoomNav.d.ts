@@ -66,6 +66,12 @@ export default class ZoomNav {
      */
     getZoomFactor(): number;
     /**
+     * Update input zoom.
+     *
+     * @param {number|string} strZoom percentage, pageWidth, or pageFit.
+     */
+    private updateInputZoom;
+    /**
      * Deselect a zoom item that was already selected.
      */
     private deselectMenu;

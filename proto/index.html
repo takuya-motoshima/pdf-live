@@ -31,7 +31,7 @@
           <div data-element="zoomToggle" class="zoom-overlay-toggle">
             <div class="zoom-overlay-toggle-text">
               <form data-element="zoomForm">
-                <input data-element="zoomInput" type="text" class="textarea" tabindex="-1" aria-label="Set zoom" value="100">
+                <input data-element="zoomInput" type="text" class="textarea" tabindex="-1" aria-label="Set zoom">
               </form>
               <span>%</span>
             </div>
@@ -124,7 +124,7 @@
         </svg>
         Fit to width
       </button>
-      <button data-element="zoomSelect" data-value="pageFit" class="button zoom-menu-item" aria-label="Fit to page" role="option">
+      <button data-element="zoomSelect" data-value="pageFit" class="button zoom-menu-item zoom-menu-item-selected" aria-label="Fit to page" role="option">
         <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
           <path d="M9.76,13.06l-5,5L3.07,16.4a.4.4,0,0,0-.68.28V21.6a.4.4,0,0,0,.4.4H7.71A.4.4,0,0,0,8,21.32L6.32,19.64l5-5a.4.4,0,0,0,0-.57l-1-1A.39.39,0,0,0,9.76,13.06Zm7-10.38,1.67,1.68-5,5a.4.4,0,0,0,0,.57l1,1A.4.4,0,0,0,15,11l5-5L21.71,7.6a.4.4,0,0,0,.68-.28V2.4A.4.4,0,0,0,22,2H17.07A.4.4,0,0,0,16.79,2.68Z"></path>
         </svg>
@@ -133,7 +133,7 @@
       <div class="divider"></div>
       <button data-element="zoomSelect" data-value="50" class="zoom-menu-item" aria-label="50%" role="option">50%</button>
       <button data-element="zoomSelect" data-value="75" class="zoom-menu-item" aria-label="75%" role="option">75%</button>
-      <button data-element="zoomSelect" data-value="100" class="zoom-menu-item zoom-menu-item-selected" aria-label="100%" role="option"">100%</button>
+      <button data-element="zoomSelect" data-value="100" class="zoom-menu-item" aria-label="100%" role="option"">100%</button>
       <button data-element="zoomSelect" data-value="125" class="zoom-menu-item" aria-label="125%" role="option"">125%</button>
       <button data-element="zoomSelect" data-value="150" class="zoom-menu-item" aria-label="150%" role="option"">150%</button>
       <button data-element="zoomSelect" data-value="200" class="zoom-menu-item" aria-label="200%" role="option"">200%</button>
@@ -144,8 +144,6 @@
   </pdf-live>
   <!-- end:App -->
 
-  <script src="../node_modules/pdfjs-dist/build/pdf.js"></script>
-  <!-- <script src="node_modules/pdfjs-dist/build/pdf.min.js"></script> -->
   <script src="index.js" type="module"></script>
 </body>
 </html>

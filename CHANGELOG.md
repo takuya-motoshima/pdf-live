@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.4] - 2022-04-13
+### Fixed
+- PDF Live now supports IOS Safari.
+- Initial zoom is 100% if viewport width is greater than 640px, otherwise fits page width.
+
 ## [1.0.3] - 2022-04-13
 ### Fixed
 - Hide document title if viewport width is smaller than 640px.
@@ -22,3 +27,4 @@ All notable changes to this project will be documented in this file.
 [1.0.1]: https://github.com/takuya-motoshima/pdf-live/compare/v1.0.0...v1.0.1
 [1.0.2]: https://github.com/takuya-motoshima/pdf-live/compare/v1.0.1...v1.0.2
 [1.0.3]: https://github.com/takuya-motoshima/pdf-live/compare/v1.0.2...v1.0.3
+[1.0.4]: https://github.com/takuya-motoshima/pdf-live/compare/v1.0.3...v1.0.4

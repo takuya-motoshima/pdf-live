@@ -5,9 +5,9 @@ import printPdf from './core/printPdf.js';
 import downloadPdf from './core/downloadPdf.js';
 import setTheme from './core/setTheme.js';
 import restoreTheme from './core/restoreTheme.js';
+import loadPdfJs from './core/loadPdfJs.js';
 import Loading from './components/Loading.js';
 import ErrorModal from './components/ErrorModal.js';
-import WarningModal from './components/WarningModal.js';
 import PasswordModal from './components/PasswordModal.js';
 import LeftPanel from './components/LeftPanel.js';
 import ZoomNav from './components/ZoomNav.js';
@@ -20,7 +20,7 @@ const context = document.querySelector('[data-element="app"]');
 const errorModal = new ErrorModal(context);
 const loading = new Loading(context);
 const passwordModal = new PasswordModal(context);
-const isProtected = true;
+const isProtected = false;
 
 (async () => {
   try {
@@ -32,6 +32,9 @@ const isProtected = true;
 
     // Set the PDF file name in the title.
     document.querySelector('[data-element="title"]').textContent = document.title = getFilename(url);
+
+    // Load pdf-dist JS.
+    loadPdfJs();
 
     // Load a PDF document.
     const pdfDoc = await getDocument(url);

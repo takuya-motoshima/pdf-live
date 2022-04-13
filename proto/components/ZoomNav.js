@@ -30,8 +30,9 @@ export default class ZoomNav {
     // Preventing multiple launches of resizing events.
     this.resizeTimeout = null;
 
-    // Last input zoom.
-    this.lastZoom = parseInt(this.zoomInput.value, 10);
+    // Set the currently selected zoom to the zoom input and the last zoom.
+    const currentZoom = (this.zoomSelects.find(zoomSelect => zoomSelect.classList.contains('zoom-menu-item-selected'))).dataset.value;
+    this.updateInputZoom(currentZoom);
 
     // All zooms that can be selected from the screen.
     this.zoomList = this.zoomSelects.flatMap(zoomSelect => {
@@ -77,14 +78,8 @@ export default class ZoomNav {
         const targetNode = evnt.target;
         targetNode.classList.add('zoom-menu-item-selected');
 
-        // Calculate zoom factor.
-        const zoomFactor = this.calcFactor(targetNode.dataset.value);
-
-        // Set the zoom percentage to the text node.
-        this.zoomInput.value = Math.floor(zoomFactor * 100).toString();
-
-        // Keep the last input value.
-        this.lastZoom = parseInt(this.zoomInput.value, 10);
+        // Set zoom.
+        this.updateInputZoom(targetNode.dataset.value);
 
         // Invoke zoom change event.
         this.changeListener(zoomFactor);
@@ -208,14 +203,6 @@ export default class ZoomNav {
       // Zoom page according to the zoom you enter.
       this.enterZoom();
     }, {passive: false});
-    // // Press Enter key with input zoom.
-    // this.zoomInput.addEventListener('keydown', evnt => {
-    //   // Ignore other than enter key.
-    //   if (evnt.key !== 'Enter' && evnt.keyCode !== 13)
-    //     return;
-    //   // Zoom page according to the zoom you enter.
-    //   this.enterZoom();
-    // }, {passive: true});
   }
 
   /**
@@ -268,6 +255,22 @@ export default class ZoomNav {
    */
   getZoomFactor() {
     return this.calcFactor(this.zoomInput.value);
+  }
+
+  /**
+   * Update input zoom.
+   *
+   * @param {number|string} strZoom percentage, pageWidth, or pageFit.
+   */
+  updateInputZoom(strZoom) {
+    // Calculate zoom factor.
+    const zoomFactor = this.calcFactor(strZoom.toString());
+
+    // Set the zoom percentage to the text node.
+    this.zoomInput.value = Math.floor(zoomFactor * 100).toString();
+
+    // Keep the last input value.
+    this.lastZoom = parseInt(this.zoomInput.value, 10);
   }
 
   /**
