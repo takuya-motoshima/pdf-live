@@ -112,7 +112,10 @@ class PDFLiveElement extends HTMLElement {
         throw new Error('Element pdf-live is missing required attribute src');
 
       // Set the PDF file name in the title.
-      this.documentTitle.textContent = document.title = getFilename(url);
+      if (this.getAttribute('title'))
+        this.documentTitle.textContent = document.title = this.getAttribute('title') as string;
+      else
+        this.documentTitle.textContent = document.title = getFilename(url);
 
       // Get the Worker URL from the worker attribute.
       const workerSrc = this.getAttribute('worker');

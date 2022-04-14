@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.5] - 2022-04-14
+### Fixed
+- Added title attribute to PDF live elements. For more information, see [here](https://lab.octopass.tech/pdf-live/docs/#api-properties).
+
 ## [1.0.4] - 2022-04-13
 ### Fixed
 - PDF Live now supports IOS Safari.
