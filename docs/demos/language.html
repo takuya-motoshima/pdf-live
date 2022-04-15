@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="dist/favicon.svg">
+  <link rel="stylesheet" href="dist/pdf-live.css">
+</head>
+<body>
+  <pdf-live src="sample.pdf" lang="ja" worker="dist/pdf.worker.js" protected></pdf-live>
+  <script type="module">
+    import './dist/pdf-live.esm.js';
+
+    // Find the PDFLive node.
+    const pdflive = document.querySelector('pdf-live');
+
+    // Password entered.
+    pdflive.on('passwordEnter', password => {
+      // Returns true if the password entered is correct.
+      return password === 'password';
+    });
+  </script>
+</body>
+</html>

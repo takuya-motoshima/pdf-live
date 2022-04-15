@@ -90,7 +90,7 @@ export default class PasswordModal extends Modal {
           this.loading.hide();
 
           // Show error messages.
-          this.incorrect.textContent = 'Incorrect password';
+          this.incorrect.textContent = language.message.incorrectPassword;
           return void this.passwordInput.classList.add('wrong');
         }
 

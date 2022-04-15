@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.7] - 2022-04-15
+### Fixed
+- Fixed a bug where the locale was not applied to password modal error messages.
+
 ## [1.0.6] - 2022-04-15
 ### Fixed
 - Fixed a bug that the file name specified in the title attribute was not applied to the download file name.
@@ -39,3 +43,4 @@ All notable changes to this project will be documented in this file.
 [1.0.4]: https://github.com/takuya-motoshima/pdf-live/compare/v1.0.3...v1.0.4
 [1.0.5]: https://github.com/takuya-motoshima/pdf-live/compare/v1.0.4...v1.0.5
 [1.0.6]: https://github.com/takuya-motoshima/pdf-live/compare/v1.0.5...v1.0.6
+[1.0.7]: https://github.com/takuya-motoshima/pdf-live/compare/v1.0.6...v1.0.7
