@@ -36,7 +36,6 @@ export default {
     }),
     copy({
       targets: [
-        {src: 'src/fonts/**/*', dest: 'dist/fonts'},
         {src: 'src/favicon.svg', dest: 'dist'},
         {src: 'node_modules/pdfjs-dist/build/pdf.worker.min.js', dest: 'dist', rename: (_, extension) => `pdf.worker.${extension}`}
       ]

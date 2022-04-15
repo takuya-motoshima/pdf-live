@@ -74,8 +74,14 @@ class PDFLiveElement extends HTMLElement {
     if (this.getAttribute('restoretheme') !== 'false')
       restoreTheme();
 
+    // language.
+    const lang = this.getAttribute('lang') || 'en';
+
     // Extract locale.
-    this.language = i18n(this.getAttribute('lang') || 'en');
+    this.language = i18n(lang);
+
+    // Set the current locale to the data-lang attribute.
+    document.documentElement.setAttribute('data-lang', lang);
 
     // Render viewer.
     this.render();

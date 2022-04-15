@@ -1,6 +1,6 @@
 {
   "name": "pdf-live",
-  "version": "1.0.8",
+  "version": "1.0.0",
   "description": "'PDF LIVE' is a PDF viewer that extends the open source 'mozilla/pdf.js'. \r You can start the PDF viewer with toolbar right away with 'PDF LIVE'.",
   "main": "dist/pdf-live.common.js",
   "module": "dist/pdf-live.esm.js",
@@ -12,13 +12,11 @@
     "postbuild": "cp -a dist docs/demos/dist",
     "prewatch": "rm -rf dist types",
     "watch": "cross-env NODE_ENV=production rollup -c --watch",
-    "postwatch": "cp -a dist docs/demos/dist",
     "prebuild:dev": "rm -rf dist types docs/demos/dist",
     "build:dev": "cross-env NODE_ENV=development rollup -c",
     "postbuild:dev": "cp -a dist docs/demos/dist",
     "prewatch:dev": "rm -rf dist types docs/demos/dist",
     "watch:dev": "cross-env NODE_ENV=development rollup -c --watch",
-    "postwatch:dev": "cp -a dist docs/demos/dist",
     "test": "jest"
   },
   "repository": {
