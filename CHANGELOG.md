@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.6] - 2022-04-15
+### Fixed
+- Fixed a bug that the file name specified in the title attribute was not applied to the download file name.
+- Enclose the modal title name of the warning modal and password modal in h2.
+
 ## [1.0.5] - 2022-04-14
 ### Fixed
 - Added title attribute to PDF live elements. For more information, see [here](https://lab.octopass.tech/pdf-live/docs/#api-properties).
@@ -32,3 +37,5 @@ All notable changes to this project will be documented in this file.
 [1.0.2]: https://github.com/takuya-motoshima/pdf-live/compare/v1.0.1...v1.0.2
 [1.0.3]: https://github.com/takuya-motoshima/pdf-live/compare/v1.0.2...v1.0.3
 [1.0.4]: https://github.com/takuya-motoshima/pdf-live/compare/v1.0.3...v1.0.4
+[1.0.5]: https://github.com/takuya-motoshima/pdf-live/compare/v1.0.4...v1.0.5
+[1.0.6]: https://github.com/takuya-motoshima/pdf-live/compare/v1.0.5...v1.0.6

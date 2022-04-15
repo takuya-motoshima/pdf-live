@@ -132,7 +132,9 @@ export default class PasswordModal extends Modal {
       `<div class="modal password-modal">
         <div class="modal-dialog">
           <div class="modal-content">
-            <div class="modal-header">{{language.message.passwordRequired}}</div>
+            <div class="modal-header">
+              <h2>{{language.message.passwordRequired}}</h2>
+            </div>
             <div class="modal-body">
               <form data-element="form" id="passwordForm">
                 <div class="enter">

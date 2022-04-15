@@ -228,6 +228,55 @@ i.disabled {
   fill: var(--disabled-icon);
 }
 
+h1,h2,h3,h4,h5,h6 {
+  margin-top: 0;
+  margin-bottom: .5rem;
+  font-weight: 600;
+  line-height: 1.2
+}
+
+h1 {
+  font-size: calc(1.3rem + .6vw);
+}
+
+@media (min-width: 1200px) {
+  h1 {
+    font-size: 1.75rem;
+  }
+}
+
+h2 {
+  font-size: calc(1.275rem + .3vw);
+}
+
+@media (min-width: 1200px) {
+  h2 {
+    font-size: 1.5rem;
+  }
+}
+
+h3 {
+  font-size: calc(1.26rem + .12vw);
+}
+
+@media (min-width: 1200px) {
+  h3 {
+    font-size: 1.35rem;
+  }
+}
+
+h4 {
+  font-size: 1.25rem;
+}
+
+h5 {
+  font-size: 1.15rem;
+}
+
+h6 {
+  font-size: 1.075rem;
+}
+
 .icon {
   width: 1rem;
   height: 1rem;
@@ -896,6 +945,15 @@ pdf-live {
         justify-content: space-between;
         padding: 1rem 1rem;
       }
+
+        .modal-header h1,
+        .modal-header h2,
+        .modal-header h3,
+        .modal-header h4,
+        .modal-header h5,
+        .modal-header h6 {
+          margin-bottom: 0;
+        }
 
       .modal-body {
         position: relative;

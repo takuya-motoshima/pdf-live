@@ -114,7 +114,9 @@ export default class PasswordModal extends Modal {
     return `<div class="modal password-modal">
               <div class="modal-dialog">
                 <div class="modal-content">
-                  <div class="modal-header">Password required</div>
+                  <div class="modal-header">
+                    <h2>Password required</h2>
+                  </div>
                   <div class="modal-body">
                     <form data-element="form" id="passwordForm">
                       <div class="enter">

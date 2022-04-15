@@ -13,7 +13,9 @@ export default class WarningModal extends Modal {
     return `<div class="modal">
               <div class="modal-dialog">
                 <div class="modal-content">
-                  <div class="modal-header">Warning modal header</div>
+                  <div class="modal-header">
+                    <h2>Warning modal header</h2>
+                  </div>
                   <div class="modal-body">Warning modal body</div>
                   <div class="modal-footer">
                     <button class="button button-cancel button-modal" data-element="WarningModalClearButton"><span>Cancel</span></button>

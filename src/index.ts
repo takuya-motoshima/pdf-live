@@ -195,7 +195,19 @@ class PDFLiveElement extends HTMLElement {
 
       // Download PDF.
       this.downloadButton.addEventListener('click', async () => {
-        await downloadPdf(pdfDoc, getFilename(url));
+        // File name to download.
+        let documentTitle;
+        if (this.getAttribute('title')) {
+          documentTitle = this.getAttribute('title') as string;
+
+          // Add .pdf extension if document name does not have one.
+          if (!documentTitle.match(/\.pdf$/i))
+            documentTitle += '.pdf';
+        } else
+          documentTitle = getFilename(url);
+
+        // Download Documentation.
+        await downloadPdf(pdfDoc, documentTitle);
       }, {passive: true});
 
       // Change theme. 

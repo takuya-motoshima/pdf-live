@@ -20,7 +20,7 @@ const context = document.querySelector('[data-element="app"]');
 const errorModal = new ErrorModal(context);
 const loading = new Loading(context);
 const passwordModal = new PasswordModal(context);
-const isProtected = false;
+const isProtected = true;
 
 (async () => {
   try {
