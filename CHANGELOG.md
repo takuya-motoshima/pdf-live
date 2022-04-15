@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.8] - 2022-04-15
+### Fixed
+- Fixed a bug that the submit button of the password modal was not locale-aware.
+- The padding of the buttons in the modal was increased.
+
 ## [1.0.7] - 2022-04-15
 ### Fixed
 - Fixed a bug where the locale was not applied to password modal error messages.

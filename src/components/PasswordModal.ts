@@ -146,7 +146,7 @@ export default class PasswordModal extends Modal {
             </div>
             <div class="modal-footer">
               <!-- <button class="button button-cancel button-modal" data-element="passwordCancelButton"><span>Cancel</span></button> -->
-              <button form="passwordForm" type="submit" class="button button-confirm button-modal" data-element="passwordSubmitButton" disabled><span>Submit</span></button>
+              <button form="passwordForm" type="submit" class="button button-confirm button-modal" data-element="passwordSubmitButton" disabled><span>{{language.action.submit}}</span></button>
             </div>
           </div>
         </div>
