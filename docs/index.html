@@ -89,7 +89,7 @@
               </div>
               <hr class="mx-auto mx-lg-0 my-5">
               <p class="text-muted">
-                Currently <a href="https://github.com/takuya-motoshima/pdf-live/releases/tag/v1.0.0" target="_blank">v1.0.0</a>
+                Currently <a href="https://github.com/takuya-motoshima/pdf-live/releases/tag/v1.0.9" target="_blank">v1.0.9</a>
                 <span class="px-1">•</span>
                 <a href="#install">Install</a>
                 <span class="px-1">•</span>
@@ -258,20 +258,20 @@ pdflive
       <p>This interface also inherits properties from its ancestors HTMLElement, Element, Node, and EventTarget.</p>
       <ul class="list-group list-group-flush">
         <li class="list-group-item">
-          <div class="fw-bold"><code>src</code><span class="badge border bg-light text-dark rounded-pill ms-2">required</span></div>
+          <div class="fw-bold"><code class="h5">src</code><span class="badge border bg-light text-dark rounded-pill ms-2">required</span></div>
           <div class="ms-3">
             URL of the PDF document.
           </div>
         </li>
         <li class="list-group-item">
-          <div class="fw-bold"><code>worker</code><span class="badge border bg-light text-dark rounded-pill ms-2">required</span></div>
+          <div class="fw-bold"><code class="h5">worker</code><span class="badge border bg-light text-dark rounded-pill ms-2">required</span></div>
           <div class="ms-3">
             The path of the web walker to handle time-consuming tasks such as parsing and rendering PDF documents.<br>
             Set the path to "node_modules/pdf-live/dist/pdf.worker.js" installed by npm.
           </div>
         </li>
         <li class="list-group-item">
-          <div class="fw-bold"><code>lang</code></div>
+          <div class="fw-bold"><code class="h5">lang</code></div>
           <div class="ms-3">
             Languages used within PDF Live.<br>
             You can use any of de, en, es, fr, it, ja, ko, nl, pt_br, ru, zh_cn, zh_tw.<br>
@@ -279,7 +279,7 @@ pdflive
           </div>
         </li>
         <li class="list-group-item">
-          <div class="fw-bold"><code>protected</code></div>
+          <div class="fw-bold"><code class="h5">protected</code></div>
           <div class="ms-3">
             The protected attribute password-protects PDF documents.<br>
             If this attribute is added, a password prompt will be raised before loading the document.
@@ -289,7 +289,7 @@ pdflive
           </div>
         </li>
         <li class="list-group-item">
-          <div class="fw-bold"><code>title</code></div>
+          <div class="fw-bold"><code class="h5">title</code></div>
           <div class="ms-3">
             The title name of the document.<br>
             This is used as the title to display on the page, browser tab name, print file name, and download file name.<br>
@@ -302,7 +302,7 @@ pdflive
       <p>This interface also inherits methods from its ancestors HTMLElement, Element, Node, and EventTarget.</p>
       <ul class="list-group list-group-flush">
         <li class="list-group-item">
-          <div class="fw-bold"><code>on()</code></div>
+          <div class="fw-bold"><code class="h5">on()</code></div>
           <div class="ms-3">
             <p>The on() method sets up a function that will be called whenever the specified event is delivered to the target.</p>
             <h6>Syntax</h6>
@@ -325,7 +325,7 @@ pdflive
           </div>
         </li>
         <li class="list-group-item">
-          <div class="fw-bold"><code>getCurrentPageNumber()</code></div>
+          <div class="fw-bold"><code class="h5">getCurrentPageNumber()</code></div>
           <div class="ms-3">
             <p>Returns the current page number.</p>
             <h6>Syntax</h6>
@@ -344,7 +344,7 @@ pdflive
       <p>Inherits methods from its parent, HTMLElement , defined in the GlobalEventHandlers mixin.<br>Listen to these events using on() or addEventListener().</p>
       <ul class="list-group list-group-flush">
         <li class="list-group-item">
-          <div class="fw-bold"><code>documentLoaded</code></div>
+          <div class="fw-bold"><code class="h5">documentLoaded</code></div>
           <div class="ms-3">
             <p>Fired when the PDF document has been loaded.</p>
             <h6>Examples</h6>
@@ -359,7 +359,7 @@ pdflive.on(&#039;documentLoaded&#039;, () =&gt; {
           </div>
         </li>
         <li class="list-group-item">
-          <div class="fw-bold"><code>pageChange</code></div>
+          <div class="fw-bold"><code class="h5">pageChange</code></div>
           <div class="ms-3">
             <p>Fired when the page number being viewed is changed.</p>
             <h6>Examples</h6>
@@ -374,7 +374,7 @@ pdflive.on(&#039;pageChange&#039;, pageNum =&gt; {
           </div>
         </li>
         <li class="list-group-item">
-          <div class="fw-bold"><code>passwordEnter</code></div>
+          <div class="fw-bold"><code class="h5">passwordEnter</code></div>
           <div class="ms-3">
             <p>Fired when user enters password.</p>
             <div class="callout callout-warning">
@@ -416,7 +416,7 @@ pdflive.on(&#039;passwordEnter&#039;, async password =&gt; {
   </div>
 
   <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.10/dist/clipboard.min.js"></script>
   <script src="docs.js"></script>
