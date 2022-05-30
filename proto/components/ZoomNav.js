@@ -78,8 +78,14 @@ export default class ZoomNav {
         const targetNode = evnt.target;
         targetNode.classList.add('zoom-menu-item-selected');
 
-        // Set zoom.
-        this.updateInputZoom(targetNode.dataset.value);
+        // Calculate zoom factor.
+        const zoomFactor = this.calcFactor(targetNode.dataset.value);
+
+        // Set the zoom percentage to the text node.
+        this.zoomInput.value = Math.floor(zoomFactor * 100);
+
+        // Keep the last input value.
+        this.lastZoom = parseInt(this.zoomInput.value, 10);
 
         // Invoke zoom change event.
         this.changeListener(zoomFactor);

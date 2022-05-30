@@ -14,13 +14,13 @@ import ZoomNav from './components/ZoomNav.js';
 import PageNav from './components/PageNav.js';
 import getFilename from './helpers/getFilename.js';
 
-const url = 'sample.pdf';
-// const url = 'notfound.pdf';
+const url = 'japanese.pdf';
+// const url = 'sample.pdf';
 const context = document.querySelector('[data-element="app"]');
 const errorModal = new ErrorModal(context);
 const loading = new Loading(context);
 const passwordModal = new PasswordModal(context);
-const isProtected = true;
+const isProtected = false;
 
 (async () => {
   try {
