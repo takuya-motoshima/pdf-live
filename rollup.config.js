@@ -37,7 +37,8 @@ export default {
     copy({
       targets: [
         {src: 'src/favicon.svg', dest: 'dist'},
-        {src: 'node_modules/pdfjs-dist/build/pdf.worker.min.js', dest: 'dist', rename: (_, extension) => `pdf.worker.${extension}`}
+        {src: 'node_modules/pdfjs-dist/build/pdf.worker.min.js', dest: 'dist', rename: (_, extension) => `pdf.worker.${extension}`},
+        {src: 'node_modules/pdfjs-dist/cmaps/**/*', dest: 'dist/cmaps'},
       ]
     })
   ],

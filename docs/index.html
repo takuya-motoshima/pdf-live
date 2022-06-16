@@ -89,7 +89,7 @@
               </div>
               <hr class="mx-auto mx-lg-0 my-5">
               <p class="text-muted">
-                Currently <a href="https://github.com/takuya-motoshima/pdf-live/releases/tag/v1.0.9" target="_blank">v1.0.9</a>
+                Currently <a href="https://github.com/takuya-motoshima/pdf-live/releases/tag/v1.0.10" target="_blank">v1.0.10</a>
                 <span class="px-1">•</span>
                 <a href="#install">Install</a>
                 <span class="px-1">•</span>
@@ -296,8 +296,18 @@ pdflive
             If the title attribute is not used, the file name contained in the document URL is used.
           </div>
         </li>
+        <li class="list-group-item">
+          <div class="fw-bold"><code class="h5">cmap</code></div>
+          <div class="ms-3">
+            <p>For PDFs using special fonts such as Japanese, specify "node_modules/pdf-live/dist/cmaps" as an absolute path in the cmap attribute to prevent garbled characters.</p>
+            <h6>Examples</h6>
+            <div class="highlight">
+              <button type="button" class="btn-clipboard" title="Copy to clipboard"><i class="far fa-clone"></i></button>
+              <pre class="mb-0"><code class="html">&lt;pdf-live src=&quot;sample.pdf&quot; worker=&quot;node_modules/pdf-live/dist/pdf.worker.js&quot; cmap=&quot;/node_modules/pdf-live/dist/cmaps&quot;&gt;&lt;/pdf-live&gt;</code></pre>
+            </div>
+          </div>
+        </li>
       </ul>
-
       <h2 id="api-methods">Methods</h2>
       <p>This interface also inherits methods from its ancestors HTMLElement, Element, Node, and EventTarget.</p>
       <ul class="list-group list-group-flush">

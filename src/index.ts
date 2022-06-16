@@ -131,8 +131,13 @@ class PDFLiveElement extends HTMLElement {
       // Load pdf-dist JS.
       loadPdfJs();
 
+      // Path of cMaps.
+      let cMapUrl;
+      if (this.getAttribute('cmap'))
+        cMapUrl = this.getAttribute('cmap') as string;
+
       // Load a PDF document.
-      const pdfDoc = await getDocument(url, workerSrc, this.language);
+      const pdfDoc = await getDocument(url, workerSrc, this.language, cMapUrl);
 
       // Check for password protection.
       if (this.hasAttribute('protected')) {   

@@ -1,6 +1,14 @@
 # Changelog
-
 All notable changes to this project will be documented in this file.
+
+## [1.0.10] - 2022-06-16
+### Fixed
+- Updated pdfjs-dist version from "v2.13.216" to "v2.14.305". See [https://github.com/mozilla/pdf.js/releases/tag/v2.14.305](https://github.com/mozilla/pdf.js/releases/tag/v2.14.305)
+- cMap can now be used to prevent garbled PDFs that use special fonts such as Japanese.
+  ```html
+  <pdf-live src="sample.pdf" worker="node_modules/pdf-live/dist/pdf.worker.js"
+    cmap="/node_modules/pdf-live/dist/cmaps"></pdf-live>
+  ```
 
 ## [1.0.9] - 2022-04-15
 ### Fixed
@@ -56,3 +64,4 @@ All notable changes to this project will be documented in this file.
 [1.0.7]: https://github.com/takuya-motoshima/pdf-live/compare/v1.0.6...v1.0.7
 [1.0.8]: https://github.com/takuya-motoshima/pdf-live/compare/v1.0.7...v1.0.8
 [1.0.9]: https://github.com/takuya-motoshima/pdf-live/compare/v1.0.8...v1.0.9
+[1.0.10]: https://github.com/takuya-motoshima/pdf-live/compare/v1.0.9...v1.0.10
