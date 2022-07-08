@@ -27,6 +27,10 @@ declare class PDFLiveElement extends HTMLElement {
     private readonly themeChangeButton;
     /** @type {{[key: string]: Function}} */
     private readonly listeners;
+    /** @type {string|undefined} */
+    private documentUrl;
+    /** @type {any|undefined} */
+    private documentObject;
     /**
      * constructor
      */
@@ -67,5 +71,13 @@ declare class PDFLiveElement extends HTMLElement {
      * Render viewer.
      */
     private render;
+    /**
+     * Print Documentation.
+     */
+    print(): Promise<void>;
+    /**
+     * Download Documentation.
+     */
+    download(): Promise<void>;
 }
 export default PDFLiveElement;

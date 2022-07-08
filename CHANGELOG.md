@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.0.11] - 2022-07-08
+### Fixed
+- Added print and download methods to PDF viewer elements.
+
 ## [1.0.10] - 2022-06-16
 ### Fixed
 - Updated pdfjs-dist version from "v2.13.216" to "v2.14.305". See [https://github.com/mozilla/pdf.js/releases/tag/v2.14.305](https://github.com/mozilla/pdf.js/releases/tag/v2.14.305)
@@ -65,3 +69,4 @@ All notable changes to this project will be documented in this file.
 [1.0.8]: https://github.com/takuya-motoshima/pdf-live/compare/v1.0.7...v1.0.8
 [1.0.9]: https://github.com/takuya-motoshima/pdf-live/compare/v1.0.8...v1.0.9
 [1.0.10]: https://github.com/takuya-motoshima/pdf-live/compare/v1.0.9...v1.0.10
+[1.0.11]: https://github.com/takuya-motoshima/pdf-live/compare/v1.0.10...v1.0.11

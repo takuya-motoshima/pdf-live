@@ -64,6 +64,12 @@ class PDFLiveElement extends HTMLElement {
     passwordEnter: undefined
   };
 
+  /** @type {string|undefined} */
+  private documentUrl: string|undefined = undefined;
+
+  /** @type {any|undefined} */
+  private documentObject: any|undefined = undefined;
+
   /**
    * constructor
    */
@@ -117,6 +123,9 @@ class PDFLiveElement extends HTMLElement {
       if (!url)
         throw new Error('Element pdf-live is missing required attribute src');
 
+      // Keep the URL of the PDF document.
+      this.documentUrl = url;
+
       // Set the PDF file name in the title.
       if (this.getAttribute('title'))
         this.documentTitle.textContent = document.title = this.getAttribute('title') as string;
@@ -137,7 +146,7 @@ class PDFLiveElement extends HTMLElement {
         cMapUrl = this.getAttribute('cmap') as string;
 
       // Load a PDF document.
-      const pdfDoc = await getDocument(url, workerSrc, this.language, cMapUrl);
+      this.documentObject = await getDocument(url, workerSrc, this.language, cMapUrl);
 
       // Check for password protection.
       if (this.hasAttribute('protected')) {   
@@ -166,7 +175,7 @@ class PDFLiveElement extends HTMLElement {
 
       // Keep page width and height for zoom factor calculation to fit by page or width.
       const defaultViewport = await (async (): Promise<Viewport> => {
-        const {width, height} = (await pdfDoc.getPage(1)).getViewport({scale: 1.5 * 1.0});
+        const {width, height} = (await this.documentObject.getPage(1)).getViewport({scale: 1.5 * 1.0});
         return {width, height}
       })();
 
@@ -178,7 +187,7 @@ class PDFLiveElement extends HTMLElement {
       });
 
       // Render pages.
-      const pages = await renderPages(pdfDoc, zoomNav.getZoomFactor());
+      const pages = await renderPages(this.documentObject, zoomNav.getZoomFactor());
 
       // Initialize the left panel.
       const leftPanel = (new LeftPanel(this, pages)).onSelect((pageNum: number) => {
@@ -188,7 +197,7 @@ class PDFLiveElement extends HTMLElement {
       });
 
       // Initialize page navigation.
-      this.pageNav = (new PageNav(this, pdfDoc.numPages)).onChange((pageNum: number) => {
+      this.pageNav = (new PageNav(this, this.documentObject.numPages)).onChange((pageNum: number) => {
         // If the page you are browsing changes.
         // Activate the thumbnail page of the browsing page.
         leftPanel.activatePage(pageNum);
@@ -201,24 +210,12 @@ class PDFLiveElement extends HTMLElement {
       // Print PDF.
       this.printButton.addEventListener('click', async () => {
         await printPdf(url);
-        // await printPdf(pdfDoc);
       }, {passive: true});
 
       // Download PDF.
       this.downloadButton.addEventListener('click', async () => {
-        // File name to download.
-        let documentTitle;
-        if (this.getAttribute('title')) {
-          documentTitle = this.getAttribute('title') as string;
-
-          // Add .pdf extension if document name does not have one.
-          if (!documentTitle.match(/\.pdf$/i))
-            documentTitle += '.pdf';
-        } else
-          documentTitle = getFilename(url);
-
         // Download Documentation.
-        await downloadPdf(pdfDoc, documentTitle);
+        await this.download();
       }, {passive: true});
 
       // Change theme. 
@@ -458,7 +455,32 @@ class PDFLiveElement extends HTMLElement {
         <!-- end:Zoom menu -->
         <iframe data-element="printFrame" style="display: none;"></iframe>`)({language: this.language, openLeftPanel, isMobile}));
   }
-}
 
+  /**
+   * Print Documentation.
+   */
+  public async print(): Promise<void> {
+    return printPdf(this.documentUrl as string);
+  }
+
+  /**
+   * Download Documentation.
+   */
+  public async download(): Promise<void> {
+    // File name to download.
+    let documentTitle;
+    if (this.getAttribute('title')) {
+      documentTitle = this.getAttribute('title') as string;
+
+      // Add .pdf extension if document name does not have one.
+      if (!documentTitle.match(/\.pdf$/i))
+        documentTitle += '.pdf';
+    } else
+      documentTitle = getFilename(this.documentUrl as string);
+
+    // Download Documentation.
+    await downloadPdf(this.documentObject, documentTitle);
+  }
+}
 PDFLiveElement.define();
 export default PDFLiveElement;
