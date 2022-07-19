@@ -30,7 +30,7 @@ export default class Modal {
    * @returns {Modal} The instance on which this method was called.
    */
   show() {
-    this.modalNode.classList.add('modal-show');
+    this.modalNode.classList.add('pl-modal-show');
     return this;
   }
 
@@ -40,7 +40,7 @@ export default class Modal {
    * @returns {Modal} The instance on which this method was called.
    */
   hide() {
-    this.modalNode.classList.remove('modal-show');
+    this.modalNode.classList.remove('pl-modal-show');
     return this;
   }
 

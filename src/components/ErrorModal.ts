@@ -23,10 +23,10 @@ export default class ErrorModal extends Modal {
    * @returns {string} Modal HTML.
    */
   protected render(): string {
-    return `<div class="modal">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-body">
+    return `<div class="pl-modal">
+              <div class="pl-modal-dialog">
+                <div class="pl-modal-content">
+                  <div class="pl-modal-body">
                     <div data-element="message">This is an error</div>
                   </div>
                 </div>

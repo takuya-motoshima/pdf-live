@@ -21,9 +21,9 @@ export default class Loading {
    * @returns {string} Loading HTML.
    */
   render() {
-    return `<div class="loading">
-              <div class="loading-content">
-                <div class="loading-spinner"></div>
+    return `<div class="pl-loading">
+              <div class="pl-loading-content">
+                <div class="pl-loading-spinner"></div>
               </div>
             </div>`;
   }
@@ -34,7 +34,7 @@ export default class Loading {
    * @returns {Loading} The instance on which this method was called.
    */
   show() {
-    this.loadingNode.classList.add('loading-show');
+    this.loadingNode.classList.add('pl-loading-show');
     return this;
   }
 
@@ -44,7 +44,7 @@ export default class Loading {
    * @returns {Loading} The instance on which this method was called.
    */
   hide() {
-    this.loadingNode.classList.remove('loading-show');
+    this.loadingNode.classList.remove('pl-loading-show');
     return this;
   }
 

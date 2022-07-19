@@ -38,7 +38,7 @@ export default class LeftPanel {
 
     // Toggle the opening and closing of the left panel.
     this.leftPanelToggle.addEventListener('click', () => {
-      if (this.leftPanel.classList.contains('left-panel-closed'))
+      if (this.leftPanel.classList.contains('pl-left-panel-closed'))
         this.open();
       else
         this.close();
@@ -49,16 +49,16 @@ export default class LeftPanel {
 
     // Keep currently active thumbnail node.
     this.activeThumbnailNode = this.thumbnailNodes.find(
-      thumbnailNode => thumbnailNode.classList.contains('thumbnail-active'));
+      thumbnailNode => thumbnailNode.classList.contains('pl-thumbnail-active'));
 
     // Add click event for thumbnail node.
     for (let thumbnailNode of this.thumbnailNodes) {
       thumbnailNode.addEventListener('click', evnt => {
         // Deactivate currently active thumbnails.
-        this.activeThumbnailNode!.classList.remove('thumbnail-active');
+        this.activeThumbnailNode!.classList.remove('pl-thumbnail-active');
 
         // Activate the selected thumbnail.
-        (evnt.currentTarget! as HTMLDivElement).classList.add('thumbnail-active');
+        (evnt.currentTarget! as HTMLDivElement).classList.add('pl-thumbnail-active');
         this.activeThumbnailNode = evnt.currentTarget as HTMLDivElement;
 
         // Invoke thumbnail selection event.
@@ -72,16 +72,16 @@ export default class LeftPanel {
    * Open the left panel.
    */
   public open(): void {
-    this.leftPanel.classList.remove('left-panel-closed')
-    this.pagegContainer.classList.add('page-container-open')
+    this.leftPanel.classList.remove('pl-left-panel-closed')
+    this.pagegContainer.classList.add('pl-page-container-open')
   }
 
   /**
    * Close left panel.
    */
   public close(): void {
-    this.leftPanel.classList.add('left-panel-closed')
-    this.pagegContainer.classList.remove('page-container-open')
+    this.leftPanel.classList.add('pl-left-panel-closed')
+    this.pagegContainer.classList.remove('pl-page-container-open')
   }
 
   /**
@@ -92,13 +92,13 @@ export default class LeftPanel {
   public activatePage(pageNum: number): void {
     // Deactivate currently active thumbnails.
     if (this.activeThumbnailNode)
-      this.activeThumbnailNode.classList.remove('thumbnail-active');
+      this.activeThumbnailNode.classList.remove('pl-thumbnail-active');
  
     // Activates the thumbnail corresponding to the specified page number.
     const targetThumbnailNode = this.thumbnailNodes.find(thumbnailNode => thumbnailNode.dataset.pageNumber == pageNum.toString());
     if (targetThumbnailNode) {
       // Activate the target thumbnail.
-      targetThumbnailNode.classList.add('thumbnail-active');
+      targetThumbnailNode.classList.add('pl-thumbnail-active');
       this.activeThumbnailNode = targetThumbnailNode;
 
       // Change the scroll position of the thumbnail viewer to a position where the active thumbnail node can be displayed.
@@ -127,23 +127,23 @@ export default class LeftPanel {
 
       // Create a thumbnail container node.
       const thumbnailNode = document.createElement('div');
-      thumbnailNode.classList.add('thumbnail');
+      thumbnailNode.classList.add('pl-thumbnail');
       thumbnailNode.dataset.pageNumber = num.toString();
 
       // Activate the thumbnail on the first page.
       if (num === 1)
-        thumbnailNode.classList.add('thumbnail-active');    
+        thumbnailNode.classList.add('pl-thumbnail-active');    
 
       // Create a canvas node.
       const canvas = document.createElement('canvas');
-      canvas.classList.add('thumbnail-image');
+      canvas.classList.add('pl-thumbnail-img');
       canvas.width = Math.floor(viewport.width);
       canvas.height = Math.floor(viewport.height);
       thumbnailNode.appendChild(canvas);
 
       // Create a thumbnail number label node.
       const label = document.createElement('div');
-      label.classList.add('thumbnail-label');
+      label.classList.add('pl-thumbnail-label');
       label.textContent = num.toString();
       thumbnailNode.appendChild(label);
 

@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.0.12] - 2022-07-19
+### Fixed
+- Added 'pl-' prefix to PDF Live CSS classes to prevent CSS conflicts.
+
 ## [1.0.11] - 2022-07-08
 ### Fixed
 - Added print and download methods to PDF viewer elements.
@@ -70,3 +74,4 @@ All notable changes to this project will be documented in this file.
 [1.0.9]: https://github.com/takuya-motoshima/pdf-live/compare/v1.0.8...v1.0.9
 [1.0.10]: https://github.com/takuya-motoshima/pdf-live/compare/v1.0.9...v1.0.10
 [1.0.11]: https://github.com/takuya-motoshima/pdf-live/compare/v1.0.10...v1.0.11
+[1.0.12]: https://github.com/takuya-motoshima/pdf-live/compare/v1.0.11...v1.0.12

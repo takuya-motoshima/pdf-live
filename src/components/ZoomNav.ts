@@ -75,7 +75,7 @@ export default class ZoomNav {
     this.pageView = context.querySelector('[data-element="pageView"]') as HTMLDivElement;
 
     // Set the currently selected zoom to the zoom input and the last zoom.
-    const currentZoom = (this.zoomSelects.find(zoomSelect => zoomSelect.classList.contains('zoom-menu-item-selected')) as HTMLButtonElement).dataset.value;
+    const currentZoom = (this.zoomSelects.find(zoomSelect => zoomSelect.classList.contains('pl-zoom-menu-item-selected')) as HTMLButtonElement).dataset.value;
     this.updateInputZoom(currentZoom!);
 
     // All zooms that can be selected from the screen.
@@ -92,7 +92,7 @@ export default class ZoomNav {
 
     // Toggle the opening and closing of the zoom overlay.
     this.zoomToggle.addEventListener('click', (evnt) => {
-      if (this.zoomMenu.classList.contains('zoom-menu-closed')) {
+      if (this.zoomMenu.classList.contains('pl-zoom-menu-closed')) {
         // Stops event propagation to the body so that the process of closing the zoom overlay for body click events does not run.
         evnt.stopPropagation();
 
@@ -117,7 +117,7 @@ export default class ZoomNav {
 
         // Activate the selected zoom item.
         const targetNode = evnt.target as HTMLButtonElement;
-        targetNode.classList.add('zoom-menu-item-selected');
+        targetNode.classList.add('pl-zoom-menu-item-selected');
 
         // Calculate zoom factor.
         const zoomFactor = this.calcFactor(targetNode.dataset.value as string);
@@ -144,7 +144,7 @@ export default class ZoomNav {
 
         // If the zoom mode is "page fit" or "width fit", resize the page.
         const selectedZoom = this.zoomSelects.find(zoomSelect =>
-          zoomSelect.classList.contains('zoom-menu-item-selected')) as HTMLButtonElement;
+          zoomSelect.classList.contains('pl-zoom-menu-item-selected')) as HTMLButtonElement;
         const currentZoom = selectedZoom.dataset.value;
         if (currentZoom === 'pageFit' || currentZoom === 'pageWidth') {
           // Calculate zoom factor.
@@ -159,7 +159,7 @@ export default class ZoomNav {
     // When the screen is clicked.
     document.body.addEventListener('click', evnt => {
       // Close if zoom overlay is open.
-      if (!this.zoomMenu.classList.contains('zoom-menu-closed')
+      if (!this.zoomMenu.classList.contains('pl-zoom-menu-closed')
         && !pointInRectangle({x: evnt.pageX, y: evnt.pageY}, this.zoomMenu.getBoundingClientRect()))
         this.close();
     }, {passive: true});
@@ -256,14 +256,14 @@ export default class ZoomNav {
    * Open zoom overlay.
    */
   public open(): void {
-    this.zoomMenu.classList.remove('zoom-menu-closed');
+    this.zoomMenu.classList.remove('pl-zoom-menu-closed');
   }
 
   /**
    * Close zoom overlay.
    */
   public close(): void {
-    this.zoomMenu.classList.add('zoom-menu-closed');
+    this.zoomMenu.classList.add('pl-zoom-menu-closed');
   }
 
   /**
@@ -325,9 +325,9 @@ export default class ZoomNav {
    */
   private deselectMenu(): void {
     const selectedZoom = this.zoomSelects.find(zoomSelect =>
-      zoomSelect.classList.contains('zoom-menu-item-selected'));
+      zoomSelect.classList.contains('pl-zoom-menu-item-selected'));
     if (selectedZoom)
-      selectedZoom.classList.remove('zoom-menu-item-selected');
+      selectedZoom.classList.remove('pl-zoom-menu-item-selected');
   }
 
   /**
@@ -342,7 +342,7 @@ export default class ZoomNav {
     // Activate the zoom menu that matches the current zoom factor.
     const zoomSelect = this.zoomSelects.find(zoomSelect => zoomSelect.dataset.value == value);
     if (zoomSelect)
-      zoomSelect.classList.add('zoom-menu-item-selected');
+      zoomSelect.classList.add('pl-zoom-menu-item-selected');
   }
 
   /**

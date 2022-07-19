@@ -46,7 +46,7 @@ export default class Modal {
    * @returns {Modal} The instance on which this method was called.
    */
   public show(): Modal | Promise<void> {
-    this.modalNode.classList.add('modal-show');
+    this.modalNode.classList.add('pl-modal-show');
     return this;
   }
 
@@ -56,7 +56,7 @@ export default class Modal {
    * @returns {Modal} The instance on which this method was called.
    */
   public hide(): Modal {
-    this.modalNode.classList.remove('modal-show');
+    this.modalNode.classList.remove('pl-modal-show');
     return this;
   }
 

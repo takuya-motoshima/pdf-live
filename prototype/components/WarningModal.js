@@ -10,16 +10,16 @@ export default class WarningModal extends Modal {
    * @returns {string} Modal HTML.
    */
   render() {
-    return `<div class="modal">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h2>Warning modal header</h2>
+    return `<div class="pl-modal">
+              <div class="pl-modal-dialog">
+                <div class="pl-modal-content">
+                  <div class="pl-modal-header">
+                    <h2>Title</h2>
                   </div>
-                  <div class="modal-body">Warning modal body</div>
-                  <div class="modal-footer">
-                    <button class="button button-cancel button-modal" data-element="WarningModalClearButton"><span>Cancel</span></button>
-                    <button class="button button-confirm button-modal" data-element="WarningModalSignButton"><span>OK</span></button>
+                  <div class="pl-modal-body">Message</div>
+                  <div class="pl-modal-footer">
+                    <button class="pl-btn pl-btn-cancel pl-btn-modal" data-element="WarningModalClearButton"><span>Cancel</span></button>
+                    <button class="pl-btn pl-btn-confirm pl-btn-modal" data-element="WarningModalSignButton"><span>OK</span></button>
                   </div>
                 </div>
               </div>

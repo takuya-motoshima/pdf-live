@@ -129,13 +129,13 @@ export default class PasswordModal extends Modal {
    */
   render(): string {
     return hbs.compile(   
-      `<div class="modal password-modal">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
+      `<div class="pl-modal pl-modal-password">
+        <div class="pl-modal-dialog">
+          <div class="pl-modal-content">
+            <div class="pl-modal-header">
               <h2>{{language.message.passwordRequired}}</h2>
             </div>
-            <div class="modal-body">
+            <div class="pl-modal-body">
               <form data-element="form" id="passwordForm">
                 <div class="enter">
                   <div>{{language.message.enterPassword}}</div>
@@ -144,9 +144,8 @@ export default class PasswordModal extends Modal {
                 <div data-element="incorrect" class="incorrect-password"></div>
               </form>
             </div>
-            <div class="modal-footer">
-              <!-- <button class="button button-cancel button-modal" data-element="passwordCancelButton"><span>Cancel</span></button> -->
-              <button form="passwordForm" type="submit" class="button button-confirm button-modal" data-element="passwordSubmitButton" disabled><span>{{language.action.submit}}</span></button>
+            <div class="pl-modal-footer">
+              <button form="passwordForm" type="submit" class="pl-btn pl-btn-confirm pl-btn-modal" data-element="passwordSubmitButton" disabled><span>{{language.action.submit}}</span></button>
             </div>
           </div>
         </div>

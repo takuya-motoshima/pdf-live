@@ -124,7 +124,7 @@ const isProtected = false;
     }, {passive: true});
 
     // Show page container after successful loading of PDF.
-    document.querySelector('[data-element="app"]').classList.add('document-loaded');
+    document.querySelector('[data-element="app"]').classList.add('pl-document-loaded');
   } catch (err) {
     // Show error.
     errorModal.show(err instanceof Error ? err.message : String(err));
