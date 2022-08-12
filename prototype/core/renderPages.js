@@ -42,11 +42,14 @@ export default async (pdfDoc, zoomFactor = 1.0) => {
     pageView.appendChild(pageNode);
 
     // Render page content on canvas.
-    page.render({
+    const renderTask = page.render({
       canvasContext: canvas.getContext('2d'), 
       transform: devicePixelRatio !== 1 ? [devicePixelRatio, 0, 0, devicePixelRatio, 0, 0] : null,
       viewport
     });
+
+    // Wait for rendering to complete.
+    await renderTask.promise;
 
     // Set the return page object.
     pages.push(page);

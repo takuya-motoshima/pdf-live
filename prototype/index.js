@@ -14,8 +14,6 @@ import ZoomNav from './components/ZoomNav.js';
 import PageNav from './components/PageNav.js';
 import getFilename from './helpers/getFilename.js';
 
-// const url = 'samples/fonts-not-supported.pdf';
-// const url = 'samples/japanese.pdf';
 const url = 'samples/sample.pdf';
 const context = document.querySelector('[data-element="app"]');
 const errorModal = new ErrorModal(context);
