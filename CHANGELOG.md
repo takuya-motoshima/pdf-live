@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.0.14] - 2022-08-15
+### Fixed
+- If the format of cMap is a relative path, convert it to URL format and load it.
+
 ## [1.0.13] - 2022-08-12
 ### Fixed
 - Document completion event (documentLoaded) is now fixed to invoke when all pages have been rendered.
@@ -80,3 +84,4 @@ All notable changes to this project will be documented in this file.
 [1.0.11]: https://github.com/takuya-motoshima/pdf-live/compare/v1.0.10...v1.0.11
 [1.0.12]: https://github.com/takuya-motoshima/pdf-live/compare/v1.0.11...v1.0.12
 [1.0.13]: https://github.com/takuya-motoshima/pdf-live/compare/v1.0.12...v1.0.13
+[1.0.14]: https://github.com/takuya-motoshima/pdf-live/compare/v1.0.12...v1.0.14

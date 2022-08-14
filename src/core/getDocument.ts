@@ -1,4 +1,5 @@
 import Language from '~/interfaces/Language';
+import relativePathToUrl from '~/shared/relativePathToUrl';
 
 /**
   * Load a PDF document.
@@ -13,16 +14,22 @@ export default async (url: string, workerSrc: string, language: Language, cMapUr
     // Setting worker path to worker bundle.
     window.pdfjsLib.GlobalWorkerOptions.workerSrc = workerSrc;
 
-    // Delimiter for timestamp parameter to invalidate cache.
-    const delimiter = url.indexOf('?') === -1 ? '?' : '&';
+    // // Add a timestamp parameter to document URLs to always read the latest documents.
+    // const delimiter = url.indexOf('?') === -1 ? '?' : '&';
+    // url += `${delimiter}t=${+new Date()}`;
+    // console.log(`Document URL:${url}`);
 
+    // If the CMap format is a relative path, convert it to URL format.
+    if (cMapUrl)
+      cMapUrl = relativePathToUrl(cMapUrl);
     // If there is no slash at the end of cMap, add it.
-    if (cMapUrl && cMapUrl.slice(-1) !== '/')
-      cMapUrl += '/';
+    // if (cMapUrl && cMapUrl.slice(-1) !== '/')
+    //   cMapUrl += '/';
+    // console.log(`cMapUrl=${cMapUrl}`);
 
     // Loading a document.
     const pdfDoc = await window.pdfjsLib.getDocument({
-      url: `${url}${delimiter}t=${+new Date()}`,
+      url,
       cMapUrl,
       cMapPacked: true
     }).promise;

@@ -300,7 +300,7 @@ class PDFLiveElement extends HTMLElement {
     this.listeners[type] = listener;
 
     // If the document is already loaded and the loaded event is set, immediately invoke the loaded event.
-    if (type === 'documentLoaded' || this.loaded) {
+    if (type === 'documentLoaded' && this.loaded) {
       if (this.listeners.documentLoaded)
         this.listeners.documentLoaded();
       this.calledLoadListener = true;

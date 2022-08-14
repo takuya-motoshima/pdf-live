@@ -8,7 +8,8 @@
   <link rel="stylesheet" href="dist/pdf-live.css">
 </head>
 <body>
-  <pdf-live src="sample.pdf" lang="en" worker="dist/pdf.worker.js"></pdf-live>
+  <pdf-live src="sample.pdf" lang="en" worker="dist/pdf.worker.js" cmap="dist/cmaps/"></pdf-live>
+
   <script type="module">
     import './dist/pdf-live.esm.js';
 
@@ -19,11 +20,11 @@
     pdflive
       .on('documentLoaded', () => {
         // PDF document loaded.
-        alert('Loaded PDF document');
+        console.log('Loaded PDF document');
       })
       .on('pageChange', pageNum => {
         // The browsing page has changed. The page number can be received as a parameter.
-        alert(`Opened page ${pageNum}`);
+        console.log(`Opened page ${pageNum}`);
       })
   </script>
 </body>

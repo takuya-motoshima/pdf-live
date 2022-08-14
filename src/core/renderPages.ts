@@ -50,6 +50,7 @@ export default async (pdfDoc: any, zoomFactor: number = 1.0): Promise<any[]> => 
 
     // Wait for rendering to complete.
     await renderTask.promise;
+    // console.log(`The ${num}th page was read`);
 
     // Set the return page object.
     pages.push(page);
