@@ -53,13 +53,6 @@ export default class ZoomNav {
      */
     private layout;
     /**
-     * Calculate zoom factor.
-     *
-     * @param   {string} zoom
-     * @returns {number}
-     */
-    private calcFactor;
-    /**
      * Returns the current zoom factor.
      *
      * @returns {number}

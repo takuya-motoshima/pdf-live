@@ -6,6 +6,7 @@ import printPdf from '~/core/printPdf';
 import downloadPdf from '~/core/downloadPdf';
 import setTheme from '~/core/setTheme';
 import restoreTheme from '~/core/restoreTheme';
+import calcPageZoomRatio from '~/core/calcPageZoomRatio';
 import loadPdfJs from '~/core/loadPdfJs';
 import Loading from '~/components/Loading';
 import ErrorModal from '~/components/ErrorModal';
@@ -19,10 +20,7 @@ import i18n from '~/i18n';
 import Language from '~/interfaces/Language';
 import hbs from 'handlebars-extd';
 import isAsyncFunction from '~/shared/isAsyncFunction';
-
-// The minimum width of the mobile.
-// If the window width is smaller than this width in the first view, the side panel will be hidden.
-const MINIMUM_MOBILE_WIDTH = 640;
+import * as constants from '~/constants';
 
 /**
  * PDFLiveElement.
@@ -60,6 +58,9 @@ class PDFLiveElement extends HTMLElement {
 
   /** @type {HTMLButtonElement} */
   private readonly themeChangeButton: HTMLButtonElement;
+
+  /** @type {HTMLDivElement} */
+  private readonly pageView: HTMLDivElement;
 
   /** @type {{[key: string]: Function}} */
   private readonly listeners: {[key: string]: Function|undefined} = {
@@ -107,6 +108,9 @@ class PDFLiveElement extends HTMLElement {
 
     // Change Theme button.
     this.themeChangeButton = this.querySelector('[data-element="themeChangeButton"]') as HTMLButtonElement;
+
+    // Page Container.
+    this.pageView = this.querySelector('[data-element="pageView"]') as HTMLDivElement;
 
     // Password Modal.
     this.passwordModal = new PasswordModal(this, this.language);
@@ -179,14 +183,18 @@ class PDFLiveElement extends HTMLElement {
 
       // Keep page width and height for zoom factor calculation to fit by page or width.
       const defaultViewport = await (async (): Promise<Viewport> => {
-        const {width, height} = (await this.documentObject.getPage(1)).getViewport({scale: 1.5 * 1.0});
+        const {width, height} = (await this.documentObject.getPage(1)).getViewport({scale: constants.PDF_DRAWING_SCALE});
         return {width, height}
       })();
 
+      // Calculate zoom factor.
+      const zoomFactor = calcPageZoomRatio('pageWidth', this.pageView, defaultViewport);
+
       // Initialize zoom menu.
-      const zoomNav = (new ZoomNav(this, defaultViewport)).onChange((zoomFactor: number) => {
-        // Change the zoom factor of the page when the zoom is changed.
-        // Resize page.
+      const zoomNav = new ZoomNav(this, defaultViewport);
+
+      // Change the zoom factor of the page when the zoom is changed.
+      zoomNav.onChange((zoomFactor: number) => {
         resizePage(pages, zoomFactor);
       });
 
@@ -325,7 +333,7 @@ class PDFLiveElement extends HTMLElement {
    * Render viewer.
    */
   private render(): void {
-    const isMobile = window.innerWidth <= MINIMUM_MOBILE_WIDTH;
+    const isMobile = window.innerWidth <= constants.MINIMUM_MOBILE_WIDTH;
     const openLeftPanel = !isMobile;
     this.insertAdjacentHTML('beforeend', hbs.compile(
       `<!-- begin:Header -->
@@ -428,7 +436,7 @@ class PDFLiveElement extends HTMLElement {
       <!-- end:Content -->
       <!-- begin:Zoom menu -->
       <div data-element="zoomMenu" class="pl-zoom-menu pl-zoom-menu-closed" role="listbox" aria-label="{{language.component.zoomOverlay}}">
-        <button data-element="zoomSelect" data-value="pageWidth" class="pl-btn pl-zoom-menu-item{{#if isMobile}} pl-zoom-menu-item-selected{{/if}}" aria-label="{{language.action.fitToWidth}}" role="option">
+        <button data-element="zoomSelect" data-value="pageWidth" class="pl-btn pl-zoom-menu-item" aria-label="{{language.action.fitToWidth}}" role="option">
           <svg class="pl-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
             <path d="M5.93,4.36,9.17,7.6a.39.39,0,0,1,0,.56l-1,1a.39.39,0,0,1-.56,0L4.36,5.93,2.68,7.6A.4.4,0,0,1,2,7.32V2.4A.4.4,0,0,1,2.4,2H7.32a.4.4,0,0,1,.28.68ZM7.6,14.83,4.36,18.07,2.68,16.4a.4.4,0,0,0-.68.28V21.6a.4.4,0,0,0,.4.4H7.32a.4.4,0,0,0,.28-.68L5.93,19.64,9.17,16.4a.39.39,0,0,0,0-.56l-1-1A.39.39,0,0,0,7.6,14.83ZM16.4,2.68l1.67,1.68L14.83,7.6a.39.39,0,0,0,0,.56l1,1a.39.39,0,0,0,.56,0l3.24-3.24L21.32,7.6A.4.4,0,0,0,22,7.32V2.4a.4.4,0,0,0-.4-.4H16.68A.4.4,0,0,0,16.4,2.68Zm-.56,12.15-1,1a.39.39,0,0,0,0,.56l3.24,3.24L16.4,21.32a.4.4,0,0,0,.28.68H21.6a.4.4,0,0,0,.4-.4V16.68a.4.4,0,0,0-.68-.28l-1.68,1.67L16.4,14.83A.39.39,0,0,0,15.84,14.83Z"></path>
           </svg>{{language.action.fitToWidth}}
@@ -441,7 +449,7 @@ class PDFLiveElement extends HTMLElement {
         <div class="pl-divider"></div>
         <button data-element="zoomSelect" data-value="50" class="pl-zoom-menu-item" aria-label="50%" role="option">50%</button>
         <button data-element="zoomSelect" data-value="75" class="pl-zoom-menu-item" aria-label="75%" role="option">75%</button>
-        <button data-element="zoomSelect" data-value="100" class="pl-zoom-menu-item{{#unless isMobile}} pl-zoom-menu-item-selected{{/unless}}" aria-label="100%" role="option"">100%</button>
+        <button data-element="zoomSelect" data-value="100" class="pl-zoom-menu-item" aria-label="100%" role="option"">100%</button>
         <button data-element="zoomSelect" data-value="125" class="pl-zoom-menu-item" aria-label="125%" role="option"">125%</button>
         <button data-element="zoomSelect" data-value="150" class="pl-zoom-menu-item" aria-label="150%" role="option"">150%</button>
         <button data-element="zoomSelect" data-value="200" class="pl-zoom-menu-item" aria-label="200%" role="option"">200%</button>
@@ -449,8 +457,7 @@ class PDFLiveElement extends HTMLElement {
       <!-- end:Zoom menu -->
       <iframe data-element="printFrame" style="display: none;"></iframe>`)({
         language: this.language,
-        openLeftPanel,
-        isMobile
+        openLeftPanel
       }));
   }
 

@@ -1,4 +1,4 @@
-import Modal from '~/components/Modal.js';
+import Modal from '~/components/Modal';
 import Loading from '~/components/Loading';
 import isAsyncFunction from '~/shared/isAsyncFunction';
 import sleep from '~/shared/sleep';

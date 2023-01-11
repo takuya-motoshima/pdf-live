@@ -1,16 +1,18 @@
+import * as constants from '~/constants';
+
 /**
   * Resize page.
   *
   * @param {any[]}  pages
   * @param {number} zoomFactor
   */
-export default (pages: any[], zoomFactor: number = 1.0): void => {
+export default (pages: any[], zoomFactor: number = 1): void => {
   for (let num=1; num<=pages.length; num++) {
     // Fetch page.
     const page = pages[num - 1];
 
     // Calculate the display area of the page.
-    const viewport = page.getViewport({scale: 1.5 * zoomFactor});
+    const viewport = page.getViewport({scale: constants.PDF_DRAWING_SCALE * zoomFactor});
 
     // Support HiDPI-screens.
     const devicePixelRatio = window.devicePixelRatio || 1;

@@ -25,6 +25,8 @@ declare class PDFLiveElement extends HTMLElement {
     private readonly downloadButton;
     /** @type {HTMLButtonElement} */
     private readonly themeChangeButton;
+    /** @type {HTMLDivElement} */
+    private readonly pageView;
     /** @type {{[key: string]: Function}} */
     private readonly listeners;
     /** @type {string|undefined} */

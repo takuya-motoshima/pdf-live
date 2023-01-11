@@ -1,5 +1,4 @@
 node_modules/
-prototype/
 src/
 rollup.config.js
 tsconfig.json

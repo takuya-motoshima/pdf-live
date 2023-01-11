@@ -1,3 +1,5 @@
+import * as constants from '~/constants';
+
 /**
   * Render pages.
   *
@@ -5,7 +7,7 @@
   * @param    {number}           zoomFactor
   * @returns  {Promise<any[]>}
   */
-export default async (pdfDoc: any, zoomFactor: number = 1.0): Promise<any[]> => {
+export default async (pdfDoc: any, zoomFactor: number = 1): Promise<any[]> => {
   // Find dependent nodes.
   const pageView = document.querySelector('[data-element="pageView"]') as HTMLDivElement;
 
@@ -18,7 +20,7 @@ export default async (pdfDoc: any, zoomFactor: number = 1.0): Promise<any[]> => 
     const page = await pdfDoc.getPage(num);
 
     // Calculate the display area of the page.
-    const viewport = page.getViewport({scale: 1.5 * zoomFactor});
+    const viewport = page.getViewport({scale: constants.PDF_DRAWING_SCALE * zoomFactor});
 
     // Support HiDPI-screens.
     const devicePixelRatio = window.devicePixelRatio || 1;

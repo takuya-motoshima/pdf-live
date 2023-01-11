@@ -1,4 +1,4 @@
-import Modal from '~/components/Modal.js';
+import Modal from '~/components/Modal';
 import Language from '~/interfaces/Language';
 /**
  * Password input modal.

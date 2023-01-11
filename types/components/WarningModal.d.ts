@@ -1,4 +1,4 @@
-import Modal from '~/components/Modal.js';
+import Modal from '~/components/Modal';
 /**
  * Warning modal.
  */

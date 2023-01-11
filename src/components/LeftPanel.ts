@@ -1,3 +1,5 @@
+import * as constants from '~/constants';
+
 /**
  * Left panel controller.
  */
@@ -123,7 +125,7 @@ export default class LeftPanel {
       const page = pages[num - 1];
 
       // Calculate the display area of the page.
-      const viewport = page.getViewport({scale: 1.5});
+      const viewport = page.getViewport({scale: constants.PDF_DRAWING_SCALE});
 
       // Create a thumbnail container node.
       const thumbnailNode = document.createElement('div');

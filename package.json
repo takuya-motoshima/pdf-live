@@ -17,6 +17,7 @@
     "postbuild:dev": "cp -a dist docs/demos/dist",
     "prewatch:dev": "rm -rf dist types docs/demos/dist",
     "watch:dev": "cross-env NODE_ENV=development rollup -c --watch",
+    "postwatch:dev": "cp -a dist docs/demos/dist",
     "test": "jest"
   },
   "repository": {
