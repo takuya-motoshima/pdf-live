@@ -1,6 +1,6 @@
 {
   "name": "pdf-live",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "description": "'PDF LIVE' is a PDF viewer that extends the open source 'mozilla/pdf.js'. \r You can start the PDF viewer with toolbar right away with 'PDF LIVE'.",
   "main": "dist/pdf-live.common.js",
   "module": "dist/pdf-live.esm.js",
