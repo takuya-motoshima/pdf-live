@@ -19,7 +19,7 @@
     "lightMode": "Heller Modus"
   },
   "component": {
-    "leftPanel": "Linke Leiste",
+    "thumbnailPanel": "Linke Leiste",
     "zoomOverlay": "Zoom-Overlay"
   },
   "message": {

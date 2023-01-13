@@ -1,15 +1,15 @@
-import calcPageZoomRatio from '~/core/calcPageZoomRatio';
+import calcZoomFactor from '~/core/calcZoomFactor';
 import pointInRectangle from '~/shared/pointInRectangle';
 import isNumber from '~/shared/isNumber';
-import Viewport from '~/interfaces/Viewport';
+import PageViewport from '~/interfaces/PageViewport';
 import * as constants from '~/constants';
 
 /**
  * Page zoom control.
  */
 export default class ZoomNav {
-  /** @type {Viewport} */
-  private readonly defaultViewport: Viewport;
+  /** @type {PageViewport} */
+  private readonly pageViewport: PageViewport;
 
   /** @type {HTMLDivElement} */
   private readonly zoomToggle: HTMLDivElement;
@@ -39,29 +39,29 @@ export default class ZoomNav {
   private resizeTimeout: number|null = null;
 
   /** @type {number} */
-  private lastZoom: number = -1;
+  private lastZoomFactor: number = -1;
+
+  /** @type {string} */
+  private lastZoomValue: string;
 
   /** @type {number[]} */
-  private readonly zoomList: number[];
+  private readonly zoomFactorList: number[];
 
   /** @type {number} */
-  private readonly minZoom: number;
+  private readonly minZoomFactor: number;
 
   /** @type {number} */
-  private readonly maxZoom: number;
+  private readonly maxZoomFactor: number;
 
   /** @type {(zoomFactor: number) => void} */
   private changeListener: (zoomFactor: number) => void = (zoomFactor: number): void => {}
 
   /**
    * Control the zoom factor change event of a page.
-   *
-   * @param {HTMLDivElement}  context
-   * @param {Viewport}        defaultViewport
    */
-  constructor(context: HTMLElement, defaultViewport: Viewport) {
+  constructor(context: HTMLElement, pageViewport: PageViewport) {
     // Keep page width and height for zoom factor calculation to fit by page or width.
-    this.defaultViewport = defaultViewport;
+    this.pageViewport = pageViewport;
 
     // Find dependent nodes.
     this.zoomToggle = context.querySelector('[data-element="zoomToggle"]') as HTMLDivElement;
@@ -76,27 +76,29 @@ export default class ZoomNav {
     // Zoom rate initially displayed.
     // If the actual width of the PDF is larger than the PDF drawing area (div.pl-page-view), the PDF will be drawn to fit within the PDF drawing area (pageWidth).  
     // Otherwise, the PDF will be drawn with its actual dimensions (100%). 
-    let initialZoom = '100';
-    if (defaultViewport.width > this.pageView.clientWidth) 
-      initialZoom = 'pageWidth';
-    const zoomSelect = this.zoomSelects.find(zoomSelect => zoomSelect.dataset.value === initialZoom) as HTMLButtonElement;
-    // console.log(`initialZoom=${initialZoom}`);
+    let initialZoomValue = '100';
+    if (pageViewport.width > this.pageView.clientWidth) 
+      initialZoomValue = 'pageWidth';
+    const zoomSelect = this.zoomSelects.find(zoomSelect => zoomSelect.dataset.value === initialZoomValue) as HTMLButtonElement;
     zoomSelect.classList.add('pl-zoom-menu-item-selected');
 
+    // Keep zoom selection value.
+    this.lastZoomValue = initialZoomValue;
+
     // Set the currently selected zoom to the zoom input and the last zoom.
-    this.updateInputZoom(initialZoom);
+    this.updateInputZoom(initialZoomValue);
 
     // All zooms that can be selected from the screen.
-    this.zoomList = this.zoomSelects.flatMap((zoomSelect: HTMLButtonElement) => {
-      const zoom = parseInt(zoomSelect.dataset.value as string, 10);
-      return isNumber(zoom) ? zoom : [];
+    this.zoomFactorList = this.zoomSelects.flatMap((zoomSelect: HTMLButtonElement) => {
+      const zoomValue = parseInt(zoomSelect.dataset.value as string, 10);
+      return isNumber(zoomValue) ? zoomValue : [];
     });
 
     // Minimum zoom.
-    this.minZoom = Math.min(...this.zoomList);
+    this.minZoomFactor = Math.min(...this.zoomFactorList);
 
     // Maximum zoom.
-    this.maxZoom = Math.max(...this.zoomList);
+    this.maxZoomFactor = Math.max(...this.zoomFactorList);
 
     // Toggle the opening and closing of the zoom overlay.
     this.zoomToggle.addEventListener('click', (evnt) => {
@@ -104,8 +106,8 @@ export default class ZoomNav {
         // Stops event propagation to the body so that the process of closing the zoom overlay for body click events does not run.
         evnt.stopPropagation();
 
-        // Layout the zoom overlay.
-        this.layout();
+        // Lay out the zoom menu item's absolute position.
+        this.layoutZoomMenuLayout();
 
         // Open zoom overlay.
         this.open();
@@ -121,20 +123,20 @@ export default class ZoomNav {
         this.close();
 
         // Deselect a zoom item that was already selected.
-        this.deselectMenu();
+        this.deselectZoom();
 
         // Activate the selected zoom item.
-        const targetNode = evnt.target as HTMLButtonElement;
-        targetNode.classList.add('pl-zoom-menu-item-selected');
+        const zoomSelect = evnt.target as HTMLButtonElement;
+        zoomSelect.classList.add('pl-zoom-menu-item-selected');
 
         // Calculate zoom factor.
-        const zoomFactor = calcPageZoomRatio(targetNode.dataset.value as string, this.pageView, this.defaultViewport);
+        const zoomFactor = calcZoomFactor(zoomSelect.dataset.value as string, this.pageView, this.pageViewport);
 
         // Set the zoom percentage to the text node.
         this.zoomInput.value = Math.floor(zoomFactor * 100).toString();
 
-        // Keep the last input value.
-        this.lastZoom = parseInt(this.zoomInput.value, 10);
+        // Keep the zoom factor.
+        this.lastZoomFactor = parseInt(this.zoomInput.value, 10);
 
         // Invoke zoom change event.
         this.changeListener(zoomFactor);
@@ -147,19 +149,14 @@ export default class ZoomNav {
         clearTimeout(this.resizeTimeout);
 
       this.resizeTimeout = window.setTimeout(() => {
-        // Recalculates the position of the zoom overlay node.
-        this.layout();
+        // Lay out the zoom menu item's absolute position.
+        this.layoutZoomMenuLayout();
 
         // If the zoom mode is "page fit" or "width fit", resize the page.
-        const selectedZoom = this.zoomSelects.find(zoomSelect =>
-          zoomSelect.classList.contains('pl-zoom-menu-item-selected')) as HTMLButtonElement;
-        const currentZoom = selectedZoom.dataset.value;
-        if (currentZoom === 'pageFit' || currentZoom === 'pageWidth') {
-          // Calculate zoom factor.
-          const zoomFactor = calcPageZoomRatio(currentZoom, this.pageView, this.defaultViewport);
-
+        const zoomValue = this.getSelectedZoomValue();
+        if (zoomValue === 'pageFit' || zoomValue === 'pageWidth') {
           // Invoke zoom change event.
-          this.changeListener(zoomFactor);
+          this.changeListener(calcZoomFactor(zoomValue, this.pageView, this.pageViewport));
         }
       }, 100);
     }, {passive: true});
@@ -173,16 +170,10 @@ export default class ZoomNav {
     }, {passive: true});
 
     // Zoom out the page.
-    this.zoomOutButton.addEventListener('click', () => {
-      // Calculate zoom step.
-      this.calcStep(constants.ZOOM_OUT);
-    }, {passive: true});
+    this.zoomOutButton.addEventListener('click', () => this.calcNextZoom(constants.ZOOM_OUT), {passive: true});
 
     // Zoom in on the page.
-    this.zoomInButton.addEventListener('click', () => {
-      // Calculate zoom step.
-      this.calcStep(constants.ZOOM_IN);
-    }, {passive: true});
+    this.zoomInButton.addEventListener('click', () => this.calcNextZoom(constants.ZOOM_IN), {passive: true});
 
     // Hold down the Ctrl key and rotate the mouse wheel to zoom. 
     window.addEventListener('wheel', evnt => {
@@ -194,55 +185,51 @@ export default class ZoomNav {
       evnt.preventDefault();
 
       // Calculate the next zoom factor.
-      const currentZoom = this.lastZoom;
-      let newZoom = currentZoom;
+      const currentZoomFactor = this.lastZoomFactor;
+      let newZoomFactor = currentZoomFactor;
       if (evnt.deltaY < 0) {
         // Rotate the mouse wheel upwards to zoom in.
-
         // Activate the zoom out button.
         this.zoomOutButton.disabled = false;
 
         // Do nothing if the current zoom factor is maximum.
-        if (currentZoom >= this.maxZoom)
+        if (currentZoomFactor >= this.maxZoomFactor)
           return;
 
         // Calculate new zoom factor.
         const multiple = 1.25;
-        newZoom = Math.min(Math.floor(currentZoom * multiple), this.maxZoom);
+        newZoomFactor = Math.min(Math.floor(currentZoomFactor * multiple), this.maxZoomFactor);
         
         // When the zoom factor reaches the maximum, disable the zoom-in button.
-        this.zoomInButton.disabled = newZoom >= this.maxZoom;
+        this.zoomInButton.disabled = newZoomFactor >= this.maxZoomFactor;
       } else if (evnt.deltaY > 0) {
         // Rotate the mouse wheel downwards to zoom out.
         // Activate the zoom-in button.
         this.zoomInButton.disabled = false;
 
         // Do nothing if the current zoom factor is minimum.
-        if (currentZoom <= this.minZoom)
+        if (currentZoomFactor <= this.minZoomFactor)
           return;
 
         // Calculate new zoom factor.
         const multiple = .8;
-        newZoom = Math.max(Math.floor(currentZoom * multiple), this.minZoom);
+        newZoomFactor = Math.max(Math.floor(currentZoomFactor * multiple), this.minZoomFactor);
 
         // When the zoom factor reaches the minimum, disable the zoom out button.
-        this.zoomOutButton.disabled = newZoom <= this.minZoom;
+        this.zoomOutButton.disabled = newZoomFactor <= this.minZoomFactor;
       }
 
       // Set the new zoom factor to the zoom input value.
-      this.zoomInput.value = newZoom.toString();
+      this.zoomInput.value = newZoomFactor.toString();
 
-      // Keep the last input value.
-      this.lastZoom = parseInt(this.zoomInput.value, 10);
+      // Keep the zoom factor.
+      this.lastZoomFactor = parseInt(this.zoomInput.value, 10);
 
       // Activate the zoom menu that matches the current zoom factor.
-      this.activateMenu(this.zoomInput.value);
-
-      // Calculate zoom factor.
-      const zoomFactor = calcPageZoomRatio(this.zoomInput.value, this.pageView, this.defaultViewport);
+      this.activateZoom(this.zoomInput.value);
 
       // Invoke zoom change event.
-      this.changeListener(zoomFactor);
+      this.changeListener(calcZoomFactor(this.zoomInput.value, this.pageView, this.pageViewport));
     }, {passive: false});
 
     // Focus out zoom input.
@@ -275,60 +262,61 @@ export default class ZoomNav {
   }
 
   /**
-   * Recalculates the position of the zoom overlay node.
+   * Returns the current zoom factor.
    */
-  private layout(): void {
-    const toogleRect =  this.zoomToggle.getBoundingClientRect();
-    this.zoomMenu.style.top = `${toogleRect.bottom}px`;
-    this.zoomMenu.style.left = `${toogleRect.left}px`;
+  public getZoomFactor(): number {
+    return calcZoomFactor(this.zoomInput.value, this.pageView, this.pageViewport);
   }
 
   /**
-   * Returns the current zoom factor.
-   *
-   * @returns {number}
+   * Zoom change event. Returns the zoom factor to the event listener.
    */
-  public getZoomFactor(): number {
-    return calcPageZoomRatio(this.zoomInput.value, this.pageView, this.defaultViewport);
+  public onChange(listener: (zoomFactor: number) => void): ZoomNav {
+    this.changeListener = listener;
+    return this;
+  }
+
+  /**
+   * Lay out the zoom menu item's absolute position.
+   */
+  private layoutZoomMenuLayout(): void {
+    const {bottom, left} =  this.zoomToggle.getBoundingClientRect();
+    this.zoomMenu.style.top = `${bottom}px`;
+    this.zoomMenu.style.left = `${left}px`;
   }
 
   /**
    * Update input zoom.
-   *
-   * @param {number|string} strZoom percentage, pageWidth, or pageFit.
    */
   private updateInputZoom(strZoom: number|string) {
     // Calculate zoom factor.
-    const zoomFactor = calcPageZoomRatio(strZoom.toString(), this.pageView, this.defaultViewport);
+    const zoomFactor = calcZoomFactor(strZoom.toString(), this.pageView, this.pageViewport);
 
     // Set the zoom percentage to the text node.
     this.zoomInput.value = Math.floor(zoomFactor * 100).toString();
 
-    // Keep the last input value.
-    this.lastZoom = parseInt(this.zoomInput.value, 10);
+    // Keep the zoom factor.
+    this.lastZoomFactor = parseInt(this.zoomInput.value, 10);
   }
 
   /**
    * Deselect a zoom item that was already selected.
    */
-  private deselectMenu(): void {
-    const selectedZoom = this.zoomSelects.find(zoomSelect =>
-      zoomSelect.classList.contains('pl-zoom-menu-item-selected'));
-    if (selectedZoom)
-      selectedZoom.classList.remove('pl-zoom-menu-item-selected');
+  private deselectZoom(): void {
+    const zoomNode = this.getSelectedZoomNode();
+    if (zoomNode)
+      zoomNode.classList.remove('pl-zoom-menu-item-selected');
   }
 
   /**
    * Activate the zoom menu.
-   *
-   * @param {string} value
    */
-  private activateMenu(value: string): void {
+  private activateZoom(zoomValue: string): void {
     // Deselect a zoom item that was already selected.
-    this.deselectMenu();
+    this.deselectZoom();
 
     // Activate the zoom menu that matches the current zoom factor.
-    const zoomSelect = this.zoomSelects.find(zoomSelect => zoomSelect.dataset.value == value);
+    const zoomSelect = this.zoomSelects.find(zoomSelect => zoomSelect.dataset.value == zoomValue);
     if (zoomSelect)
       zoomSelect.classList.add('pl-zoom-menu-item-selected');
   }
@@ -338,89 +326,86 @@ export default class ZoomNav {
    */
   private enterZoom() {
     // Converts the entered zoom to a numerical value.
-    let currentZoom = parseInt(this.zoomInput.value, 10);
+    let currentZoomFactor = parseInt(this.zoomInput.value, 10);
 
     // Check if the input value is a valid number.
-    if (!isNaN(currentZoom)) {
-      if (currentZoom < this.minZoom)
+    if (!isNaN(currentZoomFactor)) {
+      if (currentZoomFactor < this.minZoomFactor)
         // If the input is less than the minimum value, set the minimum value to the input.
-        currentZoom = this.minZoom;
-      else if (currentZoom > this.maxZoom)
+        currentZoomFactor = this.minZoomFactor;
+      else if (currentZoomFactor > this.maxZoomFactor)
         // If the input exceeds the maximum value, set the maximum value to the input.
-        currentZoom = this.maxZoom;
+        currentZoomFactor = this.maxZoomFactor;
 
       // Set the adjustment value to the input node.
-      this.zoomInput.value = currentZoom.toString();
+      this.zoomInput.value = currentZoomFactor.toString();
 
-      // Keep the last input value.
-      this.lastZoom = parseInt(this.zoomInput.value, 10);
+      // Keep the zoom factor.
+      this.lastZoomFactor = parseInt(this.zoomInput.value, 10);
 
       // When the zoom factor reaches the minimum, disable the zoom out button.
-      this.zoomOutButton.disabled = this.zoomInput.value == this.minZoom.toString();
+      this.zoomOutButton.disabled = this.zoomInput.value == this.minZoomFactor.toString();
 
       // When the zoom factor reaches the maximum, disable the zoom-in button.
-      this.zoomInButton.disabled = this.zoomInput.value == this.maxZoom.toString();
-
-      // Calculate zoom factor.
-      const zoomFactor = calcPageZoomRatio(this.zoomInput.value, this.pageView, this.defaultViewport);
+      this.zoomInButton.disabled = this.zoomInput.value == this.maxZoomFactor.toString();
 
       // Invoke zoom change event.
-      this.changeListener(zoomFactor);
+      this.changeListener(calcZoomFactor(this.zoomInput.value, this.pageView, this.pageViewport));
     } else
       // If the input zoom is an invalid number, set the previous value to the input zoom.
-      this.zoomInput.value = this.lastZoom.toString();
+      this.zoomInput.value = this.lastZoomFactor.toString();
   }
 
   /**
-   * Calculate zoom step.
-   *
-   * @param {number} zoomDir Zoom direction. 0: Zoom out, 1: Zoom in
+   * Calculate the next zoom when zooming out or in.
    */
-  private calcStep(zoomDir: number) {
-    // Calculate the next zoom.
-    if (zoomDir === constants.ZOOM_OUT)
-      // Set a zoom factor one step smaller than the current one.
-      this.zoomInput.value = (this.zoomList.sort((a, b) => b - a).find(zoom => zoom < this.lastZoom) ?? this.minZoom).toString();
-    else    
-      // Set a zoom factor one step larger than the current one.
-      this.zoomInput.value = (this.zoomList.sort((a, b) => a - b).find(zoom => zoom > this.lastZoom) ?? this.maxZoom).toString();
+  private calcNextZoom(zoomDir: number) {
+    // Move one step from the currently selected zoom rate.
+    this.zoomInput.value = zoomDir === constants.ZOOM_OUT ?
+      (this.zoomFactorList.sort((a, b) => b - a).find(zoom => zoom < this.lastZoomFactor) ?? this.minZoomFactor).toString() :
+      (this.zoomFactorList.sort((a, b) => a - b).find(zoom => zoom > this.lastZoomFactor) ?? this.maxZoomFactor).toString();
 
-    // Keep the last input value.
-    this.lastZoom = parseInt(this.zoomInput.value, 10);
+    // Keep the zoom factor.
+    this.lastZoomFactor = parseInt(this.zoomInput.value, 10);
 
     // Controlling the activation of zoom-in and zoom-out buttons.
     if (zoomDir === constants.ZOOM_OUT) {
       // When the zoom factor reaches the minimum, disable the zoom out button.
-      this.zoomOutButton.disabled = this.zoomInput.value == this.minZoom.toString();
+      this.zoomOutButton.disabled = this.zoomInput.value == this.minZoomFactor.toString();
 
       // Activate the zoom-in button.
       this.zoomInButton.disabled = false;
     } else {
       // When the zoom factor reaches the maximum, disable the zoom-in button.
-      this.zoomInButton.disabled = this.zoomInput.value == this.maxZoom.toString();
+      this.zoomInButton.disabled = this.zoomInput.value == this.maxZoomFactor.toString();
 
       // Activate the zoom out button.
       this.zoomOutButton.disabled = false;
     }
 
     // Activate the zoom menu that matches the current zoom factor.
-    this.activateMenu(this.zoomInput.value);
-
-    // Calculate zoom factor.
-    const zoomFactor = calcPageZoomRatio(this.zoomInput.value, this.pageView, this.defaultViewport);
+    this.activateZoom(this.zoomInput.value);
 
     // Invoke zoom change event.
-    this.changeListener(zoomFactor);
+    this.changeListener(calcZoomFactor(this.zoomInput.value, this.pageView, this.pageViewport));
   }
 
   /**
-   * Zoom change event. Returns the zoom factor to the event listener.
-   *
-   * @param {(zoomFactor: number) => void}
-   * @returns {ZoomNav} The instance on which this method was called.
+   * Get the currently selected zoom node.
    */
-  public onChange(listener: (zoomFactor: number) => void): ZoomNav {
-    this.changeListener = listener;
-    return this;
+  private getSelectedZoomNode(): HTMLButtonElement|undefined {
+    return this.zoomSelects.find(zoomSelect => {
+      return zoomSelect.classList.contains('pl-zoom-menu-item-selected');
+    }) as HTMLButtonElement;
+  }
+
+  /**
+   * Get the currently selected zoom value.
+   */
+  private getSelectedZoomValue(): string|null {
+    const zoomNode = this.getSelectedZoomNode();
+    if (!zoomNode)
+      return null;
+    return zoomNode.dataset.value as string;
   }
 }

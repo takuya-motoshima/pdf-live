@@ -32,9 +32,6 @@ export default class PasswordModal extends Modal {
 
   /**
    * Construct modal.
-   *
-   * @param {HTMLElement} context
-   * @param {Language}    language
    */
   constructor(context: HTMLElement, language: Language) {
     super(context, language);
@@ -124,8 +121,6 @@ export default class PasswordModal extends Modal {
 
   /**
    * Render the content of this component.
-   *
-   * @returns {string} Modal HTML.
    */
   render(): string {
     return hbs.compile(   
@@ -181,9 +176,6 @@ export default class PasswordModal extends Modal {
 
   /**
    * Password enter event. Returns the password entered to the event listener.
-   *
-   * @param   {(password: string) => boolean|Promise<boolean>}
-   * @returns {PasswordModal} The instance on which this method was called.
    */
   public onEnter(listener: (password: string) => boolean|Promise<boolean>): PasswordModal {
     this.enterListener = listener;

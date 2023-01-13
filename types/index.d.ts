@@ -39,34 +39,22 @@ declare class PDFLiveElement extends HTMLElement {
     constructor();
     /**
      * Called every time the element is inserted into the DOM.
-     *
-     * @return {void}
      */
     protected connectedCallback(): Promise<void>;
     /**
      * Define elements
-     *
-     * @return {PDFLiveElement}
      */
     static define(): typeof PDFLiveElement;
     /**
      * Generate elements
-     *
-     * @return {PDFLiveElement}
      */
     static createElement(): PDFLiveElement;
     /**
      * Add event listener
-     *
-     * @param  {'pageChange'|'documentLoaded'|'passwordEnter'}  type
-     * @param  {Function}                                       listener
-     * @return {PDFLiveElement}
      */
     on(type: 'pageChange' | 'documentLoaded' | 'passwordEnter', listener: Function): PDFLiveElement;
     /**
      * Returns the current page number.
-     *
-     * @return {number}
      */
     getCurrentPageNumber(): number;
     /**

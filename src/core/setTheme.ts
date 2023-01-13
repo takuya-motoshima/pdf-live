@@ -1,7 +1,5 @@
 /**
  * Set the theme.
- *
- * @param {string} theme
  */
 export default (theme: string): void => {
   // Returns an error if the theme is anything other than light or dark.

@@ -50,23 +50,23 @@
 
 :root[data-theme="dark"] {
   --pl-blue-1: #192530;
-  --pl-blue-2: #1B2B3A;
+  --pl-blue-2: #1b2b3a;
   --pl-blue-3: #334250;
   --pl-blue-4: #334758;
-  --pl-blue-5: #1A4971;
-  --pl-blue-6: #3183C8;
+  --pl-blue-5: #1a4971;
+  --pl-blue-6: #3183c8;
   --pl-gray-0: #000000;
-  --pl-gray-1: #16181C;
-  --pl-gray-2: #21242A;
-  --pl-gray-3: #343A40;
+  --pl-gray-1: #16181c;
+  --pl-gray-2: #21242a;
+  --pl-gray-3: #343a40;
   --pl-gray-4: #485056;
-  --pl-gray-5: #868E96;
-  --pl-gray-6: #ADB5BD;
-  --pl-gray-7: #CFD4DA;
-  --pl-gray-8: #DEE2E6;
-  --pl-gray-9: #E7EBEE;
-  --pl-gray-10: #F1F3F5;
-  --pl-gray-11: #F8F9FA;
+  --pl-gray-5: #868e96;
+  --pl-gray-6: #adb5bd;
+  --pl-gray-7: #cfd4da;
+  --pl-gray-8: #dee2e6;
+  --pl-gray-9: #e7ebee;
+  --pl-gray-10: #f1f3f5;
+  --pl-gray-11: #f8f9fa;
   --pl-panel-background: hsl(206deg 7% 21%);
   /* --pl-panel-background: var(--pl-gray-3); */
   --pl-component-background: var(--pl-gray-2);
@@ -118,7 +118,6 @@
 
 ::-webkit-scrollbar-thumb {
   border-radius: 10px;
-  background-color: #adb5bd;
   background-color: var(--pl-scrollbar-color);
   border-top: 2px solid transparent;
 }
@@ -641,7 +640,10 @@ pdf-live {
       .pl-page-container .pl-page-view {
         display: flex;
         flex-direction: column;
-        align-items: center;
+
+        /* A bug was found that when the PDF is larger than the drawing area, the horizontal position of the PDF is fixed at the center and the text cannot be seen.
+          To fix this bug, the horizontal margin of the "div.pl-page element" is set to "auto" to center the PDF (2023/1/12). */
+        /* align-items: center; */
         flex: 1;
         width: 100%;
         overflow: auto;
@@ -762,6 +764,8 @@ pdf-live {
       .pl-page-container .pl-page {
         background-color: #fff;
         box-shadow: 0 0 2px 0 rgba(0, 0, 0, .14), 0 2px 2px 0 rgba(0, 0, 0, .12), 0 1px 3px 0 rgba(0, 0, 0, .12);
+        margin-left: auto;
+        margin-right: auto;
       }
 
         .pl-page-container .pl-page canvas {

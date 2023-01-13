@@ -19,7 +19,7 @@ export default interface {
     lightMode: string
   },
   component: {
-    leftPanel: string,
+    thumbnailPanel: string,
     zoomOverlay: string
   },
   message: {

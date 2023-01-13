@@ -9,8 +9,6 @@ export default class ErrorModal extends Modal {
 
   /**
    * Construct modal.
-   *
-   * @param {HTMLElement} context
    */
   constructor(context: HTMLElement) {
     super(context);
@@ -19,8 +17,6 @@ export default class ErrorModal extends Modal {
 
   /**
    * Render the content of this component.
-   *
-   * @returns {string} Modal HTML.
    */
   protected render(): string {
     return `<div class="pl-modal">
@@ -36,8 +32,6 @@ export default class ErrorModal extends Modal {
 
   /**
    * Show modal.
-   *
-   * @param {string} message
    */
   public show(message?: string): ErrorModal {
     this.message.textContent = message as string;

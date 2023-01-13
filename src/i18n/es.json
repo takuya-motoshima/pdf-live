@@ -19,7 +19,7 @@
     "lightMode": "Modo de luz"
   },
   "component": {
-    "leftPanel": "Panel",
+    "thumbnailPanel": "Panel",
     "zoomOverlay": "Superposición de zoom"
   },
   "message": {

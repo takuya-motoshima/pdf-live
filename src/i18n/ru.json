@@ -19,7 +19,7 @@
     "lightMode": "Легкий режим"
   },
   "component": {
-    "leftPanel": "Панель",
+    "thumbnailPanel": "Панель",
     "zoomOverlay": "Наложение масштаба"
   },
   "message": {

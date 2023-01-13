@@ -12,9 +12,6 @@ export default class Modal {
 
   /**
    * Construct modal. Add modal node defined in subclass to context.
-   *
-   * @param {HTMLElement} context
-   * @param {Language}    language
    */
   constructor(context: HTMLElement, language?: Language) {
     // Set language.
@@ -33,8 +30,6 @@ export default class Modal {
 
   /**
    * Returns modal node HTML.
-   *
-   * @returns {string} Modal HTML.
    */
   protected render(): string {
     return '';
@@ -42,8 +37,6 @@ export default class Modal {
 
   /**
    * Show modal.
-   *
-   * @returns {Modal} The instance on which this method was called.
    */
   public show(): Modal | Promise<void> {
     this.modalNode.classList.add('pl-modal-show');
@@ -52,8 +45,6 @@ export default class Modal {
 
   /**
    * Hide modal.
-   *
-   * @returns {Modal} The instance on which this method was called.
    */
   public hide(): Modal {
     this.modalNode.classList.remove('pl-modal-show');

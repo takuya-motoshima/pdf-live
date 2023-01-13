@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.0.16] - 2023/1/13
+### Fixed
+- Fixed a bug that when the PDF is larger than the drawing area, the horizontal position of the PDF is fixed at the center and text on the left and right edges cannot be seen.
+- Fixed a bug that caused an error (Uncaught TypeError: Cannot read properties of undefined (reading 'dataset')) when resizing a window after zooming with the mouse wheel and the PDF was not resized.
+
 ## [1.0.15] - 2023/1/11
 ### Changed
 - In the initial display, if the actual width of the PDF is larger than the drawing area, the PDF is fixed to fit in the drawing area.
@@ -95,3 +100,4 @@ All notable changes to this project will be documented in this file.
 [1.0.13]: https://github.com/takuya-motoshima/pdf-live/compare/v1.0.12...v1.0.13
 [1.0.14]: https://github.com/takuya-motoshima/pdf-live/compare/v1.0.13...v1.0.14
 [1.0.15]: https://github.com/takuya-motoshima/pdf-live/compare/v1.0.14...v1.0.15
+[1.0.16]: https://github.com/takuya-motoshima/pdf-live/compare/v1.0.15...v1.0.16

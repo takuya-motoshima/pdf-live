@@ -10,4 +10,3 @@ export const ZOOM_IN: number = 1;
 
 // Scaling factor for PDF dimensions to be drawn.
 export const PDF_DRAWING_SCALE: number = 1.5;
-

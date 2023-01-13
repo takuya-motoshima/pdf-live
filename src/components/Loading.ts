@@ -7,8 +7,6 @@ export default class Loading {
 
   /**
    * Construct loading.
-   *
-   * @param {HTMLElement} context
    */
   constructor(context: HTMLElement) {
     // Append loading node to #app node.
@@ -20,8 +18,6 @@ export default class Loading {
 
   /**
    * Render the content of this component.
-   *
-   * @returns {string} Loading HTML.
    */
   protected render(): string {
     return `<div class="pl-loading">
@@ -33,8 +29,6 @@ export default class Loading {
 
   /**
    * Show loading.
-   *
-   * @returns {Loading} The instance on which this method was called.
    */
   public show(): Loading {
     this.loadingNode.classList.add('pl-loading-show');
@@ -43,8 +37,6 @@ export default class Loading {
 
   /**
    * Hide loading.
-   *
-   * @returns {Loading} The instance on which this method was called.
    */
   public hide(): Loading {
     this.loadingNode.classList.remove('pl-loading-show');

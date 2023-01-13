@@ -1,8 +1,5 @@
 /**
  * Relative path to URL.
- *
- * @param   {string} rel  Relative path.
- * @returns {string}      URL.
  */
 export default (rel: string): string => {
   // If rel is already an absolute path, return it as is.

@@ -1,8 +1,5 @@
 /**
  * Download PDF.
- *
- * @param {any}     pdfDoc
- * @param {string}  downloadName
  */
 export default async (pdfDoc: any, downloadName: string): Promise<void> => {
   // Access raw PDF data.

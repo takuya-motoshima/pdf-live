@@ -19,7 +19,7 @@
     "lightMode": "라이트모드"
   },
   "component": {
-    "leftPanel": "패널",
+    "thumbnailPanel": "패널",
     "zoomOverlay": "줌 오버레이"
   },
   "message": {

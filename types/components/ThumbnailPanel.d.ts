@@ -1,11 +1,11 @@
 /**
  * Left panel controller.
  */
-export default class LeftPanel {
+export default class ThumbnailPanel {
     /** @type {HTMLButtonElement} */
-    private readonly leftPanelToggle;
+    private readonly thumbnailPanelToggle;
     /** @type {HTMLDivElement} */
-    private readonly leftPanel;
+    private readonly thumbnailPanel;
     /** @type {HTMLDivElement} */
     private readonly pagegContainer;
     /** @type {HTMLDivElement} */
@@ -18,9 +18,6 @@ export default class LeftPanel {
     private selectListener;
     /**
      * Controls opening and closing of the left panel and rendering of page thumbnails.
-     *
-     * @param {HTMLElement} context
-     * @param {any[]}       pages
      */
     constructor(context: HTMLElement, pages: any[]);
     /**
@@ -33,22 +30,14 @@ export default class LeftPanel {
     close(): void;
     /**
      * Activate thumbnails.
-     *
-     * @param {number} pageNum
      */
     activatePage(pageNum: number): void;
     /**
      * Render thumbnail images.
-     *
-     * @param   {any[]} pages
-     * @returns {HTMLDivElement[]}
      */
     private render;
     /**
      * Thumbnail selection event. Returns the page number of the selected thumbnail to the listener.
-     *
-     * @param   {(pageNum: number) => void}
-     * @returns {LeftPanel} The instance on which this method was called.
      */
-    onSelect(listener: (pageNum: number) => void): LeftPanel;
+    onSelect(listener: (pageNum: number) => void): ThumbnailPanel;
 }

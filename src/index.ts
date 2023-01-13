@@ -6,16 +6,15 @@ import printPdf from '~/core/printPdf';
 import downloadPdf from '~/core/downloadPdf';
 import setTheme from '~/core/setTheme';
 import restoreTheme from '~/core/restoreTheme';
-import calcPageZoomRatio from '~/core/calcPageZoomRatio';
 import loadPdfJs from '~/core/loadPdfJs';
 import Loading from '~/components/Loading';
 import ErrorModal from '~/components/ErrorModal';
 import PasswordModal from '~/components/PasswordModal';
-import LeftPanel from '~/components/LeftPanel';
+import ThumbnailPanel from '~/components/ThumbnailPanel';
 import ZoomNav from '~/components/ZoomNav';
 import PageNav from '~/components/PageNav';
 import getFilename from '~/helpers/getFilename';
-import Viewport from '~/interfaces/Viewport';
+import PageViewport from '~/interfaces/PageViewport';
 import i18n from '~/i18n';
 import Language from '~/interfaces/Language';
 import hbs from 'handlebars-extd';
@@ -118,8 +117,6 @@ class PDFLiveElement extends HTMLElement {
 
   /**
    * Called every time the element is inserted into the DOM.
-   * 
-   * @return {void}
    */
   protected async connectedCallback(): Promise<void> {
     try {
@@ -127,18 +124,18 @@ class PDFLiveElement extends HTMLElement {
       this.loading.show();
 
       // Get the URL from the src attribute.
-      const url = this.getAttribute('src');
-      if (!url)
+      const documentUrl = this.getAttribute('src');
+      if (!documentUrl)
         throw new Error('Element pdf-live is missing required attribute src');
 
       // Keep the URL of the PDF document.
-      this.documentUrl = url;
+      this.documentUrl = documentUrl;
 
       // Set the PDF file name in the title.
       if (this.getAttribute('title'))
         this.documentTitle.textContent = document.title = this.getAttribute('title') as string;
       else
-        this.documentTitle.textContent = document.title = getFilename(url);
+        this.documentTitle.textContent = document.title = getFilename(documentUrl);
 
       // Get the Worker URL from the worker attribute.
       const workerSrc = this.getAttribute('worker');
@@ -154,7 +151,7 @@ class PDFLiveElement extends HTMLElement {
         cMapUrl = this.getAttribute('cmap') as string;
 
       // Load a PDF document.
-      this.documentObject = await getDocument(url, workerSrc, this.language, cMapUrl);
+      this.documentObject = await getDocument(documentUrl, workerSrc, this.language, cMapUrl);
 
       // Check for password protection.
       if (this.hasAttribute('protected')) {   
@@ -182,16 +179,13 @@ class PDFLiveElement extends HTMLElement {
       }
 
       // Keep page width and height for zoom factor calculation to fit by page or width.
-      const defaultViewport = await (async (): Promise<Viewport> => {
+      const pageViewport = await (async (): Promise<PageViewport> => {
         const {width, height} = (await this.documentObject.getPage(1)).getViewport({scale: constants.PDF_DRAWING_SCALE});
         return {width, height}
       })();
 
-      // Calculate zoom factor.
-      const zoomFactor = calcPageZoomRatio('pageWidth', this.pageView, defaultViewport);
-
       // Initialize zoom menu.
-      const zoomNav = new ZoomNav(this, defaultViewport);
+      const zoomNav = new ZoomNav(this, pageViewport);
 
       // Change the zoom factor of the page when the zoom is changed.
       zoomNav.onChange((zoomFactor: number) => {
@@ -202,7 +196,7 @@ class PDFLiveElement extends HTMLElement {
       const pages = await renderPages(this.documentObject, zoomNav.getZoomFactor());
 
       // Initialize the left panel.
-      const leftPanel = (new LeftPanel(this, pages)).onSelect((pageNum: number) => {
+      const thumbnailPanel = (new ThumbnailPanel(this, pages)).onSelect((pageNum: number) => {
         // Thumbnail selection event.
         // View the page corresponding to the selected thumbnail in the viewer.
         this.pageNav?.activatePage(pageNum);
@@ -212,7 +206,7 @@ class PDFLiveElement extends HTMLElement {
       this.pageNav = (new PageNav(this, this.documentObject.numPages)).onChange((pageNum: number) => {
         // If the page you are browsing changes.
         // Activate the thumbnail page of the browsing page.
-        leftPanel.activatePage(pageNum);
+        thumbnailPanel.activatePage(pageNum);
 
         // Invoke pagechange event.
         if (this.listeners.pageChange)
@@ -221,7 +215,7 @@ class PDFLiveElement extends HTMLElement {
 
       // Print PDF.
       this.printButton.addEventListener('click', async () => {
-        await printPdf(url);
+        await printPdf(documentUrl);
       }, {passive: true});
 
       // Download PDF.
@@ -276,8 +270,6 @@ class PDFLiveElement extends HTMLElement {
 
   /**
    * Define elements
-   *
-   * @return {PDFLiveElement}
    */
   public static define(): typeof PDFLiveElement {
     if (window.customElements.get('pdf-live'))
@@ -288,8 +280,6 @@ class PDFLiveElement extends HTMLElement {
 
   /**
    * Generate elements
-   *
-   * @return {PDFLiveElement}
    */
   public static createElement(): PDFLiveElement {
     const PDFLiveElement = this.define();
@@ -298,10 +288,6 @@ class PDFLiveElement extends HTMLElement {
 
   /**
    * Add event listener
-   * 
-   * @param  {'pageChange'|'documentLoaded'|'passwordEnter'}  type
-   * @param  {Function}                                       listener
-   * @return {PDFLiveElement}
    */
   public on(type: 'pageChange'|'documentLoaded'|'passwordEnter', listener: Function): PDFLiveElement {
     // Throws exception for invalid event types.
@@ -322,8 +308,6 @@ class PDFLiveElement extends HTMLElement {
 
   /**
    * Returns the current page number.
-   *
-   * @return {number}
    */
   public getCurrentPageNumber(): number {
     return this.pageNav!.getCurrentPageNumber();
@@ -334,12 +318,12 @@ class PDFLiveElement extends HTMLElement {
    */
   private render(): void {
     const isMobile = window.innerWidth <= constants.MINIMUM_MOBILE_WIDTH;
-    const openLeftPanel = !isMobile;
+    const openThumbnailPanel = !isMobile;
     this.insertAdjacentHTML('beforeend', hbs.compile(
       `<!-- begin:Header -->
       <div data-element="header" class="pl-header">
         <div class="pl-header-container">
-          <button data-element="leftPanelToggle" class="pl-left-panel-toggle pl-btn" aria-label="{{language.component.leftPanel}}" title="{{language.component.leftPanel}}">
+          <button data-element="thumbnailPanelToggle" class="pl-left-panel-toggle pl-btn" aria-label="{{language.component.thumbnailPanel}}" title="{{language.component.thumbnailPanel}}">
             <svg class="pl-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
               <path d="M0 96C0 78.33 14.33 64 32 64H416C433.7 64 448 78.33 448 96C448 113.7 433.7 128 416 128H32C14.33 128 0 113.7 0 96zM0 256C0 238.3 14.33 224 32 224H416C433.7 224 448 238.3 448 256C448 273.7 433.7 288 416 288H32C14.33 288 0 273.7 0 256zM416 448H32C14.33 448 0 433.7 0 416C0 398.3 14.33 384 32 384H416C433.7 384 448 398.3 448 416C448 433.7 433.7 448 416 448z"/>
             </svg>
@@ -398,14 +382,14 @@ class PDFLiveElement extends HTMLElement {
       <!-- begin:Content -->
       <div class="pl-content">
         <!-- begin:Left panel -->
-        <div data-element="leftPanel" class="pl-left-panel{{#unless openLeftPanel}} pl-left-panel-closed{{/unless}}">
+        <div data-element="thumbnailPanel" class="pl-left-panel{{#unless openThumbnailPanel}} pl-left-panel-closed{{/unless}}">
           <div class="pl-left-panel-container">
             <div data-element="thumbnailsPanel" class="pl-thumbnails-panel"></div>
           </div>
         </div>
         <!-- end:Left panel -->
         <!-- begin:Page container -->
-        <div data-element="pagegContainer" class="pl-page-container {{#if openLeftPanel}} pl-page-container-open{{/if}}">
+        <div data-element="pagegContainer" class="pl-page-container {{#if openThumbnailPanel}} pl-page-container-open{{/if}}">
           <!-- begin:Page view -->
           <div data-element="pageView" class="pl-page-view"></div>
           <!-- end:Page view -->
@@ -457,7 +441,7 @@ class PDFLiveElement extends HTMLElement {
       <!-- end:Zoom menu -->
       <iframe data-element="printFrame" style="display: none;"></iframe>`)({
         language: this.language,
-        openLeftPanel
+        openThumbnailPanel
       }));
   }
 

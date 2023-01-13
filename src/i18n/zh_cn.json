@@ -19,7 +19,7 @@
     "lightMode": "灯光模式"
   },
   "component": {
-    "leftPanel": "面板",
+    "thumbnailPanel": "面板",
     "zoomOverlay": "缩放叠加"
   },
   "message": {

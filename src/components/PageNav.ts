@@ -37,11 +37,8 @@ export default class PageNav {
 
   /**
    * Construct page navigation.
-   *
-   * @param {HTMLElement} context
-   * @param {number}      numPages
    */
-  constructor(context: HTMLElement, numPages: number) {
+  constructor(context: HTMLElement, pageNumber: number) {
     // Find dependent nodes.
     this.pageInput = context.querySelector('[data-element="pageInput"]') as HTMLInputElement;
     this.totalPage = context.querySelector('[data-element="totalPage"]') as HTMLSpanElement;
@@ -52,10 +49,10 @@ export default class PageNav {
     this.pageForm = context.querySelector('[data-element="pageForm"]') as HTMLFormElement;
 
     // Show total number of pages.
-    this.totalPage.textContent = numPages.toString();
+    this.totalPage.textContent = pageNumber.toString();
 
     // Minimum page number.
-    this.maxPage = numPages;
+    this.maxPage = pageNumber;
 
     // Shows the number of the page at the current scroll position.
     const observer = new IntersectionObserver(entries => {
@@ -113,8 +110,6 @@ export default class PageNav {
 
   /**
    * Activate the specified page.
-   *
-   * @param {number} pageNum
    */
   public activatePage(pageNum: number): void {
     // Find the target page node.
@@ -129,8 +124,6 @@ export default class PageNav {
 
   /**
    * Update page number.
-   *
-   * @param {number} pageNum
    */
   private updatePage(pageNum: number): void {
     // Show page number.
@@ -171,9 +164,6 @@ export default class PageNav {
 
   /**
    * Browsing page change event. Returns the number of the page being viewed to the event listener.
-   *
-   * @param   {(pageNum: number) => void}
-   * @returns {PageNav} The instance on which this method was called.
    */
   public onChange(listener: (pageNum: number) => void): PageNav {
     this.changeListener = listener;
@@ -182,8 +172,6 @@ export default class PageNav {
 
   /**
    * Returns the current page number.
-   *
-   * @return {number}
    */
   public getCurrentPageNumber(): number {
     return parseInt(this.pageInput.value, 10);

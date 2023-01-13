@@ -26,21 +26,14 @@ export default class PageNav {
     private changeListener;
     /**
      * Construct page navigation.
-     *
-     * @param {HTMLElement} context
-     * @param {number}      numPages
      */
-    constructor(context: HTMLElement, numPages: number);
+    constructor(context: HTMLElement, pageNumber: number);
     /**
      * Activate the specified page.
-     *
-     * @param {number} pageNum
      */
     activatePage(pageNum: number): void;
     /**
      * Update page number.
-     *
-     * @param {number} pageNum
      */
     private updatePage;
     /**
@@ -49,15 +42,10 @@ export default class PageNav {
     private enterPage;
     /**
      * Browsing page change event. Returns the number of the page being viewed to the event listener.
-     *
-     * @param   {(pageNum: number) => void}
-     * @returns {PageNav} The instance on which this method was called.
      */
     onChange(listener: (pageNum: number) => void): PageNav;
     /**
      * Returns the current page number.
-     *
-     * @return {number}
      */
     getCurrentPageNumber(): number;
 }

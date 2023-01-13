@@ -3,12 +3,12 @@ import * as constants from '~/constants';
 /**
  * Left panel controller.
  */
-export default class LeftPanel {
+export default class ThumbnailPanel {
   /** @type {HTMLButtonElement} */
-  private readonly leftPanelToggle: HTMLButtonElement;
+  private readonly thumbnailPanelToggle: HTMLButtonElement;
 
   /** @type {HTMLDivElement} */
-  private readonly leftPanel: HTMLDivElement;
+  private readonly thumbnailPanel: HTMLDivElement;
 
   /** @type {HTMLDivElement} */
   private readonly pagegContainer: HTMLDivElement;
@@ -27,20 +27,17 @@ export default class LeftPanel {
 
   /**
    * Controls opening and closing of the left panel and rendering of page thumbnails.
-   * 
-   * @param {HTMLElement} context
-   * @param {any[]}       pages
    */
   constructor(context: HTMLElement, pages: any[]) {
     // Find dependent nodes.
-    this.leftPanelToggle = context.querySelector('[data-element="leftPanelToggle"]') as HTMLButtonElement;
-    this.leftPanel = context.querySelector('[data-element="leftPanel"]') as HTMLDivElement;
+    this.thumbnailPanelToggle = context.querySelector('[data-element="thumbnailPanelToggle"]') as HTMLButtonElement;
+    this.thumbnailPanel = context.querySelector('[data-element="thumbnailPanel"]') as HTMLDivElement;
     this.pagegContainer = context.querySelector('[data-element="pagegContainer"]') as HTMLDivElement;
     this.thumbnailsPanel = context.querySelector('[data-element="thumbnailsPanel"]') as HTMLDivElement;
 
     // Toggle the opening and closing of the left panel.
-    this.leftPanelToggle.addEventListener('click', () => {
-      if (this.leftPanel.classList.contains('pl-left-panel-closed'))
+    this.thumbnailPanelToggle.addEventListener('click', () => {
+      if (this.thumbnailPanel.classList.contains('pl-left-panel-closed'))
         this.open();
       else
         this.close();
@@ -74,7 +71,7 @@ export default class LeftPanel {
    * Open the left panel.
    */
   public open(): void {
-    this.leftPanel.classList.remove('pl-left-panel-closed')
+    this.thumbnailPanel.classList.remove('pl-left-panel-closed')
     this.pagegContainer.classList.add('pl-page-container-open')
   }
 
@@ -82,14 +79,12 @@ export default class LeftPanel {
    * Close left panel.
    */
   public close(): void {
-    this.leftPanel.classList.add('pl-left-panel-closed')
+    this.thumbnailPanel.classList.add('pl-left-panel-closed')
     this.pagegContainer.classList.remove('pl-page-container-open')
   }
 
   /**
    * Activate thumbnails.
-   *
-   * @param {number} pageNum
    */
   public activatePage(pageNum: number): void {
     // Deactivate currently active thumbnails.
@@ -114,15 +109,12 @@ export default class LeftPanel {
 
   /**
    * Render thumbnail images.
-   *
-   * @param   {any[]} pages
-   * @returns {HTMLDivElement[]}
    */
   private render(pages: any[]): HTMLDivElement[] {
     const thumbnailNodes = [];
-    for (let num=1; num<=pages.length; num++) {
+    for (let pageNumber=1; pageNumber<=pages.length; pageNumber++) {
       // Fetch page.
-      const page = pages[num - 1];
+      const page = pages[pageNumber - 1];
 
       // Calculate the display area of the page.
       const viewport = page.getViewport({scale: constants.PDF_DRAWING_SCALE});
@@ -130,10 +122,10 @@ export default class LeftPanel {
       // Create a thumbnail container node.
       const thumbnailNode = document.createElement('div');
       thumbnailNode.classList.add('pl-thumbnail');
-      thumbnailNode.dataset.pageNumber = num.toString();
+      thumbnailNode.dataset.pageNumber = pageNumber.toString();
 
       // Activate the thumbnail on the first page.
-      if (num === 1)
+      if (pageNumber === 1)
         thumbnailNode.classList.add('pl-thumbnail-active');    
 
       // Create a canvas node.
@@ -146,7 +138,7 @@ export default class LeftPanel {
       // Create a thumbnail number label node.
       const label = document.createElement('div');
       label.classList.add('pl-thumbnail-label');
-      label.textContent = num.toString();
+      label.textContent = pageNumber.toString();
       thumbnailNode.appendChild(label);
 
       // Append Thumbnail Container Node.
@@ -163,11 +155,8 @@ export default class LeftPanel {
 
   /**
    * Thumbnail selection event. Returns the page number of the selected thumbnail to the listener.
-   *
-   * @param   {(pageNum: number) => void}
-   * @returns {LeftPanel} The instance on which this method was called.
    */
-  public onSelect(listener: (pageNum: number) => void): LeftPanel {
+  public onSelect(listener: (pageNum: number) => void): ThumbnailPanel {
     this.selectListener = listener;
     return this;
   }

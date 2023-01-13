@@ -1,12 +1,9 @@
 /**
  * Returns the PDF file name from the URL.
- *
- * @param   {string} url
- * @returns {string} PDF file name.
  */
-export default (url: string): string => {
+export default (documentUrl: string): string => {
   // Find the file name without the extension from the URL.
-  const matches = url.match(/([^/]+)\.pdf$/i);
+  const matches = documentUrl.match(/([^/]+)\.pdf$/i);
 
   // If the file name cannot be found in the URL.
   if (!matches)

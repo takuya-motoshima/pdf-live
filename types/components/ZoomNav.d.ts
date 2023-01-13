@@ -1,10 +1,10 @@
-import Viewport from '~/interfaces/Viewport';
+import PageViewport from '~/interfaces/PageViewport';
 /**
  * Page zoom control.
  */
 export default class ZoomNav {
-    /** @type {Viewport} */
-    private readonly defaultViewport;
+    /** @type {PageViewport} */
+    private readonly pageViewport;
     /** @type {HTMLDivElement} */
     private readonly zoomToggle;
     /** @type {HTMLDivElement} */
@@ -24,22 +24,21 @@ export default class ZoomNav {
     /** @type {number|null} */
     private resizeTimeout;
     /** @type {number} */
-    private lastZoom;
+    private lastZoomFactor;
+    /** @type {string} */
+    private lastZoomValue;
     /** @type {number[]} */
-    private readonly zoomList;
+    private readonly zoomFactorList;
     /** @type {number} */
-    private readonly minZoom;
+    private readonly minZoomFactor;
     /** @type {number} */
-    private readonly maxZoom;
+    private readonly maxZoomFactor;
     /** @type {(zoomFactor: number) => void} */
     private changeListener;
     /**
      * Control the zoom factor change event of a page.
-     *
-     * @param {HTMLDivElement}  context
-     * @param {Viewport}        defaultViewport
      */
-    constructor(context: HTMLElement, defaultViewport: Viewport);
+    constructor(context: HTMLElement, pageViewport: PageViewport);
     /**
      * Open zoom overlay.
      */
@@ -49,46 +48,43 @@ export default class ZoomNav {
      */
     close(): void;
     /**
-     * Recalculates the position of the zoom overlay node.
-     */
-    private layout;
-    /**
      * Returns the current zoom factor.
-     *
-     * @returns {number}
      */
     getZoomFactor(): number;
     /**
+     * Zoom change event. Returns the zoom factor to the event listener.
+     */
+    onChange(listener: (zoomFactor: number) => void): ZoomNav;
+    /**
+     * Lay out the zoom menu item's absolute position.
+     */
+    private layoutZoomMenuLayout;
+    /**
      * Update input zoom.
-     *
-     * @param {number|string} strZoom percentage, pageWidth, or pageFit.
      */
     private updateInputZoom;
     /**
      * Deselect a zoom item that was already selected.
      */
-    private deselectMenu;
+    private deselectZoom;
     /**
      * Activate the zoom menu.
-     *
-     * @param {string} value
      */
-    private activateMenu;
+    private activateZoom;
     /**
      * Zoom page according to the zoom you enter.
      */
     private enterZoom;
     /**
-     * Calculate zoom step.
-     *
-     * @param {number} zoomDir Zoom direction. 0: Zoom out, 1: Zoom in
+     * Calculate the next zoom when zooming out or in.
      */
-    private calcStep;
+    private calcNextZoom;
     /**
-     * Zoom change event. Returns the zoom factor to the event listener.
-     *
-     * @param {(zoomFactor: number) => void}
-     * @returns {ZoomNav} The instance on which this method was called.
+     * Get the currently selected zoom node.
      */
-    onChange(listener: (zoomFactor: number) => void): ZoomNav;
+    private getSelectedZoomNode;
+    /**
+     * Get the currently selected zoom value.
+     */
+    private getSelectedZoomValue;
 }

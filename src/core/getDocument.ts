@@ -3,21 +3,15 @@ import relativePathToUrl from '~/shared/relativePathToUrl';
 
 /**
   * Load a PDF document.
-  *
-  * @param  {string} url
-  * @param  {string} workerSrc
-  * @param  {string} cMapUrl
-  * @return {PDFDocumentProxy}
   */
-export default async (url: string, workerSrc: string, language: Language, cMapUrl?: string): Promise<any> => {
+export default async (documentUrl: string, workerSrc: string, language: Language, cMapUrl?: string): Promise<any> => {
   try {
     // Setting worker path to worker bundle.
     window.pdfjsLib.GlobalWorkerOptions.workerSrc = workerSrc;
 
     // // Add a timestamp parameter to document URLs to always read the latest documents.
-    // const delimiter = url.indexOf('?') === -1 ? '?' : '&';
-    // url += `${delimiter}t=${+new Date()}`;
-    // console.log(`Document URL:${url}`);
+    // const delimiter = documentUrl.indexOf('?') === -1 ? '?' : '&';
+    // documentUrl += `${delimiter}t=${+new Date()}`;
 
     // If the CMap format is a relative path, convert it to URL format.
     if (cMapUrl)
@@ -29,7 +23,7 @@ export default async (url: string, workerSrc: string, language: Language, cMapUr
 
     // Loading a document.
     const pdfDoc = await window.pdfjsLib.getDocument({
-      url,
+      url: documentUrl,
       cMapUrl,
       cMapPacked: true
     }).promise;

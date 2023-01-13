@@ -1,11 +1,8 @@
 import * as constants from '~/constants';
+import createPageNode from '~/core/createPageNode';
 
 /**
   * Render pages.
-  *
-  * @param    {PDFDocumentProxy} pdfDoc
-  * @param    {number}           zoomFactor
-  * @returns  {Promise<any[]>}
   */
 export default async (pdfDoc: any, zoomFactor: number = 1): Promise<any[]> => {
   // Find dependent nodes.
@@ -15,44 +12,25 @@ export default async (pdfDoc: any, zoomFactor: number = 1): Promise<any[]> => {
   const pages = [];
 
   // Draw page by page.
-  for (let num=1; num<=pdfDoc.numPages; num++) {
+  for (let pageNumber=1; pageNumber<=pdfDoc.numPages; pageNumber++) {
     // Fetch page.
-    const page = await pdfDoc.getPage(num);
-
-    // Calculate the display area of the page.
-    const viewport = page.getViewport({scale: constants.PDF_DRAWING_SCALE * zoomFactor});
-
-    // Support HiDPI-screens.
-    const devicePixelRatio = window.devicePixelRatio || 1;
+    const page = await pdfDoc.getPage(pageNumber);
 
     // Create a page node.
-    const pageNode = document.createElement('div');
-    pageNode.id = `page${num}`;
-    pageNode.style.width = `${Math.floor(viewport.width)}px`;
-    pageNode.style.height = `${Math.floor(viewport.height)}px`;
-    pageNode.style.margin = `${zoomFactor * 4}px`;
-    pageNode.classList.add('pl-page');
-    pageNode.dataset.pageNumber = num.toString();
-
-    // Create a canvas node.
-    const canvas = document.createElement('canvas');
-    canvas.width = Math.floor(viewport.width * devicePixelRatio);
-    canvas.height = Math.floor(viewport.height * devicePixelRatio);
-    pageNode.appendChild(canvas);
+    const [pageNode, canvas, viewport, devicePixelRatio] = createPageNode('render', page, pageNumber, zoomFactor);
 
     // Append page node to page viewer.
     pageView.appendChild(pageNode);
 
     // Render page content on canvas.
-    const renderTask = page.render({
+    const task = page.render({
       canvasContext: canvas.getContext('2d'), 
       transform: devicePixelRatio !== 1 ? [devicePixelRatio, 0, 0, devicePixelRatio, 0, 0] : null,
       viewport
     });
 
     // Wait for rendering to complete.
-    await renderTask.promise;
-    // console.log(`The ${num}th page was read`);
+    await task.promise;
 
     // Set the return page object.
     pages.push(page);

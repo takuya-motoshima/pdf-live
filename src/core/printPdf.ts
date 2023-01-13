@@ -2,15 +2,13 @@
 
 /**
  * Print PDF.
- *
- * @param {string} url
  */
-export default async (url: string): Promise<void> => {
+export default async (documentUrl: string): Promise<void> => {
   // Iframe for embedding print data.
   const printFrame = document.querySelector('[data-element="printFrame"]') as HTMLIFrameElement;
 
   // Load PDF into iframe.
-  printFrame.src = url;
+  printFrame.src = documentUrl;
   return new Promise<void>(rslv => {
     printFrame.addEventListener('load', () => {
       // Print after loading the PDF data.
@@ -19,11 +17,6 @@ export default async (url: string): Promise<void> => {
     }, {passive: true, once: true});
   });
 }
-// /**
-//  * Print PDF.
-//  *
-//  * @param {PDFDocumentProxy} pdfDoc
-//  */
 // export default async pdfDoc => {
 //   // Access raw PDF data.
 //   const data = await pdfDoc.getData();
