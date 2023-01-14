@@ -394,24 +394,22 @@ class PDFLiveElement extends HTMLElement {
           <div data-element="pageView" class="pl-page-view"></div>
           <!-- end:Page view -->
           <!-- begin:Page navigation -->
-          <div class="pl-page-footer" style="width: calc(100% - 0px); margin-left: 0px;">
-            <div data-element="pageNavOverlay" class="pl-page-nav-overlay">
-              <button data-element="prevPageButton" class="pl-btn pl-btn-page" aria-label="{{language.action.pagePrev}}" title="{{language.action.pagePrev}}" disabled>
-                <svg class="pl-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512">
-                  <path d="M192 448c-8.188 0-16.38-3.125-22.62-9.375l-160-160c-12.5-12.5-12.5-32.75 0-45.25l160-160c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L77.25 256l137.4 137.4c12.5 12.5 12.5 32.75 0 45.25C208.4 444.9 200.2 448 192 448z"/>
-                </svg>
-              </button>
-              <div class="pl-page-nav-form-container">
-                <form data-element="pageForm">
-                  <input data-element="pageInput" type="text" tabindex="-1" aria-label="Set page" value="1"> / <span data-element="totalPage">1</span>
-                </form>
-              </div>
-              <button data-element="nextPageButton" class="pl-btn pl-btn-page" aria-label="{{language.action.pageNext}}" title="{{language.action.pageNext}}">
-                <svg class="pl-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512">
-                  <path d="M64 448c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L178.8 256L41.38 118.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l160 160c12.5 12.5 12.5 32.75 0 45.25l-160 160C80.38 444.9 72.19 448 64 448z"/>
-                </svg>
-              </button>
+          <div class="pl-page-nav-overlay">
+            <button data-element="prevPageButton" class="pl-btn pl-btn-page" aria-label="{{language.action.pagePrev}}" title="{{language.action.pagePrev}}" disabled>
+              <svg class="pl-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512">
+                <path d="M192 448c-8.188 0-16.38-3.125-22.62-9.375l-160-160c-12.5-12.5-12.5-32.75 0-45.25l160-160c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L77.25 256l137.4 137.4c12.5 12.5 12.5 32.75 0 45.25C208.4 444.9 200.2 448 192 448z"/>
+              </svg>
+            </button>
+            <div class="pl-page-nav-form-container">
+              <form data-element="pageForm">
+                <input data-element="pageInput" type="text" tabindex="-1" aria-label="Set page" value="1"> / <span data-element="totalPage">1</span>
+              </form>
             </div>
+            <button data-element="nextPageButton" class="pl-btn pl-btn-page" aria-label="{{language.action.pageNext}}" title="{{language.action.pageNext}}">
+              <svg class="pl-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512">
+                <path d="M64 448c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L178.8 256L41.38 118.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l160 160c12.5 12.5 12.5 32.75 0 45.25l-160 160C80.38 444.9 72.19 448 64 448z"/>
+              </svg>
+            </button>
           </div>
           <!-- end:Page navigation -->
         </div>

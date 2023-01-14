@@ -1,6 +1,9 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.0.17] - 2023/1/15
+- Fixed a bug that the horizontal scroll bar in the PDF drawing area could not be moved by dragging.
+
 ## [1.0.16] - 2023/1/13
 ### Fixed
 - Fixed a bug that when the PDF is larger than the drawing area, the horizontal position of the PDF is fixed at the center and text on the left and right edges cannot be seen.
@@ -101,3 +104,4 @@ All notable changes to this project will be documented in this file.
 [1.0.14]: https://github.com/takuya-motoshima/pdf-live/compare/v1.0.13...v1.0.14
 [1.0.15]: https://github.com/takuya-motoshima/pdf-live/compare/v1.0.14...v1.0.15
 [1.0.16]: https://github.com/takuya-motoshima/pdf-live/compare/v1.0.15...v1.0.16
+[1.0.17]: https://github.com/takuya-motoshima/pdf-live/compare/v1.0.16...v1.0.17
