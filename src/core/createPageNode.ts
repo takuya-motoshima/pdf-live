@@ -42,7 +42,7 @@ export default (mode: 'render'|'resize', page: any, pageNumber: number, zoomFact
   if (width * height > constants.CANVAS_AREA_LIMIT) {
     // If the actual dimensions of the canvas exceed the limit, the dimensions are calculated to fit within the limit.
     const scale = Math.sqrt((constants.CANVAS_AREA_LIMIT / width) / height);
-    console.log(`Scale canvas size.\n\twidth: ${Math.floor(width)} -> ${Math.floor(width * scale)}\n\theight: ${Math.floor(height)} -> ${Math.floor(height * scale)}`);
+    // console.log(`Scale canvas size.\n\twidth: ${Math.floor(width)} -> ${Math.floor(width * scale)}\n\theight: ${Math.floor(height)} -> ${Math.floor(height * scale)}`);
     width *= scale;
     height *= scale;
   }
