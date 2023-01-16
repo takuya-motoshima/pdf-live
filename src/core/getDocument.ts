@@ -19,7 +19,6 @@ export default async (documentUrl: string, workerSrc: string, language: Language
     // If there is no slash at the end of cMap, add it.
     // if (cMapUrl && cMapUrl.slice(-1) !== '/')
     //   cMapUrl += '/';
-    // console.log(`cMapUrl=${cMapUrl}`);
 
     // Loading a document.
     const pdfDoc = await window.pdfjsLib.getDocument({

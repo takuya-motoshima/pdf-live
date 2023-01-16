@@ -1,4 +1,3 @@
-import * as constants from '~/constants';
 import createPageNode from '~/core/createPageNode';
 
 /**

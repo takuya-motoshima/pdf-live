@@ -4,9 +4,7 @@ import PageViewport from '~/interfaces/PageViewport';
 /**
   * Create a page node.
   */
-export default (mode: 'render'|'resize', page: any, pageNumber: number, zoomFactor: number = 1)
-  : [HTMLDivElement, HTMLCanvasElement, PageViewport, number] => {
-
+export default (mode: 'render'|'resize', page: any, pageNumber: number, zoomFactor: number = 1) : [HTMLDivElement, HTMLCanvasElement, PageViewport, number] => {
   // Calculate the display area of the page.
   const viewport = page.getViewport({scale: constants.PDF_DRAWING_SCALE * zoomFactor});
 
@@ -29,7 +27,6 @@ export default (mode: 'render'|'resize', page: any, pageNumber: number, zoomFact
   pageNode.style.width = `${Math.floor(viewport.width)}px`;
   pageNode.style.height = `${Math.floor(viewport.height)}px`;
   pageNode.style.margin = `${zoomFactor * 4}px auto`; // Horizontal margins are changed to auto to center the PDF (1/12/2023).
-  // pageNode.style.margin = `${zoomFactor * 4}px`;
 
   // Delete an existing canvas node.
   // Create a canvas node. When performing a continuous resizing operation, multiple renderings are performed on the same canvas, which is not possible, so create a new canvas node without reusing it.
@@ -39,9 +36,20 @@ export default (mode: 'render'|'resize', page: any, pageNumber: number, zoomFact
   // Create a canvas node.
   const canvas = document.createElement('canvas') as HTMLCanvasElement;
 
+  // Actual dimensions of the canvas.
+  let width = viewport.width * devicePixelRatio;
+  let height = viewport.height * devicePixelRatio;
+  if (width * height > constants.CANVAS_AREA_LIMIT) {
+    // If the actual dimensions of the canvas exceed the limit, the dimensions are calculated to fit within the limit.
+    const scale = Math.sqrt((constants.CANVAS_AREA_LIMIT / width) / height);
+    console.log(`Scale canvas size.\n\twidth: ${Math.floor(width)} -> ${Math.floor(width * scale)}\n\theight: ${Math.floor(height)} -> ${Math.floor(height * scale)}`);
+    width *= scale;
+    height *= scale;
+  }
+
   // Set the dimensions of the canvas node.
-  canvas.width = Math.floor(viewport.width * devicePixelRatio);
-  canvas.height = Math.floor(viewport.height * devicePixelRatio);
+  canvas.width = Math.floor(width);
+  canvas.height = Math.floor(height);
 
   // Append a canvas node to a page node.
   pageNode.appendChild(canvas);

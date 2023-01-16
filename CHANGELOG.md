@@ -1,6 +1,13 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.0.18] - 2023/1/15
+### Changed
+- Updated pdfjs-dist version from 2.15.349 to 3.2.146.
+- Changed so that if there are multiple resize requests at the same time, the page with the latest resize request is rendered.
+- Page number width in the mobile header (window width less than 640px) changed from 40px to 48px.
+- If the area of the canvas on which the PDF is drawn exceeds the maximum value (5 * 1024 * 1024px), the area will be adjusted to fit within the maximum value.
+
 ## [1.0.17] - 2023/1/15
 - Fixed a bug that the horizontal scroll bar in the PDF drawing area could not be moved by dragging.
 
@@ -105,3 +112,4 @@ All notable changes to this project will be documented in this file.
 [1.0.15]: https://github.com/takuya-motoshima/pdf-live/compare/v1.0.14...v1.0.15
 [1.0.16]: https://github.com/takuya-motoshima/pdf-live/compare/v1.0.15...v1.0.16
 [1.0.17]: https://github.com/takuya-motoshima/pdf-live/compare/v1.0.16...v1.0.17
+[1.0.18]: https://github.com/takuya-motoshima/pdf-live/compare/v1.0.17...v1.0.18

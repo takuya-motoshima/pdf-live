@@ -481,6 +481,12 @@ pdf-live {
             text-align: right;
           }
 
+          @media (max-width: 640px) {
+            .pl-zoom-overlay .pl-zoom-overlay-toggle .textarea {
+              width: 48px;
+            }
+          }
+
           .pl-zoom-overlay .pl-zoom-overlay-toggle .pl-btn:hover {
             background: none !important;
           }

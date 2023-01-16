@@ -112,7 +112,7 @@ export default class ThumbnailPanel {
    */
   private render(pages: any[]): HTMLDivElement[] {
     const thumbnailNodes = [];
-    for (let pageNumber=1; pageNumber<=pages.length; pageNumber++) {
+    for (let pageNumber=1, numberOfPages=pages.length; pageNumber<=numberOfPages; pageNumber++) {
       // Fetch page.
       const page = pages[pageNumber - 1];
 

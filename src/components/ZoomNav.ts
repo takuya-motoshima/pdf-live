@@ -144,10 +144,9 @@ export default class ZoomNav {
 
     // When the window is resized.
     window.addEventListener('resize', () => {
-      // Preventing multiple launches of resizing events.
+      // If there are consecutive resizing requests, only the latest request is accepted.
       if (this.resizeTimeout)
         clearTimeout(this.resizeTimeout);
-
       this.resizeTimeout = window.setTimeout(() => {
         // Lay out the zoom menu item's absolute position.
         this.layoutZoomMenuLayout();
@@ -158,7 +157,7 @@ export default class ZoomNav {
           // Invoke zoom change event.
           this.changeListener(calcZoomFactor(zoomValue, this.pageView, this.pageViewport));
         }
-      }, 100);
+      }, constants.RESIZE_DELAY_SECONDS * 1000);
     }, {passive: true});
 
     // When the screen is clicked.
@@ -170,10 +169,14 @@ export default class ZoomNav {
     }, {passive: true});
 
     // Zoom out the page.
-    this.zoomOutButton.addEventListener('click', () => this.calcNextZoom(constants.ZOOM_OUT), {passive: true});
+    this.zoomOutButton.addEventListener('click', () => {
+      this.calcNextZoom(constants.ZOOM_OUT);
+    }, {passive: true});
 
     // Zoom in on the page.
-    this.zoomInButton.addEventListener('click', () => this.calcNextZoom(constants.ZOOM_IN), {passive: true});
+    this.zoomInButton.addEventListener('click', () => {
+      this.calcNextZoom(constants.ZOOM_IN);
+    }, {passive: true});
 
     // Hold down the Ctrl key and rotate the mouse wheel to zoom. 
     window.addEventListener('wheel', evnt => {

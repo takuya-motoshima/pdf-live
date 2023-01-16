@@ -43,7 +43,7 @@
   "homepage": "https://github.com/takuya-motoshima/pdf-live#readme",
   "dependencies": {
     "handlebars-extd": "^1.0.2",
-    "pdfjs-dist": "^2.15.349"
+    "pdfjs-dist": "^3.2.146"
   },
   "devDependencies": {
     "@rollup/plugin-json": "^4.1.0",
