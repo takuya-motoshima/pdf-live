@@ -6,10 +6,7 @@ import PageViewport from '~/interfaces/PageViewport';
   */
 export default (mode: 'render'|'resize', page: any, pageNumber: number, zoomFactor: number = 1) : [HTMLDivElement, HTMLCanvasElement, PageViewport, number] => {
   // Calculate the display area of the page.
-  const viewport = page.getViewport({scale: constants.PDF_DRAWING_SCALE * zoomFactor});
-
-  // Support HiDPI-screens.
-  const devicePixelRatio = window.devicePixelRatio || 1;
+  const viewport = page.getViewport({scale: constants.BASIC_SCALE * zoomFactor});
 
   // Create or find page node.
   let pageNode: HTMLDivElement;
@@ -36,15 +33,20 @@ export default (mode: 'render'|'resize', page: any, pageNumber: number, zoomFact
   // Create a canvas node.
   const canvas = document.createElement('canvas') as HTMLCanvasElement;
 
+  // Support HiDPI-screens.
+  let outputScale = window.devicePixelRatio || 1;
+
   // Actual dimensions of the canvas.
-  let width = viewport.width * devicePixelRatio;
-  let height = viewport.height * devicePixelRatio;
-  if (width * height > constants.CANVAS_AREA_LIMIT) {
-    // If the actual dimensions of the canvas exceed the limit, the dimensions are calculated to fit within the limit.
-    const scale = Math.sqrt((constants.CANVAS_AREA_LIMIT / width) / height);
-    // console.log(`Scale canvas size.\n\twidth: ${Math.floor(width)} -> ${Math.floor(width * scale)}\n\theight: ${Math.floor(height)} -> ${Math.floor(height * scale)}`);
-    width *= scale;
-    height *= scale;
+  let width = viewport.width * outputScale;
+  let height = viewport.height * outputScale;
+  // console.log(`Canvas dimension is ${Math.floor(width)}/${Math.floor(height)}, scale is ${Math.floor(outputScale * 100)/100}`);
+  if (width * height > constants.CANVAS_AREA_THRESHOLD) {
+    // If the canvas area exceeds the threshold, the dimensions are recalculated to fit within the threshold.
+    outputScale = 1;
+    // outputScale = Math.sqrt((constants.CANVAS_AREA_THRESHOLD / width) / height);
+    width = viewport.width * outputScale;
+    height = viewport.height * outputScale;
+    // console.log(`Recalculated canvas dimension is ${Math.floor(width)}/${Math.floor(height)}, scale is ${Math.floor(outputScale * 100)/100}`);
   }
 
   // Set the dimensions of the canvas node.
@@ -53,5 +55,5 @@ export default (mode: 'render'|'resize', page: any, pageNumber: number, zoomFact
 
   // Append a canvas node to a page node.
   pageNode.appendChild(canvas);
-  return [pageNode, canvas, viewport, devicePixelRatio];
+  return [pageNode, canvas, viewport, outputScale];
 }

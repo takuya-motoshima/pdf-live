@@ -1,6 +1,9 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.0.19] - 2023/1/16
+- Fixed a bug that caused the right edge of the PDF page to be cut off when zoomed to 200%.
+
 ## [1.0.18] - 2023/1/15
 ### Changed
 - Updated pdfjs-dist version from 2.15.349 to 3.2.146.
@@ -113,3 +116,4 @@ All notable changes to this project will be documented in this file.
 [1.0.16]: https://github.com/takuya-motoshima/pdf-live/compare/v1.0.15...v1.0.16
 [1.0.17]: https://github.com/takuya-motoshima/pdf-live/compare/v1.0.16...v1.0.17
 [1.0.18]: https://github.com/takuya-motoshima/pdf-live/compare/v1.0.17...v1.0.18
+[1.0.19]: https://github.com/takuya-motoshima/pdf-live/compare/v1.0.18...v1.0.19

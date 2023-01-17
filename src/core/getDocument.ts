@@ -21,12 +21,12 @@ export default async (documentUrl: string, workerSrc: string, language: Language
     //   cMapUrl += '/';
 
     // Loading a document.
-    const pdfDoc = await window.pdfjsLib.getDocument({
+    const pdfDocument = await window.pdfjsLib.getDocument({
       url: documentUrl,
       cMapUrl,
       cMapPacked: true
     }).promise;
-    return pdfDoc;
+    return pdfDocument;
   } catch (err) {
     throw new Error(language.message.badDocument);
   }

@@ -79,6 +79,7 @@ export default class ZoomNav {
     let initialZoomValue = '100';
     if (pageViewport.width > this.pageView.clientWidth) 
       initialZoomValue = 'pageWidth';
+    // console.log(`Initial zoom value=${initialZoomValue}`);
     const zoomSelect = this.zoomSelects.find(zoomSelect => zoomSelect.dataset.value === initialZoomValue) as HTMLButtonElement;
     zoomSelect.classList.add('pl-zoom-menu-item-selected');
 
@@ -157,7 +158,7 @@ export default class ZoomNav {
           // Invoke zoom change event.
           this.changeListener(calcZoomFactor(zoomValue, this.pageView, this.pageViewport));
         }
-      }, constants.RESIZE_DELAY_SECONDS * 1000);
+      }, constants.DELAY_RESIZE_MS);
     }, {passive: true});
 
     // When the screen is clicked.

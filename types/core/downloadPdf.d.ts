@@ -1,4 +1,4 @@
-declare const _default: (pdfDoc: any, downloadName: string) => Promise<void>;
+declare const _default: (pdfDocument: any, downloadName: string) => Promise<void>;
 /**
  * Download PDF.
  */

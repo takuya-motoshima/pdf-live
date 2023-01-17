@@ -3,7 +3,7 @@ import createPageNode from '~/core/createPageNode';
 /**
   * Render pages.
   */
-export default async (pdfDoc: any, zoomFactor: number = 1): Promise<any[]> => {
+export default async (pdfDocument: any, zoomFactor: number = 1): Promise<any[]> => {
   // Find dependent nodes.
   const pageView = document.querySelector('[data-element="pageView"]') as HTMLDivElement;
 
@@ -11,12 +11,12 @@ export default async (pdfDoc: any, zoomFactor: number = 1): Promise<any[]> => {
   const pages = [];
 
   // Draw page by page.
-  for (let pageNumber=1; pageNumber<=pdfDoc.numPages; pageNumber++) {
+  for (let pageNumber=1; pageNumber<=pdfDocument.numPages; pageNumber++) {
     // Fetch page.
-    const page = await pdfDoc.getPage(pageNumber);
+    const page = await pdfDocument.getPage(pageNumber);
 
     // Create a page node.
-    const [pageNode, canvas, viewport, devicePixelRatio] = createPageNode('render', page, pageNumber, zoomFactor);
+    const [pageNode, canvas, viewport, outputScale] = createPageNode('render', page, pageNumber, zoomFactor);
 
     // Append page node to page viewer.
     pageView.appendChild(pageNode);
@@ -24,7 +24,7 @@ export default async (pdfDoc: any, zoomFactor: number = 1): Promise<any[]> => {
     // Render page content on canvas.
     const task = page.render({
       canvasContext: canvas.getContext('2d'), 
-      transform: devicePixelRatio !== 1 ? [devicePixelRatio, 0, 0, devicePixelRatio, 0, 0] : null,
+      transform: outputScale !== 1 ? [outputScale, 0, 0, outputScale, 0, 0] : null,
       viewport
     });
 

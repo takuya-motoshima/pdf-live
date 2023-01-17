@@ -117,7 +117,7 @@ export default class ThumbnailPanel {
       const page = pages[pageNumber - 1];
 
       // Calculate the display area of the page.
-      const viewport = page.getViewport({scale: constants.PDF_DRAWING_SCALE});
+      const viewport = page.getViewport({scale: constants.BASIC_SCALE});
 
       // Create a thumbnail container node.
       const thumbnailNode = document.createElement('div');

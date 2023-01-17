@@ -58,9 +58,6 @@ class PDFLiveElement extends HTMLElement {
   /** @type {HTMLButtonElement} */
   private readonly themeChangeButton: HTMLButtonElement;
 
-  /** @type {HTMLDivElement} */
-  private readonly pageView: HTMLDivElement;
-
   /** @type {{[key: string]: Function}} */
   private readonly listeners: {[key: string]: Function|undefined} = {
     pageChange: undefined,
@@ -72,7 +69,7 @@ class PDFLiveElement extends HTMLElement {
   private documentUrl: string|undefined = undefined;
 
   /** @type {any|undefined} */
-  private documentObject: any|undefined = undefined;
+  private pdfDocument: any|undefined = undefined;
 
   /**
    * constructor
@@ -107,9 +104,6 @@ class PDFLiveElement extends HTMLElement {
 
     // Change Theme button.
     this.themeChangeButton = this.querySelector('[data-element="themeChangeButton"]') as HTMLButtonElement;
-
-    // Page Container.
-    this.pageView = this.querySelector('[data-element="pageView"]') as HTMLDivElement;
 
     // Password Modal.
     this.passwordModal = new PasswordModal(this, this.language);
@@ -151,7 +145,7 @@ class PDFLiveElement extends HTMLElement {
         cMapUrl = this.getAttribute('cmap') as string;
 
       // Load a PDF document.
-      this.documentObject = await getDocument(documentUrl, workerSrc, this.language, cMapUrl);
+      this.pdfDocument = await getDocument(documentUrl, workerSrc, this.language, cMapUrl);
 
       // Check for password protection.
       if (this.hasAttribute('protected')) {   
@@ -180,7 +174,7 @@ class PDFLiveElement extends HTMLElement {
 
       // Keep page width and height for zoom factor calculation to fit by page or width.
       const pageViewport = await (async (): Promise<PageViewport> => {
-        const {width, height} = (await this.documentObject.getPage(1)).getViewport({scale: constants.PDF_DRAWING_SCALE});
+        const {width, height} = (await this.pdfDocument.getPage(1)).getViewport({scale: constants.BASIC_SCALE});
         return {width, height}
       })();
 
@@ -193,7 +187,7 @@ class PDFLiveElement extends HTMLElement {
       });
 
       // Render pages.
-      const pages = await renderPages(this.documentObject, zoomNav.getZoomFactor());
+      const pages = await renderPages(this.pdfDocument, zoomNav.getZoomFactor());
 
       // Initialize the left panel.
       const thumbnailPanel = (new ThumbnailPanel(this, pages)).onSelect((pageNum: number) => {
@@ -203,7 +197,7 @@ class PDFLiveElement extends HTMLElement {
       });
 
       // Initialize page navigation.
-      this.pageNav = (new PageNav(this, this.documentObject.numPages)).onChange((pageNum: number) => {
+      this.pageNav = (new PageNav(this, this.pdfDocument.numPages)).onChange((pageNum: number) => {
         // If the page you are browsing changes.
         // Activate the thumbnail page of the browsing page.
         thumbnailPanel.activatePage(pageNum);
@@ -466,7 +460,7 @@ class PDFLiveElement extends HTMLElement {
       documentTitle = getFilename(this.documentUrl as string);
 
     // Download Documentation.
-    await downloadPdf(this.documentObject, documentTitle);
+    await downloadPdf(this.pdfDocument, documentTitle);
   }
 }
 PDFLiveElement.define();

@@ -1,9 +1,9 @@
 /**
  * Download PDF.
  */
-export default async (pdfDoc: any, downloadName: string): Promise<void> => {
+export default async (pdfDocument: any, downloadName: string): Promise<void> => {
   // Access raw PDF data.
-  const data = await pdfDoc.getData();
+  const data = await pdfDocument.getData();
 
   // Create a Uint8Array object.
   const arr = new Uint8Array(data);

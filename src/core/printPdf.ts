@@ -17,9 +17,9 @@ export default async (documentUrl: string): Promise<void> => {
     }, {passive: true, once: true});
   });
 }
-// export default async pdfDoc => {
+// export default async pdfDocument => {
 //   // Access raw PDF data.
-//   const data = await pdfDoc.getData();
+//   const data = await pdfDocument.getData();
 // 
 //   // Create a Uint8Array object.
 //   const arr = new Uint8Array(data);

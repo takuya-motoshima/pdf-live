@@ -21,12 +21,12 @@ export default async (pages: any[], zoomFactor: number = 1): Promise<void> => {
       const page = pages[pageNumber - 1];
 
       // Create a page node.
-      const [_, canvas, viewport, devicePixelRatio] = createPageNode('resize', page, pageNumber, zoomFactor);
+      const [_, canvas, viewport, outputScale] = createPageNode('resize', page, pageNumber, zoomFactor);
 
       // Render page content on canvas.
       const task = page.render({
         canvasContext: canvas.getContext('2d'), 
-        transform: devicePixelRatio !== 1 ? [devicePixelRatio, 0, 0, devicePixelRatio, 0, 0] : null,
+        transform: outputScale !== 1 ? [outputScale, 0, 0, outputScale, 0, 0] : null,
         viewport
       });
 
